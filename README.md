@@ -1,4 +1,5 @@
 # gymkhana
+[![Build Status](https://travis-ci.com/devlup-labs/gymkhana_frontend.svg?branch=master)](https://travis-ci.com/devlup-labs/gymkhana_frontend)
 
 ## Project setup
 ```
