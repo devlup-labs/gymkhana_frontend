@@ -13,17 +13,25 @@
             <!--Header-->
             <!--Body-->
             <v-card>
-              <v-card-text class="pt-5">
+              <v-card-text class="pt-4">
                 <div>
                   <v-form v-model="valid" ref="form">
                     <v-text-field
+                      outline
+                      prepend-icon="mdi-email "
                       label="Username"
                       v-model="email"
                       :rules="emailRules"
                       required
                     ></v-text-field>
-                    <br />
+                    <!--mdi-visibility not working fix it-->
                     <v-text-field
+                      outline
+                      prepend-icon="mdi-lock"
+                      :append-icon="
+                        e1 ? 'mdi-visibility' : 'mdi-visibility_off'
+                      "
+                      :append-icon-cb="() => (e1 = !e1)"
                       :rules="passwordRules"
                       :type="e1 ? 'password' : 'text'"
                       label="Password"
@@ -31,20 +39,17 @@
                       required
                       v-model="password"
                     ></v-text-field>
-                    <br />
                     <v-layout justify-center>
                       <v-btn color="pink" class="white--text">Login</v-btn>
                     </v-layout>
-                    <br />
-                    <hr />
-                    <br />
                     <v-layout justify-center>
-                      <p>Or sign in with</p>
+                      <p>Or</p>
                     </v-layout>
                     <v-layout justify-center>
-                      <v-btn color="red darken-2" class="white--text"
-                        >Google</v-btn
-                      >
+                      <v-btn dark>
+                        <!--ADD GOOGLE SIGN IN HERE-->
+                        <v-icon> mdi-google</v-icon>
+                      </v-btn>
                     </v-layout>
                   </v-form>
                 </div>
@@ -60,7 +65,17 @@
 
 <script>
 export default {
-  name: "Login"
+  name: "Login",
+  data() {
+    return {
+      valid: false,
+      e1: false,
+      password: "",
+      passwordRules: [v => !!v || "Password is required"],
+      email: "",
+      emailRules: [v => !!v || "E-mail is required"]
+    };
+  }
 };
 </script>
 
