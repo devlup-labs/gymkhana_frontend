@@ -50,7 +50,17 @@
 
 <script>
 export default {
-  name: "LoginCard"
+  name: "LoginCard",
+  data() {
+    return {
+      valid: false,
+      showPassword: false,
+      password: "",
+      passwordRules: [v => !!v || "Password is required"],
+      email: "",
+      emailRules: [v => !!v || "E-mail is required"]
+    };
+  }
 };
 </script>
 

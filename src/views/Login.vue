@@ -20,16 +20,6 @@
 import LoginCard from "../components/LoginCard.vue";
 export default {
   name: "Login",
-  data() {
-    return {
-      valid: false,
-      showPassword: false,
-      password: "",
-      passwordRules: [v => !!v || "Password is required"],
-      email: "",
-      emailRules: [v => !!v || "E-mail is required"]
-    };
-  },
   components: {
     LoginCard
   }
