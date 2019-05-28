@@ -2,6 +2,7 @@
   <div id="app">
     <v-app>
       <v-container fluid fill-heignt class="loginOverlay">
+        <v-layout flex justify-start></v-layout>
         <v-layout flex align-center offset-xs5 fill-height justify-center>
           <v-flex xs11 sm6 elevation-6>
             <!--Header-->
@@ -29,11 +30,11 @@
                       outline
                       prepend-icon="mdi-lock"
                       :append-icon="
-                        e1 ? 'mdi-visibility' : 'mdi-visibility_off'
+                        showPassword ? 'mdi-visibility' : 'mdi-visibility_off'
                       "
-                      :append-icon-cb="() => (e1 = !e1)"
+                      :append-icon-cb="() => (showPassword = !showPassword)"
                       :rules="passwordRules"
-                      :type="e1 ? 'password' : 'text'"
+                      :type="showPassword ? 'password' : 'text'"
                       label="Password"
                       min="8"
                       required
@@ -71,7 +72,7 @@ export default {
   data() {
     return {
       valid: false,
-      e1: false,
+      showPassword: false,
       password: "",
       passwordRules: [v => !!v || "Password is required"],
       email: "",
