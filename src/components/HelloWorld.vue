@@ -1,11 +1,9 @@
 <template>
-  <div id="home">
-    <h1>
-      Welcome to Your Vue.js App
-      {{ msg }}
-      <br />
-    </h1>
-  </div>
+  <h1>
+    Welcome to Your Vue.js App
+    {{ msg }}
+    <br />
+  </h1>
 </template>
 
 <script>
