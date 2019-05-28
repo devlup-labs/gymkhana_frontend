@@ -43,12 +43,14 @@
                       <v-btn color="pink" class="white--text">Login</v-btn>
                     </v-layout>
                     <v-layout justify-center>
-                      <p>Or</p>
+                      <p>OR</p>
                     </v-layout>
                     <v-layout justify-center>
-                      <v-btn dark>
-                        <!--ADD GOOGLE SIGN IN HERE-->
-                        <v-icon> mdi-google</v-icon>
+                      <v-btn outline color="white">
+                        <img
+                          src="../assets/btn_google_light_normal.svg"
+                          height="90"
+                        />
                       </v-btn>
                     </v-layout>
                   </v-form>
@@ -84,8 +86,5 @@ export default {
   background-image: url("../assets/workstation-336369.jpg");
   background-size: cover;
   overflow: hidden;
-}
-hr {
-  height: 0;
 }
 </style>

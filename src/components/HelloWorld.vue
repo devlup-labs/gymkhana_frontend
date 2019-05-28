@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="home">
     <h1>
       Welcome to Your Vue.js App
       {{ msg }}
