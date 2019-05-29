@@ -1,3 +1,4 @@
+<!--suppress CheckImageSize -->
 <template>
   <div>
     <v-toolbar class="pt-2 blue darken-4">
@@ -15,13 +16,10 @@
               :rules="emailRules"
               required
             ></v-text-field>
-            <!--mdi-visibility not working fix it-->
+
             <v-text-field
-              outline
               prepend-icon="mdi-lock"
-              :append-icon="
-                showPassword ? 'mdi-visibility' : 'mdi-visibility_off'
-              "
+              :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
               :append-icon-cb="() => (showPassword = !showPassword)"
               :rules="passwordRules"
               :type="showPassword ? 'password' : 'text'"
@@ -38,7 +36,11 @@
             </v-layout>
             <v-layout justify-center>
               <v-btn outline color="white">
-                <img src="../assets/btn_google_light_normal.svg" height="90" />
+                <img
+                  src="../assets/btn_google_light_normal.svg"
+                  height="90"
+                  alt="sign in google"
+                />
               </v-btn>
             </v-layout>
           </v-form>

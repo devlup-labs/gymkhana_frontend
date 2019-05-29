@@ -1,10 +1,10 @@
 <template>
-  <div id="app">
+  <div class="login-background">
     <v-app>
       <v-container fluid fill-heignt class="loginOverlay">
         <v-layout flex justify-start></v-layout>
         <v-layout flex align-center offset-xs5 fill-height justify-center>
-          <v-flex xs11 sm6 elevation-6>
+          <v-flex xs11 sm8 elevation-6>
             <LoginCard />
           </v-flex>
         </v-layout>
@@ -24,9 +24,7 @@ export default {
 </script>
 
 <style>
-#app {
-  background-image: url("../assets/workstation-336369.jpg");
-  background-size: cover;
-  overflow: hidden;
+.login-background {
+  background-color: white;
 }
 </style>
