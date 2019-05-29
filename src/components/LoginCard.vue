@@ -1,8 +1,10 @@
 <!--suppress CheckImageSize -->
 <template>
   <div>
-    <v-toolbar class="pt-2 blue darken-4">
-      <v-toolbar-title class="white--text "><h4>Login</h4></v-toolbar-title>
+    <v-toolbar class="primary">
+      <v-toolbar-title class="white--text">
+        <p class="headline mb-0">Login</p>
+      </v-toolbar-title>
     </v-toolbar>
     <v-card>
       <v-card-text class="pt-4">
@@ -11,16 +13,17 @@
             <v-text-field
               outline
               prepend-icon="mdi-email "
-              label="Username"
+              label="Email"
               v-model="email"
               :rules="emailRules"
               required
             ></v-text-field>
 
             <v-text-field
+              outline
               prepend-icon="mdi-lock"
               :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-              :append-icon-cb="() => (showPassword = !showPassword)"
+              @click:append="() => (showPassword = !showPassword)"
               :rules="passwordRules"
               :type="showPassword ? 'password' : 'text'"
               label="Password"
@@ -29,15 +32,19 @@
               v-model="password"
             ></v-text-field>
             <v-layout justify-center>
-              <v-btn color="pink" class="white--text">Login</v-btn>
+              <v-btn color="primary">Login</v-btn>
             </v-layout>
             <v-layout justify-center>
-              <p>OR</p>
+              <h4>OR</h4>
             </v-layout>
             <v-layout justify-center>
-              <v-btn outline color="white">
-                <img :src="googleSignInBtn" height="90" alt="sign in google" />
-              </v-btn>
+              <a href="#">
+                <img
+                  :src="googleSignInBtn"
+                  class="gsign-responsive"
+                  alt="sign in google"
+                />
+              </a>
             </v-layout>
           </v-form>
         </div>
@@ -64,4 +71,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.gsign-responsive {
+  width: 100%;
+  height: auto;
+}
+</style>
