@@ -1,16 +1,12 @@
 <template>
-  <div class="login-background">
-    <v-app>
-      <v-container fluid fill-heignt class="loginOverlay">
-        <v-layout flex justify-start></v-layout>
-        <v-layout flex align-center offset-xs5 fill-height justify-center>
-          <v-flex xs11 sm6 elevation-6>
-            <LoginCard />
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-app>
-  </div>
+  <v-container fluid fill-heignt class="loginOverlay">
+    <v-layout flex justify-start></v-layout>
+    <v-layout flex align-center offset-xs5 fill-height justify-center>
+      <v-flex xs11 sm6 elevation-6>
+        <LoginCard />
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -23,8 +19,4 @@ export default {
 };
 </script>
 
-<style>
-.login-background {
-  background-color: white;
-}
-</style>
+<style></style>
