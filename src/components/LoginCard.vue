@@ -36,11 +36,7 @@
             </v-layout>
             <v-layout justify-center>
               <v-btn outline color="white">
-                <img
-                  src="../assets/btn_google_light_normal.svg"
-                  height="90"
-                  alt="sign in google"
-                />
+                <img :src="image" height="90" alt="sign in google" />
               </v-btn>
             </v-layout>
           </v-form>
@@ -51,6 +47,7 @@
 </template>
 
 <script>
+import google_logo from "../assets/btn_google_light_normal.svg";
 export default {
   name: "LoginCard",
   data() {
@@ -60,7 +57,8 @@ export default {
       password: "",
       passwordRules: [v => !!v || "Password is required"],
       email: "",
-      emailRules: [v => !!v || "E-mail is required"]
+      emailRules: [v => !!v || "E-mail is required"],
+      image: google_logo
     };
   }
 };
