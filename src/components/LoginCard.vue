@@ -12,7 +12,7 @@
           <v-form v-model="valid" ref="form">
             <v-text-field
               outline
-              prepend-icon="mdi-email "
+              prepend-icon="mdi-email"
               label="Email"
               v-model="email"
               :rules="emailRules"
