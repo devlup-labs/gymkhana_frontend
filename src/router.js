@@ -30,6 +30,10 @@ export default new Router({
       path: "/konnekt",
       name: "konnekt",
       component: () => import("./views/Konnekt")
+    },
+    {
+      path: "/konnekt/search",
+      component: () => import("./components/KonnektSearch")
     }
   ]
 });
