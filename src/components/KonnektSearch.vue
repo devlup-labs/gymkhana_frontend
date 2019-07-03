@@ -18,32 +18,42 @@
     </v-container>
     <hr />
     <v-container class="v-responsive__content v-responsive__sizer">
-      <v-card
-        v-for="person in filteredList"
-        hover
-        raised
-        ripple
-        v-bind:key="person.name"
-      >
+      <div v-for="person in filteredList" v-bind:key="person.name">
         <v-container class="container">
           <v-layout row wrap flex-center class="card">
-            <v-flex xs3 lg2 md2 pa-3>
-              <v-img
-                lazy-src="white"
-                transition=""
-                contain
-                class="rounded-circle elevation-5 "
-                v-bind:src="person.img"
-                alt="profile image"
-              />
+            <v-flex xs3 lg2 md2 pa-3 layout justify-center>
+              <v-avatar size="70" :tile="false" class="elevation-4">
+                <v-img v-bind:src="person.img" alt="profile image" />
+              </v-avatar>
             </v-flex>
-            <v-flex xs9 lg10 md10 mt-4 class="text-md-center">
-              <h2 class="media-heading mb-3 v-responsive__sizer justify-center">
+            <v-flex
+              xs4
+              lg1
+              md1
+              class="text-lg-center text-md-center text-xs-center align-center fill-height"
+              :class="{
+                'pt-4 mt-0': $vuetify.breakpoint.smAndDown,
+                'pt-0 mt-4': $vuetify.breakpoint.mdAndUp
+              }"
+            >
+              <h2 class="mb-3 font-weight-light">
                 {{ person.name }}
               </h2>
+            </v-flex>
+            <v-flex
+              xs5
+              lg8
+              md8
+              class="text-md-center text-xs-center "
+              :class="{
+                'pt-3 mt-0': $vuetify.breakpoint.smAndDown,
+                'pt-1 mt-4': $vuetify.breakpoint.mdAndUp
+              }"
+            >
               <v-chip
+                xs2
                 color="light-blue darken-1 white--text"
-                class="elevation-2  font-weight-bold"
+                class="elevation-2 font-weight-bold"
                 v-for="skill in person.skills"
                 v-bind:key="skill.name"
               >
@@ -52,7 +62,7 @@
             </v-flex>
           </v-layout>
         </v-container>
-      </v-card>
+      </div>
     </v-container>
   </div>
 </template>
@@ -109,8 +119,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.rounded-circle {
-  border-radius: 50%;
-}
-</style>
+<style scoped></style>
