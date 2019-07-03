@@ -1,52 +1,59 @@
 <template>
   <div class="container">
-    <div>
-      <v-container>
-        <v-responsive min-width="40px"
-          ><v-layout row fill-height>
-            <v-flex lg6 offset-xs3
-              ><v-text-field
-                v-model="search"
-                outline
-                prepend-inner-icon="mdi-magnify"
-                label="search any skill or name"
-                clearable
-              ></v-text-field
-            ></v-flex>
-            <v-flex><v-btn color="primary">GO</v-btn></v-flex>
-          </v-layout>
-        </v-responsive>
-      </v-container>
-    </div>
-    <hr />
-
-    <div class="card" v-for="person in filteredList" v-bind:key="person.name">
-      <v-container class="container-fluid ">
-        <v-layout row wrap flex-center mb-2>
-          <v-flex md2>
-            <img
-              class="rounded-circle elevation-5"
-              v-bind:src="person.img"
-              alt="profile image"
-            />
-          </v-flex>
-          <v-flex>
-            <h2
-              class=" text-md-center media-heading mb-1 v-responsive__sizer align-center justify-center"
-            >
-              {{ person.name }}
-            </h2>
-            <h4
-              class="d-flex d-inline-flex chip wrap elevation-6 blue--text"
-              v-for="skill in person.skills"
-              v-bind:key="skill.name"
-            >
-              {{ skill }}
-            </h4>
-          </v-flex>
+    <v-container>
+      <v-responsive min-width="40px"
+        ><v-layout row fill-height>
+          <v-flex lg6 offset-xs3
+            ><v-text-field
+              v-model="search"
+              outline
+              prepend-inner-icon="mdi-magnify"
+              label="search any skill or name"
+              clearable
+            ></v-text-field
+          ></v-flex>
+          <v-flex><v-btn color="primary">GO</v-btn></v-flex>
         </v-layout>
-      </v-container>
-    </div>
+      </v-responsive>
+    </v-container>
+    <hr />
+    <v-container class="v-responsive__content v-responsive__sizer">
+      <v-card
+        v-for="person in filteredList"
+        hover
+        raised
+        ripple
+        v-bind:key="person.name"
+      >
+        <v-container class="container">
+          <v-layout row wrap flex-center class="card">
+            <v-flex xs3 lg2 md2 pa-3>
+              <v-img
+                lazy-src="white"
+                transition=""
+                contain
+                class="rounded-circle elevation-5 "
+                v-bind:src="person.img"
+                alt="profile image"
+              />
+            </v-flex>
+            <v-flex xs9 lg10 md10 mt-4 class="text-md-center">
+              <h2 class="media-heading mb-3 v-responsive__sizer justify-center">
+                {{ person.name }}
+              </h2>
+              <v-chip
+                color="light-blue darken-1 white--text"
+                class="elevation-2  font-weight-bold"
+                v-for="skill in person.skills"
+                v-bind:key="skill.name"
+              >
+                {{ skill }}
+              </v-chip>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-card>
+    </v-container>
   </div>
 </template>
 
@@ -103,20 +110,7 @@ export default {
 </script>
 
 <style scoped>
-h2 {
-  font-family: "Roboto", sans-serif;
-}
-.chip {
-  font-size: 13px;
-  color: rgba(0, 0, 0, 0.6);
-  padding: 8px 12px;
-  border-radius: 16px;
-  background-color: #eceff1;
-  margin-bottom: 1rem;
-  margin-right: 1rem;
-}
 .rounded-circle {
   border-radius: 50%;
-  max-height: 140px;
 }
 </style>
