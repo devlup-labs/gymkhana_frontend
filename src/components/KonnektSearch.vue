@@ -16,7 +16,6 @@
         </v-layout>
       </v-responsive>
     </v-container>
-    <hr />
     <v-container class="v-responsive__content v-responsive__sizer">
       <div v-for="person in filteredList" v-bind:key="person.name">
         <v-container class="container">
