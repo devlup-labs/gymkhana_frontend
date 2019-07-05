@@ -12,7 +12,7 @@
               clearable
             ></v-text-field
           ></v-flex>
-          <v-flex><v-btn color="primary">GO</v-btn></v-flex>
+          <v-flex><v-btn large="" color="primary">GO</v-btn></v-flex>
         </v-layout>
       </v-responsive>
     </v-container>
@@ -21,7 +21,7 @@
         <v-container class="container">
           <v-layout row wrap flex-center class="card">
             <v-flex xs3 lg2 md2 pa-3 layout justify-center>
-              <v-avatar size="70" :tile="false" class="elevation-4">
+              <v-avatar size="100" :tile="false" class="elevation-4">
                 <v-img v-bind:src="person.img" alt="profile image" />
               </v-avatar>
             </v-flex>

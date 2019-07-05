@@ -1,14 +1,14 @@
 <template>
-  <home />
+  <Home />
 </template>
 
 <script>
-import home from "../components/KonnektHome";
+import Home from "../components/KonnektHome";
 
 export default {
   name: "Konnekt",
   components: {
-    home
+    Home
   }
 };
 </script>
