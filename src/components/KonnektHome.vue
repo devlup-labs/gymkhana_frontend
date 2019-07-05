@@ -1,7 +1,7 @@
 <template>
   <div class="konnekt-background">
     <v-container>
-      <v-layout row justify-center mt-5 pt-4 fill-height>
+      <v-layout row justify-center mt-3 pt-4 fill-height>
         <v-flex lg6 offset-xs3
           ><v-text-field
             outline
@@ -10,9 +10,7 @@
             clearable
           ></v-text-field
         ></v-flex>
-        <v-flex
-          ><v-btn color="primary" v-on:click="goToSearch">GO</v-btn></v-flex
-        >
+        <v-flex><v-btn large color="primary">GO</v-btn></v-flex>
       </v-layout>
     </v-container>
   </div>
