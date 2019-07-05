@@ -1,25 +1,24 @@
 <!--suppress CheckImageSize -->
-<template>
-  <div>
-    <v-toolbar class="primary">
-      <v-toolbar-title class="white--text">
-        <p class="headline mb-0">Login</p>
-      </v-toolbar-title>
-    </v-toolbar>
-    <v-card>
-      <v-card-text class="pt-4">
-        <div>
-          <v-form v-model="valid" ref="form">
-            <v-text-field
+<template lang="pug">
+  div
+    v-toolbar.primary
+      v-toolbar-title.white--text
+        p.headline.mb-0 Login
+
+    v-card
+      v-card-text.pt-4
+        div
+          v-form(v-model="valid" ref="form")
+            v-text-field(
               outline
               prepend-icon="mdi-email"
               label="Email"
               v-model="email"
               :rules="emailRules"
               required
-            ></v-text-field>
+            )
 
-            <v-text-field
+            v-text-field(
               outline
               prepend-icon="mdi-lock"
               :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
@@ -30,27 +29,21 @@
               min="8"
               required
               v-model="password"
-            ></v-text-field>
-            <v-layout justify-center>
-              <v-btn color="primary">Login</v-btn>
-            </v-layout>
-            <v-layout justify-center>
-              <h4>OR</h4>
-            </v-layout>
-            <v-layout justify-center>
-              <a href="#">
-                <img
+            )
+            v-layout(justify-center)
+              v-btn(color="primary") Login
+
+            v-layout(justify-center)
+              h4 OR
+
+            v-layout(justify-center)
+              a
+                img(
                   :src="googleSignInBtn"
                   class="gsign-responsive"
                   alt="sign in google"
-                />
-              </a>
-            </v-layout>
-          </v-form>
-        </div>
-      </v-card-text>
-    </v-card>
-  </div>
+                )
+
 </template>
 
 <script>
