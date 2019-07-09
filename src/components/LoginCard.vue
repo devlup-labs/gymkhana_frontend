@@ -1,12 +1,12 @@
 <!--suppress CheckImageSize -->
 <template lang="pug">
   div
-    v-toolbar.primary
+    v-toolbar(primary)
       v-toolbar-title.white--text
         p.headline.mb-0 Login
 
     v-card
-      v-card-text.pt-4
+      v-card-text(pt-4)
         div
           v-form(v-model="valid" ref="form")
             v-text-field(
