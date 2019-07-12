@@ -1,7 +1,7 @@
 <template lang="pug">
-  div.konnekt-background
+  div
     v-container
-      v-layout(row justify-center mt-3 pt-4 fill-height)
+      v-layout(row justify-center mt-3 pt-1 fill-height)
         v-flex(lg6 offset-xs3)
           v-text-field(
             outline
@@ -18,10 +18,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.konnekt-background {
-  height: 100%;
-  background: url("../assets/konnekt/konnekt.svg") no-repeat center;
-  background-size: cover;
-}
-</style>
+<style scoped></style>

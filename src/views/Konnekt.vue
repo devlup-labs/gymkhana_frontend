@@ -1,7 +1,8 @@
-<template lang="pug">
-  div
-    Toolbar :title="this.$options.name" />
-    Home
+<template>
+  <div class="konnekt-background">
+    <Toolbar />
+    <Home />
+  </div>
 </template>
 
 <script>
@@ -17,4 +18,10 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.konnekt-background {
+  height: 100%;
+  background: url("../assets/konnekt/konnekt.svg") no-repeat center;
+  background-size: cover;
+}
+</style>

@@ -1,4 +1,6 @@
 <template lang="pug">
+ div
+  Toolbar(:title="name")
   div.container
     v-container
       v-responsive(min-width="40px")
@@ -48,6 +50,8 @@
 </template>
 
 <script>
+import Toolbar from "./Toolbar";
+
 class Person {
   constructor(name, skills, img) {
     this.name = name;
@@ -57,6 +61,7 @@ class Person {
 }
 export default {
   name: "KonnektSearch",
+  components: { Toolbar },
   data: function() {
     return {
       search: "",
