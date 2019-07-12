@@ -1,6 +1,6 @@
 <template>
   <div class="konnekt-background">
-    <Toolbar />
+    <Toolbar :title="this.$options.name" />
     <Home />
   </div>
 </template>
