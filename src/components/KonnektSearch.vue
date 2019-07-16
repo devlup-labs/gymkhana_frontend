@@ -1,6 +1,4 @@
 <template lang="pug">
- div
-  Toolbar(:title="this.$options.name")
   div.container
     v-container
       v-responsive(min-width="40px")

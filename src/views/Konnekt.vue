@@ -1,24 +1,30 @@
 <template>
-  <div class="konnekt-background">
+  <div :class="{ 'konnekt-background': isHome }">
     <Toolbar :title="this.$options.name" />
-    <Home />
+    <v-flex>
+      <router-view />
+    </v-flex>
   </div>
 </template>
 
 <script>
-import Home from "../components/KonnektHome";
 import Toolbar from "../components/Toolbar";
 
 export default {
   name: "Konnekt",
   components: {
-    Toolbar,
-    Home
+    Toolbar
+  },
+  computed: {
+    isHome() {
+      return this.$router.currentRoute.path.toString() === "/konnekt";
+    }
   }
 };
 </script>
 
 <style scoped>
+/*noinspection CssUnusedSymbol*/
 .konnekt-background {
   height: 100%;
   background: url("../assets/konnekt/konnekt.svg") no-repeat center;

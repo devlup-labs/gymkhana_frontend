@@ -6,21 +6,21 @@
     v-spacer
     v-toolbar-items(hidden-sm-and-down)
       v-btn(flat)
-        v-icon mdi-forum
-        span Forum
+        v-icon(left) mdi-forum
+        span(v-if="$vuetify.breakpoint.mdAndUp") Forum
       v-btn(flat href="../konnekt")
-        v-icon mdi-web
-        span Konnekt
+        v-icon(left) mdi-web
+        span(v-if="$vuetify.breakpoint.mdAndUp") Konnekt
       v-menu
         template(v-slot:activator="{ on }")
           v-btn(flat v-on="on")
-            v-icon mdi-account
-            span Account
-            v-icon mdi-menu-down
+            v-icon(left) mdi-account
+            span(v-if="$vuetify.breakpoint.mdAndUp") Account
+            v-icon(v-if="$vuetify.breakpoint.mdAndUp") mdi-menu-down
         v-list
           v-list-tile(v-for="item in AccountItems")
             v-btn(flat block color="blue") {{ item.title }}
-  v-navigation-drawer(v-model="drawer" absolute temporary width="250")
+  v-navigation-drawer(v-model="drawer" app temporary width="250")
     v-card(tile flat ripple color="blue" height="200")
       div.pt-3.pl-3
         v-avatar.elevation-2(size="80" :tile="false" color="white")
