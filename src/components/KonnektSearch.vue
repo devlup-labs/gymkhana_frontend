@@ -12,7 +12,7 @@
               clearable)
           v-flex
             v-btn(large color="primary") GO
-    v-container(v-responsive__sizer v-responsive__content)
+    v-container
       div(v-for="person in filteredList" v-bind:key="person.name")
         v-container.container
           v-layout.card( row wrap flex-center)
@@ -48,6 +48,8 @@
 </template>
 
 <script>
+import Toolbar from "./Toolbar";
+
 class Person {
   constructor(name, skills, img) {
     this.name = name;
@@ -57,6 +59,7 @@ class Person {
 }
 export default {
   name: "KonnektSearch",
+  components: { Toolbar },
   data: function() {
     return {
       search: "",

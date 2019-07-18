@@ -1,6 +1,9 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
+import Konnekt from "./views/Konnekt";
+import KonnektHome from "./components/KonnektHome";
+import KonnektSearch from "./components/KonnektSearch";
 
 Vue.use(Router);
 
@@ -28,12 +31,15 @@ export default new Router({
     },
     {
       path: "/konnekt",
-      name: "konnekt",
-      component: () => import("./views/Konnekt")
-    },
-    {
-      path: "/konnekt/search",
-      component: () => import("./components/KonnektSearch")
+      component: Konnekt,
+      children: [
+        { name: "konnekt-home", path: "", component: KonnektHome },
+        {
+          name: "konnekt-search",
+          path: "search",
+          component: KonnektSearch
+        }
+      ]
     }
   ]
 });
