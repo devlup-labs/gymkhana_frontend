@@ -18,7 +18,7 @@
             span(v-if="$vuetify.breakpoint.mdAndUp") Account
             v-icon(v-if="$vuetify.breakpoint.mdAndUp") mdi-menu-down
         v-list
-          v-list-tile(v-for="item in AccountItems")
+          v-list-tile(v-for="(item,i) in accountItems" :key="i")
             v-btn(flat block color="blue") {{ item.title }}
   v-navigation-drawer(v-model="drawer" app temporary width="250")
     v-card(tile flat ripple color="blue" height="200")

@@ -15,9 +15,18 @@ export default {
   components: {
     Toolbar
   },
-  computed: {
-    isHome() {
-      return this.$router.currentRoute.path.toString() === "/konnekt";
+  data: () => ({ isHome: true }),
+  mounted() {
+    this.updateBackground();
+  },
+  methods: {
+    updateBackground() {
+      this.isHome = this.$router.currentRoute.path.toString() === "/konnekt";
+    }
+  },
+  watch: {
+    $route() {
+      this.updateBackground();
     }
   }
 };
