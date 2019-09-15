@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import gql from "graphql-tag";
 class Person {
   constructor(name, skills, img) {
     this.name = name;
@@ -57,10 +58,38 @@ class Person {
 }
 
 export default {
+  apollo: {
+    viewer: gql`
+      {
+        viewer {
+          firstName
+        }
+      }
+    `,
+    search: gql`
+      {
+        search(query: "css", nodeType: USER_PROFILE) {
+          edges {
+            node {
+              ... on UserProfileNode {
+                user {
+                  firstName
+                  lastName
+                }
+                skills
+              }
+            }
+          }
+        }
+      }
+    `
+  },
   name: "KonnektSearch",
   data: function() {
     return {
-      search: "",
+      viewer: {},
+      search: {},
+      search_1: "",
       personList: [
         new Person(
           "Soham",
@@ -91,13 +120,13 @@ export default {
     };
   },
   computed: {
-    filteredList() {
-      return this.personList.filter(person => {
-        return person.name.toLowerCase().includes(this.search.toLowerCase());
+    filterSkill() {
+      return this.search.edges.map(el => {
+        return el.node.skills.split(",");
       });
     }
   }
 };
 </script>
 
-<style scoped></style>
+<style scoped />
