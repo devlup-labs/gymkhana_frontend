@@ -1,5 +1,5 @@
-<template>
-  <HelloWorld msg="new message" />
+<template lang="pug">
+  HelloWorld( msg="new message")
 </template>
 
 <script>
