@@ -1,4 +1,5 @@
 <template lang="pug">
+<<<<<<< HEAD
   v-container
     v-responsive(min-width="40px")
       v-layout(row fill-height)
@@ -12,12 +13,12 @@
         v-flex
           v-btn(large color="primary" :to="{name : 'konnekt-search'}") GO
     v-container.ms-5
-      div(v-for="person in filteredList" v-bind:key="person.name")
+      div(v-for="(node,i) in search.edges" :key="i")
         v-container.container
           v-layout.card( row wrap flex-center)
             v-flex(xs3 lg2 md2 pa-3 layout justify-center)
               v-avatar.elevation-4(size="100" :tile="false")
-                v-img(v-bind:src="person.img" alt="profile image")
+                v-img(:src="require('../../../../media/'+node.node.avatar)" alt="Image")
             v-flex(
               text-lg-center
               text-md-center
@@ -30,7 +31,7 @@
               mt-5
               :class="{ 'pt-4 ms-4': $vuetify.breakpoint.smAndDown, 'pt-0': $vuetify.breakpoint.mdAndUp }"
             )
-              h2.mb-3.font-weight-light {{ person.name }}
+              h2.mb-3.font-weight-light {{ node.node.user.firstName }} {{ node.node.user.lastName }}
             v-flex(
               text-xs-center
               text-md-center
@@ -42,8 +43,8 @@
               v-chip.elevation-2.font-weight-bold.ma-1(
                 xs2
                 color="light-blue darken-1 white--text"
-                v-for="skill in person.skills"
-                v-bind:key="skill.name"
+                v-for="(skill,i) in node.node.skills.split(',')"
+                v-bind:key="i"
               ) {{ skill }}
 </template>
 
@@ -77,6 +78,7 @@ export default {
                   lastName
                 }
                 skills
+                avatar
               }
             }
           }
@@ -118,13 +120,6 @@ export default {
         )
       ]
     };
-  },
-  computed: {
-    filterSkill() {
-      return this.search.edges.map(el => {
-        return el.node.skills.split(",");
-      });
-    }
   }
 };
 </script>
