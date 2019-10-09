@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import Toolbar from "../components/Toolbar";
+import Toolbar from "../components/common/Toolbar";
 import OfficeBearerCard from "../components/OfficeBearerCard";
 export default {
   name: "OfficeBearers",

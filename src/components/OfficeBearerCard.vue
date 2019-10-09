@@ -5,7 +5,7 @@
         v-stepper-content(step="1")
           v-toolbar(flat)
             v-toolbar-title
-              v-img(src="../assets/office_bearers/cover2.svg")
+              v-img(src="../assets/logo.png")
           v-card-text.justify-center.text-md-center.text-xs-center.text-lg-center
             v-avatar(src="https://cdn2.iconfinder.com/data/icons/people-80/96/Picture1-512.png")
             p.font-weight-medium Anugrah Shukla
