@@ -1,6 +1,5 @@
 <template lang="pug">
   div
-    Toolbar(:title="this.$options.name")
     v-card.text-lg-center.text-xs-center.text-md-center(class="blue text-center").ma-5
      v-card-text(class="white--text")
       h1.font-weight-regular Office Bearers
