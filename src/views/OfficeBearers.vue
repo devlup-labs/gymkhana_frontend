@@ -1,12 +1,12 @@
 <template lang="pug">
-  div
-    v-card.text-lg-center.text-xs-center.text-md-center(class="blue text-center").ma-5
-     v-card-text(class="white--text")
-      h1.font-weight-regular Office Bearers
-    v-container(fluid fill-height)
-      v-layout(flex align-center offset-md5 fill-height justify-center)
-        v-flex( xs10 sm8 lg6)
-          OfficeBearerCard
+  v-content.justify-center(justify-center)
+    v-card.text-lg-center.text-xs-center.text-md-center(class="blue text-center")
+      v-card-text(class="white--text")
+        h2.font-weight-regular Office Bearer
+    v-container
+      v-row
+        v-col(cols="12" md="4" v-for="x in 3")
+          OfficeBearerCard(:avatarSize="120")
 </template>
 
 <script>
