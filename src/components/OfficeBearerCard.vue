@@ -1,35 +1,51 @@
 <template lang="pug">
-  div
-    v-stepper(v-model="cardPage")
-      v-stepper-items
-        v-stepper-content(step="1")
-          v-toolbar(flat)
-            v-toolbar-title
-              v-img(src="../assets/logo.png")
-          v-card-text.justify-center.text-md-center.text-xs-center.text-lg-center
-            v-avatar(src="https://cdn2.iconfinder.com/data/icons/people-80/96/Picture1-512.png")
-            p.font-weight-medium Anugrah Shukla
-            p.font-weight-regular General Seceretary
-            v-btn(@click="cardPage = 2") Details
-        v-stepper-content(step="2")
-          v-card-text.justify-center.text-md-center.text-xs-center.text-lg-center
-            p.font-weight-medium  About Anugrah
-            v-divider(inset)
-            div
-              a(href="https://api.whatsapp.com/send?phone=919610942435")
-              a(href="https://students.iitj.ac.in/office-bearers/tel:9610942435") +91-9610942435
-            div
-              v-icon(src="mdi-email")
-              p kumar.14@iitj.ac.in
-            v-divider(inset)
-            v-btn.fill-height(@click="cardPage = 1") Back
-
+  v-stepper(v-model="cardPage").pa-0
+    v-stepper-items
+      v-stepper-content.pa-0(step="1")
+        v-card
+          v-img(src="https://students.iitj.ac.in/static/assets/others/cover2.svg" :height="avatarSize")
+          v-card-text.pt-0.text-center
+            v-avatar.elevation-4.ma-2(:size="avatarSize" :style="{'margin-top': `-${avatarSize/2}px !important`}")
+              v-img(src="https://cdn2.iconfinder.com/data/icons/people-80/96/Picture1-512.png")
+            h2(class="black--text").font-weight-bold.mt-5 Anugrah Shukla
+            p.font-weight-regular.mt-2 General Secretary
+          v-card-actions
+            v-row(justify="center")
+              v-btn(@click="cardPage = 2" text)
+                v-icon mdi-refresh
+                v-text Details
+      v-stepper-content.pa-0(step="2")
+        v-card(height="400px")
+          v-row
+            v-col
+              v-row
+                v-card-text.justify-center.text-md-center.text-xs-center.text-lg-center
+                  h2.font-weight-medium.mb-5  About Anugrah
+              v-row
+                v-divider
+              v-row.justify-center
+                div.mt-4
+                  a(href="https://students.iitj.ac.in/office-bearers/tel:9610942435") +91-9610942435
+              v-row.justify-center
+                div
+                  v-row.justify-center
+                    v-icon  mdi-email
+                    v-text.ma-2.pa-2 kumar.14@iitj.ac.in
+              v-row
+                v-divider
+              v-row.justify-center.fill-height.align-end.pa-0.ma-0
+                v-btn(@click="cardPage = 1" depressed)
+                  v-icon mdi-refresh
+                  v-text Back
 
 </template>
 
 <script>
 export default {
   name: "OfficeBearerCard",
+  props: {
+    avatarSize: { Type: Number }
+  },
   data() {
     return {
       cardPage: 0
