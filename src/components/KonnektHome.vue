@@ -9,7 +9,7 @@
             label="search any skill or name"
             clearable)
         v-flex
-          v-btn(large color="primary") GO
+          v-btn(large color="primary" href="../konnekt/search") GO
 </template>
 
 <script>

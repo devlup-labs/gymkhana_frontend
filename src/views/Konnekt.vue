@@ -12,7 +12,9 @@ export default {
   },
   methods: {
     updateBackground() {
-      this.isHome = this.$router.currentRoute.path.toString() === "/konnekt";
+      this.isHome =
+        this.$router.currentRoute.path.toString() === "/konnekt" ||
+        this.$router.currentRoute.path.toString() === "/konnekt/";
     }
   },
   watch: {
