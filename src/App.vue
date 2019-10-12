@@ -1,9 +1,9 @@
 <template lang="pug">
   v-app
-    Header
     v-content
-      v-container(fluid fill-height)
-        router-view
+      div(v-if="!isHome")
+        Header
+      router-view
 </template>
 
 <script>
@@ -14,10 +14,20 @@ export default {
   components: {
     Header
   },
-  data() {
-    return {
-      //
-    };
+  data: () => ({ isHome: true }),
+  mounted() {
+    this.updateBackground();
+  },
+  methods: {
+    updateBackground() {
+      this.isHome =
+        this.$router.currentRoute.path.toString() === "/konnekt" || "/konnekt/";
+    }
+  },
+  watch: {
+    $route() {
+      this.updateBackground();
+    }
   }
 };
 </script>
