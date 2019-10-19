@@ -18,7 +18,7 @@
             span(v-if="$vuetify.breakpoint.mdAndUp") Account
             v-icon(v-if="$vuetify.breakpoint.mdAndUp") mdi-menu-down
         v-list
-          v-list-tile(v-for="(item,i) in AccountItems" :key="i")
+          v-list-tile(v-for="(item,i) in accountItems" :key="i")
             v-btn(text block color="blue") {{ item.title }}
   v-navigation-drawer(v-model="drawer" app temporary width="250")
     v-card(tile text ripple color="blue" height="200")
@@ -51,7 +51,7 @@
           v-list-item(@click="" link).ms-10
             v-list-tile-content
               v-list-tile-title Answered by you
-        v-list-item(v-for="items in DrawerItems" @click="" :key="items.title" link)
+        v-list-item(v-for="items in drawerItems" @click="" :key="items.title" link)
           v-list-item-icon
             v-icon {{items.icon}}
           v-list-tile-content
@@ -65,8 +65,8 @@ export default {
   data: () => ({
     item: true,
     drawer: null,
-    AccountItems: [{ title: "Profile" }, { title: "Logout" }],
-    DrawerItems: [
+    accountItems: [{ title: "Profile" }, { title: "Logout" }],
+    drawerItems: [
       { title: "Home", icon: "mdi-home" },
       { title: "Help", icon: "mdi-help" },
       { title: "About", icon: "mdi-information" }
