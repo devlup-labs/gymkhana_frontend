@@ -8,7 +8,7 @@
       v-btn(text)
         v-icon(left) mdi-forum
         span(v-if="$vuetify.breakpoint.mdAndUp") Forum
-      v-btn(text href="../konnekt")
+      v-btn(text :to="{name : 'konnekt-home'}")
         v-icon(left) mdi-web
         span(v-if="$vuetify.breakpoint.mdAndUp") Konnekt
       v-menu
