@@ -1,8 +1,7 @@
 <template lang="pug">
   v-app
     v-content
-      div(v-if="!isHome")
-        Header
+      Header(v-if="!isHome")
       router-view
 </template>
 
