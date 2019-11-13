@@ -39,7 +39,7 @@
               md8
               :class="{ 'pt-3 mt-0': $vuetify.breakpoint.smAndDown, 'pt-1 mt-4': $vuetify.breakpoint.mdAndUp }"
             )
-              v-chip.elevation-2.font-weight-bold(
+              v-chip.elevation-2.font-weight-bold.ma-1(
                 xs2
                 color="light-blue darken-1 white--text"
                 v-for="skill in person.skills"
