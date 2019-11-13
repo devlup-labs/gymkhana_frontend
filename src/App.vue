@@ -21,7 +21,9 @@ export default {
     updateBackground() {
       this.isHome =
         this.$router.currentRoute.path.toString() === "/konnekt" ||
-        this.$router.currentRoute.path.toString() === "/konnekt/";
+        this.$router.currentRoute.path.toString() === "/konnekt/" ||
+        this.$router.currentRoute.path.toString() === "/konnekt/search" ||
+        this.$router.currentRoute.path.toString() === "/konnekt/search/";
     }
   },
   watch: {
