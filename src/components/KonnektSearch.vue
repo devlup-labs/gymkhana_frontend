@@ -11,7 +11,7 @@
               label="search any skill or name"
               clearable)
           v-flex
-            v-btn(large color="primary" href="") GO
+            v-btn(large color="primary" :to="{name : 'konnekt-search'}") GO
     v-container.ms-5
       div(v-for="person in filteredList" v-bind:key="person.name")
         v-container.container
