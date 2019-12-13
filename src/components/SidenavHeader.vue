@@ -8,9 +8,12 @@
       v-btn(text)
         v-icon(left) mdi-forum
         span(v-if="$vuetify.breakpoint.mdAndUp") Forum
-      v-btn(text :to="{name : 'konnekt-home'}")
-        v-icon(left) mdi-web
-        span(v-if="$vuetify.breakpoint.mdAndUp") Konnekt
+      router-link(:to="{name : 'konnekt-home'}" tag="button")
+        v-btn(text)
+          v-icon(left) mdi-web
+          span(v-if="$vuetify.breakpoint.mdAndUp") Konnekt
+          //programatic links are causing problem here so i added a router link but that then fucks up the button need to
+            //fix this
       v-menu
         template(v-slot:activator="{ on }")
           v-btn(text v-on="on")
