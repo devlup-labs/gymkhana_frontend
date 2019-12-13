@@ -3,7 +3,7 @@
     v-container
       v-responsive(min-width="40px")
         v-layout(row fill-height)
-          v-flex(lg6 offset-xs3)
+          v-flex(lg6 xs6 offset-xs3)
             v-text-field(
               v-model="search"
               outline
@@ -11,8 +11,8 @@
               label="search any skill or name"
               clearable)
           v-flex
-            v-btn(large color="primary") GO
-    v-container
+            v-btn(large color="primary" :to="{name : 'konnekt-search'}") GO
+    v-container.ms-5
       div(v-for="person in filteredList" v-bind:key="person.name")
         v-container.container
           v-layout.card( row wrap flex-center)
@@ -25,21 +25,22 @@
               text-xs-center
               align-center
               fill-height
-              xs4
+              xs6
               lg1
               md1
-              :class="{ 'pt-4 mt-0': $vuetify.breakpoint.smAndDown, 'pt-0 mt-4': $vuetify.breakpoint.mdAndUp }"
+              mt-5
+              :class="{ 'pt-4 ms-4': $vuetify.breakpoint.smAndDown, 'pt-0': $vuetify.breakpoint.mdAndUp }"
             )
               h2.mb-3.font-weight-light {{ person.name }}
             v-flex(
               text-xs-center
               text-md-center
-              xs5
+              xs12
               lg8
               md8
               :class="{ 'pt-3 mt-0': $vuetify.breakpoint.smAndDown, 'pt-1 mt-4': $vuetify.breakpoint.mdAndUp }"
             )
-              v-chip.elevation-2.font-weight-bold(
+              v-chip.elevation-2.font-weight-bold.ma-1(
                 xs2
                 color="light-blue darken-1 white--text"
                 v-for="skill in person.skills"
