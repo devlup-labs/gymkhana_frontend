@@ -37,7 +37,6 @@
                 v-btn(@click="cardPage = 1" text)
                   v-icon mdi-refresh
                   v-text Back
-
 </template>
 
 <script>
