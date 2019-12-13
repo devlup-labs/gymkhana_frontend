@@ -1,5 +1,4 @@
 # gymkhana
-[![Build Status](https://travis-ci.com/devlup-labs/gymkhana_frontend.svg?branch=master)](https://travis-ci.com/devlup-labs/gymkhana_frontend)
 
 ## Project setup
 ```
@@ -16,14 +15,9 @@ npm run serve
 npm run build
 ```
 
-### Run your tests
+### Run your unit tests
 ```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
+npm run test:unit
 ```
 
 ### Run your end-to-end tests
@@ -31,9 +25,9 @@ npm run lint
 npm run test:e2e
 ```
 
-### Run your unit tests
+### Lints and fixes files
 ```
-npm run test:unit
+npm run lint
 ```
 
 ### Customize configuration

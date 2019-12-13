@@ -48,8 +48,6 @@
 </template>
 
 <script>
-import Toolbar from "./Toolbar";
-
 class Person {
   constructor(name, skills, img) {
     this.name = name;
@@ -57,9 +55,9 @@ class Person {
     this.img = img;
   }
 }
+
 export default {
   name: "KonnektSearch",
-  components: { Toolbar },
   data: function() {
     return {
       search: "",

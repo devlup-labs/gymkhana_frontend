@@ -1,14 +1,13 @@
 <template lang="pug">
-  div
-    v-app-bar.px-md-12(dark dense)
-      img.mr-4(:src="logo" height="40")
+  v-app-bar.px-md-12(app dark dense)
+    img.mr-4(:src="logo" height="40")
 
-      v-toolbar-items
-        v-btn(text) Home
-        v-btn(text) Societies
-        v-btn(text) Forum
-        v-btn(text) People
-      v-spacer
+    v-toolbar-items
+    v-btn(text) Home
+    v-btn(text) Societies
+    v-btn(text) Forum
+    v-btn(text) People
+    v-spacer
 </template>
 
 <script>

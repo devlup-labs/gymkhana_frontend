@@ -1,20 +1,11 @@
-<template>
-  <div :class="{ 'konnekt-background': isHome }">
-    <Toolbar :title="this.$options.name" />
-    <v-flex>
-      <router-view />
-    </v-flex>
-  </div>
+<template lang="pug">
+  v-flex(:class="{ 'konnekt-background': isHome }")
+    router-view
 </template>
 
 <script>
-import Toolbar from "../components/Toolbar";
-
 export default {
   name: "Konnekt",
-  components: {
-    Toolbar
-  },
   data: () => ({ isHome: true }),
   mounted() {
     this.updateBackground();
