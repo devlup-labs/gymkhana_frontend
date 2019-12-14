@@ -1,17 +1,16 @@
 <template lang="pug">
-  div.container
-    v-container
-      v-responsive(min-width="40px")
-        v-layout(row fill-height)
-          v-flex(lg6 xs6 offset-xs3)
-            v-text-field(
-              v-model="search"
-              outline
-              prepend-inner-icon="mdi-magnify"
-              label="search any skill or name"
-              clearable)
-          v-flex
-            v-btn(large color="primary" :to="{name : 'konnekt-search'}") GO
+  v-container
+    v-responsive(min-width="40px")
+      v-layout(row fill-height)
+        v-flex(lg6 xs6 offset-xs3)
+          v-text-field(
+            v-model="search"
+            outline
+            prepend-inner-icon="mdi-magnify"
+            label="search any skill or name"
+            clearable)
+        v-flex
+          v-btn(large color="primary" :to="{name : 'konnekt-search'}") GO
     v-container.ms-5
       div(v-for="person in filteredList" v-bind:key="person.name")
         v-container.container

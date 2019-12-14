@@ -1,34 +1,11 @@
 <template lang="pug">
-  div( :class="{ 'konnekt-background': isHome }")
-    SidenavHeader(:title="this.$options.name")
-    v-flex
-      router-view
+  v-flex(:class="$router.currentRoute.name === 'konnekt-home' ? 'konnekt-background' : ''")
+    router-view
 </template>
 
 <script>
-import SidenavHeader from "../components/SidenavHeader";
-
 export default {
-  name: "Konnekt",
-  components: {
-    SidenavHeader
-  },
-  data: () => ({ isHome: true }),
-  mounted() {
-    this.updateBackground();
-  },
-  methods: {
-    updateBackground() {
-      this.isHome =
-        this.$router.currentRoute.path.toString() === "/konnekt" ||
-        this.$router.currentRoute.path.toString() === "/konnekt/";
-    }
-  },
-  watch: {
-    $route() {
-      this.updateBackground();
-    }
-  }
+  name: "Konnekt"
 };
 </script>
 

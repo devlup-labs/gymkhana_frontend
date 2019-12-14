@@ -8,6 +8,10 @@ import KonnektSearch from "../components/KonnektSearch";
 
 Vue.use(VueRouter);
 
+const sidenavRouteMeta = {
+  sidenav: true
+};
+
 const routes = [
   {
     path: "/",
@@ -31,11 +35,18 @@ const routes = [
   {
     path: "/konnekt",
     component: Konnekt,
+    meta: sidenavRouteMeta,
     children: [
-      { name: "konnekt-home", path: "", component: KonnektHome },
+      {
+        name: "konnekt-home",
+        path: "",
+        meta: sidenavRouteMeta,
+        component: KonnektHome
+      },
       {
         name: "konnekt-search",
         path: "search",
+        meta: sidenavRouteMeta,
         component: KonnektSearch
       }
     ]
