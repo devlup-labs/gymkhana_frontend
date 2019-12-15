@@ -19,7 +19,7 @@ jobs:
     - name: npm install, lint, test and build
       run: |
         npm ci
-        npm lint
+        npm run lint
         npm run test:unit
         npm run test:e2e:headless
         npm run build --if-present
