@@ -6,6 +6,7 @@ import Konnekt from "../views/Konnekt";
 import KonnektHome from "../components/KonnektHome";
 import KonnektSearch from "../components/KonnektSearch";
 import OfficeBearers from "../views/OfficeBearers";
+import Profile from "../components/Profile";
 
 Vue.use(VueRouter);
 
@@ -56,6 +57,11 @@ const routes = [
     path: "/office-bearers",
     name: "office-bearers",
     component: OfficeBearers
+  },
+  {
+    name: "profile",
+    path: "profile",
+    component: Profile
   }
 ];
 
