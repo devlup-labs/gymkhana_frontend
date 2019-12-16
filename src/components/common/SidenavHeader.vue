@@ -12,7 +12,7 @@
               span(v-if="$vuetify.breakpoint.mdAndUp") {{ item.title }}
               v-icon(v-if="$vuetify.breakpoint.mdAndUp && item.children") mdi-menu-down
           v-list(v-if="item.children")
-            v-list-item(v-for="(child, i) in item.children" :key="i")
+            v-list-item(v-for="(child, i) in item.children" :key="i" :to="child.to")
               v-btn(text block) {{ child.title }}
     v-navigation-drawer(v-model="drawer" app :clipped="$vuetify.breakpoint.lgAndUp" :mini-variant.sync="mini")
       template(v-slot:prepend)
@@ -53,11 +53,14 @@ export default {
       {
         title: "Account",
         icon: "mdi-account",
-        children: [{ title: "Profile" }, { title: "Logout" }]
+        children: [
+          { title: "Profile", to: { name: "profile" } },
+          { title: "Logout" }
+        ]
       }
     ],
     drawerItems: [
-      { title: "Profile", icon: "mdi-account" },
+      { title: "Profile", icon: "mdi-account", to: { name: "profile" } },
       {
         title: "Categories",
         icon: "mdi-database",
