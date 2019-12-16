@@ -126,6 +126,7 @@
     v-tooltip(left color="black")
       template(v-slot:activator="{ on }")
         v-btn.ma-5(
+          :to="{name: 'profile-edit'}"
           color="primary"
           v-on="on"
           dark

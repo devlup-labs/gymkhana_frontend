@@ -7,6 +7,7 @@ import KonnektHome from "../components/KonnektHome";
 import KonnektSearch from "../components/KonnektSearch";
 import OfficeBearers from "../views/OfficeBearers";
 import Profile from "../components/Profile";
+import ProfileEdit from "../components/ProfileEdit";
 
 Vue.use(VueRouter);
 
@@ -56,6 +57,12 @@ const routes = [
         path: "profile",
         meta: sidenavRouteMeta,
         component: Profile
+      },
+      {
+        name: "profile-edit",
+        path: "profile/edit",
+        meta: sidenavRouteMeta,
+        component: ProfileEdit
       }
     ]
   },
