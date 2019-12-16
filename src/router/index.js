@@ -50,6 +50,12 @@ const routes = [
         path: "search",
         meta: sidenavRouteMeta,
         component: KonnektSearch
+      },
+      {
+        name: "profile",
+        path: "profile",
+        meta: sidenavRouteMeta,
+        component: Profile
       }
     ]
   },
@@ -57,11 +63,6 @@ const routes = [
     path: "/office-bearers",
     name: "office-bearers",
     component: OfficeBearers
-  },
-  {
-    name: "profile",
-    path: "profile",
-    component: Profile
   }
 ];
 
