@@ -43,11 +43,44 @@
                   v-card-actions
                     v-btn(icon :to="fest.to")
                       v-icon mdi-link
+    v-container(fluid)
+      v-content
+        p.display-1.text-center Societies
+        v-layout(row).pa-8
+          v-flex(v-for="(society,n) in societies" :key="n" v-if="n<6").md6.xs12.sm12
+            v-layout(row ).justify-center.mt-10
+              v-hover( v-slot:default="{ hover }")
+                v-card(
+                  :to="society.to"
+                  :elevation="hover ? 15 : 2"
+                  class="mx-auto"
+                  height="80%"
+                  width="80%"
+                  )
+                  v-img(:src="society.img")
+                    v-layout.align-end.fill-height
+                      v-card-text(class="my-4 text-center title").stripe {{society.name}}
+          v-flex(v-else).md6.offset-md3.xs12.sm12
+            v-layout(row).justify-center.mt-5
+              v-hover( v-slot:default="{ hover }")
+                v-card(
+                  :to="society.to"
+                  :elevation="hover ? 15 : 2"
+                  class="mx-auto"
+                  height="80%"
+                  width="80%"
+                )
+                  v-img(:src="society.img")
+                    v-layout.align-end.fill-height
+                      v-card-text(class="my-4 text-center title").stripe {{society.name}}as
+
+
     section
-      v-parallax(src="../assets/hero.jpeg" height="380")
-        v-layout(column align-center justify-center)
-          div(class="headline white--text mb-4 text-center")  Web development has never been easier
-          em Kick-start your application today
+      v-parallax(src="../assets/hero.jpeg" )
+        overlay(opacity=".1")
+          v-layout(column align-center justify-center)
+            div(class="headline white--text mb-4 ")  Web development has never been easier
+            em Kick-start your application today
 
     //v-layout(row).pa-10.justify-center.text-center.align-center
       v-flex
@@ -79,6 +112,7 @@ export default {
     msg: String
   },
   data: () => ({
+    home1: { name: "society" },
     festCarouselData: [
       {
         title: "Ignus",
@@ -115,6 +149,43 @@ export default {
       { image: require("../assets/home3.jpg") },
       { image: require("../assets/home4.jpg") },
       { image: require("../assets/home5.jpg") }
+    ],
+    societies: [
+      {
+        name: "Society of design and arts",
+        to: { name: "society" },
+        img: require("../assets/img1.jpg")
+      },
+      {
+        name: "Students Tech Society",
+        to: { name: "society" },
+        img: require("../assets/img2.jpg")
+      },
+      {
+        name: "Students Elected Representative Society",
+        to: { name: "society" },
+        img: require("../assets/img3.jpg")
+      },
+      {
+        name: "Student Campus Life Society",
+        to: { name: "society" },
+        img: require("../assets/img4.jpg")
+      },
+      {
+        name: "Students Cult and Lit Society",
+        to: { name: "society" },
+        img: require("../assets/home3.jpg")
+      },
+      {
+        name: "Students Sports and games Society",
+        to: { name: "society" },
+        img: require("../assets/home2.jpg")
+      },
+      {
+        name: "Students Acad Society",
+        to: { name: "society" },
+        img: require("../assets/home4.jpg")
+      }
     ]
   })
 };
