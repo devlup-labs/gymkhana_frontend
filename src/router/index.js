@@ -8,6 +8,7 @@ import KonnektSearch from "../components/KonnektSearch";
 import OfficeBearers from "../views/OfficeBearers";
 import Profile from "../components/Profile";
 import ProfileEdit from "../components/ProfileEdit";
+import Society from "../views/Society";
 
 Vue.use(VueRouter);
 
@@ -70,6 +71,11 @@ const routes = [
     path: "/office-bearers",
     name: "office-bearers",
     component: OfficeBearers
+  },
+  {
+    name: "society",
+    path: "/society",
+    component: Society
   }
 ];
 
