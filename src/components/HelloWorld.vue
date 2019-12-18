@@ -75,12 +75,24 @@
                       v-card-text(class="my-4 text-center title").stripe {{society.name}}as
 
 
-    section
-      v-parallax(src="../assets/hero.jpeg" )
-        overlay(opacity=".1")
-          v-layout(column align-center justify-center)
-            div(class="headline white--text mb-4 ")  Web development has never been easier
-            em Kick-start your application today
+    //section
+      v-parallax(src="../assets/hero.jpeg" height="900")
+        v-layout(column align-center justify-center)
+          div(class="headline white--text")  Web development has never been easier
+          em Kick-start your application today
+        v-container(fluid)
+          v-content
+            v-layout(row)
+              v-flex(v-for="(society,n) in societies" :key="n").md4
+                v-layout(row )
+                  v-hover( v-slot:default="{ hover }")
+                    v-card(
+                      height="80%"
+                      width="80%":elevation="hover ? 16 : 2"
+                    )
+                      v-img(:src="society.img"
+                        min-width="350"
+                        min-height="200" )
 
     //v-layout(row).pa-10.justify-center.text-center.align-center
       v-flex
@@ -90,19 +102,32 @@
         v-layout(row).align-center.font-weight-regular.fill-height.justify-center
           v-flex.md12.offset-md2.pt-3.sm8
             p.subtitle-1.text-center a
-    //section
-      v-container
-        v-layout(column  justify-center)
-          v-flex.xs12
-            v-layout(row).justify-center
-              p la
-          v-flex.xs12
-            v-layout(row).align-center.justify-center
-              p B
+    section
+      v-card.elevation-0(color="grey")
+        v-layout(row wrap align-center style="{background: #000000}").justify-center
+          v-flex.md6
+            v-layout(row).ml-12
+              v-container
+                span ABOUT US
+                p Student Gymkhana IITJ
+                br
+                span Coming Soon!
+          v-flex.md6.justify-end
+            v-layout(row).text-end.mr-12
+              v-container
+                p QUICK LINKS
+                p  IIT Jodhpur
+                p Contact Us
+                p Acadmic Calender
 
-    v-footer(color="blue darken-2")
-      v-layout(row wrap align-center)
-        p S
+    v-footer(color="blue darken-2 white--text").text-center.justify-center.align-center
+      v-icon(color="white" size="20") mdi-copyright
+      h4.font-weight-regular 2019 COPYRIGHT: made with
+      v-icon(color="red").pa-1 mdi-heart
+      h4.font-weight-regular by Students' Gymkhana WebD Team
+
+
+
 </template>
 
 <script>
