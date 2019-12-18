@@ -18,24 +18,24 @@
               p.subtitle-1.text-center  Students' Gymkhana, IIT Jodhpur is the governing body that looks after all student activities.
               blockquote().pl-4.subtitle-1 A place where you can find a plethora of opportunities and a place where you can pursue your passion.
 
-    section
-      v-parallax(src="../assets/hero.jpeg" height="900" )
+    v-container(fluid).pa-0
+      v-parallax(src="../assets/hero.jpeg" height="800" )
         v-overlay(absolute)
-          v-layout.display-2.text-center.justify-center.ma-6 Festivals
-          v-carousel(height="800px" :show-arrows="false" cycle hide-delimiter-background ).text-center
+          v-layout.display-2.justify-center.ma-6 Festivals
+          v-carousel(height="550px" :show-arrows="false" cycle hide-delimiter-background ).text-center
             v-carousel-item(transition="fade-transition" reverse-transition="fade-transition" v-for="(fest,i) in festCarouselData" :key="i")
-              div.display-1.ma-4 {{fest.title}}
-              v-layout(column).pt-2.align-center
-                v-flex.xs2.md4.sm2
-                  v-layout
-                    v-img( :src="require('../assets/'+fest.image)" max-height="350" max-width="400")
-                  v-layout.pt-2.justify-center.mb-2
-                    v-btn(icon :to="fest.to")
-                      v-icon mdi-link
-                v-flex.md5.xs10.elevation-0
-                  v-layout(row).pt-5.stripe.align-center.font-weight-regular.fill-height.justify-center.elevation-12
-                    v-flex.md8.sm8.xs8
-                      p.subtitle-2.text-center.stripe-texts.font-weight-bold  {{ fest.about }}
+              v-layout(row).justify-center.align-center
+                div.display-1 {{fest.title}}
+                v-btn(icon ripple large :to="fest.to").ml-2
+                    v-icon mdi-link
+              v-layout(row).pt-5.justify-center.align-center
+                v-flex.xs12.md5.offset-md1.sm12
+                  v-layout.justify-center
+                    v-img( :src="require('../assets/'+fest.image)" max-height="350" max-width="450")
+                v-flex.md6.xs12.sm12
+                  v-layout(row).font-weight-regular.justify-center.mt-2
+                    v-flex.md10.sm10.xs10
+                      p.subtitle-2.text-center.font-weight-bold  {{ fest.about }}
                 //v-card(flat tile ).transparent.elevation-0
                   v-card-title.justify-center.display-1 {{ fest.title }}
                   v-card-text.md3
@@ -91,9 +91,7 @@ export default {
         title: "Varchas",
         image: "img2.jpg",
         about:
-          "Varchas is the sports fest of IIT Jodhpur organized every year in the month of February. This year it was organized from 30thOct to 2nd Nov. Varchas celebrates the spirit of sportsmanship and serves as a platform to showcase countless hours of perspiration put in by college teams to achieve excellence in sports. Varchas was first conducted in the year 2011, with a vision of promoting sports among the colleges of India, particularly Rajasthan and providing the athletes in India a platform to showcase their talent.\n" +
-          "\n" +
-          "Competitions are held in the fields of football, cricket, table tennis, lawn tennis, badminton, squash, volleyball, basketball, and athletics in national level stadiums of Jodhpur. Varchas promotes healthy competition and is a great opportunity for the teams to prove their mettle in their respective sports.",
+          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dignissimos et id impedit modi odit placeat sunt tenetur! Eos illum neque provident? Accusantium autem cupiditate debitis doloremque doloribus possimus reprehenderit!  ",
         to: { name: "home" }
       },
       {
