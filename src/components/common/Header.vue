@@ -6,7 +6,7 @@
     v-btn(text) Home
     v-btn(text) Societies
     v-btn(text) Forum
-    v-btn(text href="../office-bearers") People
+    v-btn(text :to="{name: 'office-bearers'}") People
     v-spacer
 </template>
 
