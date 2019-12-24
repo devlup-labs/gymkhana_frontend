@@ -5,7 +5,7 @@
       v-toolbar-title.white--text
         p.headline.mb-0 Login
 
-    v-card
+    v-card.tile
       v-card-text(pt-4)
         div
           v-form(v-model="valid" ref="form")
@@ -18,7 +18,7 @@
               required
             )
 
-            v-text-field(
+            v-text-field(v-toolbar
               outline
               prepend-icon="mdi-lock"
               :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
