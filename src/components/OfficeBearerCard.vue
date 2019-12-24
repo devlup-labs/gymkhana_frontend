@@ -11,9 +11,8 @@
             p.font-weight-regular.mt-2 General Secretary
           v-card-actions
             v-row(justify="center")
-              v-btn(@click="cardPage = 2" text)
-                v-icon mdi-refresh
-                v-text Details
+              v-btn(@click="cardPage = 2" text) Details
+                v-icon(right) mdi-arrow-right
       v-stepper-content.pa-0(step="2")
         v-card(:height="avatarSize*3")
           v-row
@@ -25,18 +24,18 @@
                 v-divider
               v-row.justify-center
                 div.mt-4
-                  a(href="https://students.iitj.ac.in/office-bearers/tel:9610942435") +91-9610942435
+                  a(href="tel:9610XXXXXX") +91-9610XXXXXX
               v-row.justify-center
                 div
                   v-row
                     v-icon  mdi-email
                     v-text.ma-2.pa-2 kumar.14@iitj.ac.in
-              v-row.justify-center.align-end.pa-0.ma-0.fh
+              v-row.justify-center.align-end.pa-0.ma-0.fill-height-card-back
                 v-divider
               v-row.justify-center.mt-2.pa-0
                 v-btn(@click="cardPage = 1" text)
-                  v-icon mdi-refresh
-                  v-text Back
+                  v-icon(left) mdi-arrow-left
+                  |  Back
 </template>
 
 <script>
@@ -54,7 +53,7 @@ export default {
 </script>
 
 <style scoped>
-.fh {
+.fill-height-card-back {
   height: 50%;
 }
 </style>
