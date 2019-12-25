@@ -14,15 +14,16 @@
               v-icon(left) mdi-pen
               | Upcoming Event
             v-card-text
-              
+              EventTable
     Footer
 </template>
 
 <script>
 import Footer from "../components/common/Footer";
+import EventTable from "../components/common/EventTable";
 export default {
   name: "Society",
-  components: { Footer }
+  components: { EventTable, Footer }
 };
 </script>
 
