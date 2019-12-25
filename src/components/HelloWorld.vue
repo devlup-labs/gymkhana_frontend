@@ -36,13 +36,7 @@
                   v-layout(row).font-weight-regular.justify-center.mt-2
                     v-flex.md10.sm10.xs10
                       p.subtitle-2.text-center.font-weight-bold  {{ fest.about }}
-                //v-card(flat tile ).transparent.elevation-0
-                  v-card-title.justify-center.display-1 {{ fest.title }}
-                  v-card-text.md3
-                    v-img(:src="require('../assets/'+fest.image)")
-                  v-card-actions
-                    v-btn(icon :to="fest.to")
-                      v-icon mdi-link
+
     v-container(fluid)
       v-content
         p.display-1.text-center Societies
@@ -73,66 +67,14 @@
                   v-img(:src="society.img")
                     v-layout.align-end.fill-height
                       v-card-text(class="my-4 text-center title").stripe {{society.name}}as
-
-
-    //section
-      v-parallax(src="../assets/hero.jpeg" height="900")
-        v-layout(column align-center justify-center)
-          div(class="headline white--text")  Web development has never been easier
-          em Kick-start your application today
-        v-container(fluid)
-          v-content
-            v-layout(row)
-              v-flex(v-for="(society,n) in societies" :key="n").md4
-                v-layout(row )
-                  v-hover( v-slot:default="{ hover }")
-                    v-card(
-                      height="80%"
-                      width="80%":elevation="hover ? 16 : 2"
-                    )
-                      v-img(:src="society.img"
-                        min-width="350"
-                        min-height="200" )
-
-    //v-layout(row).pa-10.justify-center.text-center.align-center
-      v-flex
-        v-layout.text-center
-          p.text-center B
-      v-flex.md6.xs12
-        v-layout(row).align-center.font-weight-regular.fill-height.justify-center
-          v-flex.md12.offset-md2.pt-3.sm8
-            p.subtitle-1.text-center a
-    section
-      v-card.elevation-0(color="grey")
-        v-layout(row wrap align-center style="{background: #000000}").justify-center
-          v-flex.md6
-            v-layout(row).ml-12
-              v-container
-                span ABOUT US
-                p Student Gymkhana IITJ
-                br
-                span Coming Soon!
-          v-flex.md6.justify-end
-            v-layout(row).text-end.mr-12
-              v-container
-                p QUICK LINKS
-                p  IIT Jodhpur
-                p Contact Us
-                p Acadmic Calender
-
-    v-footer(color="blue darken-2 white--text").text-center.justify-center.align-center
-      v-icon(color="white" size="20") mdi-copyright
-      h4.font-weight-regular 2019 COPYRIGHT: made with
-      v-icon(color="red").pa-1 mdi-heart
-      h4.font-weight-regular by Students' Gymkhana WebD Team
-
-
-
+    Footer
 </template>
 
 <script>
+import Footer from "./common/Footer";
 export default {
   name: "HelloWorld",
+  components: { Footer },
   props: {
     msg: String
   },
