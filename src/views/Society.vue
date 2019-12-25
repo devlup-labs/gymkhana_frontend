@@ -44,12 +44,12 @@
                     v-layout.align-end.fill-height
                       v-card-text(class="my-4 text-center title").stripe.subtitle-1.font-weight-medium {{club.name}}
     v-layout(row ).pa-5.justify-center
-      v-card(flat tile text)
+      v-card(flat tile text min-width="500" )
         v-card-title.headline.justify-center
           v-icon(left) mdi-newspaper
           | News
         v-card-text
-          | No Upcoming News
+          NewsTable
     v-layout(row class="grey lighten-3").pa-5
       v-flex.md8.offset-md2
         v-card(class="accent white--text")
@@ -66,9 +66,10 @@
 import Footer from "../components/common/Footer";
 import EventTable from "../components/common/EventTable";
 import OfficeBearerCard from "../components/OfficeBearerCard";
+import NewsTable from "../components/common/NewsTable";
 export default {
   name: "Society",
-  components: { OfficeBearerCard, EventTable, Footer },
+  components: { NewsTable, OfficeBearerCard, EventTable, Footer },
   data: () => ({
     clubs: [
       {
