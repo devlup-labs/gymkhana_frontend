@@ -24,15 +24,70 @@
               | Upcoming Event
             v-card-text
               EventTable
+    v-layout(row class="grey lighten-3").pa-5
+      v-flex.md8.offset-md2
+        v-card(class="accent white--text")
+          v-card-title.display-1.justify-center Clubs
+      v-container.md12
+        v-layout(row).pa-3
+          v-flex(v-for="(club,n) in clubs" :key="n").md4.xs12.sm12
+            v-layout(row ).justify-center.mt-10
+              v-hover( v-slot:default="{ hover }")
+                v-card(
+                  :to="club.to"
+                  :elevation="hover ? 15 : 2"
+                  class="mx-auto"
+                  height="80%"
+                  width="80%"
+                )
+                  v-img(:src="club.img")
+                    v-layout.align-end.fill-height
+                      v-card-text(class="my-4 text-center title").stripe.subtitle-1.font-weight-medium {{club.name}}
+    v-layout(row ).pa-5.justify-center
+      v-card(flat tile text)
+        v-card-title.headline.justify-center
+          v-icon(left) mdi-newspaper
+          | News
+        v-card-text
+          | No Upcoming News
+    v-layout(row class="grey lighten-3").pa-5
+      v-flex.md8.offset-md2
+        v-card(class="accent white--text")
+          v-card-title.display-1.justify-center Key People
+      v-flex.md12
+        v-container
+          v-row
+            v-col(cols="12" md="4" v-for="x in 3" :key="x")
+              OfficeBearerCard(:avatarSize="120")
     Footer
 </template>
 
 <script>
 import Footer from "../components/common/Footer";
 import EventTable from "../components/common/EventTable";
+import OfficeBearerCard from "../components/OfficeBearerCard";
 export default {
   name: "Society",
-  components: { EventTable, Footer }
+  components: { OfficeBearerCard, EventTable, Footer },
+  data: () => ({
+    clubs: [
+      {
+        name: "Photography Club",
+        to: { name: "society" },
+        img: require("../assets/img1.jpg")
+      },
+      {
+        name: "Designerds",
+        to: { name: "society" },
+        img: require("../assets/img2.jpg")
+      },
+      {
+        name: "FremeX",
+        to: { name: "society" },
+        img: require("../assets/img3.jpg")
+      }
+    ]
+  })
 };
 </script>
 
@@ -47,5 +102,8 @@ blockquote {
   padding: 0.25rem 0.5rem;
   font-size: 1rem;
   border-left: 0.4rem solid #4791db;
+}
+.stripe {
+  background-color: rgba(255, 255, 255, 0.74);
 }
 </style>
