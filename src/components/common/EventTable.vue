@@ -1,6 +1,6 @@
 <template lang="pug">
     v-simple-table.elevation-4
-      thead(class="primary darken-1.5 gray--text")
+      thead(class="primary gray--text")
         th.pr-0
           v-icon mdi-pen
         th.subtitle-1.justify-start Name
