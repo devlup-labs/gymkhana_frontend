@@ -10,7 +10,7 @@
       tr(v-for="(news,i) in newsList" :key="i" @click.stop="showDialog(news)")
         td
           v-icon mdi-chevron-right
-        td {{ news.name}}
+        td News {{ i+1 }}
         td.text-center {{ news.date }}
     v-dialog.elevation-12( v-model="dialog"
       persistent
@@ -26,7 +26,7 @@
           v-container
             v-layout(row)
               v-flex.md12
-                v-img(:src="singleEvent.img" alt="lawda" max-height="230" cover).elevation-10
+                v-img(:src="singleEvent.img" max-height="230" cover).elevation-10
               v-flex.md6.mt-4.offset-2
                 v-icon(left) mdi-calendar
                 | {{singleEvent.date}}
@@ -53,7 +53,7 @@ export default {
     },
     newsList: [
       {
-        name: "Event 1",
+        name: "News 1",
         date: "tomorrow",
         author: "IIT-J",
         desc:
@@ -61,7 +61,7 @@ export default {
         img: require("../../assets/home1.jpg")
       },
       {
-        name: "Event 2",
+        name: "News 2",
         date: "23/01/2011",
         author: "IIT-J",
         desc:
@@ -69,7 +69,7 @@ export default {
         img: require("../../assets/home1.jpg")
       },
       {
-        name: "Event 3",
+        name: "News 3",
         date: "tomorrow",
         author: "IIT-J",
         desc:
@@ -77,7 +77,7 @@ export default {
         img: require("../../assets/home1.jpg")
       },
       {
-        name: "Event 4",
+        name: "News 4",
         date: "tomorrow",
         author: "IIT-J",
         desc:
