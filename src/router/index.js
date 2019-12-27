@@ -7,6 +7,7 @@ import KonnektHome from "../components/KonnektHome";
 import KonnektSearch from "../components/KonnektSearch";
 import OfficeBearers from "../views/OfficeBearers";
 import Society from "../views/Society";
+import Club from "../views/Club";
 
 Vue.use(VueRouter);
 
@@ -62,6 +63,11 @@ const routes = [
     name: "societies",
     path: "/societies",
     component: Society
+  },
+  {
+    name: "club",
+    path: "/club",
+    component: Club
   }
 ];
 
