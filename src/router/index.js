@@ -9,6 +9,7 @@ import OfficeBearers from "../views/OfficeBearers";
 import Profile from "../components/Profile";
 import ProfileEdit from "../components/ProfileEdit";
 import Society from "../views/Society";
+import Club from "../views/Club";
 
 Vue.use(VueRouter);
 
@@ -76,6 +77,11 @@ const routes = [
     name: "societies",
     path: "/societies",
     component: Society
+  },
+  {
+    name: "club",
+    path: "/club",
+    component: Club
   }
 ];
 
