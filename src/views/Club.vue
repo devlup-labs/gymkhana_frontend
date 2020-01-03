@@ -28,7 +28,7 @@
               | Upcoming Event
             v-card-text
               EventTable
-        v-flex.md7.offset-md1.elevation-0(flat tile depressed)
+        v-flex.md7.offset-md1.elevation-0(flat tile depressed).pl-5
           v-tabs(fixed-tabs background-color='primary ' dark v-model="tab")
             v-tab
               | Activities
