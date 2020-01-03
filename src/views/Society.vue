@@ -74,17 +74,17 @@ export default {
     clubs: [
       {
         name: "Photography Club",
-        to: { name: "society" },
+        to: { name: "club" },
         img: require("../assets/img1.jpg")
       },
       {
         name: "Designerds",
-        to: { name: "society" },
+        to: { name: "club" },
         img: require("../assets/img2.jpg")
       },
       {
         name: "FremeX",
-        to: { name: "society" },
+        to: { name: "club" },
         img: require("../assets/img3.jpg")
       }
     ]

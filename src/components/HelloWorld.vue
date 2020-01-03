@@ -120,37 +120,37 @@ export default {
     societies: [
       {
         name: "Society of design and arts",
-        to: { name: "society" },
+        to: { name: "societies" },
         img: require("../assets/img1.jpg")
       },
       {
-        name: "Students Tech Society",
-        to: { name: "society" },
+        name: "Students Tech societies",
+        to: { name: "societies" },
         img: require("../assets/img2.jpg")
       },
       {
         name: "Students Elected Representative Society",
-        to: { name: "society" },
+        to: { name: "societies" },
         img: require("../assets/img3.jpg")
       },
       {
         name: "Student Campus Life Society",
-        to: { name: "society" },
+        to: { name: "societies" },
         img: require("../assets/img4.jpg")
       },
       {
         name: "Students Cult and Lit Society",
-        to: { name: "society" },
+        to: { name: "societies" },
         img: require("../assets/home3.jpg")
       },
       {
         name: "Students Sports and games Society",
-        to: { name: "society" },
+        to: { name: "societies" },
         img: require("../assets/home2.jpg")
       },
       {
         name: "Students Acad Society",
-        to: { name: "society" },
+        to: { name: "societies" },
         img: require("../assets/home4.jpg")
       }
     ]
