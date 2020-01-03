@@ -24,7 +24,7 @@
               | Upcoming Event
             v-card-text
               EventTable
-    v-layout(row class="grey lighten-3").pa-5
+    v-layout(row class="grey lighten-3").pa-5.pr-0
       v-flex.md8.offset-md2
         v-card(class="accent white--text")
           v-card-title.display-1.justify-center Clubs
@@ -44,7 +44,7 @@
                     v-layout.align-end.fill-height
                       v-card-text(class="my-4 text-center title").stripe.subtitle-1.font-weight-medium {{club.name}}
     v-layout(row ).pa-5.justify-center
-      v-card(flat tile text min-width="500" )
+      v-card(flat tile text  )
         v-card-title.headline.justify-center
           v-icon(left) mdi-newspaper
           | News

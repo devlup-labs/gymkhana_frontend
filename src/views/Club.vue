@@ -8,7 +8,7 @@
       v-layout.justify-center.align-center.fill-height
         h1 Photography Club
     v-container.pa-4
-      v-layout(row :style="{'margin-top': `-100px`}")
+      v-layout(row :style="{'margin-top': `-100px`}").justify-center
         v-flex.md8.offset-md2.sm8
           v-card.card-border( class="border-top--green").pa-5.elevation-8
             v-card-title.display-1.font-weight-light About
