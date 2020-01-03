@@ -58,7 +58,7 @@
         v-container
           v-row
             v-col(cols="12" md="4" v-for="x in 3" :key="x")
-              OfficeBearerCard(:avatarSize="120")
+              OfficeBearerCard(:avatarSize="120" )
     Footer
 </template>
 
