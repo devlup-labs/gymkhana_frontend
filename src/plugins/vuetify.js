@@ -1,12 +1,18 @@
 import Vue from "vue";
 import Vuetify from "vuetify/lib";
+import Options from "./options";
 
 Vue.use(Vuetify);
 
 export default new Vuetify({
   theme: {
     options: {
-      customProperties: true
+      customProperties: true,
+      parallaxHeight: 350,
+      profile: {
+        cardSize: 300
+      },
+      socialMediaIconMap: Options.socialMediaIconMap
     },
     themes: {
       light: {

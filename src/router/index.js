@@ -51,20 +51,20 @@ const routes = [
         path: "search",
         meta: sidenavRouteMeta,
         component: KonnektSearch
-      },
-      {
-        name: "profile",
-        path: "profile",
-        meta: sidenavRouteMeta,
-        component: Profile
-      },
-      {
-        name: "profile-edit",
-        path: "profile/edit",
-        meta: sidenavRouteMeta,
-        component: ProfileEdit
       }
     ]
+  },
+  {
+    name: "profile",
+    path: "/profile",
+    meta: sidenavRouteMeta,
+    component: Profile
+  },
+  {
+    name: "profile-edit",
+    path: "/profile/edit",
+    meta: sidenavRouteMeta,
+    component: ProfileEdit
   },
   {
     path: "/office-bearers",

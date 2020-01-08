@@ -3,126 +3,92 @@
     v-parallax(
       dark
       src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
-      :height="350"
-        )
+      :height="$vuetify.theme.options.parallaxHeight"
+    )
       v-layout.justify-center.align-center.fill-height
         h1 About Me
     v-container.pa-4
-      v-layout(row :style="{'margin-top': `-100px`}")
-        v-flex.md8.offset-md2.sm8
-          v-card(:height="300").elevation-4
-            v-img(src="https://students.iitj.ac.in/static/assets/others/cover2.svg" :height="150")
-            v-layout(column).justify-center.text-center
+      v-row(justify="center" :style="{'margin-top': `-${$vuetify.theme.options.parallaxHeight/3}px`}")
+        v-col(cols="12" sm="10" lg="8")
+          v-card(:min-height="$vuetify.theme.options.profile.cardSize").elevation-4
+            v-img(src="https://students.iitj.ac.in/static/assets/others/cover2.svg" :height="$vuetify.theme.options.profile.cardSize/2")
+            v-col.justify-center.text-center
               v-flex
-                v-avatar.elevation-4.justify-center.ma-2(:size="150" :style="{'margin-top': `-${150/2}px !important`}")
+                v-avatar.elevation-4.justify-center.ma-2(
+                  :size="$vuetify.theme.options.profile.cardSize/2"
+                  :style="{'margin-top': `-${$vuetify.theme.options.profile.cardSize/4}px !important`}")
                   v-img.justify-center(src="https://cdn2.iconfinder.com/data/icons/people-80/96/Picture1-512.png")
               v-flex
-                h2(class="black--text").font-weight-bold.mt-0 Soham Sonawane
+                h2(class="black--text").font-weight-bold.mt-0 {{ profile.name }}
               v-flex
-                p.font-weight-regular.mb-1 B18CSE053
-      v-layout.pt-4(row)
-        v-flex.md4.offset-md2.sm4
-          v-card.elevation-4
-            v-layout(column).ml-4
-              v-flex
-                v-list
-                  v-list-item
-                    v-list-item-title.headline Personal Info
-              v-divider.mr-2
-              v-list(disabled )
-                v-list-item
+                p.font-weight-regular.mb-1 {{ profile.rollNumber }}
+      v-row(justify="center")
+        v-col(cols="12" sm="5" lg="4")
+          v-card(elevation="4")
+            v-card-title.headline Personal Info
+            v-divider.mx-2
+            v-card-text
+              v-list(disabled)
+                v-list-item(v-for="(key, i) in Object.keys(profile.info.personal)" :key="i")
                   v-list-item-icon
-                    v-icon(size="25") mdi-gender-male-female
-                  v-list-item-title.sub-title-1 Male
-                v-list-item
+                    v-icon(size="25") {{ iconMap[key] }}
+                  v-list-item-title.sub-title-1 {{ profile.info.personal[key] }}
+        v-col(cols="12" sm="5" lg="4")
+          v-card(elevation="4")
+            v-card-title.headline Branch, DoB and more
+            v-divider.mx-2
+            v-card-text
+              v-list(disabled)
+                v-list-item(v-for="(key, i) in Object.keys(profile.info.other)" :key="i")
                   v-list-item-icon
-                    v-icon(size="25") mdi-phone
-                  v-list-item-title.sub-title-1 6377954885
-                v-list-item
-                  v-list-item-icon
-                    v-icon(size="25") mdi-email
-                  v-list-item-title.sub-title-1 sonawane.1@iitj.ac.in
-                v-list-item
-                  v-list-item-icon
-                    v-icon(size="25") mdi-map-marker
-                  v-list-item-title.sub-title-1 None
-        v-flex.md4.pl-2.sm4
-          v-card.elevation-4
-            v-layout(column).ml-4
-              v-flex
-                v-list
-                  v-list-item
-                    v-list-item-title.headline Personal Info 2
-              v-divider.mr-2
-              v-list(disabled )
-                v-list-item
-                  v-list-item-icon
-                    v-icon(size="25") mdi-cake
-                  v-list-item-title.sub-title-1 Sept. 7, 2001
-                v-list-item
-                  v-list-item-icon
-                    v-icon(size="25") mdi-account-card-details
-                  v-list-item-title.sub-title-1 B.Tech
-                v-list-item
-                  v-list-item-icon
-                    v-icon(size="25") mdi-school
-                  v-list-item-title.sub-title-1 Computer Science and Engineering
-                v-list-item
-                  v-list-item-icon
-                    v-icon(size="25") mdi-calendar
-                  v-list-item-title.sub-title-1 Second Year
-      v-layout.pt-4(row)
-        v-flex.md4.offset-md2.sm4
-          v-card.elevation-4
-            v-layout(column).ml-4
-              v-flex
-                v-list
-                  v-list-item
-                    v-list-item-title.headline Skills
-              v-divider.mr-2
-              v-layout(row).pa-4
-                v-chip.elevation-2.font-weight-bold.ma-1(
-                  xs2
-                  color="light-blue darken-1 white--text"
-                  v-for="(skill,i) in profileSkills"
-                  v-bind:key="i"
-                ) {{ skill }}
-        v-flex.md4.pl-2.sm4
-          v-card.elevation-4
-            v-layout(column).ml-4
-              v-flex
-                v-list
-                  v-list-item
-                    v-list-item-title.headline About
-              v-divider.mr-2
-              v-layout(row).justify-center.mt-2
-                p.title.font-weight-regular NONE
-      v-layout.pt-4(row).mb-5
-        v-flex.md4.offset-md2.sm4
-          v-card.elevation-4
-            v-layout(column).ml-4
-              v-flex
-                v-list
-                  v-list-item
-                    v-list-item-title.headline Social Links
-                    v-list-item-action
-                      v-tooltip(left color="black" )
-                        template(v-slot:activator="{ on }")
-                          v-btn(
-                            color="accent darken-2"
-                            v-on="on"
-                            dark
-                            icon
-                            )
-                            v-icon(size="30") mdi-plus
-                        span Add Social Link
-              v-divider.mr-2
-              v-list()
-                v-list-item(v-for="(link,i) in socialLinks" )
-                  v-list-item-icon
-                    v-icon(size="25") {{link.icon}}
-                  v-list-item-title.sub-title-1
-                    a(:href="link.add") {{link.add}}
+                    v-icon(size="25") {{ iconMap[key] }}
+                  v-list-item-title.sub-title-1 {{ profile.info.other[key] }}
+      v-row(justify="center")
+        v-col(cols="12" sm="5" lg="4")
+          v-card(elevation="4")
+            v-card-title.headline Skills
+            v-divider.mx-2
+            v-card-text
+              v-chip.elevation-2.font-weight-bold.ma-1(
+                xs2
+                color="light-blue darken-1 white--text"
+                v-for="(skill, i) in skills"
+                v-bind:key="i"
+              ) {{ skill }}
+        v-col(cols="12" sm="5" lg="4")
+          v-card(elevation="4")
+            v-card-title.headline About
+            v-divider.mx-2
+            v-card-text.text-center
+              p.title.font-weight-regular NONE
+      v-row
+        v-col(sm="5" offset-sm="1" lg="4" offset-lg="2")
+          v-card(elevation="4")
+            v-card-title.headline Social Links
+              v-spacer
+              v-tooltip(left color="black" )
+                template(v-slot:activator="{ on }")
+                  v-btn(
+                    color="accent darken-2"
+                    v-on="on"
+                    dark
+                    icon
+                  )
+                    v-icon(size="30") mdi-plus
+                span Add Social Link
+            v-divider.mx-2
+            v-card-text
+              v-col.text-center.px-0
+                v-btn.ma-1(
+                  v-for="(link, i) in socialLinks"
+                  :key="i"
+                  color="secondary"
+                  rounded
+                  :href="link.url"
+                  target="blank"
+                )
+                  v-icon(left) {{ $vuetify.theme.options.socialMediaIconMap[link.socialMedia].icon }}
+                  | {{ $vuetify.theme.options.socialMediaIconMap[link.socialMedia].name }}
     v-tooltip(left color="black")
       template(v-slot:activator="{ on }")
         v-btn.ma-5(
@@ -136,16 +102,31 @@
           fab)
           v-icon mdi-pencil
       span Edit Your profile
-
-
-
 </template>
 
 <script>
 export default {
   name: "Profile",
   data: () => ({
-    profileSkills: [
+    profile: {
+      name: "Soham Sonawane",
+      rollNumber: "B18CSE053",
+      info: {
+        personal: {
+          gender: "Male",
+          phone: "6377954885",
+          email: "sonawane.1@iitj.ac.in",
+          hometown: "Pune"
+        },
+        other: {
+          dob: "Sept. 7, 2001",
+          prog: "B.Tech",
+          branch: "Computer Science and Engineering",
+          year: "Second Year"
+        }
+      }
+    },
+    skills: [
       "cpp",
       "vue",
       "c++",
@@ -157,10 +138,22 @@ export default {
       "django"
     ],
     socialLinks: [
-      { icon: "mdi-github-circle", add: "https://www.github.com/killbotXD" },
-      { icon: "mdi-google", add: "https://www.gmail.com" }
+      { socialMedia: "GH", url: "https://www.github.com/killbotXD" },
+      { socialMedia: "GP", url: "https://www.gmail.com" }
     ]
-  })
+  }),
+  computed: {
+    iconMap: () => ({
+      dob: "mdi-cake",
+      prog: "mdi-account-card-details",
+      branch: "mdi-school",
+      year: "mdi-calendar",
+      gender: "mdi-gender-male-female",
+      phone: "mdi-phone",
+      email: "mdi-email",
+      hometown: "mdi-map-marker"
+    })
+  }
 };
 </script>
 
