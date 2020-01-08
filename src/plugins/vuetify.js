@@ -10,7 +10,7 @@ export default new Vuetify({
       customProperties: true,
       parallaxHeight: 350,
       profile: {
-        cardSize: 300
+        cardHeight: 300
       },
       socialMediaIconMap: Options.socialMediaIconMap
     },

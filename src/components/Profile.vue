@@ -10,18 +10,7 @@
     v-container.pa-4
       v-row(justify="center" :style="{'margin-top': `-${$vuetify.theme.options.parallaxHeight/3}px`}")
         v-col(cols="12" sm="10" lg="8")
-          v-card(:min-height="$vuetify.theme.options.profile.cardSize").elevation-4
-            v-img(src="https://students.iitj.ac.in/static/assets/others/cover2.svg" :height="$vuetify.theme.options.profile.cardSize/2")
-            v-col.justify-center.text-center
-              v-flex
-                v-avatar.elevation-4.justify-center.ma-2(
-                  :size="$vuetify.theme.options.profile.cardSize/2"
-                  :style="{'margin-top': `-${$vuetify.theme.options.profile.cardSize/4}px !important`}")
-                  v-img.justify-center(src="https://cdn2.iconfinder.com/data/icons/people-80/96/Picture1-512.png")
-              v-flex
-                h2(class="black--text").font-weight-bold.mt-0 {{ profile.name }}
-              v-flex
-                p.font-weight-regular.mb-1 {{ profile.rollNumber }}
+          ProfileCard(:name="profile.name" :rollNumber="profile.rollNumber")
       v-row(justify="center")
         v-col(cols="12" sm="5" lg="4")
           v-card(elevation="4")
@@ -105,8 +94,10 @@
 </template>
 
 <script>
+import ProfileCard from "./ProfileCard";
 export default {
   name: "Profile",
+  components: { ProfileCard },
   data: () => ({
     profile: {
       name: "Soham Sonawane",
