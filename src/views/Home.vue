@@ -54,15 +54,10 @@
                   v-img(:src="society.img")
                     v-layout.align-end.fill-height
                       v-card-text(class="my-4 text-center title").stripe {{society.name}}
-    Footer
 </template>
 
 <script>
-import Footer from "../components/common/Footer";
 export default {
-  components: {
-    Footer
-  },
   data: () => ({
     carouselHeight: null,
     festCarouselData: [

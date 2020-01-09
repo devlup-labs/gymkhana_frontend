@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-content.pt-0
+  div
     v-parallax(src="../assets/home1.jpg" cover).society-photo.text-center.align-center
       v-overlay(absolute)
         p(class="white--text").display-2 Society of Design and Arts
@@ -59,7 +59,6 @@
           v-row
             v-col(cols="12" md="4" v-for="x in 3" :key="x")
               OfficeBearerCard(:avatarSize="120" )
-    Footer
 </template>
 
 <script>
@@ -99,10 +98,8 @@ export default {
   background-size: cover !important;
   -webkit-background-size: cover !important;
 }
-blockquote {
-  padding: 0.25rem 0.5rem;
-  font-size: 1rem;
-  border-left: 0.4rem solid #4791db;
+.v-application .blockquote {
+  border-left: 0.3rem solid #4791db;
 }
 .stripe {
   background-color: rgba(255, 255, 255, 0.74);

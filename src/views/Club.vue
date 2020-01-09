@@ -3,14 +3,16 @@
     v-parallax(
       dark
       :src="require('../assets/home2.jpg')"
-      :height="350"
+      :height="$vuetify.theme.options.parallaxHeight"
     )
       v-layout.justify-center.align-center.fill-height
         h1 Photography Club
     v-container.pa-4
-      v-layout(row :style="{'margin-top': `-100px`}").justify-center
-        v-flex.md8.offset-md2.sm8
-          v-card.card-border( class="border-top--green").pa-5.elevation-8
+      v-row(:style="{'margin-top': `-${$vuetify.theme.options.parallaxHeight/3.5}px`}").justify-center
+        v-col(sm="10" md="8")
+          v-card(
+            :style="{'border-top': `8px solid ${$vuetify.theme.themes.light.primary}`}"
+          ).pa-5.elevation-8
             v-card-title.display-1.font-weight-light About
             v-card-text
               p The Photography club envisages a vision comprising an outburst of every possible activity and in whatever domain one wants to do. Proposals are abundant, ambitions are high. Pioneering photography, event coverage, time-lapse photography etc. tops the list of our activities and plans. The club provides the students tremendous opportunities to live up this beautiful hobby or to pursue interest in it.
@@ -99,9 +101,6 @@
                     v-layout(row)
                       v-btn(icon v-for="(sl,l) in volunteer.socialLinks" :key="l" :href="sl.link")
                         v-icon.pa-2 {{sl.icon}}
-
-    Footer
-
 </template>
 <script>
 import EventTable from "../components/common/EventTable";
@@ -200,8 +199,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.card-border {
-  border-top: 8px solid #4791db;
-}
-</style>
+<style scoped></style>

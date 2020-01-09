@@ -7,8 +7,8 @@ Vue.use(Vuetify);
 export default new Vuetify({
   theme: {
     options: {
-      customProperties: true,
       parallaxHeight: 350,
+      customProperties: true,
       profile: {
         cardHeight: 300
       },
