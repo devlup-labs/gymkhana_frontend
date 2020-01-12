@@ -3,8 +3,8 @@
     img.mr-4(:src="logo" height="40")
 
     v-toolbar-items
-    v-btn(text) Home
-    v-btn(text) Societies
+    v-btn(text :to="{name: 'home'}" exact) Home
+    v-btn(text :to="{name : 'societies'}" exact) Societies
     v-btn(text) Forum
     v-btn(text :to="{name: 'office-bearers'}") People
     v-spacer

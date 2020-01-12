@@ -6,6 +6,10 @@ import Konnekt from "../views/Konnekt";
 import KonnektHome from "../components/KonnektHome";
 import KonnektSearch from "../components/KonnektSearch";
 import OfficeBearers from "../views/OfficeBearers";
+import Profile from "../components/Profile";
+import ProfileEdit from "../components/ProfileEdit";
+import Society from "../views/Society";
+import Club from "../views/Club";
 
 Vue.use(VueRouter);
 
@@ -53,9 +57,31 @@ const routes = [
     ]
   },
   {
+    name: "profile",
+    path: "/profile",
+    meta: sidenavRouteMeta,
+    component: Profile
+  },
+  {
+    name: "profile-edit",
+    path: "/profile/edit",
+    meta: sidenavRouteMeta,
+    component: ProfileEdit
+  },
+  {
     path: "/office-bearers",
     name: "office-bearers",
     component: OfficeBearers
+  },
+  {
+    name: "societies",
+    path: "/societies",
+    component: Society
+  },
+  {
+    name: "club",
+    path: "/club",
+    component: Club
   }
 ];
 
