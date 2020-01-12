@@ -90,7 +90,7 @@ export default {
     return {
       viewer: {},
       search: {},
-      search_1: "",
+      search_query: "",
       personList: [
         new Person(
           "Soham",
