@@ -1,5 +1,4 @@
 <template lang="pug">
-<<<<<<< HEAD
   v-container
     v-responsive(min-width="40px")
       v-layout(row fill-height)
