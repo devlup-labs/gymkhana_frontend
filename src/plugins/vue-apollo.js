@@ -60,7 +60,7 @@ export function createProvider(options = {}) {
   apolloClient.wsClient = wsClient;
 
   // Create vue apollo provider
-  const apolloProvider = new VueApollo({
+  return new VueApollo({
     defaultClient: apolloClient,
     defaultOptions: {
       $query: {
@@ -76,8 +76,6 @@ export function createProvider(options = {}) {
       );
     }
   });
-
-  return apolloProvider;
 }
 
 // Manually call this when user log in

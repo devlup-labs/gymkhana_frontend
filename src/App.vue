@@ -4,7 +4,7 @@
     Header(v-else)
     v-content
       router-view
-    Footer
+    Footer(v-if="!$router.currentRoute.meta.sidenav")
 </template>
 
 <script>

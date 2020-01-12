@@ -8,7 +8,7 @@
         v-menu(v-for="(item, i) in toolbarItems" :key="i")
           template(v-slot:activator="{ on }")
             v-btn(text v-on="on" :to="item.to" exact)
-              v-icon(left) {{ item.icon }}
+              v-icon(:left="$vuetify.breakpoint.mdAndUp") {{ item.icon }}
               span(v-if="$vuetify.breakpoint.mdAndUp") {{ item.title }}
               v-icon(v-if="$vuetify.breakpoint.mdAndUp && item.children") mdi-menu-down
           v-list(v-if="item.children")

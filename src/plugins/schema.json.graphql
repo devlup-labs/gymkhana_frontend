@@ -1,0 +1,176 @@
+# This file was generated based on "schema.json". Do not edit manually.
+
+schema {
+  query: Query
+}
+
+"An object with an ID"
+interface Node {
+  "The ID of the object."
+  id: ID!
+}
+
+union SearchResult = UserProfileNode
+
+"The Relay compliant `PageInfo` type, containing data necessary to paginate this connection."
+type PageInfo {
+  "When paginating forwards, the cursor to continue."
+  endCursor: String
+  "When paginating forwards, are there more items?"
+  hasNextPage: Boolean!
+  "When paginating backwards, are there more items?"
+  hasPreviousPage: Boolean!
+  "When paginating backwards, the cursor to continue."
+  startCursor: String
+}
+
+type Query {
+  allUserProfiles(after: String, before: String, first: Int, last: Int): UserProfileNodeConnection
+  "The ID of the object"
+  node(id: ID!): Node
+  search(
+    after: String,
+    before: String,
+    first: Int,
+    last: Int,
+    nodeType: NodeType!,
+    #Value to search for
+    query: String!
+  ): SearchResultConnection
+  viewer: UserNode
+}
+
+type SearchResultConnection {
+  "Contains the nodes in this connection."
+  edges: [SearchResultEdge]!
+  "Pagination data for this connection."
+  pageInfo: PageInfo!
+}
+
+"A Relay edge containing a `SearchResult` and its cursor."
+type SearchResultEdge {
+  "A cursor for use in pagination"
+  cursor: String!
+  "The item at the end of the edge"
+  node: SearchResult
+}
+
+type UserNode implements Node {
+  email: String!
+  firstName: String!
+  "The ID of the object."
+  id: ID!
+  lastName: String!
+  "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
+  username: String!
+  userprofile: UserProfileNode
+}
+
+type UserProfileNode implements Node {
+  about: String
+  avatar: String
+  branch: UserProfileBranch!
+  cover: String
+  dob: Date!
+  emailConfirmed: Boolean!
+  gender: UserProfileGender!
+  hometown: String
+  "The ID of the object."
+  id: ID!
+  phone: String!
+  prog: UserProfileProg!
+  roll: String!
+  "Enter your skills, separated by comma."
+  skills: String
+  user: UserNode!
+  year: UserProfileYear!
+}
+
+type UserProfileNodeConnection {
+  "Contains the nodes in this connection."
+  edges: [UserProfileNodeEdge]!
+  "Pagination data for this connection."
+  pageInfo: PageInfo!
+}
+
+"A Relay edge containing a `UserProfileNode` and its cursor."
+type UserProfileNodeEdge {
+  "A cursor for use in pagination"
+  cursor: String!
+  "The item at the end of the edge"
+  node: UserProfileNode
+}
+
+enum NodeType {
+  USER_PROFILE
+}
+
+"An enumeration."
+enum UserProfileBranch {
+  #Biosciences and Bioengineering
+  BBE
+  #BISS
+  BISS
+  #Chemistry
+  CH
+  #Computer Science and Engineering
+  CSE
+  #Electrical Engineering
+  EE
+  #Humanities and Social Sciences
+  HSS
+  #Mathematics
+  MA
+  #Mechanical Engineering
+  ME
+  #Metallurgical and Materials Engineering
+  MME
+  #Physics
+  PHY
+  #SS
+  SS
+}
+
+"An enumeration."
+enum UserProfileGender {
+  #Female
+  F
+  #Male
+  M
+  #Transgender
+  T
+}
+
+"An enumeration."
+enum UserProfileProg {
+  #B.Tech
+  BT
+  #M.Sc
+  MSC
+  #M.Tech
+  MT
+  #PhD
+  PHD
+}
+
+"An enumeration."
+enum UserProfileYear {
+  #First Year
+  A_1
+  #Second Year
+  A_2
+  #Third Year
+  A_3
+  #Fourth Year
+  A_4
+  #Fifth Year
+  A_5
+}
+
+
+"""
+The `Date` scalar type represents a Date
+value as specified by
+[iso8601](https://en.wikipedia.org/wiki/ISO_8601).
+"""
+scalar Date
