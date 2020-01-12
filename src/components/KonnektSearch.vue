@@ -18,7 +18,7 @@
           v-layout.card( row wrap flex-center)
             v-flex(xs3 lg2 md2 pa-3 layout justify-center)
               v-avatar.elevation-4(size="100" :tile="false")
-                v-img(:src="require('../../../../media/'+node.node.avatar)" alt="Image")
+                v-img(:src="require(node.node.avatar)" alt="Image")
             v-flex(
               text-lg-center
               text-md-center
