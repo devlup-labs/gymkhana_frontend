@@ -12,12 +12,12 @@
         v-flex
           v-btn(large color="primary" :to="{name : 'konnekt-search'}") GO
     v-container.ms-5
-      div(v-for="(node,i) in search.edges" :key="i")
+      div(v-for="({ node },i) in search.edges" :key="i")
         v-container.container
           v-layout.card( row wrap flex-center)
             v-flex(xs3 lg2 md2 pa-3 layout justify-center)
               v-avatar.elevation-4(size="100" :tile="false")
-                v-img(:src="require(node.node.avatar)" alt="Image")
+                v-img(:src="require(node.avatar)" alt="Image")
             v-flex(
               text-lg-center
               text-md-center
@@ -30,7 +30,7 @@
               mt-5
               :class="{ 'pt-4 ms-4': $vuetify.breakpoint.smAndDown, 'pt-0': $vuetify.breakpoint.mdAndUp }"
             )
-              h2.mb-3.font-weight-light {{ node.node.user.firstName }} {{ node.node.user.lastName }}
+              h2.mb-3.font-weight-light {{ node.user.firstName }} {{ node.user.lastName }}
             v-flex(
               text-xs-center
               text-md-center
@@ -42,7 +42,7 @@
               v-chip.elevation-2.font-weight-bold.ma-1(
                 xs2
                 color="light-blue darken-1 white--text"
-                v-for="(skill,i) in node.node.skills.split(',')"
+                v-for="(skill,i) in node.skills.split(',')"
                 v-bind:key="i"
               ) {{ skill }}
 </template>
