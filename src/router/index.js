@@ -74,8 +74,8 @@ const routes = [
     component: OfficeBearers
   },
   {
-    name: "societies",
-    path: "/societies",
+    name: "society",
+    path: "/society/:slug",
     component: Society
   },
   {

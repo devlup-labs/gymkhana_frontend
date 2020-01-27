@@ -4,7 +4,14 @@
 
     v-toolbar-items
     v-btn(text :to="{name: 'home'}" exact) Home
-    v-btn(text :to="{name : 'societies'}" exact) Societies
+    v-menu(bottom=''  offset-y transition='slide-y-transition')
+      template(v-slot:activator='{ on }')
+        v-btn(text dark v-on='on')
+          | Societies
+          v-icon(right) mdi-chevron-down
+      v-list
+        v-list-item(v-for='({node}, i) in societies.edges' :key='i' :to="{name: 'society', params: {slug: node.slug}}")
+          v-list-item-title {{ node.name }}
     v-btn(text) Forum
     v-btn(text :to="{name: 'office-bearers'}") People
     v-spacer
@@ -12,10 +19,27 @@
 
 <script>
 import GymkhanaLogo from "../../assets/logo.png";
+import { GET_SOCIETIES_QUERY } from "../../graphql/queries/societyQuery";
 export default {
+  apollo: {
+    societies: {
+      query: GET_SOCIETIES_QUERY
+    }
+  },
   name: "Header",
   computed: {
     logo: () => GymkhanaLogo
+  },
+  methods: {
+    socList() {
+      console.log("a");
+    }
+  },
+  data: () => ({
+    societyList: ["a", "B"]
+  }),
+  mounted() {
+    this.socList();
   }
 };
 </script>
