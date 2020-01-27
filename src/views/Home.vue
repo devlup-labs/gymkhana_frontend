@@ -40,24 +40,31 @@
     v-container
       v-col(cols="12")
         p.display-1.text-center Societies
-      v-col(cols="12")
+      v-col(cols="12" v-if="societies")
         v-row.justify-center
-          v-col(v-for="(society, i) in societies" :key="i" md="6")
+          v-col(v-for="({node}, i) in societies.edges" :key="i" md="6")
             v-row.justify-center
               v-hover( v-slot:default="{ hover }")
                 v-card.mx-auto(
-                  :to="society.to"
+                  :to="node.slug"
                   :elevation="hover ? 15 : 2"
                   height="80%"
                   width="80%"
                 )
-                  v-img(:src="society.img")
+                  v-img(:src="node.cover")
                     v-layout.align-end.fill-height
-                      v-card-text(class="my-4 text-center title").stripe {{society.name}}
+                      v-card-text(class="my-4 text-center title").stripe {{node.name}}
 </template>
 
 <script>
+import { GET_SOCIETIES_QUERY } from "../graphql/queries/societyQuery";
+
 export default {
+  apollo: {
+    societies: {
+      query: GET_SOCIETIES_QUERY
+    }
+  },
   data: () => ({
     carouselHeight: null,
     festCarouselData: [
@@ -96,53 +103,22 @@ export default {
       { image: require("../assets/home3.jpg") },
       { image: require("../assets/home4.jpg") },
       { image: require("../assets/home5.jpg") }
-    ],
-    societies: [
-      {
-        name: "Society of design and arts",
-        to: { name: "societies" },
-        img: require("../assets/img1.jpg")
-      },
-      {
-        name: "Students Tech societies",
-        to: { name: "societies" },
-        img: require("../assets/img2.jpg")
-      },
-      {
-        name: "Students Elected Representative Society",
-        to: { name: "societies" },
-        img: require("../assets/img3.jpg")
-      },
-      {
-        name: "Student Campus Life Society",
-        to: { name: "societies" },
-        img: require("../assets/img4.jpg")
-      },
-      {
-        name: "Students Cult and Lit Society",
-        to: { name: "societies" },
-        img: require("../assets/home3.jpg")
-      },
-      {
-        name: "Students Sports and games Society",
-        to: { name: "societies" },
-        img: require("../assets/home2.jpg")
-      },
-      {
-        name: "Students Acad Society",
-        to: { name: "societies" },
-        img: require("../assets/home4.jpg")
-      }
     ]
   }),
   methods: {
     onResize() {
       // 48px is the header size
       this.carouselHeight = window.innerHeight - 48;
+    },
+    log() {
+      console.log("this.societies[0]");
+      // console.log(this.societies[]);
+      console.log("this.societies[0]");
     }
   },
   mounted() {
     this.onResize();
+    this.log();
   }
 };
 </script>
