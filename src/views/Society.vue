@@ -2,7 +2,7 @@
   div
     v-parallax(src="../assets/home1.jpg" cover).society-photo.text-center.align-center
       v-overlay(absolute)
-        p(class="white--text").display-2 Society of Design and Arts
+        p(class="white--text").display-2 {{societies.edges[0].node.name}}
     v-container
       v-layout(row).ma-4
         v-flex.md8
@@ -30,19 +30,19 @@
           v-card-title.display-1.justify-center Clubs
       v-container.md12
         v-layout(row).pa-3
-          v-flex(v-for="(club,n) in clubs" :key="n").md4.xs12.sm12
+          v-flex(v-for="({node},n) in societies.edges[0].node.clubSet.edges" :key="n").md4.xs12.sm12
             v-layout(row ).justify-center.mt-10
               v-hover( v-slot:default="{ hover }")
                 v-card(
-                  :to="club.to"
+                  :to="{name: 'club', params: {slug: node.slug}}"
                   :elevation="hover ? 15 : 2"
                   class="mx-auto"
                   height="80%"
                   width="80%"
                 )
-                  v-img(:src="club.img")
+                  v-img(:src="node.cover")
                     v-layout.align-end.fill-height
-                      v-card-text(class="my-4 text-center title").stripe.subtitle-1.font-weight-medium {{club.name}}
+                      v-card-text(class="my-4 text-center title").stripe.subtitle-1.font-weight-medium {{node.name}}
     v-layout(row ).pa-5.justify-center
       v-card(flat tile text  )
         v-card-title.headline.justify-center
@@ -66,7 +66,18 @@ import Footer from "../components/common/Footer";
 import EventTable from "../components/common/EventTable";
 import OfficeBearerCard from "../components/OfficeBearerCard";
 import NewsTable from "../components/common/NewsTable";
+import { GET_SOCIETY_DATA_QUERY } from "../graphql/queries/societyDataQuery";
 export default {
+  apollo: {
+    societies: {
+      query: GET_SOCIETY_DATA_QUERY,
+      variables() {
+        return {
+          slugText: this.$route.params.slug
+        };
+      }
+    }
+  },
   name: "Society",
   components: { NewsTable, OfficeBearerCard, EventTable, Footer },
   data: () => ({
@@ -87,7 +98,22 @@ export default {
         img: require("../assets/img3.jpg")
       }
     ]
-  })
+  }),
+  methods: {
+    onResize() {
+      // 48px is the header size
+      this.carouselHeight = window.innerHeight - 48;
+    },
+    log() {
+      console.log("this.societies[0]");
+      console.log(this.societies.edges[0].node.clubSet.edges);
+      console.log("this.societies[0]");
+    }
+  },
+  mounted() {
+    this.onResize();
+    this.log();
+  }
 };
 </script>
 
