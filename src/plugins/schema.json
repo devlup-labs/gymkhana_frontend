@@ -256,17 +256,17 @@
             },
             {
               "kind": "OBJECT",
-              "name": "ClubNode",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
               "name": "UserProfileNode",
               "ofType": null
             },
             {
               "kind": "OBJECT",
               "name": "UserNode",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "ClubNode",
               "ofType": null
             }
           ]
@@ -477,6 +477,42 @@
             {
               "args": [],
               "deprecationReason": null,
+              "description": "",
+              "isDeprecated": false,
+              "name": "secretary",
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfileNode",
+                "ofType": null
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": "",
+              "isDeprecated": false,
+              "name": "jointSecretary",
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfileNode",
+                "ofType": null
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": "",
+              "isDeprecated": false,
+              "name": "mentor",
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfileNode",
+                "ofType": null
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
               "description": "This will be used as URL. /society/slug",
               "isDeprecated": false,
               "name": "slug",
@@ -584,480 +620,6 @@
           ],
           "kind": "OBJECT",
           "name": "SocietyNode",
-          "possibleTypes": null
-        },
-        {
-          "description": null,
-          "enumValues": null,
-          "fields": [
-            {
-              "args": [],
-              "deprecationReason": null,
-              "description": "Pagination data for this connection.",
-              "isDeprecated": false,
-              "name": "pageInfo",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "PageInfo",
-                  "ofType": null
-                }
-              }
-            },
-            {
-              "args": [],
-              "deprecationReason": null,
-              "description": "Contains the nodes in this connection.",
-              "isDeprecated": false,
-              "name": "edges",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "LIST",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "ClubNodeEdge",
-                    "ofType": null
-                  }
-                }
-              }
-            }
-          ],
-          "inputFields": null,
-          "interfaces": [],
-          "kind": "OBJECT",
-          "name": "ClubNodeConnection",
-          "possibleTypes": null
-        },
-        {
-          "description": "A Relay edge containing a `ClubNode` and its cursor.",
-          "enumValues": null,
-          "fields": [
-            {
-              "args": [],
-              "deprecationReason": null,
-              "description": "The item at the end of the edge",
-              "isDeprecated": false,
-              "name": "node",
-              "type": {
-                "kind": "OBJECT",
-                "name": "ClubNode",
-                "ofType": null
-              }
-            },
-            {
-              "args": [],
-              "deprecationReason": null,
-              "description": "A cursor for use in pagination",
-              "isDeprecated": false,
-              "name": "cursor",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              }
-            }
-          ],
-          "inputFields": null,
-          "interfaces": [],
-          "kind": "OBJECT",
-          "name": "ClubNodeEdge",
-          "possibleTypes": null
-        },
-        {
-          "description": null,
-          "enumValues": null,
-          "fields": [
-            {
-              "args": [],
-              "deprecationReason": null,
-              "description": "The ID of the object.",
-              "isDeprecated": false,
-              "name": "id",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ID",
-                  "ofType": null
-                }
-              }
-            },
-            {
-              "args": [],
-              "deprecationReason": null,
-              "description": "",
-              "isDeprecated": false,
-              "name": "name",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              }
-            },
-            {
-              "args": [],
-              "deprecationReason": null,
-              "description": "",
-              "isDeprecated": false,
-              "name": "society",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "SocietyNode",
-                  "ofType": null
-                }
-              }
-            },
-            {
-              "args": [],
-              "deprecationReason": null,
-              "description": "Specify type as Club or Team.",
-              "isDeprecated": false,
-              "name": "ctype",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "ENUM",
-                  "name": "ClubCtype",
-                  "ofType": null
-                }
-              }
-            },
-            {
-              "args": [],
-              "deprecationReason": null,
-              "description": "",
-              "isDeprecated": false,
-              "name": "description",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              }
-            },
-            {
-              "args": [],
-              "deprecationReason": null,
-              "description": "Upload high quality picture",
-              "isDeprecated": false,
-              "name": "cover",
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            {
-              "args": [],
-              "deprecationReason": null,
-              "description": "Choose a skin while displaying club page.",
-              "isDeprecated": false,
-              "name": "skin",
-              "type": {
-                "kind": "ENUM",
-                "name": "ClubSkin",
-                "ofType": null
-              }
-            },
-            {
-              "args": [],
-              "deprecationReason": null,
-              "description": "",
-              "isDeprecated": false,
-              "name": "captain",
-              "type": {
-                "kind": "OBJECT",
-                "name": "UserProfileNode",
-                "ofType": null
-              }
-            },
-            {
-              "args": [],
-              "deprecationReason": null,
-              "description": "",
-              "isDeprecated": false,
-              "name": "viceCaptainOne",
-              "type": {
-                "kind": "OBJECT",
-                "name": "UserProfileNode",
-                "ofType": null
-              }
-            },
-            {
-              "args": [],
-              "deprecationReason": null,
-              "description": "",
-              "isDeprecated": false,
-              "name": "viceCaptainTwo",
-              "type": {
-                "kind": "OBJECT",
-                "name": "UserProfileNode",
-                "ofType": null
-              }
-            },
-            {
-              "args": [],
-              "deprecationReason": null,
-              "description": "",
-              "isDeprecated": false,
-              "name": "viceCaptainThree",
-              "type": {
-                "kind": "OBJECT",
-                "name": "UserProfileNode",
-                "ofType": null
-              }
-            },
-            {
-              "args": [],
-              "deprecationReason": null,
-              "description": "",
-              "isDeprecated": false,
-              "name": "mentor",
-              "type": {
-                "kind": "OBJECT",
-                "name": "UserProfileNode",
-                "ofType": null
-              }
-            },
-            {
-              "args": [
-                {
-                  "defaultValue": null,
-                  "description": null,
-                  "name": "before",
-                  "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                },
-                {
-                  "defaultValue": null,
-                  "description": null,
-                  "name": "after",
-                  "type": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                },
-                {
-                  "defaultValue": null,
-                  "description": null,
-                  "name": "first",
-                  "type": {
-                    "kind": "SCALAR",
-                    "name": "Int",
-                    "ofType": null
-                  }
-                },
-                {
-                  "defaultValue": null,
-                  "description": null,
-                  "name": "last",
-                  "type": {
-                    "kind": "SCALAR",
-                    "name": "Int",
-                    "ofType": null
-                  }
-                }
-              ],
-              "deprecationReason": null,
-              "description": "",
-              "isDeprecated": false,
-              "name": "coreMembers",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "UserProfileNodeConnection",
-                  "ofType": null
-                }
-              }
-            },
-            {
-              "args": [],
-              "deprecationReason": null,
-              "description": "",
-              "isDeprecated": false,
-              "name": "resourcesLink",
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            {
-              "args": [],
-              "deprecationReason": null,
-              "description": "Add custom HTML to view on club page.",
-              "isDeprecated": false,
-              "name": "customHtml",
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            {
-              "args": [],
-              "deprecationReason": null,
-              "description": "This will be used as URL. /club/slug",
-              "isDeprecated": false,
-              "name": "slug",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              }
-            },
-            {
-              "args": [],
-              "deprecationReason": null,
-              "description": "",
-              "isDeprecated": false,
-              "name": "published",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Boolean",
-                  "ofType": null
-                }
-              }
-            }
-          ],
-          "inputFields": null,
-          "interfaces": [
-            {
-              "kind": "INTERFACE",
-              "name": "Node",
-              "ofType": null
-            }
-          ],
-          "kind": "OBJECT",
-          "name": "ClubNode",
-          "possibleTypes": null
-        },
-        {
-          "description": "An enumeration.",
-          "enumValues": [
-            {
-              "deprecationReason": null,
-              "description": "Club",
-              "isDeprecated": false,
-              "name": "C"
-            },
-            {
-              "deprecationReason": null,
-              "description": "Team",
-              "isDeprecated": false,
-              "name": "T"
-            }
-          ],
-          "fields": null,
-          "inputFields": null,
-          "interfaces": null,
-          "kind": "ENUM",
-          "name": "ClubCtype",
-          "possibleTypes": null
-        },
-        {
-          "description": "An enumeration.",
-          "enumValues": [
-            {
-              "deprecationReason": null,
-              "description": "White",
-              "isDeprecated": false,
-              "name": "WHITE_SKIN"
-            },
-            {
-              "deprecationReason": null,
-              "description": "Black",
-              "isDeprecated": false,
-              "name": "BLACK_SKIN"
-            },
-            {
-              "deprecationReason": null,
-              "description": "Cyan",
-              "isDeprecated": false,
-              "name": "CYAN_SKIN"
-            },
-            {
-              "deprecationReason": null,
-              "description": "MDB",
-              "isDeprecated": false,
-              "name": "MDB_SKIN"
-            },
-            {
-              "deprecationReason": null,
-              "description": "Deep Purple",
-              "isDeprecated": false,
-              "name": "DEEP_PURPLE_SKIN"
-            },
-            {
-              "deprecationReason": null,
-              "description": "Navy Blue",
-              "isDeprecated": false,
-              "name": "NAVY_BLUE_SKIN"
-            },
-            {
-              "deprecationReason": null,
-              "description": "Pink",
-              "isDeprecated": false,
-              "name": "PINK_SKIN"
-            },
-            {
-              "deprecationReason": null,
-              "description": "Indigo",
-              "isDeprecated": false,
-              "name": "INDIGO_SKIN"
-            },
-            {
-              "deprecationReason": null,
-              "description": "Light Blue",
-              "isDeprecated": false,
-              "name": "LIGHT_BLUE_SKIN"
-            },
-            {
-              "deprecationReason": null,
-              "description": "Grey",
-              "isDeprecated": false,
-              "name": "GREY_SKIN"
-            }
-          ],
-          "fields": null,
-          "inputFields": null,
-          "interfaces": null,
-          "kind": "ENUM",
-          "name": "ClubSkin",
           "possibleTypes": null
         },
         {
@@ -2209,6 +1771,480 @@
           "interfaces": null,
           "kind": "SCALAR",
           "name": "Int",
+          "possibleTypes": null
+        },
+        {
+          "description": null,
+          "enumValues": null,
+          "fields": [
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": "Pagination data for this connection.",
+              "isDeprecated": false,
+              "name": "pageInfo",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "PageInfo",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": "Contains the nodes in this connection.",
+              "isDeprecated": false,
+              "name": "edges",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "LIST",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "ClubNodeEdge",
+                    "ofType": null
+                  }
+                }
+              }
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "kind": "OBJECT",
+          "name": "ClubNodeConnection",
+          "possibleTypes": null
+        },
+        {
+          "description": "A Relay edge containing a `ClubNode` and its cursor.",
+          "enumValues": null,
+          "fields": [
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": "The item at the end of the edge",
+              "isDeprecated": false,
+              "name": "node",
+              "type": {
+                "kind": "OBJECT",
+                "name": "ClubNode",
+                "ofType": null
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": "A cursor for use in pagination",
+              "isDeprecated": false,
+              "name": "cursor",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "kind": "OBJECT",
+          "name": "ClubNodeEdge",
+          "possibleTypes": null
+        },
+        {
+          "description": null,
+          "enumValues": null,
+          "fields": [
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": "The ID of the object.",
+              "isDeprecated": false,
+              "name": "id",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": "",
+              "isDeprecated": false,
+              "name": "name",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": "",
+              "isDeprecated": false,
+              "name": "society",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "SocietyNode",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": "Specify type as Club or Team.",
+              "isDeprecated": false,
+              "name": "ctype",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "ClubCtype",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": "",
+              "isDeprecated": false,
+              "name": "description",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": "Upload high quality picture",
+              "isDeprecated": false,
+              "name": "cover",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": "Choose a skin while displaying club page.",
+              "isDeprecated": false,
+              "name": "skin",
+              "type": {
+                "kind": "ENUM",
+                "name": "ClubSkin",
+                "ofType": null
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": "",
+              "isDeprecated": false,
+              "name": "captain",
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfileNode",
+                "ofType": null
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": "",
+              "isDeprecated": false,
+              "name": "viceCaptainOne",
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfileNode",
+                "ofType": null
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": "",
+              "isDeprecated": false,
+              "name": "viceCaptainTwo",
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfileNode",
+                "ofType": null
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": "",
+              "isDeprecated": false,
+              "name": "viceCaptainThree",
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfileNode",
+                "ofType": null
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": "",
+              "isDeprecated": false,
+              "name": "mentor",
+              "type": {
+                "kind": "OBJECT",
+                "name": "UserProfileNode",
+                "ofType": null
+              }
+            },
+            {
+              "args": [
+                {
+                  "defaultValue": null,
+                  "description": null,
+                  "name": "before",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                {
+                  "defaultValue": null,
+                  "description": null,
+                  "name": "after",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                {
+                  "defaultValue": null,
+                  "description": null,
+                  "name": "first",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  }
+                },
+                {
+                  "defaultValue": null,
+                  "description": null,
+                  "name": "last",
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  }
+                }
+              ],
+              "deprecationReason": null,
+              "description": "",
+              "isDeprecated": false,
+              "name": "coreMembers",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "UserProfileNodeConnection",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": "",
+              "isDeprecated": false,
+              "name": "resourcesLink",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": "Add custom HTML to view on club page.",
+              "isDeprecated": false,
+              "name": "customHtml",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": "This will be used as URL. /club/slug",
+              "isDeprecated": false,
+              "name": "slug",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": "",
+              "isDeprecated": false,
+              "name": "published",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              }
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "Node",
+              "ofType": null
+            }
+          ],
+          "kind": "OBJECT",
+          "name": "ClubNode",
+          "possibleTypes": null
+        },
+        {
+          "description": "An enumeration.",
+          "enumValues": [
+            {
+              "deprecationReason": null,
+              "description": "Club",
+              "isDeprecated": false,
+              "name": "C"
+            },
+            {
+              "deprecationReason": null,
+              "description": "Team",
+              "isDeprecated": false,
+              "name": "T"
+            }
+          ],
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "kind": "ENUM",
+          "name": "ClubCtype",
+          "possibleTypes": null
+        },
+        {
+          "description": "An enumeration.",
+          "enumValues": [
+            {
+              "deprecationReason": null,
+              "description": "White",
+              "isDeprecated": false,
+              "name": "WHITE_SKIN"
+            },
+            {
+              "deprecationReason": null,
+              "description": "Black",
+              "isDeprecated": false,
+              "name": "BLACK_SKIN"
+            },
+            {
+              "deprecationReason": null,
+              "description": "Cyan",
+              "isDeprecated": false,
+              "name": "CYAN_SKIN"
+            },
+            {
+              "deprecationReason": null,
+              "description": "MDB",
+              "isDeprecated": false,
+              "name": "MDB_SKIN"
+            },
+            {
+              "deprecationReason": null,
+              "description": "Deep Purple",
+              "isDeprecated": false,
+              "name": "DEEP_PURPLE_SKIN"
+            },
+            {
+              "deprecationReason": null,
+              "description": "Navy Blue",
+              "isDeprecated": false,
+              "name": "NAVY_BLUE_SKIN"
+            },
+            {
+              "deprecationReason": null,
+              "description": "Pink",
+              "isDeprecated": false,
+              "name": "PINK_SKIN"
+            },
+            {
+              "deprecationReason": null,
+              "description": "Indigo",
+              "isDeprecated": false,
+              "name": "INDIGO_SKIN"
+            },
+            {
+              "deprecationReason": null,
+              "description": "Light Blue",
+              "isDeprecated": false,
+              "name": "LIGHT_BLUE_SKIN"
+            },
+            {
+              "deprecationReason": null,
+              "description": "Grey",
+              "isDeprecated": false,
+              "name": "GREY_SKIN"
+            }
+          ],
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "kind": "ENUM",
+          "name": "ClubSkin",
           "possibleTypes": null
         },
         {
