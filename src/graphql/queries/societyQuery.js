@@ -7,7 +7,6 @@ export const GET_SOCIETIES_QUERY = gql`
         node {
           ... on SocietyNode {
             name
-            cover
             slug
           }
         }
