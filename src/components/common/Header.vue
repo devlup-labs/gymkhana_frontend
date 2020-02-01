@@ -10,7 +10,7 @@
           | Societies
           v-icon(right) mdi-chevron-down
       v-list
-        v-list-item(v-for='({node}, i) in societies.edges' :key='i' :to="{name: 'society', params: {slug: node.slug}}")
+        v-list-item(v-for='({node}, i) in societies.edges' :key='i' link :to="{name: 'society', params: {slug: node.slug}}")
           v-list-item-title {{ node.name }}
     v-btn(text) Forum
     v-btn(text :to="{name: 'office-bearers'}") People
