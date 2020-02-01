@@ -80,7 +80,7 @@ const routes = [
   },
   {
     name: "club",
-    path: "/club",
+    path: "/club/:slug",
     component: Club
   }
 ];
