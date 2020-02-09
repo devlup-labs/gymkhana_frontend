@@ -7,18 +7,18 @@
       th.subtitle-1.text-center
         v-icon mdi-calendar
     tbody
-      tr(v-for="(news,i) in newsList" :key="i" @click.stop="showDialog(news)")
+      tr(v-for="({node},i) in newsData.edges" :key="i" @click.stop="showDialog({node})")
         td
           v-icon mdi-chevron-right
-        td News {{ i+1 }}
-        td.text-center {{ news.date }}
+        td {{node.title}}
+        td.text-center {{ node.date }}
     v-dialog.elevation-12( v-model="dialog"
       persistent
       max-width="500")
-      v-card
+      v-card(v-if="singleEvent")
         v-card-title(class="primary darken-1 white--text").justify-center
           v-spacer
-          span.ml-4 {{singleEvent.name}}
+          span.ml-4 {{singleEvent.node.title}}
           v-spacer
           v-btn(icon dark @click="dialog = false")
             v-icon(right) mdi-close-circle
@@ -26,15 +26,15 @@
           v-container
             v-layout(row)
               v-flex.md12
-                v-img(:src="singleEvent.img" max-height="230" cover).elevation-10
+                v-img(:src="singleEvent.node.cover" max-height="230" alt="Image" cover).elevation-10
               v-flex.md6.mt-4.offset-2
                 v-icon(left) mdi-calendar
-                | {{singleEvent.date}}
+                | {{singleEvent.node.date}}
               v-flex.md4.mt-4
                 v-icon(left) mdi-account
-                | {{singleEvent.author}}
+                | {{singleEvent.node.author.user.firstName}} {{singleEvent.node.author.user.lastName}}
               v-flex.md12.mt-5
-                p {{singleEvent.desc}}
+                p {{singleEvent.node.content}}
         v-card-actions.justify-end
           v-btn(@click="dialog = false" class="primary darken-1 white--text" small) close
 
@@ -43,48 +43,11 @@
 <script>
 export default {
   name: "NewsTable",
+  props: {
+    newsData: {}
+  },
   data: () => ({
-    singleEvent: {
-      name: "",
-      date: "",
-      author: "",
-      desc: "",
-      img: ""
-    },
-    newsList: [
-      {
-        name: "News 1",
-        date: "tomorrow",
-        author: "IIT-J",
-        desc:
-          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium deserunt dignissimos, distinctio eaque esse, est et eveniet ipsam laboriosam nam neque nesciunt placeat porro quibusdam quidem quos repudiandae rerum similique.",
-        img: require("../../assets/home1.jpg")
-      },
-      {
-        name: "News 2",
-        date: "23/01/2011",
-        author: "IIT-J",
-        desc:
-          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium deserunt dignissimos, distinctio eaque esse, est et eveniet ipsam laboriosam nam neque nesciunt placeat porro quibusdam quidem quos repudiandae rerum similique.",
-        img: require("../../assets/home1.jpg")
-      },
-      {
-        name: "News 3",
-        date: "tomorrow",
-        author: "IIT-J",
-        desc:
-          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium deserunt dignissimos, distinctio eaque esse, est et eveniet ipsam laboriosam nam neque nesciunt placeat porro quibusdam quidem quos repudiandae rerum similique.",
-        img: require("../../assets/home1.jpg")
-      },
-      {
-        name: "News 4",
-        date: "tomorrow",
-        author: "IIT-J",
-        desc:
-          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium deserunt dignissimos, distinctio eaque esse, est et eveniet ipsam laboriosam nam neque nesciunt placeat porro quibusdam quidem quos repudiandae rerum similique.",
-        img: require("../../assets/home1.jpg")
-      }
-    ],
+    singleEvent: null,
     dialog: false
   }),
   methods: {
