@@ -6,7 +6,7 @@
       :height="$vuetify.theme.options.parallaxHeight"
     )
       v-layout.justify-center.align-center.fill-height
-        h1 Photography Club
+        h1 {{clubs.edges[0].node.name}}
     v-container.pa-4
       v-row(:style="{'margin-top': `-${$vuetify.theme.options.parallaxHeight/3.5}px`}").justify-center
         v-col(sm="10" md="8")
@@ -15,7 +15,7 @@
           ).pa-5.elevation-8
             v-card-title.display-1.font-weight-light About
             v-card-text
-              p The Photography club envisages a vision comprising an outburst of every possible activity and in whatever domain one wants to do. Proposals are abundant, ambitions are high. Pioneering photography, event coverage, time-lapse photography etc. tops the list of our activities and plans. The club provides the students tremendous opportunities to live up this beautiful hobby or to pursue interest in it.
+              p {{clubs.edges[0].node.description}}
               p Currently club is having 3 entry-level and 2 semi-pro DSLRs namely :800D, 550D, 650D, 80D and 77D.
             v-card-actions.justify-end
               |link to resources
@@ -54,21 +54,58 @@
         v-card(class="accent white--text").elevation-10
           v-card-title.justify-center.display-1 Key People
         v-layout(row)
-          v-flex.md4(v-for="(person,i) in keyPeople" :key="i")
+          v-flex.md4
             v-layout(column).align-center.mt-8.title
               v-flex
                 v-avatar.elevation-4.ma-2(size="180")
-                  v-img(src="https://cdn2.iconfinder.com/data/icons/people-80/96/Picture1-512.png")
+                  v-img(src="node.avatar")
               v-flex.mt-4.font-weight-medium
-                | {{person.name}}
+                | {{clubs.edges[0].node.viceCaptainOne.user.firstName}} {{clubs.edges[0].node.viceCaptainOne.user.lastName}}
               v-flex(class="blue--text").mt-2.font-weight-light
                 v-icon( left) mdi-phone
-                | {{person.number}}
+                | {{clubs.edges[0].node.viceCaptainOne.phone}}
               v-flex.mt-2.font-weight-light
-                | {{person.position}}
+                | HEAD
               v-flex.mt-2.font-weight-regular.subtitle-1.text-center
-                | {{person.desc}}
-              v-flex.pa-4
+                | {{clubs.edges[0].node.viceCaptainOne.about}}
+              //v-flex.pa-4
+                v-layout(row)
+                  v-btn(icon v-for="(slink,n) in person.socialLinks" :key="n" :href="slink.link")
+                    v-icon.pa-2 {{slink.icon}}
+
+          v-flex.md4
+            v-layout(column).align-center.mt-8.title
+              v-flex
+                v-avatar.elevation-4.ma-2(size="180")
+                  v-img(src="node.avatar")
+              v-flex.mt-4.font-weight-medium
+                | {{clubs.edges[0].node.viceCaptainOne.user.firstName}} {{clubs.edges[0].node.viceCaptainOne.user.lastName}}
+              v-flex(class="blue--text").mt-2.font-weight-light
+                v-icon( left) mdi-phone
+                | {{clubs.edges[0].node.viceCaptainOne.phone}}
+              v-flex.mt-2.font-weight-light
+                | HEAD
+              v-flex.mt-2.font-weight-regular.subtitle-1.text-center
+                | {{clubs.edges[0].node.viceCaptainOne.about}}
+              //v-flex.pa-4
+                v-layout(row)
+                  v-btn(icon v-for="(slink,n) in person.socialLinks" :key="n" :href="slink.link")
+                    v-icon.pa-2 {{slink.icon}}
+          v-flex.md4
+            v-layout(column).align-center.mt-8.title
+              v-flex
+                v-avatar.elevation-4.ma-2(size="180")
+                  v-img(src="node.avatar")
+              v-flex.mt-4.font-weight-medium
+                | {{clubs.edges[0].node.viceCaptainOne.user.firstName}} {{clubs.edges[0].node.viceCaptainOne.user.lastName}}
+              v-flex(class="blue--text").mt-2.font-weight-light
+                v-icon( left) mdi-phone
+                | {{clubs.edges[0].node.viceCaptainOne.phone}}
+              v-flex.mt-2.font-weight-light
+                | HEAD
+              v-flex.mt-2.font-weight-regular.subtitle-1.text-center
+                | {{clubs.edges[0].node.viceCaptainOne.about}}
+              //v-flex.pa-4
                 v-layout(row)
                   v-btn(icon v-for="(slink,n) in person.socialLinks" :key="n" :href="slink.link")
                     v-icon.pa-2 {{slink.icon}}
@@ -88,16 +125,16 @@
         v-card(class="accent white--text").elevation-10
           v-card-title.justify-center.display-1 Volunteers
         v-layout(row).mt-10
-          v-flex.md6(v-for="(volunteer,j) in volunteers" :key="j")
+          v-flex.md6(v-for="({node},j) in clubs.edges[0].node.coreMembers.edges" :key="j")
             v-layout(row).justify-center.ma-2
               v-flex.md6
                 v-card.elevation-6
-                  v-img(:src="volunteer.img" max-height="200")
+                  v-img(:src="node.avatar" max-height="200")
               v-flex.md6
                 v-layout(column).align-center.ma-4
-                  v-flex.mt-4 {{volunteer.name}}
-                  v-flex.mt-4 {{volunteer.desc}}
-                  v-flex.pa-4
+                  v-flex.mt-4 {{node.user.firstName}}
+                  v-flex.mt-4 {{node.phone}}
+                  //v-flex.pa-4
                     v-layout(row)
                       v-btn(icon v-for="(sl,l) in volunteer.socialLinks" :key="l" :href="sl.link")
                         v-icon.pa-2 {{sl.icon}}
@@ -106,7 +143,18 @@
 import EventTable from "../components/common/EventTable";
 import NewsTable from "../components/common/NewsTable";
 import Footer from "../components/common/Footer";
+import { GET_CLUB_DATA_QUERY } from "../graphql/queries/clubDataQuery";
 export default {
+  apollo: {
+    clubs: {
+      query: GET_CLUB_DATA_QUERY,
+      variables() {
+        return {
+          slugText: this.$route.params.slug
+        };
+      }
+    }
+  },
   name: "Club",
   components: { Footer, NewsTable, EventTable },
   data: () => ({
