@@ -23,20 +23,20 @@
           v-carousel-item(
             transition="fade-transition"
             reverse-transition="fade-transition"
-            v-for="(fest, i) in festCarouselData" :key="i"
+            v-for="({node}, i) in festivals.edges" :key="i"
           )
             v-row.justify-center.align-center
-              div.display-1 {{fest.title}}
-              v-btn(icon ripple large :to="fest.to").ml-2
+              div.display-1 {{node.name}}
+              v-btn(icon ripple large :to="node.slug").ml-2
                 v-icon mdi-link
             v-row.mt-5
               v-col(cols="12" md="6")
                   v-row.justify-center
-                    v-img( :src="require('../assets/' + fest.image)" max-height="350" max-width="450")
+                    v-img( :src="node.photo" max-height="350" max-width="450")
               v-col(cols="12" md="6" align-self="center")
                 v-row.font-weight-regular.justify-center.mt-2
                   v-col(cols="10")
-                    p.subtitle-2.text-center.font-weight-bold  {{ fest.about }}
+                    p.subtitle-2.text-center.font-weight-bold  {{node.about}}
     v-container
       v-col(cols="12")
         p.display-1.text-center Societies
@@ -58,11 +58,15 @@
 
 <script>
 import { GET_SOCIETIES_QUERY } from "../graphql/queries/societyQuery";
+import { GET_FESTIVAL_QUERY } from "../graphql/queries/festivalQuery";
 
 export default {
   apollo: {
     societies: {
       query: GET_SOCIETIES_QUERY
+    },
+    festivals: {
+      query: GET_FESTIVAL_QUERY
     }
   },
   data: () => ({
