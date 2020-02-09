@@ -57,8 +57,12 @@
       v-flex.md12
         v-container
           v-row
-            v-col(cols="12" md="4" v-for="x in 3" :key="x")
-              OfficeBearerCard(:avatarSize="120" )
+            v-col(cols="12" md="4" )
+              OfficeBearerCard(:avatarSize="120" :bearerData="societies.edges[0].node.jointSecretary" )
+            v-col(cols="12" md="4" )
+              OfficeBearerCard(:avatarSize="120" :bearerData="societies.edges[0].node.secretary" )
+            v-col(cols="12" md="4" )
+              OfficeBearerCard(:avatarSize="120" :bearerData="societies.edges[0].node.mentor" )
 </template>
 
 <script>
