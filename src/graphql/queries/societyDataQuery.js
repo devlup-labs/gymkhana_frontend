@@ -7,21 +7,36 @@ export const GET_SOCIETY_DATA_QUERY = gql`
         node {
           name
           secretary {
+            phone
+            cover
+            avatar
+            about
             user {
               firstName
               lastName
+              email
             }
           }
           jointSecretary {
+            phone
+            cover
+            avatar
+            about
             user {
               firstName
               lastName
+              email
             }
           }
           mentor {
+            phone
+            cover
+            avatar
+            about
             user {
               firstName
               lastName
+              email
             }
           }
           slug
