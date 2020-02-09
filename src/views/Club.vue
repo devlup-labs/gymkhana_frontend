@@ -47,7 +47,7 @@
             v-tab-item
               v-card(flat tile text).pa-4
                 v-card-text
-                  NewsTable
+                  NewsTable(:newsData="news")
 
     v-container.pa-9.pb-0
       v-flex.md10.offset-md1
@@ -144,6 +144,7 @@ import EventTable from "../components/common/EventTable";
 import NewsTable from "../components/common/NewsTable";
 import Footer from "../components/common/Footer";
 import { GET_CLUB_DATA_QUERY } from "../graphql/queries/clubDataQuery";
+import { GET_NEWS_QUERY } from "../graphql/queries/newsQuery";
 export default {
   apollo: {
     clubs: {
@@ -153,6 +154,9 @@ export default {
           slugText: this.$route.params.slug
         };
       }
+    },
+    news: {
+      query: GET_NEWS_QUERY
     }
   },
   name: "Club",
