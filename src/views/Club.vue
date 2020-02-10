@@ -29,7 +29,7 @@
               v-icon(left large) mdi-lightbulb-outline
               | Upcoming Event
             v-card-text
-              EventTable
+              EventTable(:eventTableData="clubEvents")
         v-flex.md7.offset-md1.elevation-0(flat tile depressed).pl-5.xs12
           v-tabs(fixed-tabs background-color='primary ' dark v-model="tab")
             v-tab
@@ -145,6 +145,7 @@ import NewsTable from "../components/common/NewsTable";
 import Footer from "../components/common/Footer";
 import { GET_CLUB_DATA_QUERY } from "../graphql/queries/clubDataQuery";
 import { GET_NEWS_QUERY } from "../graphql/queries/newsQuery";
+import { GET_CLUB_EVENT_QUERY } from "../graphql/queries/clubEventQuery";
 export default {
   apollo: {
     clubs: {
@@ -160,6 +161,14 @@ export default {
       variables() {
         return {
           clubId: this.clubs.edges[0].node.id
+        };
+      }
+    },
+    clubEvents: {
+      query: GET_CLUB_EVENT_QUERY,
+      variables() {
+        return {
+          clubEventId: this.clubs.edges[0].node.id
         };
       }
     }
