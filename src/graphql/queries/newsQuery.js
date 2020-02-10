@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 export const GET_NEWS_QUERY = gql`
-  query {
-    news {
+  query news($clubId: ID!) {
+    news(club: $clubId) {
       edges {
         node {
           title
