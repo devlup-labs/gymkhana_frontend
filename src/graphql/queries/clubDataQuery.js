@@ -6,6 +6,7 @@ export const GET_CLUB_DATA_QUERY = gql`
       edges {
         node {
           name
+          id
           society {
             name
           }
