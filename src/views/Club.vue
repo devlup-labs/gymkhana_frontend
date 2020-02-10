@@ -30,7 +30,7 @@
               | Upcoming Event
             v-card-text
               EventTable
-        v-flex.md7.offset-md1.elevation-0(flat tile depressed).pl-5
+        v-flex.md7.offset-md1.elevation-0(flat tile depressed).pl-5.xs12
           v-tabs(fixed-tabs background-color='primary ' dark v-model="tab")
             v-tab
               | Activities
@@ -54,7 +54,7 @@
         v-card(class="accent white--text").elevation-10
           v-card-title.justify-center.display-1 Key People
         v-layout(row)
-          v-flex.md4
+          v-flex.md4.xs12
             v-layout(column).align-center.mt-8.title
               v-flex
                 v-avatar.elevation-4.ma-2(size="180")
@@ -73,38 +73,38 @@
                   v-btn(icon v-for="(slink,n) in person.socialLinks" :key="n" :href="slink.link")
                     v-icon.pa-2 {{slink.icon}}
 
-          v-flex.md4
+          v-flex.md4.xs12
             v-layout(column).align-center.mt-8.title
               v-flex
                 v-avatar.elevation-4.ma-2(size="180")
                   v-img(src="node.avatar")
               v-flex.mt-4.font-weight-medium
-                | {{clubs.edges[0].node.viceCaptainOne.user.firstName}} {{clubs.edges[0].node.viceCaptainOne.user.lastName}}
+                | {{clubs.edges[0].node.captain.user.firstName}} {{clubs.edges[0].node.captain.user.lastName}}
               v-flex(class="blue--text").mt-2.font-weight-light
                 v-icon( left) mdi-phone
-                | {{clubs.edges[0].node.viceCaptainOne.phone}}
+                | {{clubs.edges[0].node.captain.phone}}
               v-flex.mt-2.font-weight-light
                 | HEAD
               v-flex.mt-2.font-weight-regular.subtitle-1.text-center
-                | {{clubs.edges[0].node.viceCaptainOne.about}}
+                | {{clubs.edges[0].node.captain.about}}
               //v-flex.pa-4
                 v-layout(row)
                   v-btn(icon v-for="(slink,n) in person.socialLinks" :key="n" :href="slink.link")
                     v-icon.pa-2 {{slink.icon}}
-          v-flex.md4
+          v-flex.md4.xs12
             v-layout(column).align-center.mt-8.title
               v-flex
                 v-avatar.elevation-4.ma-2(size="180")
                   v-img(src="node.avatar")
               v-flex.mt-4.font-weight-medium
-                | {{clubs.edges[0].node.viceCaptainOne.user.firstName}} {{clubs.edges[0].node.viceCaptainOne.user.lastName}}
+                | {{clubs.edges[0].node.viceCaptainTwo.user.firstName}} {{clubs.edges[0].node.viceCaptainTwo.user.lastName}}
               v-flex(class="blue--text").mt-2.font-weight-light
                 v-icon( left) mdi-phone
-                | {{clubs.edges[0].node.viceCaptainOne.phone}}
+                | {{clubs.edges[0].node.viceCaptainTwo.phone}}
               v-flex.mt-2.font-weight-light
                 | HEAD
               v-flex.mt-2.font-weight-regular.subtitle-1.text-center
-                | {{clubs.edges[0].node.viceCaptainOne.about}}
+                | {{clubs.edges[0].node.viceCaptainTwo.about}}
               //v-flex.pa-4
                 v-layout(row)
                   v-btn(icon v-for="(slink,n) in person.socialLinks" :key="n" :href="slink.link")
@@ -156,97 +156,18 @@ export default {
       }
     },
     news: {
-      query: GET_NEWS_QUERY
+      query: GET_NEWS_QUERY,
+      variables() {
+        return {
+          clubId: this.clubs.edges[0].node.id
+        };
+      }
     }
   },
   name: "Club",
   components: { Footer, NewsTable, EventTable },
   data: () => ({
-    tab: null,
-    keyPeople: [
-      {
-        name: "Rituraj Kulshresth",
-        number: "91231XXXXX",
-        position: "Vice Captain",
-        desc:
-          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut deserunt libero nobis perferendis! Quis?",
-        socialLinks: [
-          { link: "kulshresth.1@iitj.ac.in", icon: "mdi-email" },
-          {
-            link: "https://www.instagram.com/riturajkulshresth",
-            icon: "mdi-instagram"
-          }
-        ]
-      },
-      {
-        name: "Anshul Tilondiya",
-        number: "91231XXXXX",
-        position: "Captain",
-        desc:
-          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut deserunt libero nobis perferendis! Quis?",
-        socialLinks: [
-          { link: "tilondiya.1@iitj.ac.in", icon: "mdi-email" },
-          {
-            link: "https://www.instagram.com/anshul_tilondiya",
-            icon: "mdi-instagram"
-          }
-        ]
-      },
-      {
-        name: "Soham Sonawane",
-        number: "91231XXXXX",
-        position: "Vice Captain",
-        desc:
-          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut deserunt libero nobis perferendis! Quis?",
-        socialLinks: [
-          { link: "sonawane.1@iitj.ac.in", icon: "mdi-email" },
-          {
-            link: "https://www.instagram.com/when_soham_clicks",
-            icon: "mdi-instagram"
-          },
-          {
-            link: "https://www.github.com/killbotXD",
-            icon: "mdi-github-circle"
-          }
-        ]
-      }
-    ],
-    volunteers: [
-      {
-        img:
-          "https://cdn2.iconfinder.com/data/icons/people-80/96/Picture1-512.png",
-        name: "Puru Raj",
-        desc: " NONE ",
-        socialLinks: [
-          { link: "sonawane.1@iitj.ac.in", icon: "mdi-email" },
-          {
-            link: "https://www.instagram.com/when_soham_clicks",
-            icon: "mdi-instagram"
-          },
-          {
-            link: "https://www.github.com/killbotXD",
-            icon: "mdi-github-circle"
-          }
-        ]
-      },
-      {
-        img:
-          "https://cdn2.iconfinder.com/data/icons/people-80/96/Picture1-512.png",
-        name: "Om Solanki",
-        desc: " NONE ",
-        socialLinks: [
-          { link: "sonawane.1@iitj.ac.in", icon: "mdi-email" },
-          {
-            link: "https://www.instagram.com/when_soham_clicks",
-            icon: "mdi-instagram"
-          },
-          {
-            link: "https://www.github.com/killbotXD",
-            icon: "mdi-github-circle"
-          }
-        ]
-      }
-    ]
+    tab: null
   })
 };
 </script>
