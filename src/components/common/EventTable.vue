@@ -7,18 +7,18 @@
         th.subtitle-1.text-center
           v-icon mdi-calendar
       tbody
-        tr(v-for="(event,i) in events" :key="i" @click.stop="showDialog(event)")
+        tr(v-for="({node},i) in eventTableData.edges" :key="i" @click.stop="showDialog({node})")
           td
             v-icon mdi-chevron-right
-          td {{ event.name}}
-          td.text-center {{ event.date }}
+          td {{node.name}}
+          td.text-center {{ node.date }}
       v-dialog.elevation-12( v-model="dialog"
       persistent
         max-width="500")
           v-card
             v-card-title(class="primary darken-1 white--text").justify-center
               v-spacer
-              span.ml-4 {{singleEvent.name}}
+              span.ml-4 {{singleEvent.node.name}}
               v-spacer
               v-btn(icon dark @click="dialog = false")
                 v-icon(right) mdi-close-circle
@@ -27,15 +27,15 @@
                 v-layout(row)
                   v-flex.md4
                     v-icon(left) mdi-calendar
-                    | {{singleEvent.date}}
+                    | {{singleEvent.node.date}}
                   v-flex.md4
                     v-icon(left) mdi-clock
                     | {{singleEvent.time}}
                   v-flex.md4
                     v-icon(left) mdi-map-marker
-                    | {{singleEvent.location}}
+                    | {{singleEvent.node.location}}
                   v-flex.md12.mt-5
-                    p {{singleEvent.desc}}
+                    p {{singleEvent.node.description}}
             v-card-actions.justify-end
               v-btn(@click="dialog = false" class="primary darken-1 white--text" small) close
 
@@ -44,14 +44,11 @@
 <script>
 export default {
   name: "EventTable",
+  props: {
+    eventTableData: null
+  },
   data: () => ({
-    singleEvent: {
-      name: "",
-      date: "",
-      time: "",
-      location: "",
-      desc: ""
-    },
+    singleEvent: {},
     events: [
       {
         name: "Event 1",
