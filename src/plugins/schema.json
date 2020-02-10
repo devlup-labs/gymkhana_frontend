@@ -388,7 +388,7 @@
               "deprecationReason": null,
               "description": null,
               "isDeprecated": false,
-              "name": "clubEvent",
+              "name": "clubEvents",
               "type": {
                 "kind": "OBJECT",
                 "name": "ClubEventNodeConnection",
