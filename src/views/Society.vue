@@ -109,9 +109,9 @@ export default {
       this.carouselHeight = window.innerHeight - 48;
     },
     log() {
-      console.log("this.societies[0]");
-      console.log(this.societies.edges[0].node.clubSet.edges);
-      console.log("this.societies[0]");
+      // console.log("this.societies[0]");
+      // console.log(this.societies.edges[0].node.clubSet.edges);
+      // console.log("this.societies[0]");
     }
   },
   mounted() {

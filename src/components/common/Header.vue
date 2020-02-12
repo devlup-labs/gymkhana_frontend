@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     socList() {
-      console.log("a");
+      // console.log("a");
     }
   },
   data: () => ({
