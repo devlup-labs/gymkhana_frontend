@@ -15,7 +15,7 @@
           ).pa-5.elevation-8
             v-card-title.display-1.font-weight-light About
             v-card-text
-              p {{clubs.edges[0].node.description}}
+              p {{clubs.edges[0].node.description.substring(3,clubs.edges[0].node.description.length-4)}}
               p Currently club is having 3 entry-level and 2 semi-pro DSLRs namely :800D, 550D, 650D, 80D and 77D.
             v-card-actions.justify-end
               |link to resources
@@ -39,11 +39,7 @@
               |news
           v-tabs-items(v-model="tab")
             v-tab-item
-              v-expansion-panels(accordion focusable)
-                v-expansion-panel(v-for='i in 5' :key='i')
-                  v-expansion-panel-header Activity {{i+1}}
-                  v-expansion-panel-content.mt-2
-                    | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              ActivityComponent(:activitiesData="clubs.edges[0].node.activitySet")
             v-tab-item
               v-card(flat tile text).pa-4
                 v-card-text
@@ -144,6 +140,7 @@ import EventTable from "../components/common/EventTable";
 import NewsTable from "../components/common/NewsTable";
 import Footer from "../components/common/Footer";
 import { GET_CLUB_DATA_QUERY } from "../graphql/queries/clubDataQuery";
+import ActivityComponent from "../components/common/ActivityComponent";
 export default {
   apollo: {
     clubs: {
@@ -156,7 +153,7 @@ export default {
     }
   },
   name: "Club",
-  components: { Footer, NewsTable, EventTable },
+  components: { ActivityComponent, Footer, NewsTable, EventTable },
   data: () => ({
     tab: null
   })
