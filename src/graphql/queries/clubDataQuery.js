@@ -61,6 +61,49 @@ export const GET_CLUB_DATA_QUERY = gql`
               }
             }
           }
+          newsSet {
+            edges {
+              node {
+                title
+                cover
+                date
+                author {
+                  user {
+                    firstName
+                    lastName
+                  }
+                }
+                content
+              }
+            }
+          }
+          eventSet {
+            edges {
+              node {
+                id
+                name
+                description
+                location
+                date
+                club {
+                  name
+                  slug
+                  society {
+                    slug
+                  }
+                }
+              }
+            }
+          }
+          activitySet {
+            edges {
+              node {
+                name
+                description
+                customHtml
+              }
+            }
+          }
         }
       }
     }
