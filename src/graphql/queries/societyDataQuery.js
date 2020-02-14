@@ -46,6 +46,16 @@ export const GET_SOCIETY_DATA_QUERY = gql`
                 name
                 slug
                 cover
+                eventSet {
+                  edges {
+                    node {
+                      name
+                      description
+                      location
+                      date
+                    }
+                  }
+                }
               }
             }
           }
