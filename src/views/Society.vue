@@ -23,7 +23,7 @@
               v-icon(left) mdi-pen
               | Upcoming Event
             v-card-text
-              EventTable
+              EventTable(:societyEventData="eventSetData")
     v-layout(row class="grey lighten-3").pa-5.pr-0
       v-flex.md8.offset-md2
         v-card(class="accent white--text")
@@ -85,38 +85,47 @@ export default {
   name: "Society",
   components: { NewsTable, OfficeBearerCard, EventTable, Footer },
   data: () => ({
-    clubs: [
-      {
-        name: "Photography Club",
-        to: { name: "club" },
-        img: require("../assets/img1.jpg")
-      },
-      {
-        name: "Designerds",
-        to: { name: "club" },
-        img: require("../assets/img2.jpg")
-      },
-      {
-        name: "FremeX",
-        to: { name: "club" },
-        img: require("../assets/img3.jpg")
-      }
-    ]
+    eventSetData: []
   }),
   methods: {
     onResize() {
       // 48px is the header size
       this.carouselHeight = window.innerHeight - 48;
     },
-    log() {
-      // console.log("this.societies[0]");
+    joinEvents() {
+      for (
+        var i = 0;
+        i < this.societies.edges[0].node.clubSet.edges.length;
+        i++
+      ) {
+        for (
+          var j = 0;
+          j <
+          this.societies.edges[0].node.clubSet.edges[i].node.eventSet.edges
+            .length;
+          j++
+        ) {
+          if (
+            this.societies.edges[0].node.clubSet.edges[i].node.eventSet.edges[
+              j
+            ] != null
+          ) {
+            this.eventSetData.push(
+              this.societies.edges[0].node.clubSet.edges[i].node.eventSet.edges[
+                j
+              ]
+            );
+          }
+        }
+      }
+      // console.log(this.eventSetData);
       // console.log(this.societies.edges[0].node.clubSet.edges);
       // console.log("this.societies[0]");
     }
   },
   mounted() {
     this.onResize();
-    this.log();
+    this.joinEvents();
   }
 };
 </script>
