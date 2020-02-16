@@ -49,7 +49,7 @@
           v-icon(left) mdi-newspaper
           | News
         v-card-text
-          NewsTable
+          NewsTable(:societyNewsData="societies.edges[0].node.clubSet")
     v-layout(row class="grey lighten-3").pa-5
       v-flex.md8.offset-md2
         v-card(class="accent white--text")
