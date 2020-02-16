@@ -6,8 +6,14 @@
       th.subtitle-1.justify-start Title
       th.subtitle-1.text-center
         v-icon mdi-calendar
-    tbody
+    tbody(v-if="newsData")
       tr(v-for="({node},i) in newsData.edges" :key="i" @click.stop="showDialog({node})")
+        td
+          v-icon mdi-chevron-right
+        td {{node.title}}
+        td.text-center {{ node.date }}
+    tbody(v-else v-for="({node},i) in societyNewsData.edges" :key="i")
+      tr(v-for="({node}) in node.newsSet.edges" :key="k" @click.stop="showDialog({node})")
         td
           v-icon mdi-chevron-right
         td {{node.title}}
@@ -34,7 +40,7 @@
                 v-icon(left) mdi-account
                 | {{singleEvent.node.author.user.firstName}} {{singleEvent.node.author.user.lastName}}
               v-flex.md12.mt-5
-                p {{singleEvent.node.content}}
+                p {{singleEvent.node.content.substring(5,singleEvent.node.content.length-6)}}
         v-card-actions.justify-end
           v-btn(@click="dialog = false" class="primary darken-1 white--text" small) close
 
@@ -44,7 +50,8 @@
 export default {
   name: "NewsTable",
   props: {
-    newsData: {}
+    newsData: {},
+    societyNewsData: {}
   },
   data: () => ({
     singleEvent: null,
