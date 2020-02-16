@@ -31,10 +31,10 @@
               v-layout(row)
                 v-flex.md4
                   v-icon(left) mdi-calendar
-                  | {{singleEvent.node.date}}
+                  | {{singleEvent.node.date.substring(0,singleEvent.node.date.indexOf('T'))}}
                 v-flex.md4
                   v-icon(left) mdi-clock
-                  | {{singleEvent.time}}
+                  | {{singleEvent.node.date.substring(singleEvent.node.date.indexOf(':')+1,singleEvent.node.date.length-6)}} hrs
                 v-flex.md4
                   v-icon(left) mdi-map-marker
                   | {{singleEvent.node.location}}
