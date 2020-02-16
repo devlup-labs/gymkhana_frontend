@@ -56,6 +56,22 @@ export const GET_SOCIETY_DATA_QUERY = gql`
                     }
                   }
                 }
+                newsSet {
+                  edges {
+                    node {
+                      title
+                      cover
+                      date
+                      author {
+                        user {
+                          firstName
+                          lastName
+                        }
+                      }
+                      content
+                    }
+                  }
+                }
               }
             }
           }
