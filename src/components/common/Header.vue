@@ -12,7 +12,7 @@
       v-list
         v-list-item(v-for='({node}, i) in societies.edges' :key='i' link :to="{name: 'society', params: {slug: node.slug}}")
           v-list-item-title {{ node.name }}
-    v-btn(text) Forum
+    v-btn(text :to="{name: 'konnekt-home'}") Forum
     v-btn(text :to="{name: 'office-bearers'}") People
     v-spacer
 </template>
