@@ -46,7 +46,7 @@
             v-row.justify-center
               v-hover( v-slot:default="{ hover }")
                 v-card.mx-auto(
-                  :to="node.slug"
+                  :to="{name: 'society', params: {slug: node.slug}}"
                   :elevation="hover ? 15 : 2"
                   height="80%"
                   width="80%"
