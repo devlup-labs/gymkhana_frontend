@@ -12,11 +12,13 @@
                 span Coming Soon!
           v-flex.md6.justify-end
             v-layout(row).text-end.mr-12
-              v-container
+              v-container(class="white--text")
                 p QUICK LINKS
-                p  IIT Jodhpur
+                p
+                  a(href="http://iitj.ac.in" class="white--text" style="text-decoration: none;") IIT Jodhpur
                 p Contact Us
-                p Acadmic Calender
+                p
+                  a(href="http://iitj.ac.in/academics/index.php?id=academic_calendar.ac.in" class="white--text" style="text-decoration: none;") Academic Calender
 
     v-footer(color="blue darken-2 white--text").text-center.justify-center.align-center
       v-icon(color="white" size="20") mdi-copyright
