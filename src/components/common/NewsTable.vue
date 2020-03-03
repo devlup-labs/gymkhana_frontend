@@ -19,7 +19,6 @@
         td {{node.title}}
         td.text-center {{ node.date }}
     v-dialog.elevation-12( v-model="dialog"
-      persistent
       max-width="500")
       v-card(v-if="singleEvent")
         v-card-title(class="primary darken-1 white--text").justify-center
@@ -34,10 +33,10 @@
               v-flex.md12
                 v-img(:src="singleEvent.node.cover" max-height="230" alt="Image" cover).elevation-10
               v-flex.md6.mt-4.offset-2
-                v-icon(left) mdi-calendar
+                v-icon.mb-1(left) mdi-calendar
                 | {{singleEvent.node.date}}
               v-flex.md4.mt-4
-                v-icon(left) mdi-account
+                v-icon.mb-1(left) mdi-account
                 | {{singleEvent.node.author.user.firstName}} {{singleEvent.node.author.user.lastName}}
               v-flex.md12.mt-5
                 p {{singleEvent.node.content.substring(5,singleEvent.node.content.length-6)}}
