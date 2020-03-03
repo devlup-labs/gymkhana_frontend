@@ -18,7 +18,7 @@
               v-icon mdi-chevron-right
             td {{node.name}}
             td.text-center {{ node.date.substring(0,node.date.indexOf('T')) }}
-      v-dialog.elevation-12( v-model="dialog" persistent max-width="500")
+      v-dialog.elevation-12( v-model="dialog" max-width="500")
         v-card(v-if="singleEvent")
           v-card-title(class="primary darken-1 white--text").justify-center
             v-spacer
@@ -29,14 +29,14 @@
           v-card-text
             v-container.ma-4
               v-layout(row)
-                v-flex.md4
-                  v-icon(left) mdi-calendar
+                v-flex.md4.align-content-center
+                  v-icon.mb-1(left) mdi-calendar
                   | {{singleEvent.node.date.substring(0,singleEvent.node.date.indexOf('T'))}}
                 v-flex.md4
-                  v-icon(left) mdi-clock
+                  v-icon.mb-1(left) mdi-clock
                   | {{singleEvent.node.date.substring(singleEvent.node.date.indexOf(':')+1,singleEvent.node.date.length-6)}} hrs
                 v-flex.md4
-                  v-icon(left) mdi-map-marker
+                  v-icon.mb-1(left) mdi-map-marker
                   | {{singleEvent.node.location}}
                 v-flex.md12.mt-5
                   p {{singleEvent.node.description}}
