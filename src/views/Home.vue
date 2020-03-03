@@ -18,7 +18,7 @@
             p.subtitle-1.text-center  Students' Gymkhana, IIT Jodhpur is the governing body that looks after all student activities.
     v-parallax(src="../assets/hero.jpeg" :height="carouselHeight")
       v-overlay(absolute)
-        v-row.display-1.justify-center.ma-6(style="margin-top: -4rem !important") Festivals
+        v-row.display-1.justify-center.ma-6(style="margin-top: -6rem !important") Festivals
         v-carousel(height="550px" :show-arrows="false" cycle hide-delimiter-background).text-center
           v-carousel-item(
             transition="fade-transition"
@@ -36,7 +36,7 @@
               v-col(cols="12" md="6" align-self="center")
                 v-row.font-weight-regular.justify-center.mt-2
                   v-col(cols="10")
-                    p.subtitle-2.text-center.font-weight-bold  {{node.about}}
+                    p.subtitle-2.text-center.font-weight-bold  {{node.about.substring(3,node.about.length-4)}}
     v-container
       v-col(cols="12")
         p.display-1.text-center Societies
