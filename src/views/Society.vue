@@ -6,7 +6,7 @@
     v-container
       v-layout(row).ma-4
         v-flex.md8
-          v-card(flat tile text)
+          v-card(flat tile text color="#fafafa" )
             v-card-title.headline About
             v-card-text.subtitle-1
               blockquote.blockquote.ma-2(class="black--text")
@@ -18,7 +18,7 @@
               v-btn.elevation-4(class="accent") Annual Report
                 v-icon(right) mdi-arrow-right
         v-flex.md4
-          v-card(flat tile text)
+          v-card(flat tile text color="#fafafa")
             v-card-title.headline.justify-center
               v-icon(left) mdi-pen
               | Upcoming Event
@@ -44,7 +44,7 @@
                     v-layout.align-end.fill-height
                       v-card-text(class="my-4 text-center title").stripe.subtitle-1.font-weight-medium {{node.name}}
     v-layout(row ).pa-5.justify-center
-      v-card(flat tile text  )
+      v-card(flat tile text color="#fafafa" )
         v-card-title.headline.justify-center
           v-icon(left) mdi-newspaper
           | News
