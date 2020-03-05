@@ -9,7 +9,7 @@
         v-btn(text dark v-on='on')
           | Societies
           v-icon(right) mdi-chevron-down
-      v-list
+      v-list(v-if="societies")
         v-list-item(v-for='({node}, i) in societies.edges' :key='i' link :to="{name: 'society', params: {slug: node.slug}}")
           v-list-item-title {{ node.name }}
     v-btn(text :to="{name: 'konnekt-home'}") Forum
