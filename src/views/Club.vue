@@ -24,7 +24,7 @@
     v-container
       v-layout(row)
         v-flex.md4
-          v-card(flat tile text)
+          v-card(flat tile text color="#fafafa" )
             v-card-title.headline.justify-center
               v-icon(left large) mdi-lightbulb-outline
               | Upcoming Event
