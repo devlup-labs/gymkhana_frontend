@@ -17,26 +17,11 @@
           v-col(md="6" align-self="center")
             p.subtitle-1.text-center  Students' Gymkhana, IIT Jodhpur is the governing body that looks after all student activities.
     v-parallax(src="../assets/hero.jpeg" :height="carouselHeight")
-      v-overlay(absolute)
-        v-row.display-1.justify-center.ma-6(style="margin-top: -6rem !important") Festivals
-        v-carousel(height="550px" :show-arrows="false" cycle hide-delimiter-background).text-center
-          v-carousel-item(
-            transition="fade-transition"
-            reverse-transition="fade-transition"
-            v-for="({node}, i) in festivals.edges" :key="i"
-          )
-            v-row.justify-center.align-center
-              div.display-1 {{node.name}}
-              v-btn(icon ripple large :to="node.slug").ml-2
-                v-icon mdi-link
-            v-row.mt-5
-              v-col(cols="12" md="6")
-                  v-row.justify-center
-                    v-img( :src="node.photo" max-height="350" max-width="450")
-              v-col(cols="12" md="6" align-self="center")
-                v-row.font-weight-regular.justify-center.mt-2
-                  v-col(cols="10")
-                    p.subtitle-2.text-center.font-weight-bold  {{node.about.substring(3,node.about.length-4)}}
+      v-content.align-center.mask
+        v-container.container--fluid.mb-12
+            v-row.display-1.justify-center.mb-12 Festivals
+            v-row
+              FestivalCarousel(:festivals="festivals")
     v-container
       v-col(cols="12")
         p.display-1.text-center Societies
@@ -59,8 +44,10 @@
 <script>
 import { GET_SOCIETIES_QUERY } from "../graphql/queries/societyQuery";
 import { GET_FESTIVAL_QUERY } from "../graphql/queries/festivalQuery";
+import FestivalCarousel from "../components/FestivalCarousel";
 
 export default {
+  components: { FestivalCarousel },
   apollo: {
     societies: {
       query: GET_SOCIETIES_QUERY
@@ -71,36 +58,6 @@ export default {
   },
   data: () => ({
     carouselHeight: null,
-    festCarouselData: [
-      {
-        title: "Ignus",
-        image: "img1.jpg",
-        about:
-          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dignissimos et id impedit modi odit placeat sunt tenetur! Eos illum neque provident? Accusantium autem cupiditate debitis doloremque doloribus possimus reprehenderit!  ",
-        to: { name: "home" }
-      },
-      {
-        title: "Varchas",
-        image: "img2.jpg",
-        about:
-          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dignissimos et id impedit modi odit placeat sunt tenetur! Eos illum neque provident? Accusantium autem cupiditate debitis doloremque doloribus possimus reprehenderit!  ",
-        to: { name: "home" }
-      },
-      {
-        title: "Spandan",
-        image: "img3.jpg",
-        about:
-          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dignissimos et id impedit modi odit placeat sunt tenetur! Eos illum neque provident? Accusantium autem cupiditate debitis doloremque doloribus possimus reprehenderit!  ",
-        to: { name: "home" }
-      },
-      {
-        title: "Framed",
-        image: "img4.jpg",
-        about:
-          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto dignissimos et id impedit modi odit placeat sunt tenetur! Eos illum neque provident? Accusantium autem cupiditate debitis doloremque doloribus possimus reprehenderit!  ",
-        to: { name: "home" }
-      }
-    ],
     homeCarousel: [
       { image: require("../assets/home1.jpg") },
       { image: require("../assets/home2.jpg") },
@@ -126,3 +83,11 @@ export default {
   }
 };
 </script>
+<style>
+.v-parallax__content {
+  padding: 0 !important;
+}
+.mask {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+</style>
