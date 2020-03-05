@@ -7,7 +7,12 @@ export const GET_FESTIVAL_QUERY = gql`
         node {
           name
           tagLine
-          photo
+          photo {
+            sizes {
+              name
+              url
+            }
+          }
           about
           slug
           link
