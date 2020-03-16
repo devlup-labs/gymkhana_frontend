@@ -2,8 +2,8 @@
   v-flex
     v-parallax(
       dark
-      :src="require('../assets/home2.jpg')"
-      :height="$vuetify.theme.options.parallaxHeight"
+      :src="clubs.edges[0].node.cover.sizes.length ? clubs.edges[0].node.cover.sizes[2].url : require('../assets/home5.jpg') "
+      :height="$vuetify.theme.options.parallaxHeight*1.3"
     )
       v-layout.justify-center.align-center.fill-height
         h1 {{clubs.edges[0].node.name}}
@@ -16,7 +16,6 @@
             v-card-title.display-1.font-weight-light About
             v-card-text
               p {{clubs.edges[0].node.description.substring(3,clubs.edges[0].node.description.length-4)}}
-              p Currently club is having 3 entry-level and 2 semi-pro DSLRs namely :800D, 550D, 650D, 80D and 77D.
             v-card-actions.justify-end
               |link to resources
               v-btn.ml-2(right ripple class="accent")
