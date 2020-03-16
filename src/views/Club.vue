@@ -51,61 +51,11 @@
           v-card-title.justify-center.display-1 Key People
         v-layout(row).justify-lg-space-around
           v-flex(v-if="clubs.edges[0].node.viceCaptainOne").md4.xs12
-            v-layout(column).align-center.mt-8.title
-              v-flex
-                v-avatar.elevation-4.ma-2(size="180")
-                  v-img(src="node.avatar")
-              v-flex.mt-4.font-weight-medium
-                | {{clubs.edges[0].node.viceCaptainOne.user.firstName}} {{clubs.edges[0].node.viceCaptainOne.user.lastName}}
-              v-flex(class="blue--text").mt-2.font-weight-light
-                v-icon( left) mdi-phone
-                | {{clubs.edges[0].node.viceCaptainOne.phone}}
-              v-flex.mt-2.font-weight-light
-                | HEAD
-              v-flex.mt-2.font-weight-regular.subtitle-1.text-center
-                | {{clubs.edges[0].node.viceCaptainOne.about}}
-              //v-flex.pa-4
-                v-layout(row)
-                  v-btn(icon v-for="(slink,n) in person.socialLinks" :key="n" :href="slink.link")
-                    v-icon.pa-2 {{slink.icon}}
-
+            CaptainComponent(:captainData="clubs.edges[0].node.viceCaptainOne")
           v-flex(v-if="clubs.edges[0].node.captain").md4.xs12
-            v-layout(column).align-center.mt-8.title
-              v-flex
-                v-avatar.elevation-4.ma-2(size="180")
-                  v-img(src="node.avatar")
-              v-flex.mt-4.font-weight-medium
-                | {{clubs.edges[0].node.captain.user.firstName}} {{clubs.edges[0].node.captain.user.lastName}}
-              v-flex(class="blue--text").mt-2.font-weight-light
-                v-icon( left) mdi-phone
-                | {{clubs.edges[0].node.captain.phone}}
-              v-flex.mt-2.font-weight-light
-                | HEAD
-              v-flex.mt-2.font-weight-regular.subtitle-1.text-center
-                | {{clubs.edges[0].node.captain.about}}
-              //v-flex.pa-4
-                v-layout(row)
-                  v-btn(icon v-for="(slink,n) in person.socialLinks" :key="n" :href="slink.link")
-                    v-icon.pa-2 {{slink.icon}}
+            CaptainComponent(:captainData="clubs.edges[0].node.captain")
           v-flex(v-if="clubs.edges[0].node.viceCaptainTwo").md4.xs12
-            v-layout(column).align-center.mt-8.title
-              v-flex
-                v-avatar.elevation-4.ma-2(size="180")
-                  v-img(src="node.avatar")
-              v-flex.mt-4.font-weight-medium
-                | {{clubs.edges[0].node.viceCaptainTwo.user.firstName}} {{clubs.edges[0].node.viceCaptainTwo.user.lastName}}
-              v-flex(class="blue--text").mt-2.font-weight-light
-                v-icon( left) mdi-phone
-                | {{clubs.edges[0].node.viceCaptainTwo.phone}}
-              v-flex.mt-2.font-weight-light
-                | HEAD
-              v-flex.mt-2.font-weight-regular.subtitle-1.text-center
-                | {{clubs.edges[0].node.viceCaptainTwo.about}}
-              //v-flex.pa-4
-                v-layout(row)
-                  v-btn(icon v-for="(slink,n) in person.socialLinks" :key="n" :href="slink.link")
-                    v-icon.pa-2 {{slink.icon}}
-
+            CaptainComponent(:captainData="clubs.edges[0].node.viceCaptainTwo")
     v-container.pa-9.pb-0
       v-flex.md10.offset-md1
         v-card(class="accent white--text").elevation-10
@@ -141,6 +91,7 @@ import NewsTable from "../components/common/NewsTable";
 import Footer from "../components/common/Footer";
 import { GET_CLUB_DATA_QUERY } from "../graphql/queries/clubDataQuery";
 import ActivityComponent from "../components/common/ActivityComponent";
+import CaptainComponent from "../components/common/CaptainComponent";
 export default {
   apollo: {
     clubs: {
@@ -153,7 +104,13 @@ export default {
     }
   },
   name: "Club",
-  components: { ActivityComponent, Footer, NewsTable, EventTable },
+  components: {
+    CaptainComponent,
+    ActivityComponent,
+    Footer,
+    NewsTable,
+    EventTable
+  },
   data: () => ({
     tab: null
   })
