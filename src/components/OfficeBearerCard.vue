@@ -24,7 +24,7 @@
                 v-divider
               v-row.justify-center
                 div.mt-4
-                  a(href="tel:${bearerData.phone}") +91-{{bearerData.phone}}
+                  a(:href="`tel:${bearerData.phone}`") +91-{{bearerData.phone}}
               v-row.justify-center
                 div
                   v-row
