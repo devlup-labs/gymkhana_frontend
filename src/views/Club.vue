@@ -70,20 +70,11 @@
       v-flex.md10.offset-md1
         v-card(class="accent white--text").elevation-10
           v-card-title.justify-center.display-1 Volunteers
-        v-layout(row).mt-10
+        v-layout(row v-if="clubs.edges[0].node.coreMembers.edges.length").mt-10
           v-flex.md6(v-for="({node},j) in clubs.edges[0].node.coreMembers.edges" :key="j")
-            v-layout(row).justify-center.ma-2
-              v-flex.md6
-                v-card.elevation-6
-                  v-img(:src="node.avatar" max-height="200")
-              v-flex.md6
-                v-layout(column).align-center.ma-4
-                  v-flex.mt-4 {{node.user.firstName}}
-                  v-flex.mt-4 {{node.phone}}
-                  //v-flex.pa-4
-                    v-layout(row)
-                      v-btn(icon v-for="(sl,l) in volunteer.socialLinks" :key="l" :href="sl.link")
-                        v-icon.pa-2 {{sl.icon}}
+            CoreMemberComponent(:memberData="node")
+        v-layout(row v-else).justify-center.mt-10
+          p There are no core members of the following club.
 </template>
 <script>
 import EventTable from "../components/common/EventTable";
@@ -92,6 +83,7 @@ import Footer from "../components/common/Footer";
 import { GET_CLUB_DATA_QUERY } from "../graphql/queries/clubDataQuery";
 import ActivityComponent from "../components/common/ActivityComponent";
 import CaptainComponent from "../components/common/CaptainComponent";
+import CoreMemberComponent from "../components/common/CoreMemberComponent";
 export default {
   apollo: {
     clubs: {
@@ -105,6 +97,7 @@ export default {
   },
   name: "Club",
   components: {
+    CoreMemberComponent,
     CaptainComponent,
     ActivityComponent,
     Footer,
