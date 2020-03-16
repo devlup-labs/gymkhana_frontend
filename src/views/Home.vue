@@ -33,7 +33,7 @@
                 v-card.mx-auto(
                   :to="{name: 'society', params: {slug: node.slug}}"
                   :elevation="hover ? 15 : 2"
-                  height="70%"
+                  height="80%"
                   width="80%"
                 )
                   v-img(:src="node.cover.sizes[2].url")
