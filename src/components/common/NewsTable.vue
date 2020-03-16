@@ -29,17 +29,17 @@
             v-icon(right) mdi-close-circle
         v-card-text
           v-container
-            v-layout(row)
+            v-layout(row).text-center
               v-flex.md12
-                v-img(:src="singleEvent.node.cover" max-height="230" alt="Image" cover).elevation-10
-              v-flex.md6.mt-4.offset-2
+                v-img(v-if="singleEvent.node.cover.sizes.length" :src="singleEvent.node.cover.sizes[1].url" max-height="230" alt="Image" cover).elevation-10
+              v-flex.md6.mt-6.text-center
                 v-icon.mb-1(left) mdi-calendar
                 | {{singleEvent.node.date}}
-              v-flex.md4.mt-4
+              v-flex.md6.mt-6.text-center
                 v-icon.mb-1(left) mdi-account
                 | {{singleEvent.node.author.user.firstName}} {{singleEvent.node.author.user.lastName}}
               v-flex.md12.mt-5
-                p {{singleEvent.node.content.substring(5,singleEvent.node.content.length-6)}}
+                p {{singleEvent.node.content.substring(3,singleEvent.node.content.length-4)}}
         v-card-actions.justify-end
           v-btn(@click="dialog = false" class="primary darken-1 white--text" small) close
 
