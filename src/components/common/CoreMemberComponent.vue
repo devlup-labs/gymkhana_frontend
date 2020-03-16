@@ -2,10 +2,11 @@
   v-layout(row).justify-center.ma-2
     v-flex.md6
       v-card.elevation-6
-        v-img(:src="memberData.avatar" max-height="200")
+        v-img(v-if="memberData.avatar.sizes" :src="memberData.avatar.sizes[1].url" max-height="200")
+        v-img(v-else src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST4n1T70ibu7ov-7FT63MjRA-yPrjrfHem04kPtqOVWjBNQuQK" max-height="200")
     v-flex.md6
       v-layout(column).align-center.ma-4
-        v-flex.mt-4 {{memberData.user.firstName}}
+        v-flex.mt-4 {{memberData.user.firstName}} {{memberData.user.lastName}}
         v-flex.mt-4 {{memberData.phone}}
         //v-flex.pa-4
           v-layout(row)
