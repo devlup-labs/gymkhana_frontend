@@ -2,7 +2,8 @@
   v-layout(column).align-center.mt-8.title
     v-flex
       v-avatar.elevation-4.ma-2(size="180")
-        v-img(src="node.avatar")
+        v-img(v-if="captainData.avatar.sizes" :src="captainData.avatar.sizes[1].url")
+        v-img(v-else src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST4n1T70ibu7ov-7FT63MjRA-yPrjrfHem04kPtqOVWjBNQuQK")
     v-flex.mt-4.font-weight-medium
       | {{captainData.user.firstName}} {{captainData.user.lastName}}
     v-flex(class="blue--text").mt-2.font-weight-light
