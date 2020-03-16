@@ -8,8 +8,16 @@ export const GET_SOCIETY_DATA_QUERY = gql`
           name
           secretary {
             phone
-            cover
-            avatar
+            cover {
+              sizes {
+                url
+              }
+            }
+            avatar {
+              sizes {
+                url
+              }
+            }
             about
             user {
               firstName
@@ -19,8 +27,16 @@ export const GET_SOCIETY_DATA_QUERY = gql`
           }
           jointSecretary {
             phone
-            cover
-            avatar
+            cover {
+              sizes {
+                url
+              }
+            }
+            avatar {
+              sizes {
+                url
+              }
+            }
             about
             user {
               firstName
@@ -30,8 +46,16 @@ export const GET_SOCIETY_DATA_QUERY = gql`
           }
           mentor {
             phone
-            cover
-            avatar
+            cover {
+              sizes {
+                url
+              }
+            }
+            avatar {
+              sizes {
+                url
+              }
+            }
             about
             user {
               firstName
@@ -40,12 +64,21 @@ export const GET_SOCIETY_DATA_QUERY = gql`
             }
           }
           slug
+          cover {
+            sizes {
+              url
+            }
+          }
           clubSet {
             edges {
               node {
                 name
                 slug
-                cover
+                cover {
+                  sizes {
+                    url
+                  }
+                }
                 eventSet {
                   edges {
                     node {
@@ -60,7 +93,11 @@ export const GET_SOCIETY_DATA_QUERY = gql`
                   edges {
                     node {
                       title
-                      cover
+                      cover {
+                        sizes {
+                          url
+                        }
+                      }
                       date
                       author {
                         user {
