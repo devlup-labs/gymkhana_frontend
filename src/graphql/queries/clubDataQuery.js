@@ -11,12 +11,24 @@ export const GET_CLUB_DATA_QUERY = gql`
             name
           }
           slug
-          cover
+          cover {
+            sizes {
+              url
+            }
+          }
           description
           captain {
             phone
-            cover
-            avatar
+            cover {
+              sizes {
+                url
+              }
+            }
+            avatar {
+              sizes {
+                url
+              }
+            }
             about
             user {
               firstName
@@ -26,8 +38,16 @@ export const GET_CLUB_DATA_QUERY = gql`
           }
           viceCaptainOne {
             phone
-            cover
-            avatar
+            cover {
+              sizes {
+                url
+              }
+            }
+            avatar {
+              sizes {
+                url
+              }
+            }
             about
             user {
               firstName
@@ -37,8 +57,16 @@ export const GET_CLUB_DATA_QUERY = gql`
           }
           viceCaptainTwo {
             phone
-            cover
-            avatar
+            cover {
+              sizes {
+                url
+              }
+            }
+            avatar {
+              sizes {
+                url
+              }
+            }
             about
             user {
               firstName
@@ -50,8 +78,16 @@ export const GET_CLUB_DATA_QUERY = gql`
             edges {
               node {
                 phone
-                cover
-                avatar
+                cover {
+                  sizes {
+                    url
+                  }
+                }
+                avatar {
+                  sizes {
+                    url
+                  }
+                }
                 about
                 user {
                   firstName
@@ -65,7 +101,11 @@ export const GET_CLUB_DATA_QUERY = gql`
             edges {
               node {
                 title
-                cover
+                cover {
+                  sizes {
+                    url
+                  }
+                }
                 date
                 author {
                   user {
