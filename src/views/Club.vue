@@ -49,8 +49,8 @@
       v-flex.md10.offset-md1
         v-card(class="accent white--text").elevation-10
           v-card-title.justify-center.display-1 Key People
-        v-layout(row)
-          v-flex.md4.xs12
+        v-layout(row).justify-lg-space-around
+          v-flex(v-if="clubs.edges[0].node.viceCaptainOne").md4.xs12
             v-layout(column).align-center.mt-8.title
               v-flex
                 v-avatar.elevation-4.ma-2(size="180")
@@ -69,7 +69,7 @@
                   v-btn(icon v-for="(slink,n) in person.socialLinks" :key="n" :href="slink.link")
                     v-icon.pa-2 {{slink.icon}}
 
-          v-flex.md4.xs12
+          v-flex(v-if="clubs.edges[0].node.captain").md4.xs12
             v-layout(column).align-center.mt-8.title
               v-flex
                 v-avatar.elevation-4.ma-2(size="180")
@@ -87,7 +87,7 @@
                 v-layout(row)
                   v-btn(icon v-for="(slink,n) in person.socialLinks" :key="n" :href="slink.link")
                     v-icon.pa-2 {{slink.icon}}
-          v-flex.md4.xs12
+          v-flex(v-if="clubs.edges[0].node.viceCaptainTwo").md4.xs12
             v-layout(column).align-center.mt-8.title
               v-flex
                 v-avatar.elevation-4.ma-2(size="180")
