@@ -33,12 +33,12 @@
                 v-card.mx-auto(
                   :to="{name: 'society', params: {slug: node.slug}}"
                   :elevation="hover ? 15 : 2"
-                  height="80%"
+                  height="70%"
                   width="80%"
                 )
-                  v-img(:src="node.cover")
+                  v-img(:src="node.cover.sizes[2].url")
                     v-layout.align-end.fill-height
-                      v-card-text(class="my-4 text-center title").stripe {{node.name}}
+                      v-card-text.my-6.title.text-center.stripe {{node.name}}
 </template>
 
 <script>
@@ -84,8 +84,12 @@ export default {
 };
 </script>
 <style>
+/*  very important do not delete this class*/
 .v-parallax__content {
   padding: 0 !important;
+}
+.stripe {
+  background: rgba(255, 255, 255, 0.7);
 }
 .mask {
   background-color: rgba(0, 0, 0, 0.5);
