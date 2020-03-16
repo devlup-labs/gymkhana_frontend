@@ -8,6 +8,11 @@ export const GET_SOCIETIES_QUERY = gql`
           ... on SocietyNode {
             name
             slug
+            cover {
+              sizes {
+                url
+              }
+            }
           }
         }
       }
