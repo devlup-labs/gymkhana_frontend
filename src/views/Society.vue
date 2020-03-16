@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    v-parallax(src="../assets/home1.jpg" cover).society-photo.text-center.align-center
+    v-parallax(:src="societies.edges[0].node.cover.sizes[2].url").society-photo.text-center
       v-overlay(absolute)
         p(class="white--text").display-2 {{societies.edges[0].node.name}}
     v-container
@@ -40,9 +40,9 @@
                   height="80%"
                   width="80%"
                 )
-                  v-img(:src="node.cover")
+                  v-img(:src="node.cover.sizes.length ? node.cover.sizes[2].url : require('../assets/cover4.svg')" max-height="500px" min-height="250px")
                     v-layout.align-end.fill-height
-                      v-card-text(class="my-4 text-center title").stripe.subtitle-1.font-weight-medium {{node.name}}
+                      v-card-text.my-10.text-center.stripe.subtitle-1.font-weight-medium {{node.name}}
     v-layout(row ).pa-5.justify-center
       v-card(flat tile text color="#fafafa" )
         v-card-title.headline.justify-center
@@ -54,7 +54,7 @@
       v-flex.md8.offset-md2
         v-card(class="accent white--text")
           v-card-title.display-1.justify-center Key People
-      v-flex.md12
+      v-flex.md12.xs12
         v-container
           v-row
             v-col(cols="12" md="4" )
@@ -98,8 +98,7 @@ export default {
 
 <style scoped>
 .society-photo {
-  height: 20rem !important;
-  background: url("../assets/home1.jpg") no-repeat center !important;
+  height: 28rem !important;
   background-size: cover !important;
   -webkit-background-size: cover !important;
 }
