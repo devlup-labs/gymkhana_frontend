@@ -72,6 +72,7 @@ export const GET_SOCIETY_DATA_QUERY = gql`
           clubSet {
             edges {
               node {
+                __typename
                 name
                 slug
                 cover {

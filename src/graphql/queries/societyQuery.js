@@ -5,6 +5,7 @@ export const GET_SOCIETIES_QUERY = gql`
     societies {
       edges {
         node {
+          __typename
           ... on SocietyNode {
             name
             slug

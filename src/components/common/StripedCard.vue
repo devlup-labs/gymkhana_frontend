@@ -1,15 +1,16 @@
 <template lang="pug">
-  v-row.justify-center
+  v-row.justify-center.mt-5
     v-hover( v-slot:default="{ hover }")
       v-card.mx-auto(
-        :to="{name: 'society', params: {slug: nodeData.slug}}"
+        :to="!nodeData.__typename.localeCompare(\"SocietyNode\")?{name: 'society', params: {slug: nodeData.slug}}:{name: 'club', params: {slug: nodeData.slug}}"
         :elevation="hover ? 15 : 2"
         height="80%"
         width="80%"
       )
-        v-img(:src="nodeData.cover.sizes[0].url")
+        v-img(:src="nodeData.cover.sizes.length ? nodeData.cover.sizes[0].url : require('../../assets/cover4.svg')" min-height="250px")
           v-layout.align-end.fill-height
-            v-card-text.my-6.title.text-center.stripe {{nodeData.name}}
+            v-card-text(v-if="!nodeData.__typename.localeCompare(\"SocietyNode\")").my-6.title.text-center.stripe {{nodeData.name}}
+            v-card-text(v-else).my-10.text-center.stripe.subtitle-1.font-weight-medium {{nodeData.name}}
 </template>
 
 <script>

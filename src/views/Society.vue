@@ -30,20 +30,9 @@
         v-card(class="accent white--text")
           v-card-title.display-1.justify-center Clubs
       v-container(v-if="societies.edges[0].node.clubSet.edges.length").md12
-        v-layout(row).pa-3
+        v-layout(row).pa-3.justify-space-around
           v-flex(v-for="({node},n) in societies.edges[0].node.clubSet.edges" :key="n").md4.xs12.sm12
-            v-layout(row ).justify-center.mt-10
-              v-hover( v-slot:default="{ hover }")
-                v-card(
-                  :to="{name: 'club', params: {slug: node.slug}}"
-                  :elevation="hover ? 15 : 2"
-                  class="mx-auto"
-                  height="80%"
-                  width="80%"
-                )
-                  v-img(:src="node.cover.sizes.length ? node.cover.sizes[0].url : require('../assets/cover4.svg')" max-height="500px" min-height="250px")
-                    v-layout.align-end.fill-height
-                      v-card-text.my-10.text-center.stripe.subtitle-1.font-weight-medium {{node.name}}
+            StripedCard(:nodeData="node")
       v-container(v-else).md12.pa-5.title.text-center
             | There are currently no clubs in the society.
     v-layout(row ).pa-5.justify-center
@@ -78,6 +67,7 @@ import EventTable from "../components/common/EventTable";
 import OfficeBearerCard from "../components/OfficeBearerCard";
 import NewsTable from "../components/common/NewsTable";
 import { GET_SOCIETY_DATA_QUERY } from "../graphql/queries/societyDataQuery";
+import StripedCard from "../components/common/StripedCard";
 export default {
   apollo: {
     societies: {
@@ -90,7 +80,7 @@ export default {
     }
   },
   name: "Society",
-  components: { NewsTable, OfficeBearerCard, EventTable, Footer },
+  components: { StripedCard, NewsTable, OfficeBearerCard, EventTable, Footer },
   methods: {
     onResize() {
       // 48px is the header size
