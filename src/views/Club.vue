@@ -2,7 +2,7 @@
   v-flex
     v-parallax(
       dark
-      :src="clubs.edges[0].node.cover.sizes.length ? clubs.edges[0].node.cover.sizes[2].url : require('../assets/home5.jpg') "
+      :src="clubs.edges[0].node.cover.sizes.length ? clubs.edges[0].node.cover.sizes[0].url : require('../assets/home5.jpg') "
       :height="$vuetify.theme.options.parallaxHeight*1.3"
     )
       v-layout.justify-center.align-center.fill-height
