@@ -41,8 +41,10 @@
               ActivityComponent(:activitiesData="clubs.edges[0].node.activitySet")
             v-tab-item
               v-card(flat tile text).pa-4
-                v-card-text
+                v-card-text(v-if="clubs.edges[0].node.newsSet.edges.length")
                   NewsTable(:newsData="clubs.edges[0].node.newsSet")
+                v-card-text(v-else).pa-4.title.text-center
+                 | There is now news currently
 
     v-container.pa-9.pb-0
       v-flex.md10.offset-md1
