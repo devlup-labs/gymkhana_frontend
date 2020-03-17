@@ -6,9 +6,9 @@
         v-img(v-else src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST4n1T70ibu7ov-7FT63MjRA-yPrjrfHem04kPtqOVWjBNQuQK")
     v-flex.mt-4.font-weight-medium
       | {{captainData.user.firstName}} {{captainData.user.lastName}}
-    v-flex(class="blue--text").mt-2.font-weight-light
-      v-icon( left) mdi-phone
-      | {{captainData.phone}}
+    v-flex.mt-2.font-weight-light
+      v-icon( left).pb-1 mdi-phone
+      a(:href="`tel:${captainData.phone}`").no-decoration {{captainData.phone}}
     v-flex.mt-2.font-weight-light
       | HEAD
     v-flex.mt-2.font-weight-regular.subtitle-1.text-center
@@ -28,4 +28,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.no-decoration {
+  text-decoration: none;
+  color: deepskyblue;
+}
+</style>
