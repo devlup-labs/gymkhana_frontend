@@ -48,8 +48,10 @@
         v-card-title.headline.justify-center
           v-icon(left) mdi-newspaper
           | News
-        v-card-text
-          NewsTable(:societyNewsData="societies.edges[0].node.clubSet")
+        v-card-text(v-if="checkNews()")
+          NewsTable( :societyNewsData="societies.edges[0].node.clubSet")
+        v-card-text(v-else).title
+          | There is no news for the current Society.
     v-layout(row class="grey lighten-3").pa-5
       v-flex.md8.offset-md2
         v-card(class="accent white--text")
@@ -88,6 +90,22 @@ export default {
     onResize() {
       // 48px is the header size
       this.carouselHeight = window.innerHeight - 48;
+    },
+    checkNews() {
+      for (let i = 0; i < this.societies.edges.length; i++) {
+        if (this.societies.edges[i].node.clubSet.edges.length == 0) return 0;
+        for (
+          let j = 0;
+          j < this.societies.edges[i].node.clubSet.edges.length;
+          j++
+        ) {
+          if (
+            this.societies.edges[i].node.clubSet.edges[j].node.newsSet.edges
+              .length >= 1
+          )
+            return 1;
+        }
+      }
     }
   },
   mounted() {
