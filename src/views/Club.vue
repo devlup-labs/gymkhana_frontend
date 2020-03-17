@@ -57,6 +57,7 @@
             CaptainComponent(:captainData="clubs.edges[0].node.captain")
           v-flex(v-if="clubs.edges[0].node.viceCaptainTwo").md4.xs12
             CaptainComponent(:captainData="clubs.edges[0].node.viceCaptainTwo")
+      v-flex(v-if="!clubs.edges[0].node.viceCaptainOne&&!clubs.edges[0].node.viceCaptainTwo&&!clubs.edges[0].node.captain").text-center.subtitle-1.pt-8 There are no key people.
     v-container.pa-9.pb-0
       v-flex.md10.offset-md1
         v-card(class="accent white--text").elevation-10
