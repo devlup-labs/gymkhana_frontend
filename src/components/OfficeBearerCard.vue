@@ -25,14 +25,14 @@
                   h2.font-weight-medium.mb-5  About {{bearerData.user.firstName}}
               v-row
                 v-divider
-              v-row.justify-center
-                div.mt-4
-                  a(:href="`tel:${bearerData.phone}`") +91-{{bearerData.phone}}
+              v-row.justify-center.mt-4
+                v-icon(left color="primary") mdi-phone
+                a(:href="`tel:${bearerData.phone}`").no-decoration +91-{{bearerData.phone}}
               v-row.justify-center
                 div
-                  v-row
-                    v-icon  mdi-email
-                    v-text.ma-2.pa-2 {{bearerData.user.email}}
+                  v-row.ma-4
+                    v-icon(left color="primary")  mdi-email
+                    a(:href="`mailto:${bearerData.user.email}`").no-decoration {{bearerData.user.email}}
               v-row.justify-center.align-end.pa-0.ma-0.fill-height-card-back
                 v-divider
               v-row.justify-center.mt-2.pa-0
@@ -59,5 +59,9 @@ export default {
 <style scoped>
 .fill-height-card-back {
   height: 50%;
+}
+.no-decoration {
+  text-decoration: none;
+  color: black;
 }
 </style>
