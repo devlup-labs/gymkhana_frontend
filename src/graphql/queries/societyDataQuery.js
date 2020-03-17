@@ -6,6 +6,7 @@ export const GET_SOCIETY_DATA_QUERY = gql`
       edges {
         node {
           name
+          description
           secretary {
             phone
             cover {
