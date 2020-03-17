@@ -7,7 +7,8 @@
     v-flex.md6
       v-layout(column).align-center.ma-4
         v-flex.mt-4 {{memberData.user.firstName}} {{memberData.user.lastName}}
-        v-flex.mt-4 {{memberData.phone}}
+        v-flex.mt-4
+          a(:href="`tel:${memberData.phone}`").no-decoration {{memberData.phone}}
         //v-flex.pa-4
           v-layout(row)
             v-btn(icon v-for="(sl,l) in volunteer.socialLinks" :key="l" :href="sl.link")
@@ -23,4 +24,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.no-decoration {
+  text-decoration: none;
+  color: deepskyblue;
+}
+</style>
