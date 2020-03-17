@@ -60,13 +60,15 @@
           v-card-title.display-1.justify-center Key People
       v-flex.md12.xs12
         v-container
-          v-row
-            v-col(cols="12" md="4" )
+          v-row.justify-space-around
+            v-col(cols="12" md="4" v-if="societies.edges[0].node.jointSecretary")
               OfficeBearerCard(:avatarSize="120" :bearerData="societies.edges[0].node.jointSecretary" )
-            v-col(cols="12" md="4" )
+            v-col(cols="12" md="4" v-if="societies.edges[0].node.secretary")
               OfficeBearerCard(:avatarSize="120" :bearerData="societies.edges[0].node.secretary" )
-            v-col(cols="12" md="4" )
+            v-col(cols="12" md="4" v-if="societies.edges[0].node.mentor" )
               OfficeBearerCard(:avatarSize="120" :bearerData="societies.edges[0].node.mentor" )
+      v-flex(v-if="!societies.edges[0].node.mentor&&!societies.edges[0].node.secretary&&!societies.edges[0].node.jointSecretary").title.text-center.md12.xs12
+        | There are no key people.
 </template>
 
 <script>
