@@ -37,11 +37,12 @@
             v-tab
               v-icon(left) mdi-newspaper
               |news
-          v-tabs-items(v-model="tab")
+          v-tabs-items(v-model="tab" )
+            v-tab-item(v-if="clubs.edges[0].node.activitySet.edges.length" )
+              ActivityComponent(:activitiesData="clubs.edges[0].node.activitySet" )
+            v-tab-item(v-else).pa-8.text-center.title There are no activities.
             v-tab-item
-              ActivityComponent(:activitiesData="clubs.edges[0].node.activitySet")
-            v-tab-item
-              v-card(flat tile text).pa-4
+              v-card(flat tile text color="#fafafa").pa-4
                 v-card-text(v-if="clubs.edges[0].node.newsSet.edges.length")
                   NewsTable(:newsData="clubs.edges[0].node.newsSet")
                 v-card-text(v-else).pa-4.title.text-center
