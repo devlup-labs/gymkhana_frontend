@@ -27,8 +27,9 @@
             v-card-title.headline.justify-center
               v-icon(left large) mdi-lightbulb-outline
               | Upcoming Event
-            v-card-text
+            v-card-text(v-if="clubs.edges[0].node.eventSet.edges.length")
               EventTable(:eventTableData="clubs.edges[0].node.eventSet")
+            v-card-text(v-else).text-center.subtitle-1.ml-2 There are currently no events.
         v-flex.md7.offset-md1.elevation-0(flat tile depressed).pl-5.xs12
           v-tabs(fixed-tabs background-color='primary ' dark v-model="tab")
             v-tab
@@ -44,7 +45,7 @@
                 v-card-text(v-if="clubs.edges[0].node.newsSet.edges.length")
                   NewsTable(:newsData="clubs.edges[0].node.newsSet")
                 v-card-text(v-else).pa-4.title.text-center
-                 | There is now news currently
+                  | There is now news currently
 
     v-container.pa-9.pb-0
       v-flex.md10.offset-md1
