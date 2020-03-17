@@ -28,26 +28,17 @@
       v-col(cols="12" v-if="societies")
         v-row.justify-center
           v-col(v-for="({node}, i) in societies.edges" :key="i" md="6")
-            v-row.justify-center
-              v-hover( v-slot:default="{ hover }")
-                v-card.mx-auto(
-                  :to="{name: 'society', params: {slug: node.slug}}"
-                  :elevation="hover ? 15 : 2"
-                  height="80%"
-                  width="80%"
-                )
-                  v-img(:src="node.cover.sizes[0].url")
-                    v-layout.align-end.fill-height
-                      v-card-text.my-6.title.text-center.stripe {{node.name}}
+            StripedCard(:nodeData="node")
 </template>
 
 <script>
 import { GET_SOCIETIES_QUERY } from "../graphql/queries/societyQuery";
 import { GET_FESTIVAL_QUERY } from "../graphql/queries/festivalQuery";
 import FestivalCarousel from "../components/FestivalCarousel";
+import StripedCard from "../components/common/StripedCard";
 
 export default {
-  components: { FestivalCarousel },
+  components: { StripedCard, FestivalCarousel },
   apollo: {
     societies: {
       query: GET_SOCIETIES_QUERY
@@ -87,9 +78,6 @@ export default {
 /*  very important do not delete this class*/
 .v-parallax__content {
   padding: 0 !important;
-}
-.stripe {
-  background: rgba(255, 255, 255, 0.7);
 }
 .mask {
   background-color: rgba(0, 0, 0, 0.5);
