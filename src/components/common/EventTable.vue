@@ -38,7 +38,7 @@
                 v-flex.md4
                   v-icon.mb-1(left) mdi-map-marker
                   | {{singleEvent.node.location}}
-                v-flex.md12.mt-5
+                v-flex.md12.mt-5.text-center
                   p {{singleEvent.node.description}}
           v-card-actions.justify-end
             v-btn(@click="dialog = false" class="primary darken-1 white--text" small) close
