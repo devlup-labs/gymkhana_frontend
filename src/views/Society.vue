@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    v-parallax(:src="societies.edges[0].node.cover.sizes[2].url").society-photo.text-center
+    v-parallax(:src="societies.edges[0].node.cover.sizes[0].url").society-photo.text-center
       v-overlay(absolute)
         p(class="white--text").display-2 {{societies.edges[0].node.name}}
     v-container
@@ -40,7 +40,7 @@
                   height="80%"
                   width="80%"
                 )
-                  v-img(:src="node.cover.sizes.length ? node.cover.sizes[2].url : require('../assets/cover4.svg')" max-height="500px" min-height="250px")
+                  v-img(:src="node.cover.sizes.length ? node.cover.sizes[0].url : require('../assets/cover4.svg')" max-height="500px" min-height="250px")
                     v-layout.align-end.fill-height
                       v-card-text.my-10.text-center.stripe.subtitle-1.font-weight-medium {{node.name}}
     v-layout(row ).pa-5.justify-center

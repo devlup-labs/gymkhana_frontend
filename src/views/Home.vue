@@ -36,7 +36,7 @@
                   height="80%"
                   width="80%"
                 )
-                  v-img(:src="node.cover.sizes[2].url")
+                  v-img(:src="node.cover.sizes[0].url")
                     v-layout.align-end.fill-height
                       v-card-text.my-6.title.text-center.stripe {{node.name}}
 </template>

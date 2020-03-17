@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-carousel( v-if="festivals"  hide-delimiter-background show-arrows-on-hover).text-center
+  v-carousel( v-if="festivals" cycle hide-delimiter-background show-arrows-on-hover).text-center
     v-carousel-item(
       transition="fade-transition"
       reverse-transition="fade-transition"
@@ -12,7 +12,7 @@
       v-row.mt-6
         v-col
           v-row.justify-center
-            v-img( :src="node.photo.sizes[1].url" max-height="350" max-width="450")
+            v-img( :src="node.photo.sizes[0].url" max-height="350" max-width="450")
         v-col
           v-row.font-weight-regular.mt-2.justify-lg-start.justify-center
             v-col(cols="10")
