@@ -28,7 +28,7 @@
       v-flex.md8.offset-md2
         v-card(class="accent white--text")
           v-card-title.display-1.justify-center Clubs
-      v-container.md12
+      v-container(v-if="societies.edges[0].node.clubSet.edges.length").md12
         v-layout(row).pa-3
           v-flex(v-for="({node},n) in societies.edges[0].node.clubSet.edges" :key="n").md4.xs12.sm12
             v-layout(row ).justify-center.mt-10
@@ -43,6 +43,8 @@
                   v-img(:src="node.cover.sizes.length ? node.cover.sizes[0].url : require('../assets/cover4.svg')" max-height="500px" min-height="250px")
                     v-layout.align-end.fill-height
                       v-card-text.my-10.text-center.stripe.subtitle-1.font-weight-medium {{node.name}}
+      v-container(v-else).md12.pa-5.title.text-center
+            | There are currently no clubs in the society.
     v-layout(row ).pa-5.justify-center
       v-card(flat tile text color="#fafafa" )
         v-card-title.headline.justify-center
