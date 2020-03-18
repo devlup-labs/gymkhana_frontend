@@ -11,11 +11,13 @@ export const GET_SOCIETY_DATA_QUERY = gql`
             phone
             cover {
               sizes {
+                name
                 url
               }
             }
             avatar {
               sizes {
+                name
                 url
               }
             }
@@ -30,11 +32,13 @@ export const GET_SOCIETY_DATA_QUERY = gql`
             phone
             cover {
               sizes {
+                name
                 url
               }
             }
             avatar {
               sizes {
+                name
                 url
               }
             }
@@ -49,11 +53,13 @@ export const GET_SOCIETY_DATA_QUERY = gql`
             phone
             cover {
               sizes {
+                name
                 url
               }
             }
             avatar {
               sizes {
+                name
                 url
               }
             }
@@ -67,6 +73,7 @@ export const GET_SOCIETY_DATA_QUERY = gql`
           slug
           cover {
             sizes {
+              name
               url
             }
           }
@@ -78,6 +85,7 @@ export const GET_SOCIETY_DATA_QUERY = gql`
                 slug
                 cover {
                   sizes {
+                    name
                     url
                   }
                 }
@@ -97,6 +105,7 @@ export const GET_SOCIETY_DATA_QUERY = gql`
                       title
                       cover {
                         sizes {
+                          name
                           url
                         }
                       }

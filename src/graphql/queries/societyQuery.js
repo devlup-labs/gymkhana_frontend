@@ -11,6 +11,7 @@ export const GET_SOCIETIES_QUERY = gql`
             slug
             cover {
               sizes {
+                name
                 url
               }
             }
