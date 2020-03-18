@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    v-parallax(:src="societies.edges[0].node.cover.sizes[0].url").society-photo.text-center
+    v-parallax(:src="societies.edges[0].node.cover.sizes.find(e => e.name === 'full_size').url").society-photo.text-center
       v-overlay(absolute)
         p(class="white--text").display-2 {{societies.edges[0].node.name}}
     v-container

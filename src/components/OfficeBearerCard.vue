@@ -3,11 +3,11 @@
     v-stepper-items
       v-stepper-content.pa-0(step="1")
         v-card(:height="avatarSize*3")
-          v-img(v-if="bearerData.cover.sizes" :src="bearerData.cover.sizes[1].url" :height="avatarSize")
+          v-img(v-if="bearerData.cover.sizes" :src="bearerData.cover.sizes.find(e => e.name === 'full_size').url" :height="avatarSize")
           v-img(v-else src="../assets/cover4.svg" :height="avatarSize")
           v-card-text.pt-0.text-center
             v-avatar.elevation-4.ma-2(:size="avatarSize" v-if="bearerData.avatar.sizes" :style="{'margin-top': `-${avatarSize/2}px !important`}")
-              v-img(:src="bearerData.avatar.sizes[1].url")
+              v-img(:src="bearerData.avatar.sizes.find(e => e.name === 'full_size').url")
             v-avatar.elevation-4.ma-2(:size="avatarSize" v-else :style="{'margin-top': `-${avatarSize/2}px !important`}")
               v-img(src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST4n1T70ibu7ov-7FT63MjRA-yPrjrfHem04kPtqOVWjBNQuQK")
             h2(class="black--text").font-weight-bold.mt-5 {{bearerData.user.firstName}} {{bearerData.user.lastName}}

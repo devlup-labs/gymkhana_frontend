@@ -31,7 +31,7 @@
           v-container
             v-layout(row).text-center
               v-flex.md12
-                v-img(v-if="singleEvent.node.cover.sizes.length" :src="singleEvent.node.cover.sizes[1].url" max-height="230" alt="Image" cover).elevation-10
+                v-img(v-if="singleEvent.node.cover.sizes.length" :src="singleEvent.node.cover.sizes.find(e => e.name === 'full_size').url" max-height="230" alt="Image" cover).elevation-10
               v-flex.md6.mt-6.text-center
                 v-icon.mb-1(left) mdi-calendar
                 | {{singleEvent.node.date}}

@@ -12,7 +12,7 @@
       v-row.mt-6
         v-col
           v-row.justify-center
-            v-img( :src="node.photo.sizes[0].url" max-height="350" max-width="450")
+            v-img( :src="node.photo.sizes.find(e => e.name === 'full_size').url" max-height="350" max-width="450")
         v-col
           v-row.font-weight-regular.mt-2.justify-lg-start.justify-center
             v-col(cols="10")

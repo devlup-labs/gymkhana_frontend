@@ -7,7 +7,7 @@
         height="80%"
         width="80%"
       )
-        v-img(:src="nodeData.cover.sizes.length ? nodeData.cover.sizes[0].url : require('../../assets/cover4.svg')" min-height="250px")
+        v-img(:src="nodeData.cover.sizes.length ? nodeData.cover.sizes.find(e => e.name === 'full_size').url : require('../../assets/cover4.svg')" min-height="250px")
           v-layout.align-end.fill-height
             v-card-text(v-if="!nodeData.__typename.localeCompare(\"SocietyNode\")").my-6.title.text-center.stripe {{nodeData.name}}
             v-card-text(v-else).my-10.text-center.stripe.subtitle-1.font-weight-medium {{nodeData.name}}
