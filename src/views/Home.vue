@@ -2,9 +2,9 @@
   div
     v-carousel(:height="carouselHeight" v-resize="onResize" cycle hide-delimiter-background)
       v-carousel-item(
-        v-for="(carouselItem, i) in homeCarousel"
+        v-for="({node}, i) in carouselGallery.edges[0].node.photos.edges"
         :key="i"
-        :src="carouselItem.image"
+        :src="node.image.sizes[0].url"
         transition="fade-transition"
         reverse-transition="fade-transition"
       )
@@ -32,10 +32,11 @@
 </template>
 
 <script>
-import { GET_SOCIETIES_QUERY } from "../graphql/queries/societyQuery";
+import { GET_SOCIETIES_QUERY } from "../graphql/queries/homeSocietyQuery";
 import { GET_FESTIVAL_QUERY } from "../graphql/queries/festivalQuery";
 import FestivalCarousel from "../components/FestivalCarousel";
 import StripedCard from "../components/common/StripedCard";
+import { GET_CAROUSEL_IMAGES_QUERY } from "../graphql/queries/homeCarouselQuery";
 
 export default {
   components: { StripedCard, FestivalCarousel },
@@ -45,6 +46,9 @@ export default {
     },
     festivals: {
       query: GET_FESTIVAL_QUERY
+    },
+    carouselGallery: {
+      query: GET_CAROUSEL_IMAGES_QUERY
     }
   },
   data: () => ({
@@ -65,6 +69,7 @@ export default {
     log() {
       //console.log("this.societies[0]");
       // console.log(this.societies[]);
+      //console.log(this.carouselGallery.edges);
       //console.log("this.societies[0]");
     }
   },

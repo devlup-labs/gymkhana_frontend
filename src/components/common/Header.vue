@@ -19,7 +19,7 @@
 
 <script>
 import GymkhanaLogo from "../../assets/logo.png";
-import { GET_SOCIETIES_QUERY } from "../../graphql/queries/societyQuery";
+import { GET_SOCIETIES_QUERY } from "../../graphql/queries/homeSocietyQuery";
 export default {
   apollo: {
     societies: {
