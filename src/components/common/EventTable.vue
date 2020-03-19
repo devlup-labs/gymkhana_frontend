@@ -29,16 +29,16 @@
           v-card-text
             v-container.ma-4
               v-layout(row)
-                v-flex.md4.align-content-center
+                v-flex.md4.align-content-center.xs4
                   v-icon.mb-1(left) mdi-calendar
                   | {{singleEvent.node.date.substring(0,singleEvent.node.date.indexOf('T'))}}
-                v-flex.md4
+                v-flex.md4.xs4
                   v-icon.mb-1(left) mdi-clock
                   | {{singleEvent.node.date.substring(singleEvent.node.date.indexOf(':')+1,singleEvent.node.date.length-6)}} hrs
-                v-flex.md4
+                v-flex.md4.xs4
                   v-icon.mb-1(left) mdi-map-marker
                   | {{singleEvent.node.location}}
-                v-flex.md12.mt-5.text-center
+                v-flex.md12.xs12.mt-5.text-center
                   p {{singleEvent.node.description}}
           v-card-actions.justify-end
             v-btn(@click="dialog = false" class="primary darken-1 white--text" small) close
