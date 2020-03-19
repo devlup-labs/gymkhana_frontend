@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    v-carousel(:height="carouselHeight" v-resize="onResize" cycle hide-delimiter-background)
+    v-carousel(:height="carouselHeight" v-resize="onResize" elevate-on-scroll cycle hide-delimiter-background)
       v-carousel-item(
         v-for="({node}, i) in carouselGallery.edges[0].node.photos.edges"
         :key="i"
@@ -8,6 +8,10 @@
         transition="fade-transition"
         reverse-transition="fade-transition"
       )
+        v-layout.display-1.mask.justify-center.align-center.fill-height
+            v-layout(column class="white--text" transition="fade-transition").text-center
+              v-flex Students' Gymkhana
+              v-flex IIT Jodhpur
     v-row
       v-col
         h1.mb-2.display-1.text-center About Students' Gymkhana
@@ -85,6 +89,6 @@ export default {
   padding: 0 !important;
 }
 .mask {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.3);
 }
 </style>
