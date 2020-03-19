@@ -1,4 +1,5 @@
 import gql from "graphql-tag";
+import { SIZES_FRAGMENT } from "../fragments/sizesFregment";
 
 export const GET_FESTIVAL_QUERY = gql`
   query {
@@ -8,10 +9,7 @@ export const GET_FESTIVAL_QUERY = gql`
           name
           tagLine
           photo {
-            sizes {
-              name
-              url
-            }
+            ...sizesFields
           }
           about
           slug
@@ -20,4 +18,5 @@ export const GET_FESTIVAL_QUERY = gql`
       }
     }
   }
+  ${SIZES_FRAGMENT}
 `;

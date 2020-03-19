@@ -1,4 +1,5 @@
 import gql from "graphql-tag";
+import { SIZES_FRAGMENT } from "../fragments/sizesFregment";
 
 export const GET_SOCIETIES_QUERY = gql`
   query {
@@ -10,14 +11,12 @@ export const GET_SOCIETIES_QUERY = gql`
             name
             slug
             cover {
-              sizes {
-                name
-                url
-              }
+              ...sizesFields
             }
           }
         }
       }
     }
   }
+  ${SIZES_FRAGMENT}
 `;

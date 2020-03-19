@@ -1,150 +1,37 @@
 import gql from "graphql-tag";
+import { EVENT_FRAGMENT } from "../fragments/eventFragment";
+import { NEWS_FRAGMENT } from "../fragments/newsFragment";
+import { CLUB_DATA_FRAGMENT } from "../fragments/clubDataFragment";
+import { OFFICE_BEARER_FRAGMENT } from "../fragments/officeBearerFragment";
 
 export const GET_CLUB_DATA_QUERY = gql`
   query clubs($slugText: String!) {
     clubs(slug: $slugText) {
       edges {
         node {
-          name
-          id
-          society {
-            name
-          }
-          slug
-          cover {
-            sizes {
-              name
-              url
-            }
-          }
+          ...clubDataFields
           description
+          cover {
+            ...sizesFields
+          }
           captain {
-            phone
-            cover {
-              sizes {
-                name
-                url
-              }
-            }
-            avatar {
-              sizes {
-                name
-                url
-              }
-            }
-            about
-            user {
-              firstName
-              lastName
-              email
-            }
+            ...officeBearerFields
           }
           viceCaptainOne {
-            phone
-            cover {
-              sizes {
-                name
-                url
-              }
-            }
-            avatar {
-              sizes {
-                name
-                url
-              }
-            }
-            about
-            user {
-              firstName
-              lastName
-              email
-            }
+            ...officeBearerFields
           }
           viceCaptainTwo {
-            phone
-            cover {
-              sizes {
-                name
-                url
-              }
-            }
-            avatar {
-              sizes {
-                name
-                url
-              }
-            }
-            about
-            user {
-              firstName
-              lastName
-              email
-            }
+            ...officeBearerFields
           }
           coreMembers {
             edges {
               node {
-                phone
-                cover {
-                  sizes {
-                    name
-                    url
-                  }
-                }
-                avatar {
-                  sizes {
-                    name
-                    url
-                  }
-                }
-                about
-                user {
-                  firstName
-                  lastName
-                  email
-                }
+                ...officeBearerFields
               }
             }
           }
-          newsSet {
-            edges {
-              node {
-                title
-                cover {
-                  sizes {
-                    name
-                    url
-                  }
-                }
-                date
-                author {
-                  user {
-                    firstName
-                    lastName
-                  }
-                }
-                content
-              }
-            }
-          }
-          eventSet {
-            edges {
-              node {
-                id
-                name
-                description
-                location
-                date
-                club {
-                  name
-                  slug
-                  society {
-                    slug
-                  }
-                }
-              }
-            }
-          }
+          ...newsFields
+          ...eventFields
           activitySet {
             edges {
               node {
@@ -158,4 +45,8 @@ export const GET_CLUB_DATA_QUERY = gql`
       }
     }
   }
+  ${OFFICE_BEARER_FRAGMENT}
+  ${EVENT_FRAGMENT}
+  ${NEWS_FRAGMENT}
+  ${CLUB_DATA_FRAGMENT}
 `;

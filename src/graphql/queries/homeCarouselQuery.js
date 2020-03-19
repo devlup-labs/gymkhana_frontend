@@ -1,4 +1,5 @@
 import gql from "graphql-tag";
+import { SIZES_FRAGMENT } from "../fragments/sizesFregment";
 
 export const GET_CAROUSEL_IMAGES_QUERY = gql`
   query {
@@ -13,9 +14,7 @@ export const GET_CAROUSEL_IMAGES_QUERY = gql`
               node {
                 title
                 image {
-                  sizes {
-                    url
-                  }
+                  ...sizesFields
                 }
               }
             }
@@ -24,4 +23,5 @@ export const GET_CAROUSEL_IMAGES_QUERY = gql`
       }
     }
   }
+  ${SIZES_FRAGMENT}
 `;

@@ -1,4 +1,5 @@
 import gql from "graphql-tag";
+import { SIZES_FRAGMENT } from "../fragments/sizesFregment";
 
 export const SEARCH_USER_PROFILE_QUERY = gql`
   query Search($query: String!) {
@@ -11,10 +12,13 @@ export const SEARCH_USER_PROFILE_QUERY = gql`
               lastName
             }
             skills
-            avatar
+            avatar {
+              ...sizesFields
+            }
           }
         }
       }
     }
   }
+  ${SIZES_FRAGMENT}
 `;
