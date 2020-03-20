@@ -7,11 +7,11 @@
       v-card-title.display-1.justify-center {{node.name}}
       v-row
         v-col(cols="12" md="4")
-          OfficeBearerCard(:avatarSize="120" :bearerData="node.mentor")
+          OfficeBearerCard(:avatarSize="120" :bearerData="node.mentor" :designation="'Mentor'")
         v-col(cols="12" md="4")
-          OfficeBearerCard(:avatarSize="120" :bearerData="node.secretary")
+          OfficeBearerCard(:avatarSize="120" :bearerData="node.secretary" :designation="'Secretary'")
         v-col(cols="12" md="4")
-          OfficeBearerCard(:avatarSize="120" :bearerData="node.jointSecretary")
+          OfficeBearerCard(:avatarSize="120" :bearerData="node.jointSecretary" :designation="'Joint Secretary'")
 </template>
 
 <script>

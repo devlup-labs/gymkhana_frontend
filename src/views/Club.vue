@@ -57,11 +57,11 @@
           v-card-title.justify-center.display-1 Key People
         v-layout(row).justify-lg-space-around
           v-flex(v-if="clubs.edges[0].node.viceCaptainOne").md4.xs12
-            CaptainComponent(:captainData="clubs.edges[0].node.viceCaptainOne")
+            CaptainComponent(:captainData="clubs.edges[0].node.viceCaptainOne" :designation="'Vice Captain'")
           v-flex(v-if="clubs.edges[0].node.captain").md4.xs12
-            CaptainComponent(:captainData="clubs.edges[0].node.captain")
+            CaptainComponent(:captainData="clubs.edges[0].node.captain" :designation="'Captain'")
           v-flex(v-if="clubs.edges[0].node.viceCaptainTwo").md4.xs12
-            CaptainComponent(:captainData="clubs.edges[0].node.viceCaptainTwo")
+            CaptainComponent(:captainData="clubs.edges[0].node.viceCaptainTwo" :designation="'Vice Captain'")
       v-flex(v-if="!clubs.edges[0].node.viceCaptainOne&&!clubs.edges[0].node.viceCaptainTwo&&!clubs.edges[0].node.captain").text-center.subtitle-1.pt-8 There are no key people.
     v-container.pa-9.pb-0
       v-flex.md10.offset-md1
