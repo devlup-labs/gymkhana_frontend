@@ -10,7 +10,7 @@
       v-icon( left).pb-1 mdi-phone
       a(:href="`tel:${captainData.phone}`").no-decoration {{captainData.phone}}
     v-flex.mt-2.font-weight-light
-      | HEAD
+      | {{designation}}
     v-flex.mt-2.font-weight-regular.subtitle-1.text-center
       | {{captainData.about}}
     //v-flex.pa-4
@@ -23,7 +23,8 @@
 export default {
   name: "CaptainComponent",
   props: {
-    captainData: null
+    captainData: null,
+    designation: String
   }
 };
 </script>

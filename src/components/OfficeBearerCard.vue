@@ -11,7 +11,7 @@
             v-avatar.elevation-4.ma-2(:size="avatarSize" v-else :style="{'margin-top': `-${avatarSize/2}px !important`}")
               v-img(src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST4n1T70ibu7ov-7FT63MjRA-yPrjrfHem04kPtqOVWjBNQuQK")
             h2(class="black--text").font-weight-bold.mt-5 {{bearerData.user.firstName}} {{bearerData.user.lastName}}
-            p.font-weight-regular.mt-2 Seceretary
+            p.font-weight-regular.mt-2 {{designation.toString()}}
           v-card-actions
             v-row(justify="center")
               v-btn(@click="cardPage = 2" text) Details
@@ -46,7 +46,8 @@ export default {
   name: "OfficeBearerCard",
   props: {
     avatarSize: { Type: Number },
-    bearerData: null
+    bearerData: null,
+    designation: String
   },
   data() {
     return {
