@@ -28,10 +28,10 @@ export default {
     OfficeBearerCard
   },
   mounted() {
-    console.log("lodssg");
-    var data = [];
-    this.societies.edges.flatMap(e => data.push(e));
-    console.log(data);
+    document
+      .getElementsByTagName("header")[0]
+      .setAttribute("style", "background-color: #424242;width:100%;");
+    document.getElementsByTagName("header")[0].classList.remove("elevation-0");
   }
 };
 </script>

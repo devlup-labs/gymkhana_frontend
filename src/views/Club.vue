@@ -4,7 +4,7 @@
       dark
       :src="clubs.edges[0].node.cover.sizes.length ? clubs.edges[0].node.cover.sizes.find(e => e.name === 'full_size').url : require('../assets/home5.jpg') "
       :height="$vuetify.theme.options.parallaxHeight*1.3"
-    )
+    ).topbar-style
       v-layout.justify-center.align-center.fill-height
         h1 {{clubs.edges[0].node.name}}
     v-container.pa-4
@@ -117,4 +117,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.topbar-style {
+  margin-top: -48px;
+}
+</style>

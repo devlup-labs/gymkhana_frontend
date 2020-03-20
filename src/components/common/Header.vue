@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-app-bar.px-md-12(app dark dense)
+  v-app-bar.px-md-12(app dark dense).elevation-0
     img.mr-4(:src="logo" height="40")
 
     v-toolbar-items

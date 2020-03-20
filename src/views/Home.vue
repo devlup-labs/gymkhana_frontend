@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    v-carousel(:height="carouselHeight" v-resize="onResize" elevate-on-scroll cycle hide-delimiter-background)
+    v-carousel(:height="carouselHeight" v-resize="onResize" elevate-on-scroll cycle hide-delimiter-background).topbar-margin
       v-carousel-item(
         v-for="({node}, i) in carouselGallery.edges[0].node.photos.edges"
         :key="i"
@@ -9,7 +9,7 @@
         reverse-transition="fade-transition"
       )
         v-layout.display-1.mask.justify-center.align-center.fill-height
-            v-layout(column class="white--text" transition="fade-transition").text-center.font-weight-light
+            v-layout(column class="white--text" transition="fade-transition").text-center.font-weight-light.topbar-margin
               v-flex Students' Gymkhana
               v-flex IIT Jodhpur
     v-container.pa-10
@@ -31,15 +31,15 @@
               NewsTable(:newsData="this.societies.edges.flatMap(({node}) => node.clubSet.edges.flatMap(({node})=>node.newsSet.edges.map(e=>e)))")
             v-col(md="6" sm="6")
               v-row.pa-2.justify-center.title.font-weight-regular
-                v-icon(left) mdi-newspaper
-                | News
+                v-icon(left) mdi-note-text
+                | Events
               EventTable(:eventTableData="this.societies.edges.flatMap(({node}) => node.clubSet.edges.flatMap(({node})=>node.eventSet.edges.map(e=>e)))")
     v-parallax(src="../assets/hero.jpeg" :height="carouselHeight")
       v-content.align-center.mask
         v-container.container--fluid.mb-12
-            v-row.display-1.justify-center.mb-12 Festivals
-            v-row
-              FestivalCarousel(:festivals="festivals")
+          v-row.display-1.justify-center.mb-12 Festivals
+          v-row
+            FestivalCarousel(:festivals="festivals")
     v-container
       v-col(cols="12")
         p.display-1.text-center Societies
@@ -57,7 +57,8 @@ import StripedCard from "../components/common/StripedCard";
 import { GET_CAROUSEL_IMAGES_QUERY } from "../graphql/queries/homeCarouselQuery";
 import NewsTable from "../components/common/NewsTable";
 import EventTable from "../components/common/EventTable";
-
+import goTo from "vuetify/es5/services/goto";
+//
 export default {
   components: { EventTable, NewsTable, StripedCard, FestivalCarousel },
   apollo: {
@@ -72,25 +73,50 @@ export default {
     }
   },
   data: () => ({
-    carouselHeight: null,
-    homeCarousel: [
-      { image: require("../assets/home1.jpg") },
-      { image: require("../assets/home2.jpg") },
-      { image: require("../assets/home3.jpg") },
-      { image: require("../assets/home4.jpg") },
-      { image: require("../assets/home5.jpg") }
-    ]
+    scrollingDown: true,
+    scrollingUp: false,
+    carouselHeight: null
   }),
   methods: {
     onResize() {
-      // 48px is the header size
-      this.carouselHeight = window.innerHeight - 48;
+      this.carouselHeight = window.innerHeight;
+      document
+        .getElementsByTagName("header")[0]
+        .setAttribute(
+          "style",
+          "background-color: rgba(255,255,255,0);width:100%;"
+        );
+      goTo(0, { duration: 50 });
     },
-    log: function() {}
+    log: function() {},
+    handleScroll() {
+      if (window.scrollY < 10) {
+        this.scrollingUp = false;
+      }
+      if (window.scrollY > 15 && window.scrollY <= 60 && !this.scrollingUp) {
+        goTo(982, { duration: 700 });
+        this.scrollingDown = true;
+      } else if (
+        window.scrollY >= 890 &&
+        window.scrollY <= 960 &&
+        !this.scrollingDown
+      ) {
+        goTo(0);
+        this.scrollingUp = true;
+      }
+      if (window.scrollY > 970) {
+        this.scrollingDown = false;
+      }
+    }
   },
   mounted() {
     this.onResize();
-    this.log();
+  },
+  created() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.handleScroll);
   }
 };
 </script>
@@ -99,6 +125,11 @@ export default {
 .v-parallax__content {
   padding: 0 !important;
 }
+
+.topbar-margin {
+  margin-top: -48px;
+}
+
 .mask {
   background-color: rgba(0, 0, 0, 0.3);
 }

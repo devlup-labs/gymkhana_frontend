@@ -126,7 +126,8 @@ export default {
 
 <style scoped>
 .society-photo {
-  height: 28rem !important;
+  margin-top: -48px;
+  height: 30rem !important;
   background-size: cover !important;
   -webkit-background-size: cover !important;
 }
