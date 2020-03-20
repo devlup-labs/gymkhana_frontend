@@ -28,10 +28,13 @@
               v-icon(left large) mdi-lightbulb-outline
               | Upcoming Event
             v-card-text(v-if="clubs.edges[0].node.eventSet.edges.length")
-              EventTable(:eventTableData="clubs.edges[0].node.eventSet")
+              EventTable(:eventTableData="clubs.edges.flatMap(({node})=>node.eventSet.edges.map(e=>e))")
             v-card-text(v-else).text-center.subtitle-1.ml-2 There are currently no events.
         v-flex.md7.offset-md1.elevation-0(flat tile depressed).pl-5.xs12
-          v-tabs(fixed-tabs background-color='primary ' dark v-model="tab")
+          v-card-title.headline.justify-center
+            v-icon(left large) mdi-newspaper-plus
+            | Activities and News
+          v-tabs(fixed-tabs background-color='primary lighten-1' dark v-model="tab")
             v-tab
               | Activities
             v-tab
@@ -39,12 +42,12 @@
               |news
           v-tabs-items(v-model="tab" )
             v-tab-item(v-if="clubs.edges[0].node.activitySet.edges.length" )
-              ActivityComponent(:activitiesData="clubs.edges[0].node.activitySet" )
+              ActivityComponent(:activitiesData="clubs.edges.flatMap(({node})=>node.activitySet.edges.map(e=>e))" )
             v-tab-item(v-else).pa-8.text-center.title There are no activities.
             v-tab-item
               v-card(flat tile text color="#fafafa").pa-4
                 v-card-text(v-if="clubs.edges[0].node.newsSet.edges.length")
-                  NewsTable(:newsData="clubs.edges[0].node.newsSet")
+                  NewsTable(:newsData="clubs.edges.flatMap(({node})=>node.newsSet.edges.map(e=>e))")
                 v-card-text(v-else).pa-4.title.text-center
                   | There is now news currently
 

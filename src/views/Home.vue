@@ -9,17 +9,31 @@
         reverse-transition="fade-transition"
       )
         v-layout.display-1.mask.justify-center.align-center.fill-height
-            v-layout(column class="white--text" transition="fade-transition").text-center
+            v-layout(column class="white--text" transition="fade-transition").text-center.font-weight-light
               v-flex Students' Gymkhana
               v-flex IIT Jodhpur
-    v-row
-      v-col
-        h1.mb-2.display-1.text-center About Students' Gymkhana
-        v-row.justify-center
-          v-col(sm="6" md="4")
-            v-img(src="../assets/workstation-336369.jpg" )
-          v-col(md="6" align-self="center")
-            p.subtitle-1.text-center  Students' Gymkhana, IIT Jodhpur is the governing body that looks after all student activities.
+    v-container.pa-10
+      v-row
+        v-col
+          h1.mb-2.display-1.text-center About Students' Gymkhana
+          v-row.justify-center
+            v-col(sm="6" md="4")
+              v-img(src="../assets/workstation-336369.jpg" )
+            v-col(md="6" align-self="center")
+              p.subtitle-1.text-center  Students' Gymkhana, IIT Jodhpur is the governing body that looks after all student activities.
+      v-row.mt-4
+        v-col
+          v-row.justify-center
+            v-col(sm="6" md="6")
+              v-row.pa-2.justify-center.title.font-weight-regular
+                v-icon(left) mdi-newspaper
+                | News
+              NewsTable(:newsData="this.societies.edges.flatMap(({node}) => node.clubSet.edges.flatMap(({node})=>node.newsSet.edges.map(e=>e)))")
+            v-col(md="6" sm="6")
+              v-row.pa-2.justify-center.title.font-weight-regular
+                v-icon(left) mdi-newspaper
+                | News
+              EventTable(:eventTableData="this.societies.edges.flatMap(({node}) => node.clubSet.edges.flatMap(({node})=>node.eventSet.edges.map(e=>e)))")
     v-parallax(src="../assets/hero.jpeg" :height="carouselHeight")
       v-content.align-center.mask
         v-container.container--fluid.mb-12
@@ -41,9 +55,11 @@ import { GET_FESTIVAL_QUERY } from "../graphql/queries/festivalQuery";
 import FestivalCarousel from "../components/FestivalCarousel";
 import StripedCard from "../components/common/StripedCard";
 import { GET_CAROUSEL_IMAGES_QUERY } from "../graphql/queries/homeCarouselQuery";
+import NewsTable from "../components/common/NewsTable";
+import EventTable from "../components/common/EventTable";
 
 export default {
-  components: { StripedCard, FestivalCarousel },
+  components: { EventTable, NewsTable, StripedCard, FestivalCarousel },
   apollo: {
     societies: {
       query: GET_SOCIETIES_QUERY
@@ -70,12 +86,7 @@ export default {
       // 48px is the header size
       this.carouselHeight = window.innerHeight - 48;
     },
-    log() {
-      //console.log("this.societies[0]");
-      // console.log(this.societies[]);
-      //console.log(this.carouselGallery.edges);
-      //console.log("this.societies[0]");
-    }
+    log: function() {}
   },
   mounted() {
     this.onResize();

@@ -22,7 +22,7 @@
               v-icon(left) mdi-pen
               | Upcoming Event
             v-card-text(v-if="checkEvents()")
-              EventTable(:societyEventData="societies.edges[0].node.clubSet")
+              EventTable(:eventTableData="societies.edges.flatMap(({node})=>node.clubSet.edges.flatMap(({node})=>node.eventSet.edges.map(e=>e)))")
             v-card-text(v-else).subtitle-1.text-center.ml-4 There are currently no events.
     v-layout(row class="grey lighten-3").pa-5.pr-0
       v-flex.md8.offset-md2
@@ -40,7 +40,7 @@
           v-icon(left) mdi-newspaper
           | News
         v-card-text(v-if="checkNews()")
-          NewsTable( :societyNewsData="societies.edges[0].node.clubSet")
+          NewsTable( :newsData="societies.edges.flatMap(({node})=>node.clubSet.edges.flatMap(({node})=>node.newsSet.edges.map(e=>e)))")
         v-card-text(v-else).title
           | There is no news for the current Society.
     v-layout(row class="grey lighten-3").pa-5

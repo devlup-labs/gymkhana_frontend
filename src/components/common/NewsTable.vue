@@ -6,14 +6,8 @@
       th.subtitle-1.justify-start Title
       th.subtitle-1.text-center
         v-icon mdi-calendar
-    tbody(v-if="newsData")
-      tr(v-for="({node},i) in newsData.edges" :key="i" @click.stop="showDialog({node})")
-        td
-          v-icon mdi-chevron-right
-        td {{node.title}}
-        td.text-center {{ node.date }}
-    tbody(v-else v-for="({node},i) in societyNewsData.edges" :key="i")
-      tr(v-for="({node}) in node.newsSet.edges" :key="k" @click.stop="showDialog({node})")
+    tbody
+      tr(v-for="({node},i) in newsData" :key="i" @click.stop="showDialog({node})")
         td
           v-icon mdi-chevron-right
         td {{node.title}}
@@ -49,8 +43,7 @@
 export default {
   name: "NewsTable",
   props: {
-    newsData: {},
-    societyNewsData: {}
+    newsData: []
   },
   data: () => ({
     singleEvent: null,

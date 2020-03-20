@@ -1,23 +1,17 @@
 <template lang="pug">
     v-simple-table.elevation-4
-      thead(class="primary gray--text")
+      thead(class="primary lighten-1 gray--text")
         th.pr-0
           v-icon mdi-pen
         th.subtitle-1.justify-start Name
         th.subtitle-1.text-center
           v-icon mdi-calendar
-      tbody(v-if="eventTableData!=null")
-        tr(v-for="({node},i) in eventTableData.edges" :key="i" @click.stop="showDialog({node})")
+      tbody
+        tr(v-for="({node},i) in eventTableData" :key="i" @click.stop="showDialog({node})")
           td
             v-icon mdi-chevron-right
           td {{node.name}}
           td.text-center {{ node.date.substring(0,node.date.indexOf('T')) }}
-      tbody(v-else v-for="({node},i) in societyEventData.edges" :key="i")
-        tr(v-for="({node},k) in node.eventSet.edges" @click.stop="showDialog({node})")
-            td
-              v-icon mdi-chevron-right
-            td {{node.name}}
-            td.text-center {{ node.date.substring(0,node.date.indexOf('T')) }}
       v-dialog.elevation-12( v-model="dialog" max-width="500")
         v-card(v-if="singleEvent")
           v-card-title(class="primary darken-1 white--text").justify-center
@@ -49,8 +43,7 @@
 export default {
   name: "EventTable",
   props: {
-    eventTableData: {},
-    societyEventData: {}
+    eventTableData: []
   },
   data: () => ({
     singleEvent: null,
