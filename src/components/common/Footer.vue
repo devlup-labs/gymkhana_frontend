@@ -22,7 +22,7 @@
 
     v-footer(color="blue darken-2 white--text").text-center.justify-center.align-center
       v-icon(color="white" size="20") mdi-copyright
-      h4.font-weight-regular 2019 COPYRIGHT: made with
+      h4.font-weight-regular 2020 COPYRIGHT: made with
       v-icon(color="red").pa-1 mdi-heart
       h4.font-weight-regular by Students' Gymkhana WebD Team
 
