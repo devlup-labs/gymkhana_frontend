@@ -54,7 +54,7 @@
       v-flex.md10.offset-md1(v-if="club.captain || club.viceCaptainOne || club.viceCaptainTwo || club.viceCaptainThree || club.mentor")
         v-card(class="accent white--text").elevation-10
           v-card-title.justify-center.display-1 Key People
-        v-layout(row).justify-space-around
+        v-row.justify-space-around
           v-flex(v-if="club.captain").md4.xs12
             CaptainComponent(:captainData="club.captain" :designation="'Captain'")
           v-flex(v-if="club.viceCaptainOne").md4.xs12

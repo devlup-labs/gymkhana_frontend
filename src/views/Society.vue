@@ -53,11 +53,11 @@
         v-container
           v-row.justify-space-around
             v-col(cols="12" md="4" v-if="society.jointSecretary")
-              OfficeBearerCard(:avatarSize="120" :bearerData="society.jointSecretary" :designation="'Mentor'")
+              OfficeBearerCard(:avatarSize="120" :profile="society.jointSecretary" :designation="'Mentor'")
             v-col(cols="12" md="4" v-if="society.secretary")
-              OfficeBearerCard(:avatarSize="120" :bearerData="society.secretary" :designation="'Secretary'" )
+              OfficeBearerCard(:avatarSize="120" :profile="society.secretary" :designation="'Secretary'" )
             v-col(cols="12" md="4" v-if="society.mentor" )
-              OfficeBearerCard(:avatarSize="120" :bearerData="society.mentor" :designation="'Joint Secretary'")
+              OfficeBearerCard(:avatarSize="120" :profile="society.mentor" :designation="'Joint Secretary'")
       v-flex(v-else).title.text-center.md12.xs12
         | There are no key people.
 </template>

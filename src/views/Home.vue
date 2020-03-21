@@ -64,7 +64,7 @@
         p.display-1.text-center Societies
       v-col(cols="12" v-if="societies")
         v-row.justify-center
-          v-col(v-for="({node}, i) in societies.edges" :key="i" md="6")
+          v-col(cols="12" md="6" v-for="({ node }, i) in societies.edges" :key="i")
             StripedCard(:nodeData="node")
 </template>
 

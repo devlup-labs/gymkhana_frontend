@@ -1,17 +1,17 @@
 <template lang="pug">
-  v-content.justify-center(justify-center)
+  v-content.justify-center(justify-center v-if="!$apollo.queries.societies.loading")
     v-card.text-center(class="blue text-center mx-auto" max-width="800").mt-4
       v-card-text(class="white--text")
         h1.font-weight-regular Office Bearers
-    v-container(v-for="({node},i) in societies.edges.flatMap(e=>e) " :key="i")
-      v-card-title.display-1.justify-center {{node.name}}
-      v-row
-        v-col(cols="12" md="4")
-          OfficeBearerCard(:avatarSize="120" :bearerData="node.mentor" :designation="'Mentor'")
-        v-col(cols="12" md="4")
-          OfficeBearerCard(:avatarSize="120" :bearerData="node.secretary" :designation="'Secretary'")
-        v-col(cols="12" md="4")
-          OfficeBearerCard(:avatarSize="120" :bearerData="node.jointSecretary" :designation="'Joint Secretary'")
+    v-container(v-for="({ node }, i) in societies.edges" :key="i")
+      v-card-title.display-1.justify-center {{ node.name }}
+      v-row.justify-space-around
+        v-col(cols="12" md="4" sm="6")
+          OfficeBearerCard(:avatarSize="120" :profile="node.mentor" :designation="'Mentor'")
+        v-col(cols="12" md="4" sm="6")
+          OfficeBearerCard(:avatarSize="120" :profile="node.secretary" :designation="'Secretary'")
+        v-col(cols="12" md="4" sm="6")
+          OfficeBearerCard(:avatarSize="120" :profile="node.jointSecretary" :designation="'Joint Secretary'")
 </template>
 
 <script>
@@ -26,12 +26,6 @@ export default {
   name: "OfficeBearers",
   components: {
     OfficeBearerCard
-  },
-  mounted() {
-    document
-      .getElementsByTagName("header")[0]
-      .setAttribute("style", "background-color: #424242;width:100%;");
-    document.getElementsByTagName("header")[0].classList.remove("elevation-0");
   }
 };
 </script>
