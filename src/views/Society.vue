@@ -13,7 +13,7 @@
               blockquote.blockquote.ma-2(class="black--text")
                 p “Every child is an artist, the problem is staying an artist when you grow up.”
                 p -   Pablo Picasso
-              p {{ society.description.substring(3, society.description.length - 4) }}
+            span(v-html="society.description")
             v-card-actions
               v-btn.elevation-4(class="accent") Annual Report
                 v-icon(right) mdi-arrow-right

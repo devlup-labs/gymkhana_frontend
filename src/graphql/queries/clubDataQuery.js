@@ -23,6 +23,12 @@ export const GET_CLUB_DATA_QUERY = gql`
           viceCaptainTwo {
             ...officeBearerFields
           }
+          viceCaptainThree {
+            ...officeBearerFields
+          }
+          mentor {
+            ...officeBearerFields
+          }
           coreMembers {
             edges {
               node {
@@ -41,6 +47,7 @@ export const GET_CLUB_DATA_QUERY = gql`
               }
             }
           }
+          customHtml
         }
       }
     }
