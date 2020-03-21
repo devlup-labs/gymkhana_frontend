@@ -7,5 +7,10 @@ module.exports = {
       }
     }
   },
-  transpileDependencies: ["vuetify"]
+  transpileDependencies: ["vuetify"],
+  pluginOptions: {
+    apollo: {
+      lintGQL: true
+    }
+  }
 };

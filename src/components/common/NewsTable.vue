@@ -7,7 +7,7 @@
       th.subtitle-1.text-center
         v-icon mdi-calendar
     tbody
-      tr(v-for="({node},i) in newsData" :key="i" @click.stop="showDialog({node})")
+      tr(v-for="({node},i) in newsList" :key="i" @click.stop="showDialog({node})")
         td
           v-icon mdi-chevron-right
         td {{node.title}}
@@ -43,7 +43,10 @@
 export default {
   name: "NewsTable",
   props: {
-    newsData: []
+    newsList: {
+      type: Array,
+      required: true
+    }
   },
   data: () => ({
     singleEvent: null,

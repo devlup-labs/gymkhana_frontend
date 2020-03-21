@@ -1,9 +1,9 @@
 <template lang="pug">
-  v-carousel( v-if="festivals" cycle hide-delimiter-background show-arrows-on-hover).text-center
+  v-carousel(cycle hide-delimiter-background show-arrows-on-hover).text-center
     v-carousel-item(
       transition="fade-transition"
       reverse-transition="fade-transition"
-      v-for="({node}, i) in festivals.edges" :key="i"
+      v-for="({node}, i) in festivalsList" :key="i"
     )
       v-row.justify-center
         div.display-1 {{node.name.toUpperCase()}}
@@ -23,7 +23,10 @@
 export default {
   name: "FestivalCarousel",
   props: {
-    festivals: null
+    festivalsList: {
+      type: Array,
+      required: true
+    }
   }
 };
 </script>
