@@ -5,8 +5,8 @@
       v-overlay(absolute)
         p(class="white--text").display-2 {{ society.name }}
     v-container
-      v-layout(row).ma-4
-        v-flex.md8
+      v-row.ma-4
+        v-col(cols="12" md="8")
           v-card(flat tile text color="#fafafa" )
             v-card-title.headline About
             v-card-text.subtitle-1
@@ -17,7 +17,7 @@
             v-card-actions
               v-btn.elevation-4(class="accent") Annual Report
                 v-icon(right) mdi-arrow-right
-        v-flex.md4
+        v-col(cols="12" md="4")
           v-card(flat tile text color="#fafafa")
             v-card-title.headline.justify-center
               v-icon(left) mdi-pen
@@ -25,17 +25,17 @@
             v-card-text(v-if="society.upcomingEvents.edges.length")
               EventTable(:eventsList="society.upcomingEvents.edges")
             v-card-text(v-else).subtitle-1.text-center.ml-4 There are no upcoming events.
-    v-layout(row class="grey lighten-3").pa-5.pr-0
-      v-flex.md8.offset-md2
+    v-row(class="grey lighten-3").pa-5.pr-0
+      v-col(cols="12" md="8" offset-md="2")
         v-card(class="accent white--text")
           v-card-title.display-1.justify-center Clubs
       v-container(v-if="society.clubSet.edges.length").md12
-        v-layout(row).pa-3.justify-space-around
-          v-flex(v-for="({ node }, n) in society.clubSet.edges" :key="n").md4.xs12.sm12
-            StripedCard(:nodeData="node")
+        v-row.pa-3.justify-space-around
+          v-col(cols="12" md="4" v-for="({ node }, n) in society.clubSet.edges" :key="n")
+            StripedCard(:node="node")
       v-container(v-else).md12.pa-5.title.text-center
             | There are currently no clubs in the society.
-    v-layout(row ).pa-5.justify-center
+    v-row.pa-5.justify-center
       v-col(cols="12" sm="10" md="6")
         v-card(flat tile text color="#fafafa" )
           v-card-title.headline.justify-center
@@ -45,11 +45,11 @@
             NewsTable(:newsList="society.pastNews.edges")
           v-card-text(v-else).title
             | There is no news for the current Society.
-    v-layout(row class="grey lighten-3").pa-5
-      v-flex.md8.offset-md2
+    v-row(class="grey lighten-3").pa-5
+      v-col(cols="12" md="8" offset-md="2")
         v-card(class="accent white--text")
           v-card-title.display-1.justify-center Key People
-      v-flex.md12.xs12(v-if="society.mentor || !society.secretary || !society.jointSecretary")
+      v-col(cols="12" v-if="society.mentor || !society.secretary || !society.jointSecretary")
         v-container
           v-row.justify-space-around
             v-col(cols="12" md="4" v-if="society.jointSecretary")
@@ -58,7 +58,7 @@
               OfficeBearerCard(:avatarSize="120" :profile="society.secretary" :designation="'Secretary'" )
             v-col(cols="12" md="4" v-if="society.mentor" )
               OfficeBearerCard(:avatarSize="120" :profile="society.mentor" :designation="'Joint Secretary'")
-      v-flex(v-else).title.text-center.md12.xs12
+      v-col(v-else).title.text-center.md12.xs12
         | There are no key people.
 </template>
 

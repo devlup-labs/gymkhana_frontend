@@ -64,8 +64,8 @@
         p.display-1.text-center Societies
       v-col(cols="12" v-if="societies")
         v-row.justify-center
-          v-col(cols="12" md="6" v-for="({ node }, i) in societies.edges" :key="i")
-            StripedCard(:nodeData="node")
+          v-col(cols="12" sm="6" v-for="({ node }, i) in societies.edges" :key="i")
+            StripedCard(:node="node")
 </template>
 
 <script>
@@ -76,8 +76,7 @@ import StripedCard from "../components/common/StripedCard";
 import { GET_HOME_GALLERY_QUERY } from "../graphql/queries/homeCarouselQuery";
 import NewsTable from "../components/common/NewsTable";
 import EventTable from "../components/common/EventTable";
-import goTo from "vuetify/es5/services/goto";
-//
+
 export default {
   components: { EventTable, NewsTable, StripedCard, FestivalCarousel },
   apollo: {
@@ -99,43 +98,10 @@ export default {
   methods: {
     onResize() {
       this.carouselHeight = window.innerHeight;
-      document
-        .getElementsByTagName("header")[0]
-        .setAttribute(
-          "style",
-          "background-color: rgba(255,255,255,0);width:100%;"
-        );
-      goTo(0, { duration: 50 });
-    },
-    log: function() {},
-    handleScroll() {
-      if (window.scrollY < 10) {
-        this.scrollingUp = false;
-      }
-      if (window.scrollY > 15 && window.scrollY <= 60 && !this.scrollingUp) {
-        goTo(982, { duration: 700 });
-        this.scrollingDown = true;
-      } else if (
-        window.scrollY >= 890 &&
-        window.scrollY <= 960 &&
-        !this.scrollingDown
-      ) {
-        goTo(0);
-        this.scrollingUp = true;
-      }
-      if (window.scrollY > 970) {
-        this.scrollingDown = false;
-      }
     }
   },
   mounted() {
     this.onResize();
-  },
-  created() {
-    window.addEventListener("scroll", this.handleScroll);
-  },
-  destroyed() {
-    window.removeEventListener("scroll", this.handleScroll);
   }
 };
 </script>
