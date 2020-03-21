@@ -33,8 +33,20 @@ export const GET_SOCIETY_DATA_QUERY = gql`
                 cover {
                   ...sizesFields
                 }
-                ...eventFields
-                ...newsFields
+              }
+            }
+          }
+          upcomingEvents {
+            edges {
+              node {
+                ...Event
+              }
+            }
+          }
+          pastNews {
+            edges {
+              node {
+                ...News
               }
             }
           }

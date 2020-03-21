@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
-import { EVENT_FRAGMENT } from "../fragments/eventFragment";
-import { NEWS_FRAGMENT } from "../fragments/newsFragment";
+import { CLUB_EVENTS_FRAGMENT } from "../fragments/eventFragment";
+import { CLUB_NEWS_FRAGMENT } from "../fragments/newsFragment";
 import { CLUB_DATA_FRAGMENT } from "../fragments/clubDataFragment";
 import { OFFICE_BEARER_FRAGMENT } from "../fragments/officeBearerFragment";
 
@@ -46,7 +46,7 @@ export const GET_CLUB_DATA_QUERY = gql`
     }
   }
   ${OFFICE_BEARER_FRAGMENT}
-  ${EVENT_FRAGMENT}
-  ${NEWS_FRAGMENT}
+  ${CLUB_EVENTS_FRAGMENT}
+  ${CLUB_NEWS_FRAGMENT}
   ${CLUB_DATA_FRAGMENT}
 `;

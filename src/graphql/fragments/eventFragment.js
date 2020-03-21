@@ -1,16 +1,23 @@
 import gql from "graphql-tag";
 
 export const EVENT_FRAGMENT = gql`
+  fragment Event on EventNode {
+    name
+    description
+    location
+    date
+  }
+`;
+
+export const CLUB_EVENTS_FRAGMENT = gql`
   fragment eventFields on ClubNode {
     eventSet {
       edges {
         node {
-          name
-          description
-          location
-          date
+          ...Event
         }
       }
     }
   }
+  ${EVENT_FRAGMENT}
 `;

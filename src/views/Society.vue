@@ -1,8 +1,9 @@
 <template lang="pug">
-  div
-    v-parallax(:src="societies.edges[0].node.cover.sizes.find(e => e.name === 'full_size').url").society-photo.text-center
+  div(v-if="!$apollo.queries._societies.loading")
+    v-parallax(
+      :src="society.cover.sizes.find(e => e.name === 'full_size').url").society-photo.text-center
       v-overlay(absolute)
-        p(class="white--text").display-2 {{societies.edges[0].node.name}}
+        p(class="white--text").display-2 {{ society.name }}
     v-container
       v-layout(row).ma-4
         v-flex.md8
@@ -12,7 +13,7 @@
               blockquote.blockquote.ma-2(class="black--text")
                 p “Every child is an artist, the problem is staying an artist when you grow up.”
                 p -   Pablo Picasso
-              p {{societies.edges[0].node.description.substring(3,societies.edges[0].node.description.length -4)}}
+              p {{ society.description.substring(3, society.description.length - 4) }}
             v-card-actions
               v-btn.elevation-4(class="accent") Annual Report
                 v-icon(right) mdi-arrow-right
@@ -21,42 +22,43 @@
             v-card-title.headline.justify-center
               v-icon(left) mdi-pen
               | Upcoming Event
-            v-card-text(v-if="checkEvents()")
-              EventTable(:eventTableData="societies.edges.flatMap(({node})=>node.clubSet.edges.flatMap(({node})=>node.eventSet.edges.map(e=>e)))")
-            v-card-text(v-else).subtitle-1.text-center.ml-4 There are currently no events.
+            v-card-text(v-if="society.upcomingEvents.edges.length")
+              EventTable(:eventsList="society.upcomingEvents.edges")
+            v-card-text(v-else).subtitle-1.text-center.ml-4 There are no upcoming events.
     v-layout(row class="grey lighten-3").pa-5.pr-0
       v-flex.md8.offset-md2
         v-card(class="accent white--text")
           v-card-title.display-1.justify-center Clubs
-      v-container(v-if="societies.edges[0].node.clubSet.edges.length").md12
+      v-container(v-if="society.clubSet.edges.length").md12
         v-layout(row).pa-3.justify-space-around
-          v-flex(v-for="({node},n) in societies.edges[0].node.clubSet.edges" :key="n").md4.xs12.sm12
+          v-flex(v-for="({ node }, n) in society.clubSet.edges" :key="n").md4.xs12.sm12
             StripedCard(:nodeData="node")
       v-container(v-else).md12.pa-5.title.text-center
             | There are currently no clubs in the society.
     v-layout(row ).pa-5.justify-center
-      v-card(flat tile text color="#fafafa" )
-        v-card-title.headline.justify-center
-          v-icon(left) mdi-newspaper
-          | News
-        v-card-text(v-if="checkNews()")
-          NewsTable( :newsData="societies.edges.flatMap(({node})=>node.clubSet.edges.flatMap(({node})=>node.newsSet.edges.map(e=>e)))")
-        v-card-text(v-else).title
-          | There is no news for the current Society.
+      v-col(cols="12" sm="10" md="6")
+        v-card(flat tile text color="#fafafa" )
+          v-card-title.headline.justify-center
+            v-icon(left) mdi-newspaper
+            | News
+          v-card-text(v-if="society.pastNews.edges.length")
+            NewsTable(:newsList="society.pastNews.edges")
+          v-card-text(v-else).title
+            | There is no news for the current Society.
     v-layout(row class="grey lighten-3").pa-5
       v-flex.md8.offset-md2
         v-card(class="accent white--text")
           v-card-title.display-1.justify-center Key People
-      v-flex.md12.xs12
+      v-flex.md12.xs12(v-if="society.mentor || !society.secretary || !society.jointSecretary")
         v-container
           v-row.justify-space-around
-            v-col(cols="12" md="4" v-if="societies.edges[0].node.jointSecretary")
-              OfficeBearerCard(:avatarSize="120" :bearerData="societies.edges[0].node.jointSecretary" :designation="'Mentor'")
-            v-col(cols="12" md="4" v-if="societies.edges[0].node.secretary")
-              OfficeBearerCard(:avatarSize="120" :bearerData="societies.edges[0].node.secretary" :designation="'Secretary'" )
-            v-col(cols="12" md="4" v-if="societies.edges[0].node.mentor" )
-              OfficeBearerCard(:avatarSize="120" :bearerData="societies.edges[0].node.mentor" :designation="'Joint Secretary'")
-      v-flex(v-if="!societies.edges[0].node.mentor&&!societies.edges[0].node.secretary&&!societies.edges[0].node.jointSecretary").title.text-center.md12.xs12
+            v-col(cols="12" md="4" v-if="society.jointSecretary")
+              OfficeBearerCard(:avatarSize="120" :bearerData="society.jointSecretary" :designation="'Mentor'")
+            v-col(cols="12" md="4" v-if="society.secretary")
+              OfficeBearerCard(:avatarSize="120" :bearerData="society.secretary" :designation="'Secretary'" )
+            v-col(cols="12" md="4" v-if="society.mentor" )
+              OfficeBearerCard(:avatarSize="120" :bearerData="society.mentor" :designation="'Joint Secretary'")
+      v-flex(v-else).title.text-center.md12.xs12
         | There are no key people.
 </template>
 
@@ -67,59 +69,25 @@ import OfficeBearerCard from "../components/OfficeBearerCard";
 import NewsTable from "../components/common/NewsTable";
 import { GET_SOCIETY_DATA_QUERY } from "../graphql/queries/societyDataQuery";
 import StripedCard from "../components/common/StripedCard";
+
 export default {
   apollo: {
-    societies: {
+    _societies: {
       query: GET_SOCIETY_DATA_QUERY,
       variables() {
         return {
           slugText: this.$route.params.slug
         };
-      }
+      },
+      update: data => data.societies
     }
   },
   name: "Society",
   components: { StripedCard, NewsTable, OfficeBearerCard, EventTable, Footer },
-  methods: {
-    onResize() {
-      // 48px is the header size
-      this.carouselHeight = window.innerHeight - 48;
-    },
-    checkNews() {
-      for (let i = 0; i < this.societies.edges.length; i++) {
-        if (this.societies.edges[i].node.clubSet.edges.length === 0) return 0;
-        for (
-          let j = 0;
-          j < this.societies.edges[i].node.clubSet.edges.length;
-          j++
-        ) {
-          if (
-            this.societies.edges[i].node.clubSet.edges[j].node.newsSet.edges
-              .length >= 1
-          )
-            return 1;
-        }
-      }
-    },
-    checkEvents() {
-      for (let i = 0; i < this.societies.edges.length; i++) {
-        if (!this.societies.edges[i].node.clubSet.edges.length) return 0;
-        for (
-          let j = 0;
-          j < this.societies.edges[i].node.clubSet.edges.length;
-          j++
-        ) {
-          if (
-            this.societies.edges[i].node.clubSet.edges[j].node.eventSet.edges
-              .length >= 1
-          )
-            return 1;
-        }
-      }
+  computed: {
+    society() {
+      return this._societies.edges[0].node;
     }
-  },
-  mounted() {
-    this.onResize();
   }
 };
 </script>
