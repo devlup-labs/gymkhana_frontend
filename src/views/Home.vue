@@ -1,14 +1,15 @@
 <template lang="pug">
   div
-    v-carousel(:height="carouselHeight" v-resize="onResize" elevate-on-scroll cycle hide-delimiter-background).topbar-margin
-      v-carousel-item(
-        v-for="({node}, i) in carouselGallery.edges[0].node.photos.edges"
-        :key="i"
-        :src="node.image.sizes[0].url"
-        transition="fade-transition"
-        reverse-transition="fade-transition"
-      )
-        v-layout.display-1.mask.justify-center.align-center.fill-height
+    v-carousel(:height="carouselHeight" v-resize="onResize" elevate-on-scroll cycle hide-delimiter-background show-arrows-on-hover).topbar-margin
+      span(v-if="carouselGallery.edges.length")
+        v-carousel-item(
+          v-for="({node}, i) in carouselGallery.edges[0].node.photos.edges"
+          :key="i"
+          :src="node.image.sizes[0].url"
+          transition="fade-transition"
+          reverse-transition="fade-transition"
+        )
+          v-layout.display-1.mask.justify-center.align-center.fill-height
             v-layout(column class="white--text" transition="fade-transition").text-center.font-weight-light.topbar-margin
               v-flex Students' Gymkhana
               v-flex IIT Jodhpur
