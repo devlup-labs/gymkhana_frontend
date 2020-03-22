@@ -39,16 +39,21 @@
               v-row.pa-2.justify-center.title.font-weight-regular
                 v-icon(left) mdi-newspaper
                 | News
-              NewsTable(
-                :newsList="societies.edges.flatMap(({node}) => node.clubSet.edges.flatMap(({node})=>node.newsSet.edges))"
+              NewsTable( v-if="societies.edges.find(({node})=>node.pastNews.edges.length)"
+                :newsList="societies.edges.flatMap(({node})=>node.pastNews.edges)"
               )
+              v-col(v-else).text-center.title
+                | There is no News.
             v-col(md="6" sm="6")
               v-row.pa-2.justify-center.title.font-weight-regular
                 v-icon(left) mdi-note-text
-                | Events
+                | Upcoming Events
               EventTable(
-                :eventsList="societies.edges.flatMap(({node}) => node.clubSet.edges.flatMap(({node})=>node.eventSet.edges))"
+                v-if="societies.edges.find(({node})=>node.upcomingEvents.edges.length)"
+                :eventsList="societies.edges.flatMap(({node}) => node.upcomingEvents.edges)"
               )
+              v-col(v-else).text-center.title
+                | There are no Upcoming Events.
     v-parallax(
       v-if="!$apollo.queries.festivals.loading"
       src="../assets/hero.jpeg"
