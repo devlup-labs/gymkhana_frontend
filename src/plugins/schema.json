@@ -549,7 +549,19 @@
               "deprecationReason": null,
               "description": null,
               "isDeprecated": false,
-              "name": "homeGallery",
+              "name": "homeCarouselGallery",
+              "type": {
+                "kind": "OBJECT",
+                "name": "GalleryNode",
+                "ofType": null
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
+              "description": null,
+              "isDeprecated": false,
+              "name": "gallery",
               "type": {
                 "kind": "OBJECT",
                 "name": "GalleryNode",
