@@ -23,7 +23,7 @@
     v-container
       v-layout(row)
         v-flex.md4
-          v-card(flat tile text color="#fafafa" )
+          v-card(flat tile text).background-color
             v-card-title.headline.justify-center
               v-icon(left large) mdi-lightbulb-outline
               | Upcoming Event
@@ -39,13 +39,13 @@
               | Activities
             v-tab
               v-icon(left) mdi-newspaper
-              |news
+              | news
           v-tabs-items(v-model="tab" )
             v-tab-item(v-if="club.activitySet.edges.length" )
               ActivityComponent(:activitiesList="club.activitySet.edges" )
-            v-tab-item(v-else).pa-8.text-center.title There are no activities.
+            v-tab-item(v-else ).pa-8.text-center.title.background-color There are no activities.
             v-tab-item
-              v-card(flat tile text color="#fafafa").pa-4
+              v-card(flat tile text ).pa-4.background-color
                 v-card-text(v-if="club.newsSet.edges.length")
                   NewsTable(:newsList="club.newsSet.edges")
                 v-card-text(v-else).pa-4.title.text-center
@@ -65,14 +65,13 @@
             CaptainComponent(:profile="club.viceCaptainThree" :designation="'Vice Captain'")
           v-flex(v-if="club.mentor").md4.xs12
             CaptainComponent(:profile="club.mentor" :designation="'Mentor'")
-      v-flex(v-else).text-center.subtitle-1.pt-8 There are no key people.
     v-container.pa-5(v-if="club.customHtml")
       span(v-html="club.customHtml")
     v-container.pa-8(v-if="club.coreMembers.edges.length" fluid)
       v-flex.md8.offset-md2
         v-card(class="accent white--text").elevation-10
           v-card-title.justify-center.display-1 Volunteers
-      v-row
+      v-row.justify-space-around
         v-col(cols="12" md="6" lg="4" v-for="({ node }, j) in club.coreMembers.edges" :key="j")
           CoreMemberComponent(:profile="node")
 </template>
@@ -121,5 +120,9 @@ export default {
 <style scoped>
 .topbar-style {
   margin-top: -48px;
+}
+
+.background-color {
+  background-color: #fafafa;
 }
 </style>
