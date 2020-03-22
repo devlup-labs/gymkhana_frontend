@@ -1,7 +1,7 @@
 <template lang="pug">
   div
     v-carousel(
-      v-if="!$apollo.queries.homeGallery.loading"
+      v-if="!$apollo.queries.homeCarouselGallery.loading"
       :height="carouselHeight"
       v-resize="onResize"
       elevate-on-scroll
@@ -10,7 +10,7 @@
       show-arrows-on-hover
     ).topbar-margin
       v-carousel-item(
-        v-for="({node}, i) in homeGallery.photos.edges"
+        v-for="({node}, i) in homeCarouselGallery.photos.edges"
         :key="i"
         :src="node.image.sizes[0].url"
         transition="fade-transition"
@@ -78,7 +78,7 @@ import { GET_SOCIETIES_QUERY } from "../graphql/queries/homeSocietyQuery";
 import { GET_FESTIVAL_QUERY } from "../graphql/queries/festivalQuery";
 import FestivalCarousel from "../components/FestivalCarousel";
 import StripedCard from "../components/common/StripedCard";
-import { GET_HOME_GALLERY_QUERY } from "../graphql/queries/homeCarouselQuery";
+import { GET_HOME_CAROUSEL_GALLERY_QUERY } from "../graphql/queries/homeCarouselQuery";
 import NewsTable from "../components/common/NewsTable";
 import EventTable from "../components/common/EventTable";
 
@@ -91,8 +91,8 @@ export default {
     festivals: {
       query: GET_FESTIVAL_QUERY
     },
-    homeGallery: {
-      query: GET_HOME_GALLERY_QUERY
+    homeCarouselGallery: {
+      query: GET_HOME_CAROUSEL_GALLERY_QUERY
     }
   },
   data: () => ({

@@ -1,23 +1,11 @@
 import gql from "graphql-tag";
-import { SIZES_FRAGMENT } from "../fragments/sizesFragment";
+import { GALLERY_FRAGMENT } from "../fragments/galleryFragment";
 
-export const GET_HOME_GALLERY_QUERY = gql`
+export const GET_HOME_CAROUSEL_GALLERY_QUERY = gql`
   query {
-    homeGallery {
-      title
-      description
-      slug
-      photos {
-        edges {
-          node {
-            title
-            image {
-              ...Sizes
-            }
-          }
-        }
-      }
+    homeCarouselGallery {
+      ...Gallery
     }
   }
-  ${SIZES_FRAGMENT}
+  ${GALLERY_FRAGMENT}
 `;
