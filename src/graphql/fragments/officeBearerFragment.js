@@ -1,14 +1,14 @@
 import gql from "graphql-tag";
-import { SIZES_FRAGMENT } from "./sizesFregment";
+import { SIZES_FRAGMENT } from "./sizesFragment";
 
 export const OFFICE_BEARER_FRAGMENT = gql`
-  fragment officeBearerFields on UserProfileNode {
+  fragment OfficeBearerFields on UserProfileNode {
     phone
     cover {
-      ...sizesFields
+      ...Sizes
     }
     avatar {
-      ...sizesFields
+      ...Sizes
     }
     about
     user {

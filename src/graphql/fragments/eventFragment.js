@@ -10,7 +10,7 @@ export const EVENT_FRAGMENT = gql`
 `;
 
 export const CLUB_EVENTS_FRAGMENT = gql`
-  fragment eventFields on ClubNode {
+  fragment EventFields on ClubNode {
     eventSet {
       edges {
         node {

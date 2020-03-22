@@ -1,17 +1,17 @@
 import gql from "graphql-tag";
 import { FULL_NAME_FRAGMENT } from "./userFullNameFragment";
-import { SIZES_FRAGMENT } from "./sizesFregment";
+import { SIZES_FRAGMENT } from "./sizesFragment";
 
 export const NEWS_FRAGMENT = gql`
   fragment News on NewsNode {
     title
     cover {
-      ...sizesFields
+      ...Sizes
     }
     date
     author {
       user {
-        ...nameFields
+        ...NameParts
       }
     }
     content
@@ -21,24 +21,15 @@ export const NEWS_FRAGMENT = gql`
 `;
 
 export const CLUB_NEWS_FRAGMENT = gql`
-  fragment newsFields on ClubNode {
+  fragment NewsFields on ClubNode {
     newsSet {
       edges {
         node {
-          title
-          cover {
-            ...sizesFields
-          }
-          date
-          author {
-            user {
-              ...nameFields
-            }
-          }
-          content
+          ...News
         }
       }
     }
   }
   ${FULL_NAME_FRAGMENT}
+  ${NEWS_FRAGMENT}
 `;
