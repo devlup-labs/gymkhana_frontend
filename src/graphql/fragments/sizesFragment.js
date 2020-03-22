@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 export const SIZES_FRAGMENT = gql`
-  fragment sizesFields on ImageType {
+  fragment Sizes on ImageType {
     sizes {
       name
       url
