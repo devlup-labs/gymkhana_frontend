@@ -71,6 +71,13 @@
         v-row.justify-center
           v-col(cols="12" sm="6" v-for="({ node }, i) in societies.edges" :key="i")
             StripedCard(:node="node")
+    v-img(src="../assets/other/background.svg" v-if="!$apollo.queries.gallery.loading" :min-height="carouselHeight")
+      div.mask.fill-height
+        v-container
+          v-col(cols="12").text-center
+            v-row.white--text.display-1.font-weight-light.justify-center.pa-10.ma-10 Memories
+            CustomLightGallery(:images="gallery.photos.edges")
+
 </template>
 
 <script>
@@ -81,9 +88,17 @@ import StripedCard from "../components/common/StripedCard";
 import { GET_HOME_CAROUSEL_GALLERY_QUERY } from "../graphql/queries/homeCarouselQuery";
 import NewsTable from "../components/common/NewsTable";
 import EventTable from "../components/common/EventTable";
+import { GET_HOME_GALLERY_QUERY } from "../graphql/queries/homeGalleryQuery";
+import CustomLightGallery from "../components/common/CustomLightGallery";
 
 export default {
-  components: { EventTable, NewsTable, StripedCard, FestivalCarousel },
+  components: {
+    CustomLightGallery,
+    EventTable,
+    NewsTable,
+    StripedCard,
+    FestivalCarousel
+  },
   apollo: {
     societies: {
       query: GET_SOCIETIES_QUERY
@@ -93,11 +108,12 @@ export default {
     },
     homeCarouselGallery: {
       query: GET_HOME_CAROUSEL_GALLERY_QUERY
+    },
+    gallery: {
+      query: GET_HOME_GALLERY_QUERY
     }
   },
   data: () => ({
-    scrollingDown: true,
-    scrollingUp: false,
     carouselHeight: null
   }),
   methods: {
@@ -121,6 +137,6 @@ export default {
 }
 
 .mask {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 </style>
