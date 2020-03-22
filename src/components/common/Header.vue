@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-app-bar.px-md-12(app dark dense).elevation-0(v-if="!$apollo.queries.societies.loading")
+  v-app-bar.px-md-12(app dark dense v-if="!$apollo.queries.societies.loading")
     img.mr-4(:src="logo" height="40")
     v-toolbar-items
       v-btn(text :to="{name: 'home'}" exact) Home
@@ -18,22 +18,13 @@
 
 <script>
 import GymkhanaLogo from "../../assets/logo.png";
-import gql from "graphql-tag";
+import { HEADER_SOCIETY_LIST_QUERY } from "../../graphql/queries/headerSocietyListQuery";
 
 export default {
   apollo: {
-    societies: gql`
-      query {
-        societies {
-          edges {
-            node {
-              name
-              slug
-            }
-          }
-        }
-      }
-    `
+    societies: {
+      query: HEADER_SOCIETY_LIST_QUERY
+    }
   },
   name: "Header",
   computed: {
