@@ -1,6 +1,6 @@
 <template lang="pug">
   v-row
-    v-col(v-for="({node},i) in images" cols="12"  sm="8" md="4").offset-md-0.offset-sm-2
+    v-col(v-for="({node},j) in images" :key="j" cols="12"  sm="8" md="4").offset-md-0.offset-sm-2
       v-tooltip(bottom)
         template(v-slot:activator="{on}")
           v-hover(v-slot:default="{ hover }")
