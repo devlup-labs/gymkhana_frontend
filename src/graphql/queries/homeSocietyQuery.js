@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 import { SIZES_FRAGMENT } from "../fragments/sizesFregment";
-import { CLUB_NEWS_FRAGMENT } from "../fragments/newsFragment";
-import { CLUB_EVENTS_FRAGMENT } from "../fragments/eventFragment";
+import { NEWS_FRAGMENT } from "../fragments/newsFragment";
+import { EVENT_FRAGMENT } from "../fragments/eventFragment";
 
 export const GET_SOCIETIES_QUERY = gql`
   query {
@@ -13,13 +13,19 @@ export const GET_SOCIETIES_QUERY = gql`
             name
             slug
             cover {
-              ...sizesFields
+              ...Sizes
             }
-            clubSet {
+            pastNews {
               edges {
                 node {
-                  ...eventFields
-                  ...newsFields
+                  ...News
+                }
+              }
+            }
+            upcomingEvents {
+              edges {
+                node {
+                  ...Event
                 }
               }
             }
@@ -29,6 +35,6 @@ export const GET_SOCIETIES_QUERY = gql`
     }
   }
   ${SIZES_FRAGMENT}
-  ${CLUB_NEWS_FRAGMENT}
-  ${CLUB_EVENTS_FRAGMENT}
+  ${NEWS_FRAGMENT}
+  ${EVENT_FRAGMENT}
 `;
