@@ -25,7 +25,7 @@
             v-card-text(v-if="society.upcomingEvents.edges.length")
               EventTable(:eventsList="society.upcomingEvents.edges")
             v-card-text(v-else).subtitle-1.text-center.ml-4 There are no upcoming events.
-    v-row(class="grey lighten-3").pa-5.pr-0
+    v-row(class="grey lighten-3").pa-5
       v-col(cols="12" md="8" offset-md="2")
         v-card(class="accent white--text")
           v-card-title.display-1.justify-center Clubs
@@ -36,29 +36,29 @@
       v-container(v-else).md12.pa-5.title.text-center
             | There are currently no clubs in the society.
     v-row.pa-5.justify-center
-      v-col(cols="12" sm="10" md="6")
+      v-col(cols="12" sm="10" md="6" lg="4")
         v-card(flat tile text color="#fafafa" )
           v-card-title.headline.justify-center
             v-icon(left) mdi-newspaper
             | News
           v-card-text(v-if="society.pastNews.edges.length")
             NewsTable(:newsList="society.pastNews.edges")
-          v-card-text(v-else).title
+          v-card-text(v-else).title.text-center
             | There is no news for the current Society.
     v-row(class="grey lighten-3").pa-5
       v-col(cols="12" md="8" offset-md="2")
         v-card(class="accent white--text")
           v-card-title.display-1.justify-center Key People
-      v-col(cols="12" v-if="society.mentor || !society.secretary || !society.jointSecretary")
+      v-col(cols="12" v-if="society.mentor || society.secretary || society.jointSecretary")
         v-container
           v-row.justify-space-around
             v-col(cols="12" md="4" v-if="society.jointSecretary")
-              OfficeBearerCard(:avatarSize="120" :profile="society.jointSecretary" :designation="'Mentor'")
+              OfficeBearerCard(:avatarSize="120" :profile="society.jointSecretary" :designation="'Joint Secretary'")
             v-col(cols="12" md="4" v-if="society.secretary")
               OfficeBearerCard(:avatarSize="120" :profile="society.secretary" :designation="'Secretary'" )
             v-col(cols="12" md="4" v-if="society.mentor" )
-              OfficeBearerCard(:avatarSize="120" :profile="society.mentor" :designation="'Joint Secretary'")
-      v-col(v-else).title.text-center.md12.xs12
+              OfficeBearerCard(:avatarSize="120" :profile="society.mentor" :designation="'Mentor'")
+      v-col(v-else cols="12").title.text-center
         | There are no key people.
 </template>
 
