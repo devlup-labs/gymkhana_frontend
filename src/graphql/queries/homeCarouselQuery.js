@@ -1,5 +1,5 @@
 import gql from "graphql-tag";
-import { SIZES_FRAGMENT } from "../fragments/sizesFregment";
+import { SIZES_FRAGMENT } from "../fragments/sizesFragment";
 
 export const GET_HOME_GALLERY_QUERY = gql`
   query {
@@ -12,7 +12,7 @@ export const GET_HOME_GALLERY_QUERY = gql`
           node {
             title
             image {
-              ...sizesFields
+              ...Sizes
             }
           }
         }

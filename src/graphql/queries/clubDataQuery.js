@@ -9,35 +9,35 @@ export const GET_CLUB_DATA_QUERY = gql`
     clubs(slug: $slugText) {
       edges {
         node {
-          ...clubDataFields
+          ...ClubDataFields
           description
           cover {
-            ...sizesFields
+            ...Sizes
           }
           captain {
-            ...officeBearerFields
+            ...OfficeBearerFields
           }
           viceCaptainOne {
-            ...officeBearerFields
+            ...OfficeBearerFields
           }
           viceCaptainTwo {
-            ...officeBearerFields
+            ...OfficeBearerFields
           }
           viceCaptainThree {
-            ...officeBearerFields
+            ...OfficeBearerFields
           }
           mentor {
-            ...officeBearerFields
+            ...OfficeBearerFields
           }
           coreMembers {
             edges {
               node {
-                ...officeBearerFields
+                ...OfficeBearerFields
               }
             }
           }
-          ...newsFields
-          ...eventFields
+          ...NewsFields
+          ...EventFields
           activitySet {
             edges {
               node {

@@ -1,5 +1,6 @@
 import gql from "graphql-tag";
-import { SIZES_FRAGMENT } from "../fragments/sizesFregment";
+import { SIZES_FRAGMENT } from "../fragments/sizesFragment";
+import { FULL_NAME_FRAGMENT } from "../fragments/userFullNameFragment";
 
 export const SEARCH_USER_PROFILE_QUERY = gql`
   query Search($query: String!) {
@@ -8,12 +9,11 @@ export const SEARCH_USER_PROFILE_QUERY = gql`
         node {
           ... on UserProfileNode {
             user {
-              firstName
-              lastName
+              ...NameParts
             }
             skills
             avatar {
-              ...sizesFields
+              ...Sizes
             }
           }
         }
@@ -21,4 +21,5 @@ export const SEARCH_USER_PROFILE_QUERY = gql`
     }
   }
   ${SIZES_FRAGMENT}
+  ${FULL_NAME_FRAGMENT}
 `;

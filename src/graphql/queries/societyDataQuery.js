@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 import { OFFICE_BEARER_FRAGMENT } from "../fragments/officeBearerFragment";
-import { SIZES_FRAGMENT } from "../fragments/sizesFregment";
+import { SIZES_FRAGMENT } from "../fragments/sizesFragment";
 import { EVENT_FRAGMENT } from "../fragments/eventFragment";
 import { NEWS_FRAGMENT } from "../fragments/newsFragment";
 import { CLUB_DATA_FRAGMENT } from "../fragments/clubDataFragment";
@@ -13,25 +13,25 @@ export const GET_SOCIETY_DATA_QUERY = gql`
           name
           description
           secretary {
-            ...officeBearerFields
+            ...OfficeBearerFields
           }
           jointSecretary {
-            ...officeBearerFields
+            ...OfficeBearerFields
           }
           mentor {
-            ...officeBearerFields
+            ...OfficeBearerFields
           }
           slug
           cover {
-            ...sizesFields
+            ...Sizes
           }
           clubSet {
             edges {
               node {
                 __typename
-                ...clubDataFields
+                ...ClubDataFields
                 cover {
-                  ...sizesFields
+                  ...Sizes
                 }
               }
             }

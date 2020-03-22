@@ -1,5 +1,5 @@
 import gql from "graphql-tag";
-import { SIZES_FRAGMENT } from "../fragments/sizesFregment";
+import { SIZES_FRAGMENT } from "../fragments/sizesFragment";
 import { NEWS_FRAGMENT } from "../fragments/newsFragment";
 import { EVENT_FRAGMENT } from "../fragments/eventFragment";
 

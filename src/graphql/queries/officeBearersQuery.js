@@ -8,13 +8,13 @@ export const GET_OFFICE_BEARERS_QUERY = gql`
         node {
           name
           secretary {
-            ...officeBearerFields
+            ...OfficeBearerFields
           }
           jointSecretary {
-            ...officeBearerFields
+            ...OfficeBearerFields
           }
           mentor {
-            ...officeBearerFields
+            ...OfficeBearerFields
           }
         }
       }
