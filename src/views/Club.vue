@@ -16,9 +16,9 @@
             v-card-title.display-1.font-weight-light About
             v-card-text
               span(v-html="club.description")
-            v-card-actions.justify-end
+            v-card-actions(v-if="club.resourcesLink").justify-end
               | Link to resources
-              v-btn.ml-2(right ripple class="accent")
+              v-btn.ml-2(right ripple class="accent" :href="club.resourcesLink")
                 v-icon mdi-arrow-right
     v-container
       v-layout(row)

@@ -11,6 +11,7 @@ export const GET_CLUB_DATA_QUERY = gql`
         node {
           ...ClubDataFields
           description
+          resourcesLink
           cover {
             ...Sizes
           }
