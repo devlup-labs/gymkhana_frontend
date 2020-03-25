@@ -923,6 +923,18 @@
             {
               "args": [],
               "deprecationReason": null,
+              "description": "Add a drive link to show on society page",
+              "isDeprecated": false,
+              "name": "reportLink",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            {
+              "args": [],
+              "deprecationReason": null,
               "description": "This will be used as URL. /society/slug",
               "isDeprecated": false,
               "name": "slug",
