@@ -14,8 +14,8 @@
                 p “Every child is an artist, the problem is staying an artist when you grow up.”
                 p -   Pablo Picasso
             span(v-html="society.description")
-            v-card-actions
-              v-btn.elevation-4(class="accent") Annual Report
+            v-card-actions(v-if="society.reportLink")
+              v-btn.elevation-4(class="accent" :href="society.reportLink") Annual Report
                 v-icon(right) mdi-arrow-right
         v-col(cols="12" md="4")
           v-card(flat tile text color="#fafafa")

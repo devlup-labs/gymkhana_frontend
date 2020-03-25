@@ -12,6 +12,7 @@ export const GET_SOCIETY_DATA_QUERY = gql`
         node {
           name
           description
+          reportLink
           secretary {
             ...OfficeBearerFields
           }
