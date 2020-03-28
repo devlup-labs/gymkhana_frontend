@@ -6,11 +6,11 @@
     v-container(v-for="({ node }, i) in societies.edges" :key="i" v-if=" node.mentor || node.secretary || node.jointSecretary ")
       v-card-title.display-1.justify-center {{ node.name }}
       v-row.justify-space-around(v-if=" node.mentor || node.secretary || node.jointSecretary ")
-        v-col(cols="12" md="4" sm="6" v-if="node.mentor")
+        v-col(cols="12" lg="4" sm="6" v-if="node.mentor")
           OfficeBearerCard(:avatarSize="120" :profile="node.mentor" :designation="'Mentor'")
-        v-col(cols="12" md="4" sm="6" v-if="node.secretary")
+        v-col(cols="12" lg="4" sm="6" v-if="node.secretary")
           OfficeBearerCard(:avatarSize="120" :profile="node.secretary" :designation="'Secretary'")
-        v-col(cols="12" md="4" sm="6" v-if="node.jointSecretary")
+        v-col(cols="12" lg="4" sm="6" v-if="node.jointSecretary")
           OfficeBearerCard(:avatarSize="120" :profile="node.jointSecretary" :designation="'Joint Secretary'")
 </template>
 
