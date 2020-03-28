@@ -45,7 +45,18 @@
                   v-row.ma-4
                     v-icon(left color="primary")  mdi-email
                     a(:href="`mailto:${profile.user.email}`").no-decoration {{ profile.user.email }}
-              v-row.justify-center.align-end.pa-0.ma-0.fill-height-card-back
+              v-row.fill-height.fill-height-card-back
+                v-col.text-center
+                  v-btn.ma-1(
+                    v-for="({node}, i) in profile.socialLinks.edges"
+                    :key="i"
+                    :color="$vuetify.theme.options.socialMediaIconMap[node.socialMedia].color"
+                    rounded
+                    :href="node.url"
+                    target="blank"
+                  ).white--text
+                    v-icon() {{ $vuetify.theme.options.socialMediaIconMap[node.socialMedia].icon }}
+              v-row.justify-center.align-end.pa-0.ma-0
                 v-divider
               v-row.justify-center.mt-2.pa-0
                 v-btn(@click="cardPage=1" text)
@@ -71,7 +82,7 @@ export default {
 
 <style scoped>
 .fill-height-card-back {
-  height: 50%;
+  max-height: 110px !important;
 }
 .no-decoration {
   text-decoration: none;
