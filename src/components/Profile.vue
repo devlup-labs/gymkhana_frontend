@@ -95,7 +95,14 @@
 
 <script>
 import ProfileCard from "./ProfileCard";
+import { VIEWER_PROFILE_QUERY } from "../graphql/queries/viewerProfileQuery";
 export default {
+  apollo: {
+    viewer: {
+      query: VIEWER_PROFILE_QUERY
+    },
+    $client: "private"
+  },
   name: "Profile",
   components: { ProfileCard },
   data: () => ({
