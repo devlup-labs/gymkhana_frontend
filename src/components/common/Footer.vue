@@ -1,5 +1,5 @@
 <template lang="pug">
-  div
+  div(style="z-index:0")
     section
       v-card.elevation-0(color="blue darken-1 white--text" flat tile)
         v-layout(row wrap align-center style="{background: #000000}").justify-center

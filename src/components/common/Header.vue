@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-app-bar.px-md-12(app dark dense v-if="!$apollo.queries.societies.loading")
+  v-app-bar.px-md-12(app dark dense v-if="!$apollo.queries.societies.loading" style="z-index:3")
     img.mr-4(:src="logo" height="40")
     v-toolbar-items
       v-btn(text :to="{name: 'home'}" exact) Home
