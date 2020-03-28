@@ -61,7 +61,8 @@ export default {
         if (this.searchTerm) return this.searchTerm.length < 3;
         else return false;
       }
-    }
+    },
+    $client: "private"
   },
   name: "KonnektSearch",
   data: () => ({
