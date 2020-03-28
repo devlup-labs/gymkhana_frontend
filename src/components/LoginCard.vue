@@ -1,10 +1,8 @@
-<!--suppress CheckImageSize -->
 <template lang="pug">
   div
-    v-toolbar(primary)
+    v-toolbar(color="primary" )
       v-toolbar-title.white--text
         p.headline.mb-0 Login
-
     v-card.tile
       v-card-text(pt-4)
         div
@@ -32,10 +30,8 @@
             )
             v-layout(justify-center)
               v-btn(color="primary") Login
-
             v-layout(justify-center)
               h4 OR
-
             v-layout(justify-center)
               a
                 img(
@@ -45,7 +41,6 @@
                 )
 
 </template>
-
 <script>
 import googleSignInBtn from "../assets/btn_google_light_normal.svg";
 export default {
