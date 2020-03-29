@@ -52,16 +52,16 @@
                     :key="i"
                     :color="$vuetify.theme.options.socialMediaIconMap[node.socialMedia].color"
                     rounded
-                    :href="node.url"
+                    :href="node.link"
                     target="blank"
                   ).white--text
-                    v-icon() {{ $vuetify.theme.options.socialMediaIconMap[node.socialMedia].icon }}
+                    v-icon {{ $vuetify.theme.options.socialMediaIconMap[node.socialMedia].icon }}
               v-row.justify-center.align-end.pa-0.ma-0
                 v-divider
               v-row.justify-center.mt-2.pa-0
                 v-btn(@click="cardPage=1" text)
                   v-icon(left) mdi-arrow-left
-                  |  Back
+                  | Back
 </template>
 
 <script>

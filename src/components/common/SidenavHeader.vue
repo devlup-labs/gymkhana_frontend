@@ -1,5 +1,5 @@
 <template lang="pug">
-  div
+  div(v-if="!$apollo.loading")
     v-app-bar(clipped-left fixed app)
       v-app-bar-nav-icon.mx-n1(@click.stop="drawer= !drawer")
       v-toolbar-title.hidden-sm-and-down {{ title }}
@@ -16,12 +16,12 @@
               v-btn(text block) {{ child.title }}
     v-navigation-drawer(v-model="drawer" app :clipped="$vuetify.breakpoint.lgAndUp" :mini-variant.sync="mini")
       template(v-slot:prepend)
-        v-list-item(two-line)
+        v-list-item(two-line v-if="!$apollo.queries.viewer.loading")
           v-list-item-avatar
             img(src="https://randomuser.me/api/portraits/women/81.jpg")
           v-list-item-content
-            v-list-item-title John Smith
-            v-list-item-subtitle john.smith@iitj.ac.in
+            v-list-item-title {{ viewer.firstName }} {{ viewer.lastName }}
+            v-list-item-subtitle {{ viewer.email }}
           v-list-item-action
             v-btn(icon @click.stop="mini = !mini")
               v-icon mdi-chevron-left
@@ -40,9 +40,17 @@
 </template>
 
 <script>
+import { VIEWER_PROFILE_QUERY } from "../../graphql/queries/viewerProfileQuery";
+
 export default {
   name: "SidenavHeader",
   props: { title: { type: String } },
+  apollo: {
+    viewer: {
+      query: VIEWER_PROFILE_QUERY
+    },
+    $client: "private"
+  },
   data: () => ({
     item: true,
     drawer: null,

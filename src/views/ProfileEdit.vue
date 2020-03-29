@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import ProfileCard from "./ProfileCard";
+import ProfileCard from "../components/ProfileCard";
 export default {
   name: "ProfileEdit",
   components: { ProfileCard },

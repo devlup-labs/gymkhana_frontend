@@ -6,8 +6,8 @@ import Konnekt from "../views/Konnekt";
 import KonnektHome from "../components/KonnektHome";
 import KonnektSearch from "../components/KonnektSearch";
 import OfficeBearers from "../views/OfficeBearers";
-import Profile from "../components/Profile";
-import ProfileEdit from "../components/ProfileEdit";
+import ProfileDetail from "../views/ProfileDetail";
+import ProfileEdit from "../views/ProfileEdit";
 import Society from "../views/Society";
 import Club from "../views/Club";
 
@@ -60,7 +60,7 @@ const routes = [
     name: "profile",
     path: "/profile",
     meta: sidenavRouteMeta,
-    component: Profile
+    component: ProfileDetail
   },
   {
     name: "profile-edit",

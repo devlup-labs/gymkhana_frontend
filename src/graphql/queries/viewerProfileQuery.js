@@ -4,7 +4,7 @@ import { FULL_NAME_FRAGMENT } from "../fragments/userFullNameFragment";
 import { SOCIAL_MEDIA_ICON_FRAGMENT } from "../fragments/socialMediaIconFragment";
 
 export const VIEWER_PROFILE_QUERY = gql`
-  query viewer {
+  query {
     viewer {
       username
       ...NameParts

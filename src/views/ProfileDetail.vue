@@ -94,16 +94,9 @@
 </template>
 
 <script>
-import ProfileCard from "./ProfileCard";
-import { VIEWER_PROFILE_QUERY } from "../graphql/queries/viewerProfileQuery";
+import ProfileCard from "../components/ProfileCard";
 export default {
-  apollo: {
-    viewer: {
-      query: VIEWER_PROFILE_QUERY
-    },
-    $client: "private"
-  },
-  name: "Profile",
+  name: "ProfileDetail",
   components: { ProfileCard },
   data: () => ({
     profile: {
