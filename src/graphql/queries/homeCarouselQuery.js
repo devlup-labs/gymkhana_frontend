@@ -1,9 +1,9 @@
 import gql from "graphql-tag";
 import { GALLERY_FRAGMENT } from "../fragments/galleryFragment";
 
-export const GET_HOME_CAROUSEL_GALLERY_QUERY = gql`
+export const GET_HOME_CAROUSEL_QUERY = gql`
   query {
-    homeCarouselGallery {
+    homeCarousel {
       ...Gallery
     }
   }

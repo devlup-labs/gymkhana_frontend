@@ -21,8 +21,9 @@ export default {
   }
 };
 </script>
+
 <style scoped>
-.v-content {
+main.v-content {
   z-index: 1;
 }
 </style>

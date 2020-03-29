@@ -3,7 +3,7 @@ import { GALLERY_FRAGMENT } from "../fragments/galleryFragment";
 
 export const GET_HOME_GALLERY_QUERY = gql`
   query {
-    gallery {
+    homeGallery {
       ...Gallery
     }
   }

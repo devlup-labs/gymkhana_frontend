@@ -1,7 +1,7 @@
 <template lang="pug">
   div
     v-carousel(
-      v-if="!$apollo.queries.homeCarouselGallery.loading"
+      v-if="!$apollo.queries.homeCarousel.loading && homeCarousel"
       :height="carouselHeight"
       v-resize="onResize"
       elevate-on-scroll
@@ -10,7 +10,7 @@
       show-arrows-on-hover
     ).topbar-margin
       v-carousel-item(
-        v-for="({node}, i) in homeCarouselGallery.photos.edges"
+        v-for="({node}, i) in homeCarousel.photos.edges"
         :key="i"
         :src="node.image.sizes[0].url"
         transition="fade-transition"
@@ -71,13 +71,12 @@
         v-row.justify-center
           v-col(cols="12" sm="6" v-for="({ node }, i) in societies.edges" :key="i")
             StripedCard(:node="node")
-    v-img(src="../assets/other/background.svg" v-if="!$apollo.queries.gallery.loading" :min-height="carouselHeight")
+    v-img(src="../assets/other/background.svg" v-if="!$apollo.queries.homeGallery.loading && homeGallery" :min-height="carouselHeight")
       div.mask.fill-height
         v-container
           v-col(cols="12").text-center
             v-row.white--text.display-1.font-weight-light.justify-center.pa-10.ma-10 Memories
-            CustomLightGallery(:images="gallery.photos.edges")
-
+            CustomLightGallery(:images="homeGallery.photos.edges")
 </template>
 
 <script>
@@ -85,7 +84,7 @@ import { GET_SOCIETIES_QUERY } from "../graphql/queries/homeSocietyQuery";
 import { GET_FESTIVAL_QUERY } from "../graphql/queries/festivalQuery";
 import FestivalCarousel from "../components/FestivalCarousel";
 import StripedCard from "../components/common/StripedCard";
-import { GET_HOME_CAROUSEL_GALLERY_QUERY } from "../graphql/queries/homeCarouselQuery";
+import { GET_HOME_CAROUSEL_QUERY } from "../graphql/queries/homeCarouselQuery";
 import NewsTable from "../components/common/NewsTable";
 import EventTable from "../components/common/EventTable";
 import { GET_HOME_GALLERY_QUERY } from "../graphql/queries/homeGalleryQuery";
@@ -106,10 +105,10 @@ export default {
     festivals: {
       query: GET_FESTIVAL_QUERY
     },
-    homeCarouselGallery: {
-      query: GET_HOME_CAROUSEL_GALLERY_QUERY
+    homeCarousel: {
+      query: GET_HOME_CAROUSEL_QUERY
     },
-    gallery: {
+    homeGallery: {
       query: GET_HOME_GALLERY_QUERY
     }
   },
