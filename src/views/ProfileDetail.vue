@@ -6,11 +6,11 @@
       :height="$vuetify.theme.options.parallaxHeight"
     )
       v-layout.justify-center.align-center.fill-height
-        h1 About Me
+        h1 About {{viewer.firstName.concat(' ',viewer.lastName)}}
     v-container.pa-4
       v-row(justify="center" :style="{'margin-top': `-${$vuetify.theme.options.parallaxHeight/3}px`}")
         v-col(cols="12" sm="10" lg="8")
-          ProfileCard(:name="profile.name" :rollNumber="profile.rollNumber")
+          ProfileCard(:name="viewer.firstName.concat(' ',viewer.lastName)" :rollNumber="profile1.roll" :avatarLink="profile1.avatar.sizes.find(e => e.name === 'full_size').url" :coverLink="profile1.cover.sizes.find(e => e.name === 'full_size').url")
       v-row(justify="center")
         v-col(cols="12" sm="5" lg="4")
           v-card(elevation="4")
@@ -18,20 +18,22 @@
             v-divider.mx-2
             v-card-text
               v-list(disabled)
-                v-list-item(v-for="(key, i) in Object.keys(profile.info.personal)" :key="i")
+                v-list-item(v-for="(key, i) in Object.keys(iconMap.info)" :key="i")
                   v-list-item-icon
-                    v-icon(size="25") {{ iconMap[key] }}
-                  v-list-item-title.sub-title-1 {{ profile.info.personal[key] }}
+                    v-icon(size="25") {{ iconMap.info[key] }}
+                  v-list-item-title(v-if="key === 'email'").sub-title-1 {{ viewer[key] }}
+                  v-list-item-title(v-else).sub-title-1 {{ profile1[key] }}
         v-col(cols="12" sm="5" lg="4")
           v-card(elevation="4")
             v-card-title.headline Branch, DoB and more
             v-divider.mx-2
             v-card-text
               v-list(disabled)
-                v-list-item(v-for="(key, i) in Object.keys(profile.info.other)" :key="i")
+                v-list-item(v-for="(key, i) in Object.keys(iconMap.other)" :key="i")
                   v-list-item-icon
-                    v-icon(size="25") {{ iconMap[key] }}
-                  v-list-item-title.sub-title-1 {{ profile.info.other[key] }}
+                    v-icon(size="25") {{ iconMap.other[key] }}
+                  v-list-item-title(v-if="key === 'dob'").sub-title-1 {{ profile1[key] | moment }}
+                  v-list-item-title(v-else).sub-title-1 {{ profile1[key] }}
       v-row(justify="center")
         v-col(cols="12" sm="5" lg="4")
           v-card(elevation="4")
@@ -41,7 +43,7 @@
               v-chip.elevation-2.font-weight-bold.ma-1(
                 xs2
                 color="light-blue darken-1 white--text"
-                v-for="(skill, i) in skills"
+                v-for="(skill, i) in profile1.skills.split(',')"
                 v-bind:key="i"
               ) {{ skill }}
         v-col(cols="12" sm="5" lg="4")
@@ -49,7 +51,7 @@
             v-card-title.headline About
             v-divider.mx-2
             v-card-text.text-center
-              p.title.font-weight-regular NONE
+              p.title.font-weight-regular {{profile1.about}}
       v-row
         v-col(sm="5" offset-sm="1" lg="4" offset-lg="2")
           v-card(elevation="4")
@@ -62,6 +64,7 @@
                     v-on="on"
                     dark
                     icon
+                    :to='{name : "profile-edit"}'
                   )
                     v-icon(size="30") mdi-plus
                 span Add Social Link
@@ -69,15 +72,15 @@
             v-card-text
               v-col.text-center.px-0
                 v-btn.ma-1(
-                  v-for="(link, i) in socialLinks"
+                  v-for="({node}, i) in profile1.socialLinks.edges"
                   :key="i"
-                  color="secondary"
+                  :color="$vuetify.theme.options.socialMediaIconMap[node.socialMedia].color"
                   rounded
-                  :href="link.url"
+                  :href="node.link"
                   target="blank"
-                )
-                  v-icon(left) {{ $vuetify.theme.options.socialMediaIconMap[link.socialMedia].icon }}
-                  | {{ $vuetify.theme.options.socialMediaIconMap[link.socialMedia].name }}
+                ).white--text
+                  v-icon(left) {{ $vuetify.theme.options.socialMediaIconMap[node.socialMedia].icon }}
+                  | {{ $vuetify.theme.options.socialMediaIconMap[node.socialMedia].name }}
     v-tooltip(left color="black")
       template(v-slot:activator="{ on }")
         v-btn.ma-5(
@@ -95,55 +98,40 @@
 
 <script>
 import ProfileCard from "../components/ProfileCard";
+import { VIEWER_PROFILE_QUERY } from "../graphql/queries/viewerProfileQuery";
+import moment from "moment";
 export default {
   name: "ProfileDetail",
-  components: { ProfileCard },
-  data: () => ({
-    profile: {
-      name: "Soham Sonawane",
-      rollNumber: "B18CSE053",
-      info: {
-        personal: {
-          gender: "Male",
-          phone: "6377954885",
-          email: "sonawane.1@iitj.ac.in",
-          hometown: "Pune"
-        },
-        other: {
-          dob: "Sept. 7, 2001",
-          prog: "B.Tech",
-          branch: "Computer Science and Engineering",
-          year: "Second Year"
-        }
-      }
+  apollo: {
+    viewer: {
+      query: VIEWER_PROFILE_QUERY
     },
-    skills: [
-      "cpp",
-      "vue",
-      "c++",
-      "kotlin",
-      "java",
-      "vuetify",
-      "photography",
-      "latex",
-      "django"
-    ],
-    socialLinks: [
-      { socialMedia: "GH", url: "https://www.github.com/killbotXD" },
-      { socialMedia: "GP", url: "https://www.gmail.com" }
-    ]
-  }),
+    $client: "private"
+  },
+  components: { ProfileCard },
   computed: {
     iconMap: () => ({
-      dob: "mdi-cake",
-      prog: "mdi-account-card-details",
-      branch: "mdi-school",
-      year: "mdi-calendar",
-      gender: "mdi-gender-male-female",
-      phone: "mdi-phone",
-      email: "mdi-email",
-      hometown: "mdi-map-marker"
-    })
+      other: {
+        dob: "mdi-cake",
+        prog: "mdi-account-card-details",
+        branch: "mdi-school",
+        year: "mdi-calendar"
+      },
+      info: {
+        gender: "mdi-gender-male-female",
+        phone: "mdi-phone",
+        email: "mdi-email",
+        hometown: "mdi-map-marker"
+      }
+    }),
+    profile1() {
+      return this.viewer.userprofile;
+    }
+  },
+  filters: {
+    moment: date => {
+      return moment(date).format("MMM. DD, YYYY");
+    }
   }
 };
 </script>
