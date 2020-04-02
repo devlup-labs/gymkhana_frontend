@@ -28,6 +28,9 @@ export const VIEWER_PROFILE_QUERY = gql`
         cover {
           ...Sizes
         }
+        avatar {
+          ...Sizes
+        }
         skills
         about
       }
