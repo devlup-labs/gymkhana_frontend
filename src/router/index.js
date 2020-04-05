@@ -21,7 +21,6 @@ const loginRoute = (to, from, next) => {
   if (to.name !== "login" && !localStorage.getItem("apollo-token")) {
     return next({ name: "login" });
   } else {
-    console.log("exe2");
     return next();
   }
 };
