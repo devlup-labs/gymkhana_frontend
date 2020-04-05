@@ -17,6 +17,14 @@ const sidenavRouteMeta = {
   sidenav: true
 };
 
+const loginRoute = (to, from, next) => {
+  if (to.name !== "login" && !localStorage.getItem("apollo-token")) {
+    return next({ name: "login" });
+  } else {
+    console.log("exe2");
+    return next();
+  }
+};
 const routes = [
   {
     path: "/",
@@ -41,6 +49,9 @@ const routes = [
     path: "/konnekt",
     component: Konnekt,
     meta: sidenavRouteMeta,
+    beforeEnter: (to, from, next) => {
+      loginRoute(to, from, next);
+    },
     children: [
       {
         name: "konnekt-home",
@@ -60,12 +71,18 @@ const routes = [
     name: "profile",
     path: "/profile",
     meta: sidenavRouteMeta,
+    beforeEnter: (to, from, next) => {
+      loginRoute(to, from, next);
+    },
     component: ProfileDetail
   },
   {
     name: "profile-edit",
     path: "/profile/edit",
     meta: sidenavRouteMeta,
+    beforeEnter: (to, from, next) => {
+      loginRoute(to, from, next);
+    },
     component: ProfileEdit
   },
   {
