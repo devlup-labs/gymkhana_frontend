@@ -2,7 +2,7 @@
   v-container(fluid).my-5
     v-row.justify-center
       v-col(cols="7")
-        ProfileCard(name="Soham Sonawane" rollNumber="B18CSE053")
+        ProfileCard(:name="viewer.firstName.concat(' ',viewer.lastName)" :rollNumber="profile1.roll" :avatarLink="profile1.avatar.sizes.find(e => e.name === 'full_size').url" :coverLink="profile1.cover.sizes.find(e => e.name === 'full_size').url")
     v-row.justify-center.align-center
       v-btn(x-large text disabled).text--black
         v-icon(left) mdi-pencil
@@ -11,12 +11,13 @@
     v-row.justify-center
       v-col(sm="8" md="6")
         v-form
-          v-text-field(label="Phone" type="tel" outlined prepend-icon="mdi-phone" :counter="10")
-          v-text-field(label="Hometown" type="Address" outlined prepend-icon="mdi-map-marker" )
+          v-text-field(label="Phone" type="tel" v-model="phone" outlined prepend-icon="mdi-phone" :counter="10")
+          v-text-field(label="Hometown" type="Address" v-model="hometown" outlined prepend-icon="mdi-map-marker" )
           v-select(
             label="Year"
             :items="yearItems"
             outlined
+            v-model="select"
             prepend-icon="mdi-calendar"
           )
           v-textarea(label="About You" :counter="160" outlined)
@@ -37,18 +38,34 @@
           )
     v-layout(row).justify-center
       v-btn(color="primary") Save
-      v-btn.ml-4 Cancel
+      v-btn.ml-4(@click="$router.go(-1)") Cancel
 </template>
 
 <script>
 import ProfileCard from "../components/ProfileCard";
+import { VIEWER_PROFILE_QUERY } from "../graphql/queries/viewerProfileQuery";
 export default {
+  apollo: {
+    viewer: {
+      query: VIEWER_PROFILE_QUERY
+    },
+    $client: "private"
+  },
   name: "ProfileEdit",
   components: { ProfileCard },
   data: () => ({
     select: null,
-    yearItems: ["First", "Second", "Third", "Fourth", "Fifth"],
-    skills: ["css", "vue"]
+    yearItems: [
+      { key: "1", text: "First Year" },
+      { key: "2", text: "Second Year" },
+      { key: "3", text: "Third Year" },
+      { key: "4", text: "Fourth Year" },
+      { key: "5", text: "Fifth Year" }
+    ],
+    skills: [],
+    phone: null,
+    hometown: null,
+    about: null
   }),
   methods: {
     add: function(event) {
@@ -57,6 +74,21 @@ export default {
     },
     del: function(skill) {
       this.skills = this.skills.filter(e => e !== skill);
+    },
+    onload() {
+      this.phone = this.profile1.phone;
+      this.hometown = this.profile1.hometown;
+      this.about = this.profile1.about;
+      this.select = this.profile1.year;
+      this.skills = this.profile1.skills.split(",");
+    }
+  },
+  mounted() {
+    this.onload();
+  },
+  computed: {
+    profile1() {
+      return this.viewer.userprofile;
     }
   }
 };
