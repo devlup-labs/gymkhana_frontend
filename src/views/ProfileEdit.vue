@@ -16,11 +16,14 @@
           v-select(
             label="Year"
             :items="yearItems"
+            item-text="text"
+            item-value="key"
             outlined
+            return-object
             v-model="select"
             prepend-icon="mdi-calendar"
           )
-          v-textarea(label="About You" :counter="160" outlined)
+          v-textarea(label="About You" v-model="about" :counter="160" outlined)
           v-col.pb-0
             p.mb-0.font-weight-light Skills
             v-chip.elevation-2.font-weight-bold.ma-1(
@@ -37,13 +40,14 @@
             @keyup.enter="e => add(e)"
           )
     v-layout(row).justify-center
-      v-btn(color="primary") Save
+      v-btn(color="primary" @click="updateUserProfile") Save
       v-btn.ml-4(@click="$router.go(-1)") Cancel
 </template>
 
 <script>
 import ProfileCard from "../components/ProfileCard";
 import { VIEWER_PROFILE_QUERY } from "../graphql/queries/viewerProfileQuery";
+import { UPDATE_PROFILE_MUTATION } from "../graphql/mutations/updateProfileMutation";
 export default {
   apollo: {
     viewer: {
@@ -79,8 +83,34 @@ export default {
       this.phone = this.profile1.phone;
       this.hometown = this.profile1.hometown;
       this.about = this.profile1.about;
-      this.select = this.profile1.year;
+      this.select = this.yearItems.find(e => e.text === this.profile1.year);
       this.skills = this.profile1.skills.split(",");
+    },
+    updateUserProfile() {
+      this.$apollo
+        .mutate({
+          // Query
+          mutation: UPDATE_PROFILE_MUTATION,
+          refetchQueries: [
+            {
+              query: VIEWER_PROFILE_QUERY
+            }
+          ],
+          // Parameters
+          variables: {
+            input: {
+              year: this.select.key,
+              phone: this.phone,
+              hometown: this.hometown,
+              skills: this.skills.toString(),
+              about: this.about
+            }
+          },
+          client: "private"
+        })
+        .then(() => {
+          this.$router.push({ name: "profile" });
+        });
     }
   },
   mounted() {
