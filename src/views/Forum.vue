@@ -16,7 +16,7 @@
           v-divider.mb-5
           v-row.justify-center
             v-col(cols="12" md="10" xs="12" v-for="x in (1,3)")
-              ForumTopic
+              ForumTopicCard
     v-container.mt-5
         v-pagination(circle length="10" v-model="page" total-visible="7" next-icon="mdi-chevron-right" prev-icon="mdi-chevron-left")
     v-dialog(v-model="dialog" persistent max-width="700px" )
@@ -44,12 +44,12 @@
 </template>
 
 <script>
-import ForumTopic from "../components/ForumTopic";
+import ForumTopicCard from "../components/ForumTopicCard";
 import AddTopicDialog from "../components/AddTopicDialog";
 
 export default {
   name: "Forum",
-  components: { AddTopicDialog, ForumTopic },
+  components: { AddTopicDialog, ForumTopicCard },
   data: () => ({
     searchTerm: null,
     page: 1,
