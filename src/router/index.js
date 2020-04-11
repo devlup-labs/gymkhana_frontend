@@ -10,6 +10,7 @@ import ProfileDetail from "../views/ProfileDetail";
 import ProfileEdit from "../views/ProfileEdit";
 import Society from "../views/Society";
 import Club from "../views/Club";
+import Forum from "../views/Forum";
 
 Vue.use(VueRouter);
 
@@ -43,6 +44,12 @@ const routes = [
     path: "/login",
     name: "login",
     component: Login
+  },
+  {
+    path: "/forum",
+    name: "forum",
+    meta: sidenavRouteMeta,
+    component: Forum
   },
   {
     path: "/konnekt",
