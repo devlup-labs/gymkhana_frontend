@@ -10,6 +10,8 @@ import ProfileDetail from "../views/ProfileDetail";
 import ProfileEdit from "../views/ProfileEdit";
 import Society from "../views/Society";
 import Club from "../views/Club";
+import ForumHome from "../components/ForumHome";
+import ForumTopic from "../components/ForumTopic";
 import Forum from "../views/Forum";
 
 Vue.use(VueRouter);
@@ -47,9 +49,22 @@ const routes = [
   },
   {
     path: "/forum",
-    name: "forum",
+    component: Forum,
     meta: sidenavRouteMeta,
-    component: Forum
+    children: [
+      {
+        path: "",
+        name: "forum-home",
+        meta: sidenavRouteMeta,
+        component: ForumHome
+      },
+      {
+        name: "forum-topic",
+        meta: sidenavRouteMeta,
+        path: "/:topic",
+        component: ForumTopic
+      }
+    ]
   },
   {
     path: "/konnekt",
