@@ -60,7 +60,7 @@ export default {
     drawer: null,
     mini: false,
     toolbarItems: [
-      { title: "Forum", icon: "mdi-forum", to: { name: "home" } },
+      { title: "Forum", icon: "mdi-forum", to: { name: "forum" } },
       { title: "Konnekt", icon: "mdi-web", to: { name: "konnekt-home" } },
       {
         title: "Account",
