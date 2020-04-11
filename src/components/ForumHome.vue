@@ -44,8 +44,8 @@
 </template>
 
 <script>
-import ForumTopicCard from "../components/ForumTopicCard";
-import AddTopicDialog from "../components/AddTopicDialog";
+import ForumTopicCard from "./ForumTopicCard";
+import AddTopicDialog from "./AddTopicDialog";
 
 export default {
   name: "Forum",
