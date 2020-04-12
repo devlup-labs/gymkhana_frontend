@@ -3,9 +3,9 @@
     v-card.elevation-2
       v-card-text
         v-row.justify-center.align-center
-          v-avatar(:size="$vuetify.breakpoint.smAndDown?40:80").ml-2
+          v-avatar(:size="$vuetify.breakpoint.smAndDown?40:80")
             v-img(src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST4n1T70ibu7ov-7FT63MjRA-yPrjrfHem04kPtqOVWjBNQuQK")
-          v-col(cols="10").pl-6
+          v-col(cols="10" sm="8").pl-6
             router-link(:to="{name : 'forum-topic',params : {topic : 'topic'}}" )
               v-row.mb-0
                 span.subtitle-1 Has anyone installed Wine?
@@ -17,12 +17,14 @@
                 v-icon(small) mdi-reply
                 span.subtitle-2 Anshul Ahuja
                 span.subtitle-2.font-weight-light.pl-1  replied 3 mins ago
-          v-row
-            UpvoteButton.justify-lg-end.ml-10
-            v-col(cols="2").ml-2.pr-0.mr-4
-              CommentsCounter
-            v-col(cols="1" v-if="true").mr-4
-              TopicDeleteButton
+          v-col.pt-0.pb-0
+            v-row.pt-0.pl-2
+              v-col(cols="8" sm="6" ).pt-0
+                UpvoteButton.justify-lg-center.pl-10
+              v-col(cols="2" sm="3").pt-0.justify-center
+                CommentsCounter
+              v-col(cols="1"  v-if="true").pt-0.mr-6.pl-4
+                TopicDeleteButton
 
 </template>
 
