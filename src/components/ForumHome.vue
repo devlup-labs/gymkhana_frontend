@@ -15,10 +15,10 @@
                 v-icon mdi-magnify
           v-divider.mb-5
           v-row.justify-center
-            v-col(cols="12" md="10" xs="12" v-for="x in (1,3)")
+            v-col(cols="12" md="10" xs="12" v-for="x in 3" :key="x")
               ForumTopicCard
     v-container.mt-5
-        v-pagination(circle length="10" v-model="page" total-visible="7" next-icon="mdi-chevron-right" prev-icon="mdi-chevron-left")
+        v-pagination(circle :length="10" v-model="page" total-visible="7" next-icon="mdi-chevron-right" prev-icon="mdi-chevron-left")
     v-dialog(v-model="dialog" persistent max-width="700px" )
       AddTopicDialog
         template(v-slot:cross)
