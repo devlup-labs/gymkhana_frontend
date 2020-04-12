@@ -6,7 +6,7 @@
           v-avatar(:size="$vuetify.breakpoint.smAndDown?40:80")
             v-img(src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST4n1T70ibu7ov-7FT63MjRA-yPrjrfHem04kPtqOVWjBNQuQK")
           v-col(cols="10" sm="8").pl-6
-            router-link(:to="{name : 'forum-topic',params : {topic : 'topic'}}" )
+            router-link(:to="{name : 'forum-topic',params : {id : `topic`}}" )
               v-row.mb-0
                 span.subtitle-1 Has anyone installed Wine?
               v-row
