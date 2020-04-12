@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import Header from "./components/common/Header";
-import SidenavHeader from "./components/common/SidenavHeader";
+import Header from "./components/common/headers/Header";
+import SidenavHeader from "./components/common/headers/SidenavHeader";
 import Footer from "./components/common/Footer";
 
 export default {

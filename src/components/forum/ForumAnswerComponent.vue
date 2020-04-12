@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import UpvoteButton from "./common/UpvoteButton";
-import TopicDeleteButton from "./common/TopicDeleteButton";
+import UpvoteButton from "../common/buttons/UpvoteButton";
+import TopicDeleteButton from "../common/buttons/TopicDeleteButton";
 export default {
   name: "ForumAnswerComponent",
   components: { TopicDeleteButton, UpvoteButton }

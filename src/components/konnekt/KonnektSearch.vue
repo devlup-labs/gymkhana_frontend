@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import { SEARCH_USER_PROFILE_QUERY } from "../graphql/queries/searchUserProfilesQuery";
+import { SEARCH_USER_PROFILE_QUERY } from "../../graphql/queries/searchUserProfilesQuery";
 
 export default {
   apollo: {

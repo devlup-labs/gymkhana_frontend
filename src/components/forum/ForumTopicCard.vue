@@ -29,9 +29,9 @@
 </template>
 
 <script>
-import UpvoteButton from "./common/UpvoteButton";
-import CommentsCounter from "./common/CommentsCounter";
-import TopicDeleteButton from "./common/TopicDeleteButton";
+import UpvoteButton from "../common/buttons/UpvoteButton";
+import CommentsCounter from "../common/buttons/CommentsCounter";
+import TopicDeleteButton from "../common/buttons/TopicDeleteButton";
 export default {
   name: "ForumTopicCard",
   components: { TopicDeleteButton, CommentsCounter, UpvoteButton }

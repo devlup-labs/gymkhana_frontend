@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import GymkhanaLogo from "../../assets/logo.png";
-import { HEADER_SOCIETY_LIST_QUERY } from "../../graphql/queries/headerSocietyListQuery";
+import GymkhanaLogo from "../../../assets/logo.png";
+import { HEADER_SOCIETY_LIST_QUERY } from "../../../graphql/queries/headerSocietyListQuery";
 
 export default {
   apollo: {

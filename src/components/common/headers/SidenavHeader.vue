@@ -43,8 +43,8 @@
 </template>
 
 <script>
-import { onLogout } from "../../plugins/vue-apollo";
-import { GET_SIDENAV_DATA_QUERY } from "../../graphql/queries/sidenavDataQuery";
+import { onLogout } from "../../../plugins/vue-apollo";
+import { GET_SIDENAV_DATA_QUERY } from "../../../graphql/queries/sidenavDataQuery";
 
 export default {
   name: "SidenavHeader",

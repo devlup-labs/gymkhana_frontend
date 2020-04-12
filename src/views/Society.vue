@@ -62,11 +62,11 @@
 
 <script>
 import Footer from "../components/common/Footer";
-import EventTable from "../components/common/EventTable";
+import EventTable from "../components/common/tables/EventTable";
 import OfficeBearerCard from "../components/OfficeBearerCard";
-import NewsTable from "../components/common/NewsTable";
+import NewsTable from "../components/common/tables/NewsTable";
 import { GET_SOCIETY_DATA_QUERY } from "../graphql/queries/societyDataQuery";
-import StripedCard from "../components/common/StripedCard";
+import StripedCard from "../components/common/cards/StripedCard";
 
 export default {
   apollo: {

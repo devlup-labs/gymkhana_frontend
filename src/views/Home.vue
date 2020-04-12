@@ -83,10 +83,10 @@
 import { GET_SOCIETIES_QUERY } from "../graphql/queries/homeSocietyQuery";
 import { GET_FESTIVAL_QUERY } from "../graphql/queries/festivalQuery";
 import FestivalCarousel from "../components/FestivalCarousel";
-import StripedCard from "../components/common/StripedCard";
+import StripedCard from "../components/common/cards/StripedCard";
 import { GET_HOME_CAROUSEL_QUERY } from "../graphql/queries/homeCarouselQuery";
-import NewsTable from "../components/common/NewsTable";
-import EventTable from "../components/common/EventTable";
+import NewsTable from "../components/common/tables/NewsTable";
+import EventTable from "../components/common/tables/EventTable";
 import { GET_HOME_GALLERY_QUERY } from "../graphql/queries/homeGalleryQuery";
 import CustomLightGallery from "../components/common/CustomLightGallery";
 

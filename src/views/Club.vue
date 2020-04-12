@@ -77,13 +77,13 @@
 </template>
 
 <script>
-import EventTable from "../components/common/EventTable";
-import NewsTable from "../components/common/NewsTable";
+import EventTable from "../components/common/tables/EventTable";
+import NewsTable from "../components/common/tables/NewsTable";
 import Footer from "../components/common/Footer";
 import { GET_CLUB_DATA_QUERY } from "../graphql/queries/clubDataQuery";
 import ActivityComponent from "../components/common/ActivityComponent";
-import CaptainComponent from "../components/common/CaptainComponent";
-import CoreMemberComponent from "../components/common/CoreMemberComponent";
+import CaptainComponent from "../components/common/cards/CaptainComponent";
+import CoreMemberComponent from "../components/common/cards/CoreMemberComponent";
 
 export default {
   apollo: {

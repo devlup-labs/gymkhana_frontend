@@ -36,7 +36,7 @@
 
 <script>
 import ForumAnswerComponent from "./ForumAnswerComponent";
-import UpvoteButton from "./common/UpvoteButton";
+import UpvoteButton from "../common/buttons/UpvoteButton";
 import AddAnswerDialog from "./AddAnswerDialog";
 export default {
   name: "ForumTopic",
