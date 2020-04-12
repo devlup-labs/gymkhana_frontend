@@ -12,7 +12,7 @@
             p.ml-2.font-weight-light April 8, 2020, 2:23 a.m.
             v-row.justify-end.mr-8.align-center
               UpvoteButton.justify-end.mr-4
-              v-btn(icon )
+              v-btn(icon @click="toggleDialog")
                 v-icon mdi-reply
           span Description
           v-row
@@ -25,14 +25,30 @@
       v-divider.mt-5
       v-timeline(align-top dense)
         ForumAnswerComponent(v-for="t in 4" :key="t")
+      v-dialog(v-model="dialog" persistent max-width="700px" )
+        AddAnswerDialog
+          template(v-slot:cross)
+            v-btn(icon @click="toggleDialog")
+              v-icon mdi-close
+          template(v-slot:answer)
+            v-btn(@click="toggleDialog" color="primary") Answer
 </template>
 
 <script>
 import ForumAnswerComponent from "./ForumAnswerComponent";
 import UpvoteButton from "./common/UpvoteButton";
+import AddAnswerDialog from "./AddAnswerDialog";
 export default {
   name: "ForumTopic",
-  components: { UpvoteButton, ForumAnswerComponent }
+  components: { AddAnswerDialog, UpvoteButton, ForumAnswerComponent },
+  data: () => ({
+    dialog: false
+  }),
+  methods: {
+    toggleDialog() {
+      this.dialog = !this.dialog;
+    }
+  }
 };
 </script>
 
