@@ -2,17 +2,16 @@
   v-timeline-item
     template(v-slot:icon)
       v-avatar(size="60").elevation-2
-        v-img(src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST4n1T70ibu7ov-7FT63MjRA-yPrjrfHem04kPtqOVWjBNQuQK")
-    span(slot="opposite") Soham
+        v-img(:src="authorAvatar?authorAvatar:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST4n1T70ibu7ov-7FT63MjRA-yPrjrfHem04kPtqOVWjBNQuQK'")
     v-card(class="elevation-2").pl-4
-      v-card-title.subtitle-1.font-weight-light.pb-0 About 6 mins ago
-      v-row.align-start
+      v-card-title.subtitle-1.font-weight-light.pb-0 {{authorName}} {{answerTime}}
+      v-row.align-start.pl-2
         v-col(cols="10")
-          p Lorem ipsum dolorn vim zril disputando voluptatibus, vix an salutandi sententiae. lorem ipsumim zril disputando voluptatibus, vix an salutandi sententiae. lorem ipsumim zril disputando voluptatibus, vix an salutandi sententiae. lorem ipsum
+          span(v-html="answerContent")
         v-col.align-center.pt-0
           v-row.mr-3.ml-5
-            UpvoteButton.pr-2
-            TopicDeleteButton
+            UpvoteButton(:upvoted="isUpvoted" :upvotes="upvotes").pr-2
+            TopicDeleteButton(v-if="isAuthor")
 
 </template>
 
@@ -21,7 +20,16 @@ import UpvoteButton from "../common/buttons/UpvoteButton";
 import TopicDeleteButton from "../common/buttons/TopicDeleteButton";
 export default {
   name: "ForumAnswerComponent",
-  components: { TopicDeleteButton, UpvoteButton }
+  components: { TopicDeleteButton, UpvoteButton },
+  props: {
+    authorAvatar: { type: String, default: null },
+    authorName: String,
+    answerTime: String,
+    answerContent: String,
+    isUpvoted: Boolean,
+    upvotes: Number,
+    isAuthor: Boolean
+  }
 };
 </script>
 
