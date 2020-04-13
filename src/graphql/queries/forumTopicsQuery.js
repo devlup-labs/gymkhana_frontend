@@ -1,6 +1,7 @@
 import gql from "graphql-tag";
 import { FULL_NAME_FRAGMENT } from "../fragments/userFullNameFragment";
 import { SIZES_FRAGMENT } from "../fragments/sizesFragment";
+import { TOPIC_DATA_FRAGMENT } from "../fragments/topicDataFragment";
 
 export const GET_FORUM_TOPICS_QUERY = gql`
   query Search($query: String!, $first: Int, $last: Int) {
@@ -13,13 +14,9 @@ export const GET_FORUM_TOPICS_QUERY = gql`
       edges {
         node {
           ... on TopicNode {
-            title
             slug
-            createdAt
-            upvotesCount
             answersCount
-            isUpvoted
-            isAuthor
+            ...TopicData
             author {
               user {
                 ...NameParts
@@ -51,4 +48,5 @@ export const GET_FORUM_TOPICS_QUERY = gql`
   }
   ${FULL_NAME_FRAGMENT}
   ${SIZES_FRAGMENT}
+  ${TOPIC_DATA_FRAGMENT}
 `;
