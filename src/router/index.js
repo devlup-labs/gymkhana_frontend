@@ -61,7 +61,7 @@ const routes = [
       {
         name: "forum-topic",
         meta: sidenavRouteMeta,
-        path: "topic/:id",
+        path: "topic/:slug",
         component: ForumTopic
       }
     ]

@@ -16,7 +16,7 @@
           v-divider.mb-5
           v-row.justify-center(v-if="search")
             v-col(cols="12" md="10" xs="12" v-for="({node},x) in this.search.edges" :key="x")
-              ForumTopicCard(:topic="node.title" :topicId="node.id" :authorName="authorName(node)" :authorInfo="authorInfo(node)" :answerAuthorName="answerAuthorName(node)"
+              ForumTopicCard(:topic="node.title" :slug="node.slug" :authorName="authorName(node)" :authorInfo="authorInfo(node)" :answerAuthorName="answerAuthorName(node)"
                 :answerTime="node.answerSet.edges.length  ?timeSince(node.answerSet.edges[0].node.createdAt):null"
                 :authorPic="node.author.avatar.sizes.find(e=>e.name=='full_size').url")
                 template(v-slot:upVote)

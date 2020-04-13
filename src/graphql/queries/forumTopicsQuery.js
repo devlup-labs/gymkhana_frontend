@@ -13,7 +13,6 @@ export const GET_FORUM_TOPICS_QUERY = gql`
       edges {
         node {
           ... on TopicNode {
-            id
             title
             slug
             createdAt
