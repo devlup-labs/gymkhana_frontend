@@ -97,8 +97,6 @@ export default {
   methods: {
     toggleDialog() {
       this.dialog = !this.dialog;
-      console.log(this.search.edgeCount);
-      console.log(this.pages);
     },
     authorName(node) {
       return node.author.user.firstName.concat(" ", node.author.user.lastName);
@@ -145,7 +143,6 @@ export default {
   },
   computed: {
     pages() {
-      console.log(this.page);
       if (this.searchTerm && this.search)
         return Math.ceil(this.search.edgeCount / 3);
       else if (this.search) return Math.ceil(this.search.totalCount / 3);
