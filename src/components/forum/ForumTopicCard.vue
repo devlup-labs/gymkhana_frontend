@@ -16,7 +16,7 @@
               v-row.pa-1(v-if="answerAuthorName")
                 v-icon(small) mdi-reply
                 span.subtitle-2 {{answerAuthorName}}
-                span.subtitle-2.font-weight-light.pl-1  replied {{answerTime}} ago
+                span.subtitle-2.font-weight-light.pl-1  replied {{answerTime}}
               v-row(v-else)
                 v-icon(small) mdi-reply
                 span Be the first to answer
