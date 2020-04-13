@@ -9,7 +9,7 @@
             prepend-inner-icon="mdi-magnify"
             label="Search any skill or name"
             clearable)
-    v-container.ms-5(v-if="search")
+    v-container.ms-5(v-if="search && searchTerm.length>=3")
       div(v-for="({ node },i) in search.edges" :key="i")
         v-container.container
           v-layout.card( row wrap flex-center)
