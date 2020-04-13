@@ -2,12 +2,15 @@
   v-row.justify-center
     v-btn(icon  )
       v-icon(left) mdi-message
-      | 023
+      | {{answerCount}}
 </template>
 
 <script>
 export default {
-  name: "CommentsCounter"
+  name: "CommentsCounter",
+  props: {
+    answerCount: Number
+  }
 };
 </script>
 

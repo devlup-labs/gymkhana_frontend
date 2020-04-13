@@ -9,10 +9,10 @@
 <script>
 export default {
   name: "UpvoteButton",
-  data: () => ({
-    upvoted: false,
-    upvotes: 0
-  }),
+  props: {
+    upvoted: Boolean,
+    upvotes: Number
+  },
   methods: {
     upvote() {
       this.upvoted = !this.upvoted;
