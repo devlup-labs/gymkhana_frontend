@@ -17,7 +17,7 @@
           v-row.justify-center(v-if="search")
             v-col(cols="12" md="10" xs="12" v-for="({node},x) in this.search.edges" :key="x")
               ForumTopicCard(:topic="node.title" :slug="node.slug" :authorName="authorName(node)" :authorInfo="authorInfo(node)" :answerAuthorName="answerAuthorName(node)"
-                :answerTime="node.answerSet.edges.length  ?timeSince(node.answerSet.edges[0].node.createdAt):null"
+                :answerTime="node.answersCount  ?timeSince(node.answerSet.edges[0].node.createdAt):null"
                 :authorPic="node.author.avatar.sizes.find(e=>e.name=='full_size').url")
                 template(v-slot:upVote)
                   UpvoteButton.justify-lg-center.pl-10(:upvotes="node.upvotesCount" :upvoted="node.isUpvoted").justify-sm-end
@@ -58,6 +58,7 @@ import { GET_FORUM_TOPICS_QUERY } from "../../graphql/queries/forumTopicsQuery";
 import UpvoteButton from "../common/buttons/UpvoteButton";
 import CommentsCounter from "../common/buttons/CommentsCounter";
 import TopicDeleteButton from "../common/buttons/TopicDeleteButton";
+import moment from "moment";
 
 export default {
   apollo: {
@@ -115,30 +116,7 @@ export default {
       else return null;
     },
     timeSince(date) {
-      date = new Date(date).getTime();
-      var seconds = Math.floor((new Date() - date) / 1000);
-      var interval = Math.floor(seconds / 31536000);
-
-      if (interval > 1) {
-        return interval + " years";
-      }
-      interval = Math.floor(seconds / 2592000);
-      if (interval > 1) {
-        return interval + " months";
-      }
-      interval = Math.floor(seconds / 86400);
-      if (interval > 1) {
-        return interval + " days";
-      }
-      interval = Math.floor(seconds / 3600);
-      if (interval > 1) {
-        return interval + " hours";
-      }
-      interval = Math.floor(seconds / 60);
-      if (interval > 1) {
-        return interval + " minutes";
-      }
-      return Math.floor(seconds) + " seconds";
+      return moment(date, "YYYYMMDDLTS").fromNow();
     }
   },
   computed: {
