@@ -1,6 +1,6 @@
 <template lang="pug">
   v-row.align-center
-    v-btn(icon  @click="upvote" :color="upvoted?'primary':'gray'")
+    v-btn(icon  @click="emitUpvote" :color="upvoted?'primary':'gray'")
       v-icon mdi-thumb-up
     span {{upvotes}}
   
@@ -14,7 +14,8 @@ export default {
     upvotes: Number
   },
   methods: {
-    upvote() {
+    emitUpvote() {
+      this.$emit("upVote");
       this.upvoted = !this.upvoted;
       this.upvotes = this.upvoted ? this.upvotes + 1 : this.upvotes - 1;
     }
