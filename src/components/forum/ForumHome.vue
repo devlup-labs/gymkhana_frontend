@@ -29,12 +29,10 @@
     v-container.mt-5
         v-pagination(circle :length="pages" v-model="page" total-visible="7" next-icon="mdi-chevron-right" prev-icon="mdi-chevron-left")
     v-dialog(v-model="dialog" persistent max-width="700px" )
-      AddTopicDialog
+      AddTopicDialog(v-on:create="createTopic")
         template(v-slot:cross)
           v-btn(icon @click="toggleDialog")
             v-icon mdi-close
-        template(v-slot:create)
-          v-btn(@click="toggleDialog" color="primary") Create
     v-tooltip(left color="black")
       template(v-slot:activator="{ on }")
         v-btn.mr-5.mb-12(
@@ -61,6 +59,7 @@ import CommentsCounter from "../common/buttons/CommentsCounter";
 import TopicDeleteButton from "../common/buttons/TopicDeleteButton";
 import moment from "moment";
 import { UPVOTE_MUTATION } from "../../graphql/mutations/upVoteMutation";
+import { CREATE_TOPIC_MUTATION } from "../../graphql/mutations/createTopicMutation";
 
 export default {
   apollo: {
@@ -139,6 +138,34 @@ export default {
     },
     clearSearchTerm() {
       this.searchTerm = "";
+    },
+    createTopic(category, title, tags, content) {
+      console.log(category);
+      this.$apollo.mutate({
+        // Query
+        mutation: CREATE_TOPIC_MUTATION,
+        refetchQueries: [
+          {
+            query: GET_FORUM_TOPICS_QUERY,
+            variables: {
+              query: this.searchTerm,
+              first: this.page * 3,
+              last: 3
+            }
+          }
+        ],
+        // Parameters
+        variables: {
+          input: {
+            category: category,
+            title: title,
+            tags: tags,
+            content: content
+          }
+        },
+        client: "private"
+      });
+      this.toggleDialog();
     }
   },
   computed: {
