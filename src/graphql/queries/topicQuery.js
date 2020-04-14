@@ -22,6 +22,7 @@ export const GET_TOPIC_QUERY = gql`
           answerSet {
             edges {
               node {
+                id
                 content
                 upvotesCount
                 isAuthor
