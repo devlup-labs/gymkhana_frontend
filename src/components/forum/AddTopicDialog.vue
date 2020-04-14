@@ -7,36 +7,39 @@
     v-divider
     v-card-subtitle
       p.pt-4 Category
-      v-select(:items="categories" item-text="category" v-model="select")
-      v-text-field(
-        v-model="title"
-        prepend-inner-icon="mdi-pencil"
-        label="Title"
-        clearable)
-      v-col.pb-0
-        p.mb-0.font-weight-light Tags
-        v-chip.elevation-2.font-weight-bold.ma-1(
-          xs2
-          color="light-blue darken-1 white--text"
-          v-for="(tag, i) in tags"
-          :key="i"
-          close
-          @click:close="del(tag)"
-        ) {{ tag }}
-      v-text-field.mb-3.mt-0.pt-0(
-        hint="Enter A Tag"
-        persistent-hint
-        @keyup.enter="e => add(e)"
-      )
-      v-textarea(label="Description" v-model="description" :counter="300" outlined).mt-2
+      v-form( ref="form" v-model="validForm")
+        v-select(:items="categories" item-text="category" item-value="key" v-model="select" :rules="[v => !!v || 'Item is required']")
+        v-text-field(
+          v-model="title"
+          prepend-inner-icon="mdi-pencil"
+          label="Title"
+          :rules="[v => !!v || 'Title is required']"
+          clearable)
+        v-col.pb-0
+          p.mb-0.font-weight-light Tags
+          v-chip.elevation-2.font-weight-bold.ma-1(
+            xs2
+            color="light-blue darken-1 white--text"
+            v-for="(tag, i) in tags"
+            :key="i"
+            close
+            @click:close="del(tag)"
+          ) {{ tag }}
+        v-text-field.mb-3.mt-0.pt-0(
+          hint="Enter A Tag"
+          persistent-hint
+          @keyup.enter="e => add(e)"
+        )
+        v-textarea(label="Description" v-model="content" :counter="300" outlined :rules="[v => !!v || 'Content is required']" ).mt-2
     v-card-actions.mr-6.pb-6.justify-end
-      slot(name="create")
+      v-btn(@click="createTopic" :disabled='!validForm' color="primary") Create
 </template>
 
 <script>
 export default {
   name: "AddTopicDialog",
   data: () => ({
+    validForm: false,
     categories: [
       { key: "Q", category: "Question" },
       { key: "F", category: "Feedback" },
@@ -46,7 +49,7 @@ export default {
     select: { key: "Q", category: "Question" },
     title: null,
     tags: [],
-    description: null
+    content: null
   }),
   methods: {
     add: function(event) {
@@ -55,6 +58,15 @@ export default {
     },
     del: function(tag) {
       this.tags = this.tags.filter(e => e !== tag);
+    },
+    createTopic() {
+      this.$emit(
+        "create",
+        this.select.key,
+        this.title,
+        this.tags.join(","),
+        this.content
+      );
     }
   }
 };
