@@ -10,7 +10,8 @@
                 outline
                 prepend-inner-icon="mdi-magnify"
                 label="Search Forum for Topics"
-                clearable)
+                clearable
+                @click:clear="clearSearchTerm")
               v-btn(color="primary" ).mb-2
                 v-icon mdi-magnify
           v-divider.mb-5
@@ -20,7 +21,7 @@
                 :answerTime="node.answersCount  ?timeSince(node.answerSet.edges[0].node.createdAt):null"
                 :authorPic="node.author.avatar.sizes.find(e=>e.name=='full_size').url")
                 template(v-slot:upVote)
-                  UpvoteButton.justify-lg-center.pl-10(:upvotes="node.upvotesCount" :upvoted="node.isUpvoted").justify-sm-end
+                  UpvoteButton.justify-lg-center.pl-10(:upvotes="node.upvotesCount" :upvoted="node.isUpvoted" v-on:upVote="upVoteClick(node.id,true)").justify-sm-end
                 template(v-slot:answersCount)
                   CommentsCounter(:answerCount="node.answersCount")
                 template(v-slot:deleteButton)
@@ -59,25 +60,21 @@ import UpvoteButton from "../common/buttons/UpvoteButton";
 import CommentsCounter from "../common/buttons/CommentsCounter";
 import TopicDeleteButton from "../common/buttons/TopicDeleteButton";
 import moment from "moment";
+import { UPVOTE_MUTATION } from "../../graphql/mutations/upVoteMutation";
 
 export default {
   apollo: {
     search: {
       query: GET_FORUM_TOPICS_QUERY,
       variables() {
-        if (this.searchTerm) {
-          return {
-            query: this.searchTerm,
-            first: this.page * 3,
-            last: 3
-          };
-        } else {
-          return {
-            query: "",
-            first: this.page * 3,
-            last: 3
-          };
-        }
+        return {
+          query: this.searchTerm,
+          first: this.page * 3,
+          last: 3
+        };
+      },
+      skip() {
+        return this.searchTerm === null;
       }
     },
     $client: "private"
@@ -91,7 +88,7 @@ export default {
     ForumTopicCard
   },
   data: () => ({
-    searchTerm: null,
+    searchTerm: "",
     page: 1,
     dialog: false
   }),
@@ -117,6 +114,31 @@ export default {
     },
     timeSince(date) {
       return moment(date, "YYYYMMDDLTS").fromNow();
+    },
+    upVoteClick(id, isTopic) {
+      this.$apollo.mutate({
+        // Query
+        mutation: UPVOTE_MUTATION,
+        refetchQueries: [
+          {
+            query: GET_FORUM_TOPICS_QUERY,
+            variables: {
+              query: this.searchTerm,
+              first: this.page * 3,
+              last: 3
+            }
+          }
+        ],
+        // Parameters
+        variables: {
+          id: id,
+          isTopic: isTopic
+        },
+        client: "private"
+      });
+    },
+    clearSearchTerm() {
+      this.searchTerm = "";
     }
   },
   computed: {

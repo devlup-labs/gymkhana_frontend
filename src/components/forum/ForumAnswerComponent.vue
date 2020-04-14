@@ -10,7 +10,7 @@
           span(v-html="answerContent")
         v-col.align-center.pt-0
           v-row.mr-3.ml-5
-            UpvoteButton(:upvoted="isUpvoted" :upvotes="upvotes").pr-2
+            UpvoteButton(:upvoted="isUpvoted" :upvotes="upvotes" v-on:upVote="upVoteClick").pr-2
             TopicDeleteButton(v-if="isAuthor")
 
 </template>
@@ -29,6 +29,11 @@ export default {
     isUpvoted: Boolean,
     upvotes: Number,
     isAuthor: Boolean
+  },
+  methods: {
+    upVoteClick() {
+      this.$emit("upVote");
+    }
   }
 };
 </script>

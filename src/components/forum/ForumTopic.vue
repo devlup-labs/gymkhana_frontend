@@ -11,7 +11,7 @@
             p {{topic.author.user.firstName.concat(' ',topic.author.user.lastName)}}
             p.ml-2.font-weight-light {{createdAt}}
             v-row.justify-end.mr-8.align-center
-              UpvoteButton.justify-end.mr-4(:upvotes="topic.upvotesCount" :upvoted="topic.isUpvoted" )
+              UpvoteButton.justify-end.mr-4(:upvotes="topic.upvotesCount" :upvoted="topic.isUpvoted" v-on:upVote="upVoteClick(topic.id,true)" )
               v-btn(icon @click="toggleDialog")
                 v-icon mdi-reply
           span(v-if="topic.content" v-html="topic.content")
@@ -32,6 +32,7 @@
         :isUpvoted="node.isUpvoted"
         :upvotes="node.upvotesCount"
         :isAuthor="node.isAuthor"
+        v-on:upVote="upVoteClick(node.id,false)"
         )
       v-row(v-else).justify-center.display-1.font-weight-light.ma-6
         v-btn(icon @click="toggleDialog")
@@ -52,6 +53,7 @@ import UpvoteButton from "../common/buttons/UpvoteButton";
 import AddAnswerDialog from "./AddAnswerDialog";
 import { GET_TOPIC_QUERY } from "../../graphql/queries/topicQuery";
 import moment from "moment";
+import { UPVOTE_MUTATION } from "../../graphql/mutations/upVoteMutation";
 export default {
   apollo: {
     _topic: {
@@ -76,6 +78,26 @@ export default {
     },
     timeSince(date) {
       return moment(date, "YYYYMMDDLTS").fromNow();
+    },
+    upVoteClick(id, isTopic) {
+      this.$apollo.mutate({
+        // Query
+        mutation: UPVOTE_MUTATION,
+        refetchQueries: [
+          {
+            query: GET_TOPIC_QUERY,
+            variables: {
+              slug: this.$route.params.slug
+            }
+          }
+        ],
+        // Parameters
+        variables: {
+          id: id,
+          isTopic: isTopic
+        },
+        client: "private"
+      });
     }
   },
   computed: {
