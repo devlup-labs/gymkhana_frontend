@@ -23,7 +23,7 @@
                 template(v-slot:upVote)
                   UpvoteButton.justify-lg-center.pl-10(:upvotes="node.upvotesCount" :upvoted="node.isUpvoted" v-on:upVote="upVoteClick(node.id,true)").justify-sm-end
                 template(v-slot:answersCount)
-                  CommentsCounter(:answerCount="node.answersCount")
+                  CommentsCounter(:answerCount="node.answersCount" :slug="node.slug")
                 template(v-slot:deleteButton)
                   TopicDeleteButton(v-if="node.isAuthor")
     v-container.mt-5

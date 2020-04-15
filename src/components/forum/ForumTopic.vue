@@ -14,6 +14,8 @@
               UpvoteButton.justify-end.mr-4(:upvotes="topic.upvotesCount" :upvoted="topic.isUpvoted" v-on:upVote="upVoteClick(topic.id,true)" )
               v-btn(icon @click="toggleDialog")
                 v-icon mdi-reply
+              v-col(cols="1")
+                TopicDeleteButton(v-if="topic.isAuthor")
           span(v-if="topic.content" v-html="topic.content")
           v-row(v-if="topic.tags")
             v-chip.elevation-2.font-weight-bold.ma-1(
@@ -54,6 +56,7 @@ import AddAnswerDialog from "./AddAnswerDialog";
 import { GET_TOPIC_QUERY } from "../../graphql/queries/topicQuery";
 import moment from "moment";
 import { UPVOTE_MUTATION } from "../../graphql/mutations/upVoteMutation";
+import TopicDeleteButton from "../common/buttons/TopicDeleteButton";
 export default {
   apollo: {
     _topic: {
@@ -68,7 +71,12 @@ export default {
     $client: "private"
   },
   name: "ForumTopic",
-  components: { AddAnswerDialog, UpvoteButton, ForumAnswerComponent },
+  components: {
+    TopicDeleteButton,
+    AddAnswerDialog,
+    UpvoteButton,
+    ForumAnswerComponent
+  },
   data: () => ({
     dialog: false
   }),
