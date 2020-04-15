@@ -1,7 +1,6 @@
 import gql from "graphql-tag";
-import { SIZES_FRAGMENT } from "../fragments/sizesFragment";
 import { FULL_NAME_FRAGMENT } from "../fragments/userFullNameFragment";
-import { SOCIAL_MEDIA_ICON_FRAGMENT } from "../fragments/socialMediaIconFragment";
+import { USER_PROFILE_DATA_FRAGMENT } from "../fragments/userProfileDataFragment";
 
 export const VIEWER_PROFILE_QUERY = gql`
   query {
@@ -10,33 +9,10 @@ export const VIEWER_PROFILE_QUERY = gql`
       ...NameParts
       email
       userprofile {
-        socialLinks {
-          edges {
-            node {
-              ...SocialMedia
-            }
-          }
-        }
-        roll
-        gender
-        phone
-        dob
-        prog
-        year
-        branch
-        hometown
-        cover {
-          ...Sizes
-        }
-        avatar {
-          ...Sizes
-        }
-        skills
-        about
+        ...UserProfile
       }
     }
   }
-  ${SIZES_FRAGMENT}
   ${FULL_NAME_FRAGMENT}
-  ${SOCIAL_MEDIA_ICON_FRAGMENT}
+  ${USER_PROFILE_DATA_FRAGMENT}
 `;

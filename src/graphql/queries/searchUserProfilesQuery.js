@@ -8,6 +8,7 @@ export const SEARCH_USER_PROFILE_QUERY = gql`
       edges {
         node {
           ... on UserProfileNode {
+            roll
             user {
               ...NameParts
             }
