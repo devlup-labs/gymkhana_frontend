@@ -18,6 +18,8 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: npm install, lint, test and build
       run: |
+        Xvfb :1 -screen 0 1280x800x24 &
+        export DISPLAY=:1
         npm ci
         npm run lint
         npm run test:unit

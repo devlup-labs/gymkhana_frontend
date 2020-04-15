@@ -1,0 +1,54 @@
+on:
+  push:
+    tags:
+      - 'v*'
+
+name: Release
+
+jobs:
+  build:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Generate changelog
+        id: changelog
+        run: |
+          git fetch --depth=1 origin +refs/tags/*:refs/tags/* 1>&2
+          git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/* 1>&2
+          git fetch --prune --unshallow 1>&2
+          LOG=$(git log $(git describe --tags --always `git rev-list --tags --max-count=2` | sed -z 's/ /../g') --pretty=format:"[\`%h\`](http://github.com/devlup-labs/gymkhana_frontend/commit/%H) - %s  " --reverse)
+          LOG="## Changelog
+          $LOG"
+          LOG="${LOG//'%'/'%25'}"
+          LOG="${LOG//$'\n'/'%0A'}"
+          LOG="${LOG//$'\r'/'%0D'}"
+          echo "::set-output name=changelog::$LOG"
+      - name: Build Project
+        id: vue_build
+        run: |
+          npm install
+          npm run build
+          tar -czvf dist.tar.gz dist
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: ${{ steps.changelog.outputs.changelog }}
+          draft: false
+          prerelease: false
+      - name: Upload Release Archive
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dist.tar.gz
+          asset_name: dist.tar.gz
+          asset_content_type: application/gzip
