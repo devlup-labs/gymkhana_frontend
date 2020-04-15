@@ -13,6 +13,7 @@ import Club from "../views/Club";
 import ForumHome from "../components/forum/ForumHome";
 import ForumTopic from "../components/forum/ForumTopic";
 import Forum from "../views/Forum";
+import UserProfile from "../components/konnekt/UserProfile";
 
 Vue.use(VueRouter);
 
@@ -87,6 +88,12 @@ const routes = [
         component: KonnektSearch
       }
     ]
+  },
+  {
+    name: "profile-view",
+    path: "/profile/:roll",
+    meta: sidenavRouteMeta,
+    component: UserProfile
   },
   {
     name: "profile",
