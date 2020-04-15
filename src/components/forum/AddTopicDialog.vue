@@ -62,7 +62,7 @@ export default {
     createTopic() {
       this.$emit(
         "create",
-        this.select.key,
+        this.select,
         this.title,
         this.tags.join(","),
         this.content

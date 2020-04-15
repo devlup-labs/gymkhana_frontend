@@ -140,7 +140,6 @@ export default {
       this.searchTerm = "";
     },
     createTopic(category, title, tags, content) {
-      console.log(category);
       this.$apollo.mutate({
         // Query
         mutation: CREATE_TOPIC_MUTATION,
