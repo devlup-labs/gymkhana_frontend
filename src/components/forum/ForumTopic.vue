@@ -15,7 +15,7 @@
               v-btn(icon @click="toggleDialog")
                 v-icon mdi-reply
               v-col(cols="1")
-                TopicDeleteButton(v-if="topic.isAuthor")
+                TopicDeleteButton(v-if="topic.isAuthor" v-on:delete_msg="deleteMethod(topic.id,true)")
           span(v-if="topic.content" v-html="topic.content")
           v-row(v-if="topic.tags")
             v-chip.elevation-2.font-weight-bold.ma-1(
@@ -35,6 +35,7 @@
         :upvotes="node.upvotesCount"
         :isAuthor="node.isAuthor"
         v-on:upVote="upVoteClick(node.id,false)"
+        v-on:delete="deleteMethod(node.id,false)"
         )
       v-row(v-else).justify-center.display-1.font-weight-light.ma-6
         v-btn(icon @click="toggleDialog")
@@ -57,6 +58,7 @@ import moment from "moment";
 import { UPVOTE_MUTATION } from "../../graphql/mutations/upVoteMutation";
 import TopicDeleteButton from "../common/buttons/TopicDeleteButton";
 import { ADD_ANSWER_MUTATION } from "../../graphql/mutations/addAnswerMutation";
+import { DELETE_MUTATION } from "../../graphql/mutations/deleteMutation";
 export default {
   apollo: {
     _topic: {
@@ -131,6 +133,28 @@ export default {
         })
         .then(() => {
           this.toggleDialog();
+        });
+    },
+    deleteMethod(id, is_topic) {
+      this.$apollo
+        .mutate({
+          // Query
+          mutation: DELETE_MUTATION,
+          // Parameters
+          variables: {
+            id: id,
+            isTopic: is_topic
+          },
+          client: "private"
+        })
+        .then(() => {
+          if (is_topic) {
+            this.$router.go(-1);
+          } else {
+            this.$apollo.queries._topic.refetch({
+              slug: this.$route.params.slug
+            });
+          }
         });
     }
   },

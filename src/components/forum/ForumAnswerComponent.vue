@@ -11,13 +11,14 @@
         v-col.align-center.pt-0
           v-row.mr-3.ml-5
             UpvoteButton(:upvoted="isUpvoted" :upvotes="upvotes" v-on:upVote="upVoteClick").pr-2
-            TopicDeleteButton(v-if="isAuthor")
+            TopicDeleteButton(v-if="isAuthor" v-on:delete_msg="deleteAnswerClicked")
 
 </template>
 
 <script>
 import UpvoteButton from "../common/buttons/UpvoteButton";
 import TopicDeleteButton from "../common/buttons/TopicDeleteButton";
+
 export default {
   name: "ForumAnswerComponent",
   components: { TopicDeleteButton, UpvoteButton },
@@ -33,6 +34,9 @@ export default {
   methods: {
     upVoteClick() {
       this.$emit("upVote");
+    },
+    deleteAnswerClicked() {
+      this.$emit("delete");
     }
   }
 };

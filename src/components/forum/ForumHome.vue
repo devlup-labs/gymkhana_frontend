@@ -25,7 +25,7 @@
                 template(v-slot:answersCount)
                   CommentsCounter(:answerCount="node.answersCount" :slug="node.slug")
                 template(v-slot:deleteButton)
-                  TopicDeleteButton(v-if="node.isAuthor")
+                  TopicDeleteButton(v-if="node.isAuthor" v-on:delete_msg="deleteMethod(node.id,true)")
     v-container.mt-5
         v-pagination(circle :length="pages" v-model="page" total-visible="7" next-icon="mdi-chevron-right" prev-icon="mdi-chevron-left")
     v-dialog(v-model="dialog" persistent max-width="700px" )
@@ -60,6 +60,7 @@ import TopicDeleteButton from "../common/buttons/TopicDeleteButton";
 import moment from "moment";
 import { UPVOTE_MUTATION } from "../../graphql/mutations/upVoteMutation";
 import { CREATE_TOPIC_MUTATION } from "../../graphql/mutations/createTopicMutation";
+import { DELETE_MUTATION } from "../../graphql/mutations/deleteMutation";
 
 export default {
   apollo: {
@@ -165,6 +166,28 @@ export default {
         client: "private"
       });
       this.toggleDialog();
+    },
+    deleteMethod(id, is_topic) {
+      this.$apollo.mutate({
+        // Query
+        mutation: DELETE_MUTATION,
+        refetchQueries: [
+          {
+            query: GET_FORUM_TOPICS_QUERY,
+            variables: {
+              query: this.searchTerm,
+              first: this.page * 3,
+              last: 3
+            }
+          }
+        ],
+        // Parameters
+        variables: {
+          id: id,
+          isTopic: is_topic
+        },
+        client: "private"
+      });
     }
   },
   computed: {
