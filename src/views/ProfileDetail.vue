@@ -1,6 +1,6 @@
 <template lang="pug">
   v-flex
-    ProfileTemplate(:viewer="viewer")
+    ProfileTemplate(v-if="!$apollo.queries.viewer.loading" :user="viewer")
       template(v-slot:sLinkAdd)
         v-tooltip(left color="black" )
           template(v-slot:activator="{ on }")
