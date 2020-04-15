@@ -41,12 +41,11 @@
           v-icon mdi-reply
         |Be the first to answer
       v-dialog(v-model="dialog" persistent max-width="700px" )
-        AddAnswerDialog
+        AddAnswerDialog(v-on:answer="addAnswer")
           template(v-slot:cross)
             v-btn(icon @click="toggleDialog")
               v-icon mdi-close
-          template(v-slot:answer)
-            v-btn(@click="toggleDialog" color="primary") Answer
+
 </template>
 
 <script>
@@ -57,6 +56,7 @@ import { GET_TOPIC_QUERY } from "../../graphql/queries/topicQuery";
 import moment from "moment";
 import { UPVOTE_MUTATION } from "../../graphql/mutations/upVoteMutation";
 import TopicDeleteButton from "../common/buttons/TopicDeleteButton";
+import { ADD_ANSWER_MUTATION } from "../../graphql/mutations/addAnswerMutation";
 export default {
   apollo: {
     _topic: {
@@ -106,6 +106,32 @@ export default {
         },
         client: "private"
       });
+    },
+    addAnswer(content) {
+      this.$apollo
+        .mutate({
+          // Query
+          mutation: ADD_ANSWER_MUTATION,
+          refetchQueries: [
+            {
+              query: GET_TOPIC_QUERY,
+              variables: {
+                slug: this.$route.params.slug
+              }
+            }
+          ],
+          // Parameters
+          variables: {
+            input: {
+              topic: this.topic.id,
+              content: content
+            }
+          },
+          client: "private"
+        })
+        .then(() => {
+          this.toggleDialog();
+        });
     }
   },
   computed: {

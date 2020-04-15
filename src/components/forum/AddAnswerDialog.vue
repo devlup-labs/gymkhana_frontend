@@ -7,17 +7,24 @@
     v-divider
     v-card-subtitle
       p.pt-4 Answer
-      v-textarea(label="Description" v-model="description" :counter="300" outlined).mt-2
+      v-form(ref="form" v-model="valid")
+        v-textarea(label="Description" v-model="description" :counter="300" outlined :rules="[v=>!!v || 'Required']" ).mt-2
     v-card-actions.mr-6.pb-6.justify-end
-      slot(name="answer")
+      v-btn(@click="answer" color="primary" :disabled="!valid" ) Answer
 </template>
 
 <script>
 export default {
   name: "AddAnswerDialog",
   data: () => ({
-    description: null
-  })
+    description: null,
+    valid: false
+  }),
+  methods: {
+    answer() {
+      this.$emit("answer", this.description);
+    }
+  }
 };
 </script>
 
