@@ -4,8 +4,8 @@
 </template>
 
 <script>
-import { GET_USER_PROFILE_QUERY } from "../../graphql/queries/getUserProfileQuery";
-import ProfileTemplate from "./ProfileTemplate";
+import { GET_USER_PROFILE_QUERY } from "../graphql/queries/getUserProfileQuery";
+import ProfileTemplate from "../components/konnekt/ProfileTemplate";
 
 export default {
   name: "UserProfile",
@@ -13,8 +13,10 @@ export default {
   apollo: {
     profile: {
       query: GET_USER_PROFILE_QUERY,
-      variables: {
-        roll: "B18CSE053"
+      variables() {
+        return {
+          roll: this.$route.params.roll
+        };
       }
     },
     $client: "private"

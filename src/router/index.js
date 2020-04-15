@@ -13,7 +13,7 @@ import Club from "../views/Club";
 import ForumHome from "../components/forum/ForumHome";
 import ForumTopic from "../components/forum/ForumTopic";
 import Forum from "../views/Forum";
-import UserProfile from "../components/konnekt/UserProfile";
+import UserProfile from "../views/UserProfile";
 
 Vue.use(VueRouter);
 

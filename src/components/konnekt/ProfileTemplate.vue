@@ -10,7 +10,8 @@
     v-container.pa-4
       v-row(justify="center" :style="{'margin-top': `-${$vuetify.theme.options.parallaxHeight/3}px`}")
         v-col(cols="12" sm="10" lg="8")
-          ProfileCard(:name="user.firstName.concat(' ',user.lastName)" :rollNumber="profile1.roll" :avatarLink="profile1.avatar.sizes.find(e => e.name === 'full_size').url" :coverLink="profile1.cover.sizes.find(e => e.name === 'full_size').url")
+          ProfileCard(:name="user.firstName.concat(' ',user.lastName)" :rollNumber="profile.roll" :avatarLink="profile.avatar.sizes.length?profile.avatar.sizes.find(e => e.name === 'full_size').url:'https://cdn2.iconfinder.com/data/icons/people-80/96/Picture1-512.png'"
+            :coverLink="profile.cover.sizes.length?profile.cover.sizes.find(e => e.name === 'full_size').url:'https://students.iitj.ac.in/static/assets/others/cover2.svg'")
       v-row(justify="center")
         v-col(cols="12" sm="5" lg="4")
           v-card(elevation="4")
@@ -22,7 +23,7 @@
                   v-list-item-icon
                     v-icon(size="25") {{ iconMap.info[key] }}
                   v-list-item-title(v-if="key === 'email'").sub-title-1 {{ user[key] }}
-                  v-list-item-title(v-else).sub-title-1 {{ profile1[key] }}
+                  v-list-item-title(v-else).sub-title-1 {{ profile[key] }}
         v-col(cols="12" sm="5" lg="4")
           v-card(elevation="4")
             v-card-title.headline Branch, DoB and more
@@ -32,8 +33,8 @@
                 v-list-item(v-for="(key, i) in Object.keys(iconMap.other)" :key="i")
                   v-list-item-icon
                     v-icon(size="25") {{ iconMap.other[key] }}
-                  v-list-item-title(v-if="key === 'dob'").sub-title-1 {{ profile1[key] | moment }}
-                  v-list-item-title(v-else).sub-title-1 {{ profile1[key] }}
+                  v-list-item-title(v-if="key === 'dob'").sub-title-1 {{ profile[key] | moment }}
+                  v-list-item-title(v-else).sub-title-1 {{ profile[key] }}
       v-row(justify="center")
         v-col(cols="12" sm="5" lg="4")
           v-card(elevation="4")
@@ -43,7 +44,7 @@
               v-chip.elevation-2.font-weight-bold.ma-1(
                 xs2
                 color="light-blue darken-1 white--text"
-                v-for="(skill, i) in profile1.skills.split(',')"
+                v-for="(skill, i) in profile.skills.split(',')"
                 v-bind:key="i"
               ) {{ skill }}
         v-col(cols="12" sm="5" lg="4")
@@ -51,7 +52,7 @@
             v-card-title.headline About
             v-divider.mx-2
             v-card-text.text-center
-              p.title.font-weight-regular {{profile1.about}}
+              p.title.font-weight-regular {{profile.about}}
       v-row
         v-col(sm="5" offset-sm="1" lg="4" offset-lg="2")
           v-card(elevation="4")
@@ -62,7 +63,7 @@
             v-card-text
               v-col.text-center.px-0
                 v-btn.ma-1(
-                  v-for="({node}, i) in profile1.socialLinks.edges"
+                  v-for="({node}, i) in profile.socialLinks.edges"
                   :key="i"
                   :color="$vuetify.theme.options.socialMediaIconMap[node.socialMedia].color"
                   rounded
@@ -99,7 +100,7 @@ export default {
         hometown: "mdi-map-marker"
       }
     }),
-    profile1() {
+    profile() {
       return this.user.userprofile;
     }
   },

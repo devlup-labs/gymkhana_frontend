@@ -16,7 +16,7 @@
             v-flex(xs3 lg2 md2 pa-3 layout justify-center)
               a(@click="goToProfile(node.roll)")
                 v-avatar.elevation-4(size="100" :tile="false" )
-                  v-img(:src="node.avatar.sizes.find(e=>e.name==='full_size').url" alt="Image")
+                  v-img(:src="node.avatar.sizes.length?node.avatar.sizes.find(e=>e.name==='full_size').url:'https://cdn2.iconfinder.com/data/icons/people-80/96/Picture1-512.png'" alt="Image")
             v-flex(
               text-lg-center
               text-md-center
