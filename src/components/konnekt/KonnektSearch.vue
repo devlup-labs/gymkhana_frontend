@@ -67,7 +67,12 @@ export default {
   name: "KonnektSearch",
   data: () => ({
     searchTerm: null
-  })
+  }),
+  created() {
+    if (this.$route.query.searchTerm) {
+      this.searchTerm = this.$route.query.searchTerm;
+    }
+  }
 };
 </script>
 
