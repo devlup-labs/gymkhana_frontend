@@ -31,7 +31,7 @@
 <script>
 import ProfileCard from "../components/ProfileCard";
 import { VIEWER_PROFILE_QUERY } from "../graphql/queries/viewerProfileQuery";
-import ProfileTemplate from "../components/konnekt/profileTemplate";
+import ProfileTemplate from "../components/konnekt/ProfileTemplate";
 export default {
   name: "ProfileDetail",
   apollo: {

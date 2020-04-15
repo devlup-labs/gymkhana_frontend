@@ -79,7 +79,7 @@ import moment from "moment";
 import ProfileCard from "../ProfileCard";
 
 export default {
-  name: "profileTemplate",
+  name: "ProfileTemplate",
   components: { ProfileCard },
   props: {
     viewer: {}
