@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-container
+  v-container(v-if="!$apollo.queries.search.loading")
     v-responsive(min-width="40px")
       v-layout(row fill-height)
         v-flex(lg6 xs6 offset-xs3)
@@ -14,8 +14,9 @@
         v-container.container
           v-layout.card( row wrap flex-center)
             v-flex(xs3 lg2 md2 pa-3 layout justify-center)
-              v-avatar.elevation-4(size="100" :tile="false")
-                v-img(:src="node.avatar" alt="Image")
+              a(@click="goToProfile(node.roll)")
+                v-avatar.elevation-4(size="100" :tile="false" )
+                  v-img(:src="node.avatar.sizes.find(e=>e.name==='full_size').url" alt="Image")
             v-flex(
               text-lg-center
               text-md-center
@@ -28,7 +29,8 @@
               mt-5
               :class="{ 'pt-4 ms-4': $vuetify.breakpoint.smAndDown, 'pt-0': $vuetify.breakpoint.mdAndUp }"
             )
-              h2.mb-3.font-weight-light {{ node.user.firstName }} {{ node.user.lastName }}
+              a(@click="goToProfile(node.roll)")
+                h2.mb-3.font-weight-light.black--text {{ node.user.firstName }} {{ node.user.lastName }}
             v-flex(
               text-xs-center
               text-md-center
@@ -42,6 +44,7 @@
                 color="light-blue darken-1 white--text"
                 v-for="(skill,i) in node.skills.split(',')"
                 v-bind:key="i"
+                @click="searchChip(skill)"
               ) {{ skill }}
 </template>
 
@@ -66,11 +69,19 @@ export default {
   },
   name: "KonnektSearch",
   data: () => ({
-    searchTerm: null
+    searchTerm: ""
   }),
   created() {
     if (this.$route.query.searchTerm) {
       this.searchTerm = this.$route.query.searchTerm;
+    }
+  },
+  methods: {
+    searchChip(skill) {
+      this.searchTerm = skill;
+    },
+    goToProfile(roll) {
+      this.$router.push({ name: "profile-view", params: { roll: roll } });
     }
   }
 };

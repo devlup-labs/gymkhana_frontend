@@ -6,11 +6,11 @@
       :height="$vuetify.theme.options.parallaxHeight"
     )
       v-layout.justify-center.align-center.fill-height
-        h1 About {{viewer.firstName.concat(' ',viewer.lastName)}}
+        h1 About {{user.firstName.concat(' ',user.lastName)}}
     v-container.pa-4
       v-row(justify="center" :style="{'margin-top': `-${$vuetify.theme.options.parallaxHeight/3}px`}")
         v-col(cols="12" sm="10" lg="8")
-          ProfileCard(:name="viewer.firstName.concat(' ',viewer.lastName)" :rollNumber="profile1.roll" :avatarLink="profile1.avatar.sizes.find(e => e.name === 'full_size').url" :coverLink="profile1.cover.sizes.find(e => e.name === 'full_size').url")
+          ProfileCard(:name="user.firstName.concat(' ',user.lastName)" :rollNumber="profile1.roll" :avatarLink="profile1.avatar.sizes.find(e => e.name === 'full_size').url" :coverLink="profile1.cover.sizes.find(e => e.name === 'full_size').url")
       v-row(justify="center")
         v-col(cols="12" sm="5" lg="4")
           v-card(elevation="4")
@@ -21,7 +21,7 @@
                 v-list-item(v-for="(key, i) in Object.keys(iconMap.info)" :key="i")
                   v-list-item-icon
                     v-icon(size="25") {{ iconMap.info[key] }}
-                  v-list-item-title(v-if="key === 'email'").sub-title-1 {{ viewer[key] }}
+                  v-list-item-title(v-if="key === 'email'").sub-title-1 {{ user[key] }}
                   v-list-item-title(v-else).sub-title-1 {{ profile1[key] }}
         v-col(cols="12" sm="5" lg="4")
           v-card(elevation="4")
@@ -82,7 +82,7 @@ export default {
   name: "ProfileTemplate",
   components: { ProfileCard },
   props: {
-    viewer: {}
+    user: {}
   },
   computed: {
     iconMap: () => ({
@@ -100,7 +100,7 @@ export default {
       }
     }),
     profile1() {
-      return this.viewer.userprofile;
+      return this.user.userprofile;
     }
   },
   filters: {

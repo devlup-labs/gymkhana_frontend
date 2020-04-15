@@ -16,7 +16,7 @@
 export default {
   name: "KonnektHome",
   data: () => ({
-    searchTerm: null
+    searchTerm: ""
   })
 };
 </script>
