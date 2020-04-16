@@ -12,5 +12,6 @@ module.exports = {
     apollo: {
       lintGQL: true
     }
-  }
+  },
+  publicPath: "/static/"
 };
