@@ -68,8 +68,7 @@ export default {
           variables: {
             username: this.email,
             password: this.password
-          },
-          client: "private"
+          }
         })
         .then(data => {
           onLogin(
