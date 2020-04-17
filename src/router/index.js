@@ -51,6 +51,9 @@ const routes = [
   {
     path: "/forum",
     component: Forum,
+    beforeEnter: (to, from, next) => {
+      loginRoute(to, from, next);
+    },
     meta: sidenavRouteMeta,
     children: [
       {
@@ -93,6 +96,9 @@ const routes = [
     name: "profile-view",
     path: "/profile/:roll",
     meta: sidenavRouteMeta,
+    beforeEnter: (to, from, next) => {
+      loginRoute(to, from, next);
+    },
     component: UserProfile
   },
   {
