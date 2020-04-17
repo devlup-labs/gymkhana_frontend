@@ -9,7 +9,7 @@
             prepend-inner-icon="mdi-magnify"
             label="Search any skill or name"
             clearable)
-    v-container.ms-5(v-if="!$apollo.queries.search.loading && search && searchTerm.length>=3")
+    v-container.ms-5(v-if="!$apollo.queries.search.loading && search && searchTerm && searchTerm.length>=3")
       div(v-for="({ node },i) in search.edges" :key="i")
         v-container.container
           v-layout.card( row wrap flex-center)
@@ -46,7 +46,7 @@
                 v-bind:key="i"
                 @click="searchChip(skill)"
               ) {{ skill }}
-      v-row.justify-center(v-if="!this.search.edges.length").display-1
+      v-row.justify-center(v-if="!this.search && !this.search.edges.length").display-1
         | There are no results
     v-container(v-if="this.$apollo.queries.search.loading")
       v-row.justify-center.align-center
