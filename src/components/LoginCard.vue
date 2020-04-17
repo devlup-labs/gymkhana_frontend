@@ -75,7 +75,7 @@ export default {
             this.$apollo.provider.clients.private,
             data.data.tokenAuth.token
           );
-          this.$router.push({ name: "konnekt-home" });
+          this.$router.push({ name: this.$route.query.to });
         })
         .catch(error => {
           // Error
