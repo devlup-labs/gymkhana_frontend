@@ -2,7 +2,7 @@
   v-container(fluid).my-5
     v-row.justify-center
       v-col(cols="7")
-        ProfileCard(:name="viewer.firstName.concat(' ',viewer.lastName)" :rollNumber="profile1.roll" :avatarLink="profile1.avatar.sizes.find(e => e.name === 'full_size').url" :coverLink="profile1.cover.sizes.find(e => e.name === 'full_size').url")
+        ProfileCard(:name="viewer.firstName.concat(' ',viewer.lastName)" :rollNumber="profile1.roll" :avatarLink="profile1.avatar.sizes.length?profile1.avatar.sizes.find(e => e.name === 'full_size').url:'https://cdn2.iconfinder.com/data/icons/people-80/96/Picture1-512.png'" :coverLink="profile1.cover.sizes.length?profile1.cover.sizes.find(e => e.name === 'full_size').url:'https://students.iitj.ac.in/static/assets/others/cover2.svg'")
     v-row.justify-center.align-center
       v-btn(x-large text disabled).text--black
         v-icon(left) mdi-pencil
