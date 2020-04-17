@@ -1,5 +1,5 @@
 <template lang="pug">
-  v-container(v-if="!$apollo.queries.search.loading")
+  v-container
     v-responsive(min-width="40px")
       v-layout(row fill-height)
         v-flex(lg6 xs6 offset-xs3)
@@ -9,7 +9,7 @@
             prepend-inner-icon="mdi-magnify"
             label="Search any skill or name"
             clearable)
-    v-container.ms-5(v-if="search && searchTerm.length>=3")
+    v-container.ms-5(v-if="!$apollo.queries.search.loading && search && searchTerm.length>=3")
       div(v-for="({ node },i) in search.edges" :key="i")
         v-container.container
           v-layout.card( row wrap flex-center)
