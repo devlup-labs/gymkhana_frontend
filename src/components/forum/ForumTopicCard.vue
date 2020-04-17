@@ -1,6 +1,6 @@
 <template lang="pug">
-  div
-    v-card.elevation-2
+  v-hover(v-slot:default="{ hover }")
+    v-card(:elevation="hover ? 10 : 2")
       v-card-text
         v-row.justify-center.align-start
           v-avatar(:size="$vuetify.breakpoint.smAndDown?40:80").ml-2.mt-2
@@ -49,13 +49,6 @@ export default {
 <style scoped>
 .v-card:not(.v-sheet--tile):not(.v-card--shaped) {
   border-radius: 15px;
-}
-.v-card:not(.v-sheet--tile):not(.v-card--shaped):hover {
-  background-color: #82b1ff;
-  color: white;
-}
-.v-card:not(.v-sheet--tile):not(.v-card--shaped):hover span {
-  color: white;
 }
 .v-application a {
   color: black;
