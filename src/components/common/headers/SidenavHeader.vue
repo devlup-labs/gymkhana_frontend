@@ -86,7 +86,7 @@ export default {
   methods: {
     logout1() {
       onLogout(this.$apollo.provider.clients.private).then(() => {
-        this.$router.push({ name: "login" });
+        this.$router.push({ name: "home" });
       });
     }
   }
