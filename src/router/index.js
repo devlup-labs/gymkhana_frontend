@@ -14,6 +14,7 @@ import ForumHome from "../components/forum/ForumHome";
 import ForumTopic from "../components/forum/ForumTopic";
 import Forum from "../views/Forum";
 import UserProfile from "../views/UserProfile";
+import QuestionsAnsweredByUser from "../components/forum/QuestionsAnsweredByUser";
 
 Vue.use(VueRouter);
 
@@ -67,6 +68,12 @@ const routes = [
         meta: sidenavRouteMeta,
         path: "topic/:slug",
         component: ForumTopic
+      },
+      {
+        path: "topics",
+        name: "forum-topics-answered",
+        meta: sidenavRouteMeta,
+        component: QuestionsAnsweredByUser
       }
     ]
   },
