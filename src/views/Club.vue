@@ -18,7 +18,7 @@
               span(v-html="club.description")
             v-card-actions(v-if="club.resourcesLink").justify-end
               | Link to resources
-              v-btn.ml-2(right ripple class="accent" :href="club.resourcesLink")
+              v-btn.ml-2(right ripple class="accent" :href="club.resourcesLink" target="_blank")
                 v-icon mdi-arrow-right
     v-container
       v-layout(row)
