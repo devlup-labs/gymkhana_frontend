@@ -3,7 +3,7 @@ import { OFFICE_BEARER_FRAGMENT } from "../fragments/officeBearerFragment";
 
 export const GET_OFFICE_BEARERS_QUERY = gql`
   query societies {
-    societies {
+    societies(isActive: true) {
       edges {
         node {
           name
