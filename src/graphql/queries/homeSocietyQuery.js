@@ -5,7 +5,7 @@ import { EVENT_FRAGMENT } from "../fragments/eventFragment";
 
 export const GET_SOCIETIES_QUERY = gql`
   query {
-    societies {
+    societies(isActive: true) {
       edges {
         node {
           __typename
