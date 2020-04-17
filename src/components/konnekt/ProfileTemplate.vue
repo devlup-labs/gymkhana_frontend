@@ -45,6 +45,7 @@
                 xs2
                 color="light-blue darken-1 white--text"
                 v-for="(skill, i) in profile.skills.split(',')"
+                @click="searchChip(skill)"
                 v-bind:key="i"
               ) {{ skill }}
         v-col(cols="12" sm="5" lg="4")
@@ -107,6 +108,14 @@ export default {
   filters: {
     moment: date => {
       return moment(date).format("MMM. DD, YYYY");
+    }
+  },
+  methods: {
+    searchChip(skill) {
+      this.$router.push({
+        name: "konnekt-search",
+        query: { searchTerm: skill }
+      });
     }
   }
 };

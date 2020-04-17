@@ -46,6 +46,12 @@
                 v-bind:key="i"
                 @click="searchChip(skill)"
               ) {{ skill }}
+      v-row.justify-center(v-if="!this.search.edges.length").display-1
+        | There are no results
+    v-container(v-if="this.$apollo.queries.search.loading")
+      v-row.justify-center.align-center
+        v-progress-circular(indeterminate color="primary")
+        span.ml-5 Fetching Data... Please wait
 </template>
 
 <script>
