@@ -1,11 +1,12 @@
 <template lang="pug">
+div
   v-container(fluid v-if="!$apollo.queries._topic.loading").pt-0
     v-row.text-capitalize.justify-center.align-center.fill-height(class="blue white--text").display-2.pa-8
       | {{topic.title}}
     v-container
       v-row.mt-3
         v-avatar(size="100")
-          v-img(:src="topic.author.avatar?topic.author.avatar.sizes.find(e=>e.name==='full_size').url:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST4n1T70ibu7ov-7FT63MjRA-yPrjrfHem04kPtqOVWjBNQuQK'")
+          v-img(:src="topic.author.avatar.sizes.length?topic.author.avatar.sizes.find(e=>e.name==='full_size').url:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST4n1T70ibu7ov-7FT63MjRA-yPrjrfHem04kPtqOVWjBNQuQK'")
         v-col.pl-4
           v-row
             p {{topic.author.user.firstName.concat(' ',topic.author.user.lastName)}}
@@ -20,22 +21,22 @@
           v-row(v-if="topic.tags")
             v-chip.elevation-2.font-weight-bold.ma-1(
               xs2
-            color="light-blue darken-1 white--text"
-            v-for="(tag,i) in topic.tags.split(',')"
-            :key="i"
-          ) {{tag}}
+              color="light-blue darken-1 white--text"
+              v-for="(tag,i) in topic.tags.split(',')"
+              :key="i"
+            ) {{tag}}
       v-divider.mt-5
       v-timeline(align-top dense v-if="topic.answerSet.edges.length")
         ForumAnswerComponent(v-for="({node},t) in topic.answerSet.edges" :key="t"
-        :authorAvatar="node.author.avatar.sizes.length?node.author.avatar.sizes.find(e=>e.name==='full_size').url:null"
-        :authorName="node.author.user.firstName.concat(' ',node.author.user.lastName)"
-        :answerTime="timeSince(node.createdAt)"
-        :answerContent="node.content"
-        :isUpvoted="node.isUpvoted"
-        :upvotes="node.upvotesCount"
-        :isAuthor="node.isAuthor"
-        v-on:upVote="upVoteClick(node.id,false)"
-        v-on:delete="deleteMethod(node.id,false)"
+          :authorAvatar="node.author.avatar.sizes.length?node.author.avatar.sizes.find(e=>e.name==='full_size').url:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST4n1T70ibu7ov-7FT63MjRA-yPrjrfHem04kPtqOVWjBNQuQK'"
+          :authorName="node.author.user.firstName.concat(' ',node.author.user.lastName)"
+          :answerTime="timeSince(node.createdAt)"
+          :answerContent="node.content"
+          :isUpvoted="node.isUpvoted"
+          :upvotes="node.upvotesCount"
+          :isAuthor="node.isAuthor"
+          v-on:upVote="upVoteClick(node.id,false)"
+          v-on:delete="deleteMethod(node.id,false)"
         )
       v-row(v-else).justify-center.display-1.font-weight-light.ma-6
         v-btn(icon @click="toggleDialog")
@@ -46,6 +47,9 @@
           template(v-slot:cross)
             v-btn(icon @click="toggleDialog")
               v-icon mdi-close
+  v-row(style="height: 600px;").justify-center.align-center
+    v-progress-circular(indeterminate color="primary" )
+    span.ml-2 Loading...
 
 </template>
 
@@ -165,6 +169,11 @@ export default {
     createdAt() {
       return moment(this.topic.createdAt).format("MMMM DD, YYYY, hh:mm a");
     }
+  },
+  mounted() {
+    this.$apollo.queries._topic.refetch({
+      slug: this.$route.params.slug
+    });
   }
 };
 </script>

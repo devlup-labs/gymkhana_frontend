@@ -14,7 +14,6 @@ export const GET_FORUM_TOPICS_QUERY = gql`
         node {
           ... on TopicNode {
             slug
-            answersCount
             ...TopicData
             author {
               user {

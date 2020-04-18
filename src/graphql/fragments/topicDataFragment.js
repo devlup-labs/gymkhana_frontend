@@ -7,6 +7,7 @@ export const TOPIC_DATA_FRAGMENT = gql`
     isAuthor
     isUpvoted
     upvotesCount
+    answersCount
     createdAt
   }
 `;

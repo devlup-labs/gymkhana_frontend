@@ -15,19 +15,25 @@
               v-btn(color="primary" ).mb-2
                 v-icon mdi-magnify
           v-divider.mb-5
-          v-row.justify-center(v-if="search")
-            v-col(cols="12" md="10" xs="12" v-for="({node},x) in this.search.edges" :key="x")
-              ForumTopicCard(:topic="node.title" :slug="node.slug" :authorName="authorName(node)" :authorInfo="authorInfo(node)" :answerAuthorName="answerAuthorName(node)"
-                :answerTime="node.answersCount  ?timeSince(node.answerSet.edges[0].node.createdAt):null"
-                :authorPic="node.author.avatar.sizes.find(e=>e.name=='full_size').url")
+          v-row.justify-center(v-if="!this.$apollo.queries.loading")
+            v-col(cols="12" md="10" xs="12" v-for="(node,x) in this.topics" :key="x")
+              ForumTopicCard(
+                :topic="node.title"
+                :slug="node.slug"
+                :authorName="authorName(node.author.user)"
+                :authorInfo="authorInfo(node)"
+                :answerAuthorName="answerAuthorName(node)"
+                :answerTime="node.answersCount  ? timeSince(node.answerSet.edges[0].node.createdAt) : null"
+                :authorPic="node.author.avatar.sizes.length?node.author.avatar.sizes.find(e=>e.name==='full_size').url:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST4n1T70ibu7ov-7FT63MjRA-yPrjrfHem04kPtqOVWjBNQuQK'")
                 template(v-slot:upVote)
                   UpvoteButton.justify-lg-center.pl-10(:upvotes="node.upvotesCount" :upvoted="node.isUpvoted" v-on:upVote="upVoteClick(node.id,true)").justify-sm-end
                 template(v-slot:answersCount)
                   CommentsCounter(:answerCount="node.answersCount" :slug="node.slug")
                 template(v-slot:deleteButton)
                   TopicDeleteButton(v-if="node.isAuthor" v-on:delete_msg="deleteMethod(node.id,true)")
-    v-container.mt-5
-        v-pagination(circle :length="pages" v-model="page" total-visible="7" next-icon="mdi-chevron-right" prev-icon="mdi-chevron-left")
+    v-container.mt-5(v-if="nodes&&nodes.pageInfo.hasNextPage")
+      v-row.justify-center
+        v-btn(@click="updateEndCursor" text) Show More
     v-dialog(v-model="dialog" persistent max-width="700px" )
       AddTopicDialog(v-on:create="createTopic")
         template(v-slot:cross)
@@ -64,17 +70,28 @@ import { DELETE_MUTATION } from "../../graphql/mutations/deleteMutation";
 
 export default {
   apollo: {
-    search: {
+    nodes: {
       query: GET_FORUM_TOPICS_QUERY,
       variables() {
         return {
           query: this.searchTerm,
-          first: this.page * 3,
-          last: 3
+          first: 10,
+          after: this.endCursor
         };
       },
+      fetchPolicy: "no-cache",
       skip() {
         return this.searchTerm === null;
+      },
+      result(data) {
+        if ((this.flag || !this.topics.length) && !this.searchTerm.length) {
+          data.data.nodes.edges.forEach(({ node }) => this.topics.push(node));
+        } else if (!this.flag && !this.topics.length && !this.searchTerm.length)
+          this.flag = !this.flag;
+        else {
+          if (!this.endCursor) this.topics.length = 0;
+          data.data.nodes.edges.forEach(({ node }) => this.topics.push(node));
+        }
       }
     },
     $client: "private"
@@ -89,15 +106,20 @@ export default {
   },
   data: () => ({
     searchTerm: "",
-    page: 1,
-    dialog: false
+    dialog: false,
+    endCursor: "",
+    flag: false,
+    topics: []
   }),
   methods: {
     toggleDialog() {
       this.dialog = !this.dialog;
     },
-    authorName(node) {
-      return node.author.user.firstName.concat(" ", node.author.user.lastName);
+    clearSearchTerm() {
+      this.searchTerm = "";
+    },
+    authorName(user) {
+      return user.firstName.concat(" ", user.lastName);
     },
     authorInfo(node) {
       return node.author.prog.concat(
@@ -109,26 +131,23 @@ export default {
     },
     answerAuthorName(node) {
       if (node.answerSet.edges.length)
-        return this.authorName(node.answerSet.edges[0].node);
+        return this.authorName(node.answerSet.edges[0].node.author.user);
       else return null;
     },
     timeSince(date) {
       return moment(date, "YYYYMMDDLTS").fromNow();
     },
     upVoteClick(id, isTopic) {
+      var temp = [...this.topics];
+      var node = temp[temp.indexOf(temp.find(node => node.id === id))];
+      node.isUpvoted = !node.isUpvoted;
+      node.upvotesCount += node.isUpvoted ? 1 : -1;
+      this.topics.length = 0;
+      this.topics = [...temp];
+
       this.$apollo.mutate({
         // Query
         mutation: UPVOTE_MUTATION,
-        refetchQueries: [
-          {
-            query: GET_FORUM_TOPICS_QUERY,
-            variables: {
-              query: this.searchTerm,
-              first: this.page * 3,
-              last: 3
-            }
-          }
-        ],
         // Parameters
         variables: {
           id: id,
@@ -137,65 +156,65 @@ export default {
         client: "private"
       });
     },
-    clearSearchTerm() {
-      this.searchTerm = "";
-    },
     createTopic(category, title, tags, content) {
-      this.$apollo.mutate({
-        // Query
-        mutation: CREATE_TOPIC_MUTATION,
-        refetchQueries: [
-          {
-            query: GET_FORUM_TOPICS_QUERY,
-            variables: {
-              query: this.searchTerm,
-              first: this.page * 3,
-              last: 3
-            }
-          }
-        ],
-        // Parameters
-        variables: {
-          input: {
-            category: category,
-            title: title,
-            tags: tags,
-            content: content
-          }
-        },
-        client: "private"
-      });
       this.toggleDialog();
+      this.$apollo
+        .mutate({
+          // Query
+          mutation: CREATE_TOPIC_MUTATION,
+          // Parameters
+          variables: {
+            input: {
+              category: category,
+              title: title,
+              tags: tags,
+              content: content
+            }
+          },
+          client: "private"
+        })
+        .then(data => {
+          this.topics.unshift(data.data.createTopic.topic);
+        });
     },
     deleteMethod(id, is_topic) {
-      this.$apollo.mutate({
-        // Query
-        mutation: DELETE_MUTATION,
-        refetchQueries: [
-          {
-            query: GET_FORUM_TOPICS_QUERY,
-            variables: {
-              query: this.searchTerm,
-              first: this.page * 3,
-              last: 3
-            }
+      this.$apollo
+        .mutate({
+          // Query
+          mutation: DELETE_MUTATION,
+          // Parameters
+          variables: {
+            id: id,
+            isTopic: is_topic
+          },
+          client: "private"
+        })
+        .then(data => {
+          if (data.data.delete.deleted) {
+            this.topics.splice(
+              this.topics.indexOf(this.topics.find(node => node.id === id)),
+              1
+            );
+            var temp = [...this.topics];
+            this.topics.length = 0;
+            this.topics = [...temp];
           }
-        ],
-        // Parameters
-        variables: {
-          id: id,
-          isTopic: is_topic
-        },
-        client: "private"
-      });
+        });
+    },
+    updateEndCursor() {
+      this.flag = true;
+      this.endCursor = this.nodes.pageInfo.endCursor;
+    },
+    refetchQueries() {
+      this.$apollo.queries.nodes.refetch({});
     }
   },
-  computed: {
-    pages() {
-      if (this.searchTerm && this.search)
-        return Math.ceil(this.search.edgeCount / 3);
-      else if (this.search) return Math.ceil(this.search.totalCount / 3);
-      return 1;
+  watch: {
+    searchTerm() {
+      if (this.searchTerm === null) {
+        this.searchTerm = "";
+      }
+      this.endCursor = "";
     }
   }
 };
