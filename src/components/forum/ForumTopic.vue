@@ -47,7 +47,7 @@ div
           template(v-slot:cross)
             v-btn(icon @click="toggleDialog")
               v-icon mdi-close
-  v-row(style="height: 600px;").justify-center.align-center
+  v-row(style="height: 600px;" v-else).justify-center.align-center
     v-progress-circular(indeterminate color="primary" )
     span.ml-2 Loading...
 
