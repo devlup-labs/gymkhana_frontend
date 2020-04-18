@@ -84,11 +84,9 @@ export default {
         return this.searchTerm === null;
       },
       result(data) {
-        if ((this.flag || !this.topics.length) && !this.searchTerm.length) {
+        if (!this.topics.length && !this.searchTerm.length) {
           data.data.nodes.edges.forEach(({ node }) => this.topics.push(node));
-        } else if (!this.flag && !this.topics.length && !this.searchTerm.length)
-          this.flag = !this.flag;
-        else {
+        } else {
           if (!this.endCursor) this.topics.length = 0;
           data.data.nodes.edges.forEach(({ node }) => this.topics.push(node));
         }
@@ -108,7 +106,6 @@ export default {
     searchTerm: "",
     dialog: false,
     endCursor: "",
-    flag: false,
     topics: []
   }),
   methods: {
