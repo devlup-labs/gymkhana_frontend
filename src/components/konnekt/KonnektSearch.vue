@@ -9,8 +9,8 @@
             prepend-inner-icon="mdi-magnify"
             label="Search any skill or name"
             clearable)
-    v-container.ms-5(v-if="!$apollo.queries.search.loading && search && searchTerm && searchTerm.length>=3")
-      div(v-for="({ node },i) in search.edges" :key="i")
+    v-container.ms-5(v-if="!$apollo.queries.nodes.loading && nodes && searchTerm && searchTerm.length>=3")
+      div(v-for="({ node },i) in nodes.edges" :key="i")
         v-container.container
           v-layout.card( row wrap flex-center)
             v-flex(xs3 lg2 md2 pa-3 layout justify-center)
@@ -46,9 +46,9 @@
                 v-bind:key="i"
                 @click="searchChip(skill)"
               ) {{ skill }}
-      v-row.justify-center(v-if="!this.search && !this.search.edges.length").display-1
+      v-row.justify-center(v-if="!this.nodes || !this.nodes.edges.length").display-1
         | There are no results
-    v-container(v-if="this.$apollo.queries.search.loading")
+    v-container(v-if="this.$apollo.queries.nodes.loading")
       v-row.justify-center.align-center
         v-progress-circular(indeterminate color="primary")
         span.ml-5 Fetching Data... Please wait
@@ -59,7 +59,7 @@ import { SEARCH_USER_PROFILE_QUERY } from "../../graphql/queries/searchUserProfi
 
 export default {
   apollo: {
-    search: {
+    nodes: {
       query: SEARCH_USER_PROFILE_QUERY,
       variables() {
         return {
