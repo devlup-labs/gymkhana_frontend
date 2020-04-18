@@ -1,8 +1,8 @@
 <template lang="pug">
-  v-col
+  v-col(v-if="!$apollo.queries.topicsByUser.loading")
     v-row.justify-center.pa-6
       span.display-2 Answered By you
-    v-row.justify-center(v-if="!$apollo.queries.topicsByUser.loading" v-for="({node},i) in topicsByUser.edges" :key="i")
+    v-row.justify-center( v-for="({node},i) in topicsByUser.edges" :key="i")
       v-col(cols="12" md="8" )
         ForumTopicCard(:topic="node.title" :slug="node.slug" :authorName="node.author.user.firstName.concat(\" \", node.author.user.lastName)"
           :authorInfo="node.author.prog.concat(\", \",node.author.branch,\", \",node.author.year)"
@@ -15,6 +15,7 @@
             CommentsCounter(:answerCount="node.answersCount" :slug="node.slug")
           template(v-slot:deleteButton)
             TopicDeleteButton(v-if="node.isAuthor" v-on:delete_msg="deleteMethod(node.id,true)")
+    v-row(v-if="!this.topicsByUser.edges.length").justify-center.headline There Are no answers currently
 
 </template>
 
