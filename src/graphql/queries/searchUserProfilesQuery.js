@@ -4,7 +4,7 @@ import { FULL_NAME_FRAGMENT } from "../fragments/userFullNameFragment";
 
 export const SEARCH_USER_PROFILE_QUERY = gql`
   query Search($query: String!) {
-    search(query: $query, nodeType: USER_PROFILE) {
+    nodes(query: $query, nodeType: USER_PROFILE) {
       edges {
         node {
           ... on UserProfileNode {
