@@ -17,8 +17,8 @@
             )
 
             v-text-field(
-            outline
-            prepend-icon="mdi-lock"
+              outline
+              prepend-icon="mdi-lock"
               :append-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
               @click:append="() => (showPassword = !showPassword)"
               :rules="passwordRules"
@@ -33,7 +33,7 @@
             v-layout(justify-center)
               h4 OR
             v-layout(justify-center)
-              a
+              a(:href="link")
                 img(
                   :src="googleSignInBtn"
                   class="gsign-responsive"
@@ -45,6 +45,7 @@
 import googleSignInBtn from "../assets/btn_google_light_normal.svg";
 import { onLogin } from "../plugins/vue-apollo";
 import { AUTHORIZATION_MUTATION } from "../graphql/mutations/authMutation";
+import { G_SIGN_IN_MUTATION } from "../graphql/mutations/googleSignInMutation";
 
 export default {
   name: "LoginCard",
@@ -81,6 +82,45 @@ export default {
           // Error
           alert(error.message);
         });
+    },
+    check_auth() {
+      if (this.$route.query.key) {
+        this.$apollo
+          .mutate({
+            mutation: G_SIGN_IN_MUTATION,
+            variables: {
+              accessToken: this.$route.query.key,
+              provider: "google-oauth2"
+            }
+          })
+          .then(data => {
+            onLogin(
+              this.$apollo.provider.clients.private,
+              data.data.socialAuth.token
+            );
+
+            //Redirect
+            let to = "konnekt-home";
+            if (this.$route.query.to) {
+              to = this.$route.query.to;
+            }
+            this.$router.push({ name: to });
+          })
+          .catch(error => {
+            // Error
+            alert(error.message);
+          });
+      }
+    }
+  },
+  mounted() {
+    this.check_auth();
+  },
+  computed: {
+    link() {
+      return (
+        "http://127.0.0.1:8000/login/google-oauth2/?to=" + this.$route.query.to
+      );
     }
   }
 };
