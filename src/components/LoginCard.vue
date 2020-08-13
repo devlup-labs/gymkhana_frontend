@@ -98,13 +98,16 @@ export default {
               this.$apollo.provider.clients.private,
               data.data.socialAuth.token
             );
-
-            //Redirect
-            let to = "konnekt-home";
-            if (this.$route.query.to) {
-              to = this.$route.query.to;
+            if (!data.data.socialAuth.social.user.userprofile) {
+              this.$router.push({ name: "register" });
+            } else {
+              //Redirect
+              let to = "konnekt-home";
+              if (this.$route.query.to) {
+                to = this.$route.query.to;
+              }
+              this.$router.push({ name: to });
             }
-            this.$router.push({ name: to });
           })
           .catch(error => {
             // Error
