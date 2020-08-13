@@ -15,6 +15,7 @@ import ForumTopic from "../components/forum/ForumTopic";
 import Forum from "../views/Forum";
 import UserProfile from "../views/UserProfile";
 import QuestionsAnsweredByUser from "../components/forum/QuestionsAnsweredByUser";
+import Register from "@/views/Register";
 
 Vue.use(VueRouter);
 
@@ -48,6 +49,11 @@ const routes = [
     path: "/login",
     name: "login",
     component: Login
+  },
+  {
+    path: "/register",
+    name: "register",
+    component: Register
   },
   {
     path: "/forum",
