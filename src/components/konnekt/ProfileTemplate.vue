@@ -40,7 +40,7 @@
           v-card(elevation="4")
             v-card-title.headline Skills
             v-divider.mx-2
-            v-card-text
+            v-card-text(v-if="profile.skills")
               v-chip.elevation-2.font-weight-bold.ma-1(
                 xs2
                 color="light-blue darken-1 white--text"
