@@ -4,7 +4,7 @@
       v-card-text
         v-row.justify-center.align-start
           v-avatar(:size="$vuetify.breakpoint.smAndDown?40:80").ml-2.mt-2
-            v-img(:src="authorPic?authorPic:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST4n1T70ibu7ov-7FT63MjRA-yPrjrfHem04kPtqOVWjBNQuQK'")
+            v-img(:src="authorPic?authorPic:require('@/assets/avatar_default.png')")
           v-col(cols="10" sm="6" lg="8").pl-6
             router-link(:to="{name : 'forum-topic',params : {slug : slug}}" )
               v-row.mb-0

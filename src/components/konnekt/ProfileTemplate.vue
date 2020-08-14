@@ -8,9 +8,14 @@
       v-layout.justify-center.align-center.fill-height
         h1 About {{user.firstName.concat(' ',user.lastName)}}
     v-container.pa-4
-      v-row(justify="center" :style="{'margin-top': `-${$vuetify.theme.options.parallaxHeight/3}px`}")
+      v-row(
+        justify="center"
+        :style="{'margin-top': `-${$vuetify.theme.options.parallaxHeight/3}px`}")
         v-col(cols="12" sm="10" lg="8")
-          ProfileCard(:name="user.firstName.concat(' ',user.lastName)" :rollNumber="profile.roll" :avatarLink="profile.avatar.sizes.length?profile.avatar.sizes.find(e => e.name === 'full_size').url:'https://cdn2.iconfinder.com/data/icons/people-80/96/Picture1-512.png'"
+          ProfileCard(
+            :name="user.firstName.concat(' ',user.lastName)"
+            :rollNumber="profile.roll"
+            :avatarLink="profile.avatar.sizes.length?profile.avatar.sizes.find(e => e.name === 'full_size').url:require('@/assets/avatar_default.png')"
             :coverLink="profile.cover.sizes.length?profile.cover.sizes.find(e => e.name === 'full_size').url:'https://students.iitj.ac.in/static/assets/others/cover2.svg'")
       v-row(justify="center")
         v-col(cols="12" sm="5" lg="4")

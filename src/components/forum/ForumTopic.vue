@@ -6,7 +6,7 @@ div
     v-container
       v-row.mt-3
         v-avatar(size="100")
-          v-img(:src="topic.author.avatar.sizes.length?topic.author.avatar.sizes.find(e=>e.name==='full_size').url:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST4n1T70ibu7ov-7FT63MjRA-yPrjrfHem04kPtqOVWjBNQuQK'")
+          v-img(:src="topic.author.avatar.sizes.length?topic.author.avatar.sizes.find(e=>e.name==='full_size').url:require('@/assets/avatar_default.png')")
         v-col.pl-4
           v-row
             p {{topic.author.user.firstName.concat(' ',topic.author.user.lastName)}}
@@ -28,7 +28,7 @@ div
       v-divider.mt-5
       v-timeline(align-top dense v-if="topic.answerSet.edges.length")
         ForumAnswerComponent(v-for="({node},t) in topic.answerSet.edges" :key="t"
-          :authorAvatar="node.author.avatar.sizes.length?node.author.avatar.sizes.find(e=>e.name==='full_size').url:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST4n1T70ibu7ov-7FT63MjRA-yPrjrfHem04kPtqOVWjBNQuQK'"
+          :authorAvatar="node.author.avatar.sizes.length?node.author.avatar.sizes.find(e=>e.name==='full_size').url:require('@/assets/avatar_default.png')"
           :authorName="node.author.user.firstName.concat(' ',node.author.user.lastName)"
           :answerTime="timeSince(node.createdAt)"
           :answerContent="node.content"

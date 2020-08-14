@@ -8,7 +8,7 @@
         )
         v-img(
           v-else
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST4n1T70ibu7ov-7FT63MjRA-yPrjrfHem04kPtqOVWjBNQuQK"
+          src="require('@/assets/avatar_default.png')"
           max-height="200"
         )
     v-flex.md4

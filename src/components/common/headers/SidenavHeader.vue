@@ -20,7 +20,7 @@
       template(v-slot:prepend)
         v-list-item(two-line v-if="!$apollo.queries.viewer.loading")
           v-list-item-avatar
-            img(:src="viewer.userprofile.avatar.sizes.length?viewer.userprofile.avatar.sizes.find(e => e.name === 'full_size').url:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST4n1T70ibu7ov-7FT63MjRA-yPrjrfHem04kPtqOVWjBNQuQK'")
+            img(:src="viewer.userprofile.avatar.sizes.length?viewer.userprofile.avatar.sizes.find(e => e.name === 'full_size').url:require('@/assets/avatar_default.png')")
           v-list-item-content.text-start.pt-4
             v-list-item-title {{ viewer.firstName }}
             v-list-item-title {{ viewer.lastName }}

@@ -2,7 +2,7 @@
   v-timeline-item
     template(v-slot:icon)
       v-avatar(size="60").elevation-2
-        v-img(:src="authorAvatar?authorAvatar:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST4n1T70ibu7ov-7FT63MjRA-yPrjrfHem04kPtqOVWjBNQuQK'")
+        v-img(:src="authorAvatar?authorAvatar:require('@/assets/avatar_default.png')")
     v-card(class="elevation-2").pl-4
       v-card-title.subtitle-1.font-weight-light.pb-0 {{authorName}} {{answerTime}}
       v-row.align-start.pl-2

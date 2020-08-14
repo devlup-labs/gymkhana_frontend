@@ -24,7 +24,7 @@
                 :authorInfo="authorInfo(node)"
                 :answerAuthorName="answerAuthorName(node)"
                 :answerTime="node.answersCount  ? timeSince(node.answerSet.edges[0].node.createdAt) : null"
-                :authorPic="node.author.avatar.sizes.length?node.author.avatar.sizes.find(e=>e.name==='full_size').url:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST4n1T70ibu7ov-7FT63MjRA-yPrjrfHem04kPtqOVWjBNQuQK'")
+                :authorPic="node.author.avatar.sizes.length?node.author.avatar.sizes.find(e=>e.name==='full_size').url:require('@/assets/avatar_default.png')")
                 template(v-slot:upVote)
                   UpvoteButton.justify-lg-center.pl-10(:upvotes="node.upvotesCount" :upvoted="node.isUpvoted" v-on:upVote="upVoteClick(node.id,true)").justify-sm-end
                 template(v-slot:answersCount)
