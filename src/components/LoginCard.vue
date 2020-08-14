@@ -45,7 +45,6 @@
 import googleSignInBtn from "../assets/btn_google_light_normal.svg";
 import { onLogin } from "../plugins/vue-apollo";
 import { AUTHORIZATION_MUTATION } from "../graphql/mutations/authMutation";
-import { G_SIGN_IN_MUTATION } from "../graphql/mutations/googleSignInMutation";
 
 export default {
   name: "LoginCard",
@@ -82,48 +81,11 @@ export default {
           // Error
           alert(error.message);
         });
-    },
-    check_auth() {
-      if (this.$route.query.key) {
-        this.$apollo
-          .mutate({
-            mutation: G_SIGN_IN_MUTATION,
-            variables: {
-              accessToken: this.$route.query.key,
-              provider: "google-oauth2"
-            }
-          })
-          .then(data => {
-            onLogin(
-              this.$apollo.provider.clients.private,
-              data.data.socialAuth.token
-            );
-            if (!data.data.socialAuth.social.user.userprofile) {
-              this.$router.push({ name: "register" });
-            } else {
-              //Redirect
-              let to = "konnekt-home";
-              if (this.$route.query.to) {
-                to = this.$route.query.to;
-              }
-              this.$router.push({ name: to });
-            }
-          })
-          .catch(error => {
-            // Error
-            alert(error.message);
-          });
-      }
     }
-  },
-  mounted() {
-    this.check_auth();
   },
   computed: {
     link() {
-      return (
-        "http://127.0.0.1:8000/login/google-oauth2/?to=" + this.$route.query.to
-      );
+      return "http://127.0.0.1:8000/login/google-oauth2/";
     }
   }
 };
