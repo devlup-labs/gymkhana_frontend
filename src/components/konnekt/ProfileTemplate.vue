@@ -2,7 +2,7 @@
   v-flex
     v-parallax(
       dark
-      src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
+      src="require(@/assets/banner.jpg)"
       :height="$vuetify.theme.options.parallaxHeight"
     )
       v-layout.justify-center.align-center.fill-height
@@ -16,7 +16,7 @@
             :name="user.firstName.concat(' ',user.lastName)"
             :rollNumber="profile.roll"
             :avatarLink="profile.avatar.sizes.length?profile.avatar.sizes.find(e => e.name === 'full_size').url:require('@/assets/avatar_default.png')"
-            :coverLink="profile.cover.sizes.length?profile.cover.sizes.find(e => e.name === 'full_size').url:'https://students.iitj.ac.in/static/assets/others/cover2.svg'")
+            :coverLink="profile.cover.sizes.length?profile.cover.sizes.find(e => e.name === 'full_size').url:require('@/assets/cover2.svg')")
       v-row(justify="center")
         v-col(cols="12" sm="5" lg="4")
           v-card(elevation="4")
