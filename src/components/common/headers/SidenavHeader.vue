@@ -15,7 +15,7 @@
             v-list-item
               v-btn(text block :to='{name : "profile"}' link) Account
             v-list-item
-              v-btn(text block @click="logout1") Logout
+              v-btn(text block @click="logoutAuth") Logout
     v-navigation-drawer(v-model="drawer" app :clipped="$vuetify.breakpoint.lgAndUp" :mini-variant.sync="mini")
       template(v-slot:prepend)
         v-list-item(two-line v-if="!$apollo.queries.viewer.loading")
@@ -87,7 +87,7 @@ export default {
     ]
   }),
   methods: {
-    logout1() {
+    logoutAuth() {
       onLogout(this.$apollo.provider.clients.private).then(() => {
         this.$router.push({ name: "home" });
       });

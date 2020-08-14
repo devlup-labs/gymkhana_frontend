@@ -107,7 +107,7 @@ const routes = [
   },
   {
     name: "profile-view",
-    path: "/profile/:roll",
+    path: "/profile-view/:roll",
     meta: sidenavRouteMeta,
     beforeEnter: (to, from, next) => {
       loginRoute(to, from, next);

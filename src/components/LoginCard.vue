@@ -6,7 +6,7 @@
     v-card.tile
       v-card-text(pt-4)
         div
-          v-form(v-model="valid" ref="form" @submit.prevent="login1")
+          v-form(v-model="valid" ref="form" @submit.prevent="loginAuth")
             v-text-field(
               outline
               prepend-icon="mdi-email"
@@ -33,7 +33,7 @@
             v-layout(justify-center)
               h4 OR
             v-layout(justify-center)
-              a(:href="link")
+              a(href="login/google-oauth2/")
                 img(
                   :src="googleSignInBtn"
                   class="gsign-responsive"
@@ -60,7 +60,7 @@ export default {
     };
   },
   methods: {
-    login1() {
+    loginAuth() {
       this.$apollo
         .mutate({
           mutation: AUTHORIZATION_MUTATION,
@@ -81,11 +81,6 @@ export default {
           // Error
           alert(error.message);
         });
-    }
-  },
-  computed: {
-    link() {
-      return "http://127.0.0.1:8000/login/google-oauth2/";
     }
   }
 };

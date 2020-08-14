@@ -1,12 +1,12 @@
 <template lang="pug">
-  v-container(fluid).my-5
+  v-container(fluid v-if="!$apollo.queries.viewer.loading").my-5
     v-row.justify-center
       v-col(cols="7")
         ProfileCard(
           :name="viewer.firstName.concat(' ',viewer.lastName)"
-          :rollNumber="profile1.roll"
-          :avatarLink="profile1.avatar.sizes.length?profile1.avatar.sizes.find(e => e.name === 'full_size').url:require('@/assets/avatar_default.png')"
-          :coverLink="profile1.cover.sizes.length?profile1.cover.sizes.find(e => e.name === 'full_size').url:'https://students.iitj.ac.in/static/assets/others/cover2.svg'")
+          :rollNumber="userProfile.roll"
+          :avatarLink="userProfile.avatar.sizes.length?userProfile.avatar.sizes.find(e => e.name === 'full_size').url:require('@/assets/avatar_default.png')"
+          :coverLink="userProfile.cover.sizes.length?userProfile.cover.sizes.find(e => e.name === 'full_size').url:require('@/assets/cover2.svg')")
     v-row.justify-center.align-center
       v-btn(x-large text disabled).text--black
         v-icon(left) mdi-pencil
@@ -31,6 +31,7 @@
           v-col.pb-0
             p.mb-0.font-weight-light Skills
             v-chip.elevation-2.font-weight-bold.ma-1(
+              v-if="skills"
               xs2
               color="light-blue darken-1 white--text"
               v-for="(skill, i) in skills"
@@ -83,13 +84,6 @@ export default {
     del: function(skill) {
       this.skills = this.skills.filter(e => e !== skill);
     },
-    onload() {
-      this.phone = this.profile1.phone;
-      this.hometown = this.profile1.hometown;
-      this.about = this.profile1.about;
-      this.select = this.yearItems.find(e => e.text === this.profile1.year);
-      this.skills = this.profile1.skills.split(",");
-    },
     updateUserProfile() {
       this.$apollo
         .mutate({
@@ -117,11 +111,16 @@ export default {
         });
     }
   },
-  mounted() {
-    this.onload();
-  },
   computed: {
-    profile1() {
+    userProfile() {
+      /* eslint-disable */
+      this.phone = this.viewer.userprofile.phone;
+      this.hometown = this.viewer.userprofile.hometown;
+      this.about = this.viewer.userprofile.about;
+      this.select = this.yearItems.find(e => e.text === this.viewer.userprofile.year);
+      this.skills = this.viewer.userprofile.skills.split(",");
+      /* eslint-enable */
+
       return this.viewer.userprofile;
     }
   }
