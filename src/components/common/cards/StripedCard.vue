@@ -8,7 +8,7 @@
         width="80%"
       )
         v-img(
-          :src="node.cover.sizes.length ? node.cover.sizes.find(e => e.name === 'full_size').url : require('../../assets/cover4.svg')"
+          :src="node.cover.sizes.length ? node.cover.sizes.find(e => e.name === 'full_size').url : require('../../../assets/cover4.svg')"
           min-height="250px"
         )
           v-layout.align-end.fill-height

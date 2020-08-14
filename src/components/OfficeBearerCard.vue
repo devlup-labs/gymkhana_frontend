@@ -12,16 +12,9 @@
           v-card-text.pt-0.text-center
             v-avatar.elevation-4.ma-2(
               :size="avatarSize"
-              v-if="profile.avatar.sizes"
               :style="{'margin-top': `-${avatarSize / 2}px !important`}"
             )
-              v-img(:src="profile.avatar.sizes.find(e => e.name === 'full_size').url")
-            v-avatar.elevation-4.ma-2(
-              v-else
-              :size="avatarSize"
-              :style="{'margin-top': `-${avatarSize / 2}px !important`}"
-            )
-              v-img(src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST4n1T70ibu7ov-7FT63MjRA-yPrjrfHem04kPtqOVWjBNQuQK")
+              v-img(:src="profile.avatar.sizes?profile.avatar.sizes.find(e => e.name === 'full_size').url:require('@/assets/avatar_default.png')")
             h2(class="black--text").font-weight-bold.mt-5 {{ profile.user.firstName }} {{ profile.user.lastName }}
             p.font-weight-regular.mt-2 {{ designation.toString() }}
           v-card-actions

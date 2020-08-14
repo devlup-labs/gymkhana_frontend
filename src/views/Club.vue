@@ -18,7 +18,7 @@
               span(v-html="club.description")
             v-card-actions(v-if="club.resourcesLink").justify-end
               | Link to resources
-              v-btn.ml-2(right ripple class="accent" :href="club.resourcesLink")
+              v-btn.ml-2(right ripple class="accent" :href="club.resourcesLink" target="_blank")
                 v-icon mdi-arrow-right
     v-container
       v-layout(row)
@@ -77,13 +77,13 @@
 </template>
 
 <script>
-import EventTable from "../components/common/EventTable";
-import NewsTable from "../components/common/NewsTable";
+import EventTable from "../components/common/tables/EventTable";
+import NewsTable from "../components/common/tables/NewsTable";
 import Footer from "../components/common/Footer";
 import { GET_CLUB_DATA_QUERY } from "../graphql/queries/clubDataQuery";
 import ActivityComponent from "../components/common/ActivityComponent";
-import CaptainComponent from "../components/common/CaptainComponent";
-import CoreMemberComponent from "../components/common/CoreMemberComponent";
+import CaptainComponent from "../components/common/cards/CaptainComponent";
+import CoreMemberComponent from "../components/common/cards/CoreMemberComponent";
 
 export default {
   apollo: {

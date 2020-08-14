@@ -8,7 +8,7 @@
         )
         v-img(
           v-else
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcST4n1T70ibu7ov-7FT63MjRA-yPrjrfHem04kPtqOVWjBNQuQK"
+          src="require('@/assets/avatar_default.png')"
         )
     v-flex.mt-4.font-weight-medium
       | {{ profile.user.firstName }} {{ profile.user.lastName }}
@@ -19,10 +19,17 @@
       | {{ designation }}
     v-flex.mt-2.font-weight-regular.subtitle-1.text-center
       | {{ profile.about }}
-    //v-flex.pa-4
+    v-flex.pa-4
       v-layout(row)
-        v-btn(icon v-for="(slink,n) in person.socialLinks" :key="n" :href="slink.link")
-          v-icon.pa-2 {{slink.icon}}
+        v-btn.ma-1(
+          v-for="({node}, i) in profile.socialLinks.edges"
+          :key="i"
+          :color="$vuetify.theme.options.socialMediaIconMap[node.socialMedia].color"
+          rounded
+          :href="node.link"
+          target="blank"
+        ).white--text
+          v-icon {{ $vuetify.theme.options.socialMediaIconMap[node.socialMedia].icon }}
 </template>
 
 <script>

@@ -3,13 +3,19 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Konnekt from "../views/Konnekt";
-import KonnektHome from "../components/KonnektHome";
-import KonnektSearch from "../components/KonnektSearch";
+import KonnektHome from "../components/konnekt/KonnektHome";
+import KonnektSearch from "../components/konnekt/KonnektSearch";
 import OfficeBearers from "../views/OfficeBearers";
 import ProfileDetail from "../views/ProfileDetail";
 import ProfileEdit from "../views/ProfileEdit";
 import Society from "../views/Society";
 import Club from "../views/Club";
+import ForumHome from "../components/forum/ForumHome";
+import ForumTopic from "../components/forum/ForumTopic";
+import Forum from "../views/Forum";
+import UserProfile from "../views/UserProfile";
+import QuestionsAnsweredByUser from "../components/forum/QuestionsAnsweredByUser";
+import Register from "@/views/Register";
 
 Vue.use(VueRouter);
 
@@ -17,6 +23,13 @@ const sidenavRouteMeta = {
   sidenav: true
 };
 
+const loginRoute = (to, from, next) => {
+  if (to.name !== "login" && !localStorage.getItem("apollo-token")) {
+    return next({ name: "login", query: { to: to.name } });
+  } else {
+    return next();
+  }
+};
 const routes = [
   {
     path: "/",
@@ -38,9 +51,45 @@ const routes = [
     component: Login
   },
   {
+    path: "/register",
+    name: "register",
+    component: Register
+  },
+  {
+    path: "/forum",
+    component: Forum,
+    beforeEnter: (to, from, next) => {
+      loginRoute(to, from, next);
+    },
+    meta: sidenavRouteMeta,
+    children: [
+      {
+        path: "",
+        name: "forum-home",
+        meta: sidenavRouteMeta,
+        component: ForumHome
+      },
+      {
+        name: "forum-topic",
+        meta: sidenavRouteMeta,
+        path: "topic/:slug",
+        component: ForumTopic
+      },
+      {
+        path: "topics",
+        name: "forum-topics-answered",
+        meta: sidenavRouteMeta,
+        component: QuestionsAnsweredByUser
+      }
+    ]
+  },
+  {
     path: "/konnekt",
     component: Konnekt,
     meta: sidenavRouteMeta,
+    beforeEnter: (to, from, next) => {
+      loginRoute(to, from, next);
+    },
     children: [
       {
         name: "konnekt-home",
@@ -57,15 +106,30 @@ const routes = [
     ]
   },
   {
+    name: "profile-view",
+    path: "/profile-view/:roll",
+    meta: sidenavRouteMeta,
+    beforeEnter: (to, from, next) => {
+      loginRoute(to, from, next);
+    },
+    component: UserProfile
+  },
+  {
     name: "profile",
     path: "/profile",
     meta: sidenavRouteMeta,
+    beforeEnter: (to, from, next) => {
+      loginRoute(to, from, next);
+    },
     component: ProfileDetail
   },
   {
     name: "profile-edit",
     path: "/profile/edit",
     meta: sidenavRouteMeta,
+    beforeEnter: (to, from, next) => {
+      loginRoute(to, from, next);
+    },
     component: ProfileEdit
   },
   {

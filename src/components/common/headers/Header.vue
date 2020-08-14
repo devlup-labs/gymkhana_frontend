@@ -11,14 +11,15 @@
         v-list
           v-list-item(v-for='({ node }, i) in societies.edges' :key='i' link :to="{name: 'society', params: {slug: node.slug}}")
             v-list-item-title {{ node.name }}
-      v-btn(text :to="{name: 'konnekt-home'}") Forum
+      v-btn(text :to="{name: 'konnekt-home'}") Konnekt
+      v-btn(text :to="{name: 'forum-home'}") Forum
       v-btn(text :to="{name: 'office-bearers'}") People
     v-spacer
 </template>
 
 <script>
-import GymkhanaLogo from "../../assets/logo.png";
-import { HEADER_SOCIETY_LIST_QUERY } from "../../graphql/queries/headerSocietyListQuery";
+import GymkhanaLogo from "../../../assets/logo.png";
+import { HEADER_SOCIETY_LIST_QUERY } from "../../../graphql/queries/headerSocietyListQuery";
 
 export default {
   apollo: {

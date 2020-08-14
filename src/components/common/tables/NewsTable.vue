@@ -34,8 +34,6 @@
                 | {{singleEvent.node.author.user.firstName}} {{singleEvent.node.author.user.lastName}}
               v-flex.md12.mt-5
                 p {{singleEvent.node.content.substring(3,singleEvent.node.content.length-4)}}
-        v-card-actions.justify-end
-          v-btn(@click="dialog = false" class="primary darken-1 white--text" small) close
 
 </template>
 

@@ -69,7 +69,6 @@ export function createProvider(options = {}) {
   // Create vue apollo provider
   return new VueApollo({
     clients: {
-      default: apolloClient,
       private: privateClient.apolloClient
     },
     defaultClient: apolloClient,
