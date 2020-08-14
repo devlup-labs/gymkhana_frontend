@@ -19,10 +19,17 @@
       | {{ designation }}
     v-flex.mt-2.font-weight-regular.subtitle-1.text-center
       | {{ profile.about }}
-    //v-flex.pa-4
+    v-flex.pa-4
       v-layout(row)
-        v-btn(icon v-for="(slink,n) in person.socialLinks" :key="n" :href="slink.link")
-          v-icon.pa-2 {{slink.icon}}
+        v-btn.ma-1(
+          v-for="({node}, i) in profile.socialLinks.edges"
+          :key="i"
+          :color="$vuetify.theme.options.socialMediaIconMap[node.socialMedia].color"
+          rounded
+          :href="node.link"
+          target="blank"
+        ).white--text
+          v-icon {{ $vuetify.theme.options.socialMediaIconMap[node.socialMedia].icon }}
 </template>
 
 <script>
