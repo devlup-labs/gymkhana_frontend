@@ -12,8 +12,7 @@ Vue.use(VueApollo);
 const AUTH_TOKEN = "apollo-token";
 
 // Http endpoint
-const httpEndpoint =
-  process.env.VUE_APP_GRAPHQL_HTTP || "http://localhost:8000/graphql";
+const httpEndpoint = process.env.VUE_APP_GRAPHQL_HTTP || "/graphql";
 
 // Config
 const defaultOptions = {
@@ -50,7 +49,7 @@ const defaultOptions = {
   // clientState: { resolvers: { ... }, defaults: { ... } }
 };
 const pgGraphql = {
-  httpEndpoint: "http://localhost:8000/pgraphql"
+  httpEndpoint: "/pgraphql"
 };
 // Call this in the Vue app file
 export function createProvider(options = {}) {
