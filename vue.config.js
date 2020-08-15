@@ -13,5 +13,5 @@ module.exports = {
       lintGQL: true
     }
   },
-  publicPath: "/static/"
+  assetsDir: "static"
 };
