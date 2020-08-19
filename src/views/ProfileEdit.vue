@@ -31,7 +31,7 @@
           v-col.pb-0
             p.mb-0.font-weight-light Skills
             v-chip.elevation-2.font-weight-bold.ma-1(
-              v-if="skills"
+              v-if="skills.length"
               xs2
               color="light-blue darken-1 white--text"
               v-for="(skill, i) in skills"
@@ -53,6 +53,7 @@
 import ProfileCard from "../components/ProfileCard";
 import { VIEWER_PROFILE_QUERY } from "../graphql/queries/viewerProfileQuery";
 import { UPDATE_PROFILE_MUTATION } from "../graphql/mutations/updateProfileMutation";
+
 export default {
   apollo: {
     viewer: {
@@ -118,7 +119,9 @@ export default {
       this.hometown = this.viewer.userprofile.hometown;
       this.about = this.viewer.userprofile.about;
       this.select = this.yearItems.find(e => e.text === this.viewer.userprofile.year);
-      this.skills = this.viewer.userprofile.skills.split(",");
+      if (this.viewer.userprofile.skills) {
+        this.skills = this.viewer.userprofile.skills.split(",");
+      }
       /* eslint-enable */
 
       return this.viewer.userprofile;

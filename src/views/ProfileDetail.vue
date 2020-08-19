@@ -9,10 +9,9 @@
               v-on="on"
               dark
               icon
-              :to='{name : "profile-edit"}'
             )
               v-icon(size="30") mdi-plus
-          span Add Social Link
+          span Add Social Link! Coming Soon!
     v-tooltip(left color="black")
       template(v-slot:activator="{ on }")
         v-btn.ma-5(

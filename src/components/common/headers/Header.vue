@@ -1,19 +1,29 @@
 <template lang="pug">
   v-app-bar.px-md-12(app dark dense v-if="!$apollo.queries.societies.loading")
     img.mr-4(:src="logo" height="40")
-    v-toolbar-items
-      v-btn(text :to="{name: 'home'}" exact) Home
+    v-toolbar-items(hidden-sm-and-down)
+      v-btn(text :to="{name: 'home'}" exact)
+        v-icon(:left="$vuetify.breakpoint.mdAndUp") mdi-home
+        span(v-if="$vuetify.breakpoint.mdAndUp") Home
       v-menu(bottom=''  offset-y transition='slide-y-transition')
         template(v-slot:activator='{ on }')
+
           v-btn(text dark v-on='on')
-            | Societies
+            v-icon(:left="$vuetify.breakpoint.mdAndUp") mdi-account-multiple
+            span(v-if="$vuetify.breakpoint.mdAndUp") Societies
             v-icon(right) mdi-chevron-down
         v-list
           v-list-item(v-for='({ node }, i) in societies.edges' :key='i' link :to="{name: 'society', params: {slug: node.slug}}")
             v-list-item-title {{ node.name }}
-      v-btn(text :to="{name: 'konnekt-home'}") Konnekt
-      v-btn(text :to="{name: 'forum-home'}") Forum
-      v-btn(text :to="{name: 'office-bearers'}") People
+      v-btn(text :to="{name: 'konnekt-home'}")
+        v-icon(:left="$vuetify.breakpoint.mdAndUp") mdi-web
+        span(v-if="$vuetify.breakpoint.mdAndUp") Konnekt
+      v-btn(text :to="{name: 'forum-home'}")
+        v-icon(:left="$vuetify.breakpoint.mdAndUp") mdi-forum
+        span(v-if="$vuetify.breakpoint.mdAndUp") Forum
+      v-btn(text :to="{name: 'office-bearers'}")
+        v-icon(:left="$vuetify.breakpoint.mdAndUp") mdi-clipboard-account
+        span(v-if="$vuetify.breakpoint.mdAndUp") People
     v-spacer
 </template>
 
@@ -28,6 +38,20 @@ export default {
     }
   },
   name: "Header",
+  data: () => ({
+    toolbarItems: [
+      { title: "Forum", icon: "mdi-forum", to: { name: "forum-home" } },
+      { title: "Konnekt", icon: "mdi-web", to: { name: "konnekt-home" } },
+      {
+        title: "Account",
+        icon: "mdi-account",
+        children: [
+          { title: "Profile", to: { name: "profile" } },
+          { title: "Logout" }
+        ]
+      }
+    ]
+  }),
   computed: {
     logo: () => GymkhanaLogo
   }

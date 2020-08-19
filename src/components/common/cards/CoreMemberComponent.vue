@@ -3,13 +3,7 @@
     v-flex.md4
       v-card.elevation-6
         v-img(
-          v-if="profile.avatar.sizes"
-          :src="profile.avatar.sizes.find(e => e.name === 'full_size').url" max-height="200"
-        )
-        v-img(
-          v-else
-          src="require('@/assets/avatar_default.png')"
-          max-height="200"
+          :src="profile.avatar.sizes.length?profile.avatar.sizes.find(e => e.name === 'medium_square_crop').url:require('@/assets/avatar_default.png')"
         )
     v-flex.md4
       v-layout(column).align-center.ma-4

@@ -3,12 +3,7 @@
     v-flex
       v-avatar.elevation-4.ma-2(size="180")
         v-img(
-          v-if="profile.avatar.sizes"
-          :src="profile.avatar.sizes.find(e => e.name === 'full_size').url"
-        )
-        v-img(
-          v-else
-          src="require('@/assets/avatar_default.png')"
+          :src="profile.avatar.sizes.length?profile.avatar.sizes.find(e => e.name === 'full_size').url:require('@/assets/avatar_default.png')"
         )
     v-flex.mt-4.font-weight-medium
       | {{ profile.user.firstName }} {{ profile.user.lastName }}

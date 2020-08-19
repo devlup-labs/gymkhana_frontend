@@ -9,7 +9,7 @@
               @click.stop="show(j)"
             )
               v-img(
-                :src="node.image.sizes[0].url"
+                :src="node.image.sizes.find(e => e.name === 'full_size').url"
                 height="250px"
                 v-on="on"
               )
@@ -37,7 +37,7 @@
                   v-row.justify-center.mb-1
                     span.font-weight-light.headline.pa-2 {{ node.title }}
                   v-row
-                    v-img(:src="node.image.sizes[0].url")
+                    v-img(:src="node.image.sizes.find(e => e.name === 'full_size').url")
 </template>
 
 <script>

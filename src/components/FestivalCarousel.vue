@@ -1,6 +1,11 @@
 <template lang="pug">
-  v-carousel(cycle hide-delimiter-background show-arrows-on-hover).text-center
+  v-carousel(
+    cycle
+    hide-delimiter-background
+    show-arrows-on-hover
+    height="auto" ).text-center
     v-carousel-item(
+      height="auto"
       transition="fade-transition"
       reverse-transition="fade-transition"
       v-for="({ node }, i) in festivalsList" :key="i"

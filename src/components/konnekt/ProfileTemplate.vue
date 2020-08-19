@@ -2,7 +2,7 @@
   v-flex
     v-parallax(
       dark
-      src="require(@/assets/banner.jpg)"
+      :src="require('@/assets/banner.jpg')"
       :height="$vuetify.theme.options.parallaxHeight"
     )
       v-layout.justify-center.align-center.fill-height
@@ -47,6 +47,7 @@
             v-divider.mx-2
             v-card-text(v-if="profile.skills")
               v-chip.elevation-2.font-weight-bold.ma-1(
+                v-if="profile.skills.length"
                 xs2
                 color="light-blue darken-1 white--text"
                 v-for="(skill, i) in profile.skills.split(',')"

@@ -30,7 +30,7 @@
             v-card-text(v-if="club.eventSet.edges.length")
               EventTable(:eventsList="club.eventSet.edges")
             v-card-text(v-else).text-center.subtitle-1.ml-2 There are currently no events.
-        v-flex.md7.offset-md1.elevation-0(flat tile depressed).pl-5.xs12
+        v-flex.md7.offset-md1.elevation-0(flat tile depressed).pl-md-5.xs12
           v-card-title.headline.justify-center
             v-icon(left large) mdi-newspaper-plus
             | Activities and News
