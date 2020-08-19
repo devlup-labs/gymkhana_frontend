@@ -45,7 +45,7 @@
               v-col(v-else).text-center.title
                 | There is no News.
             v-col(md="6" sm="6")
-              v-row.pa-2.justify-center.title.font-weight-regular
+              v-row.pa-2.justify-center.title.font-weight-regular.text-center
                 v-icon(left) mdi-note-text
                 | Upcoming Events
               EventTable(
@@ -57,7 +57,7 @@
     v-parallax(
       v-if="!$apollo.queries.festivals.loading"
       src="../assets/hero.jpeg"
-      :height="carouselHeight"
+      :height="$vuetify.breakpoint.smAndDown?'auto':carouselHeight"
     )
       v-content.align-center.mask
         v-container.container--fluid.mb-12

@@ -2,16 +2,14 @@
   div
     section
       v-card.elevation-0(color="blue darken-1 white--text" flat tile)
-        v-layout(row wrap align-center style="{background: #000000}").justify-center
-          v-flex.md6
-            v-layout(row).ml-12
+        v-row(style="{background: #000000}").justify-center
+          v-col(cols="12" md="6").text-center
+            v-layout(row)
               v-container
                 span ABOUT US
                 p Student Gymkhana IITJ
-                br
-                span Coming Soon!
-          v-flex.md6.justify-end
-            v-layout(row).text-end.mr-12
+          v-col(cols="12" md="6").text-center
+            v-layout(row)
               v-container(class="white--text")
                 p QUICK LINKS
                 p
@@ -31,4 +29,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+section {
+  overflow-x: hidden;
+}
+</style>

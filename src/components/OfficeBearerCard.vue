@@ -4,17 +4,15 @@
       v-stepper-content.pa-0(step="1")
         v-card(:height="avatarSize * 3")
           v-img(
-            v-if="profile.cover.sizes"
-            :src="profile.cover.sizes.find(e => e.name === 'full_size').url"
+            :src="profile.cover.sizes.length?profile.cover.sizes.find(e => e.name === 'full_size').url:require('@/assets/cover4.svg')"
             :height="avatarSize"
           )
-          v-img(v-else src="../assets/cover4.svg" :height="avatarSize")
           v-card-text.pt-0.text-center
             v-avatar.elevation-4.ma-2(
               :size="avatarSize"
               :style="{'margin-top': `-${avatarSize / 2}px !important`}"
             )
-              v-img(:src="profile.avatar.sizes?profile.avatar.sizes.find(e => e.name === 'full_size').url:require('@/assets/avatar_default.png')")
+              v-img(:src="profile.avatar.sizes.length?profile.avatar.sizes.find(e => e.name === 'full_size').url:require('@/assets/avatar_default.png')")
             h2(class="black--text").font-weight-bold.mt-5 {{ profile.user.firstName }} {{ profile.user.lastName }}
             p.font-weight-regular.mt-2 {{ designation.toString() }}
           v-card-actions
