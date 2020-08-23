@@ -6,8 +6,10 @@
           v-col(cols="12" md="6").text-center
             v-layout(row)
               v-container
-                span ABOUT US
+                p ABOUT US
                 p Student Gymkhana IITJ
+                p
+                  a(href="https://devlup-labs.github.io/#/" class="white--text" style="text-decoration: none;") Devlup Labs
           v-col(cols="12" md="6").text-center
             v-layout(row)
               v-container(class="white--text")
