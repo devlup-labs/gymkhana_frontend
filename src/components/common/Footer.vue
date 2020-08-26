@@ -14,7 +14,7 @@
               v-container(class="white--text")
                 p QUICK LINKS
                 p
-                  a(href="http://iitj.ac.in" class="white--text" style="text-decoration: none;") IIT Jodhpur
+                  a(href="http://iitj.ac.in" class="white--text" target="_blank" style="text-decoration: none;") IIT Jodhpur
                 p Contact Us
                 p
                   a(href="http://iitj.ac.in/academics/index.php?id=academic_calendar" class="white--text" style="text-decoration: none;") Academic Calender
