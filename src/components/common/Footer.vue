@@ -8,8 +8,7 @@
               v-container
                 p ABOUT US
                 p Student Gymkhana IITJ
-                p
-                  a(href="https://devlup-labs.github.io/#/" class="white--text" style="text-decoration: none;") Devlup Labs
+                   
           v-col(cols="12" md="6").text-center
             v-layout(row)
               v-container(class="white--text")
@@ -22,7 +21,8 @@
     v-footer(color="blue darken-2 white--text").text-center.justify-center.align-center
       h4.font-weight-regular © {{new Date().getFullYear() }} COPYRIGHT  | Made with
       v-icon(color="red").pa-1 mdi-heart
-      h4.font-weight-regular by Students' Gymkhana WebD Team
+      a(href="https://devlup-labs.github.io/#/" class="white--text" style="text-decoration: none;")
+        h4.font-weight-regular Devlup Labs
 </template>
 
 <script>
