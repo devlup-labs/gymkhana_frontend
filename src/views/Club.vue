@@ -49,7 +49,7 @@
                 v-card-text(v-if="club.newsSet.edges.length")
                   NewsTable(:newsList="club.newsSet.edges")
                 v-card-text(v-else).pa-4.title.text-center
-                  | There is now news currently
+                  | There is no news currently
     v-container.pa-8
       v-flex.md10.offset-md1(v-if="club.captain || club.viceCaptainOne || club.viceCaptainTwo || club.viceCaptainThree || club.mentor")
         v-card(class="accent white--text").elevation-10
