@@ -1,19 +1,20 @@
 <template lang="pug">
-  v-flex(v-if="!$apollo.queries._clubs.loading")
+  v-flex()
     v-parallax(
       dark
       :src="club.cover.sizes.length ? club.cover.sizes.find(e => e.name === 'full_size').url : require('../assets/home5.jpg') "
       :height="$vuetify.theme.options.parallaxHeight * 1.3"
     ).topbar-style
-      v-layout.justify-center.align-center.fill-height
+      v-layout.justify-center.align-center.fill-height(v-if="!$apollo.queries._clubs.loading")
         h1 {{ club.name }}
+      v-skeleton-loader(v-else loading="loading" type="heading" align="center" tile)
     v-container.pa-4
       v-row(:style="{'margin-top': `-${ $vuetify.theme.options.parallaxHeight / 3.5 }px`}").justify-center
         v-col(sm="10" md="8")
           v-card(
             :style="{'border-top': `8px solid ${ $vuetify.theme.themes.light.primary }`}"
           ).pa-5.elevation-8
-            v-card-title.display-1.font-weight-light About
+            v-card-title.display-1.font-weight-light About            
             v-card-text
               span(v-html="club.description")
             v-card-actions(v-if="club.resourcesLink").justify-end
@@ -24,15 +25,17 @@
       v-layout(row)
         v-flex.md4
           v-card(flat tile text).background-color
-            v-card-title.headline.justify-center
+            v-skeleton-loader(v-if="$apollo.queries._clubs.loading" loading="loading" type="list-item-avatar-three-line" align="center" tile)
+            v-card-title.headline.justify-center(v-else)
               v-icon(left large) mdi-lightbulb-outline
               | Upcoming Event
             v-card-text(v-if="club.eventSet.edges.length")
               EventTable(:eventsList="club.eventSet.edges")
+            v-skeleton-loader(v-if="$apollo.queries._clubs.loading" type="text" tile)
             v-card-text(v-else).text-center.subtitle-1.ml-2 There are currently no events.
         v-flex.md7.offset-md1.elevation-0(flat tile depressed).pl-md-5.xs12
-          v-card-title.headline.justify-center
-            v-icon(left large) mdi-newspaper-plus
+          v-card-title.headline.justify-center()
+            v-icon(left large ) mdi-newspaper-plus
             | Activities and News
           v-tabs(fixed-tabs background-color='primary lighten-1' dark v-model="tab")
             v-tab
@@ -43,7 +46,7 @@
           v-tabs-items(v-model="tab" )
             v-tab-item(v-if="club.activitySet.edges.length" )
               ActivityComponent(:activitiesList="club.activitySet.edges" )
-            v-tab-item(v-else ).pa-8.text-center.title.background-color There are no activities.
+            v-tab-item(v-else).pa-8.text-center.title.background-color There are no activities.
             v-tab-item
               v-card(flat tile text ).pa-4.background-color
                 v-card-text(v-if="club.newsSet.edges.length")
@@ -57,19 +60,25 @@
         v-row.justify-space-around
           v-flex(v-if="club.captain").md4.xs12
             CaptainComponent(:profile="club.captain" :designation="'Captain'")
+            v-skeleton-loader(v-if="$apollo.queries._clubs.loading" type="card-avatar")
           v-flex(v-if="club.viceCaptainOne").md4.xs12
             CaptainComponent(:profile="club.viceCaptainOne" :designation="'Vice Captain'")
+            v-skeleton-loader(v-if="$apollo.queries._clubs.loading" type="card-avatar")
           v-flex(v-if="club.viceCaptainTwo").md4.xs12
             CaptainComponent(:profile="club.viceCaptainTwo" :designation="'Vice Captain'")
+            v-skeleton-loader(v-if="$apollo.queries._clubs.loading" type="card-avatar")
           v-flex(v-if="club.viceCaptainThree").md4.xs12
             CaptainComponent(:profile="club.viceCaptainThree" :designation="'Vice Captain'")
+            v-skeleton-loader(v-if="$apollo.queries._clubs.loading" type="card-avatar")
           v-flex(v-if="club.mentor").md4.xs12
             CaptainComponent(:profile="club.mentor" :designation="'Mentor'")
+            v-skeleton-loader(v-if="$apollo.queries._clubs.loading" type="card-avatar")
     v-container.pa-5(v-if="club.customHtml")
       span(v-html="club.customHtml")
     v-container.pa-8(v-if="club.coreMembers.edges.length" fluid)
       v-flex.md8.offset-md2
-        v-card(class="accent white--text").elevation-10
+        v-skeleton-loader(v-if="$apollo.queries._clubs.loading" type="card-avatar@2")
+        v-card(v-else class="accent white--text").elevation-10
           v-card-title.justify-center.display-1 Volunteers
       v-row.justify-space-around
         v-col(cols="12" md="6" lg="4" v-for="({ node }, j) in club.coreMembers.edges" :key="j")

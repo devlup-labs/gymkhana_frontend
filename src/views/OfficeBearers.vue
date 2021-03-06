@@ -1,4 +1,4 @@
-<template lang="pug" v-slot:placeholder>
+<template lang="pug">
   v-content.justify-center()
     v-card.text-center(class="blue text-center mx-auto" max-width="800" v-if="!$apollo.queries.societies.loading").mt-4 
       v-card-text(class="white--text")
