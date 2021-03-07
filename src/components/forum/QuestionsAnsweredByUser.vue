@@ -4,7 +4,8 @@
       span.display-2 Answered By you
     v-row.justify-center( v-for="({node},i) in topicsByUser.edges" :key="i")
       v-col(cols="12" md="8" )
-        ForumTopicCard(:topic="node.title" :slug="node.slug" :authorName="node.author.user.firstName.concat(\" \", node.author.user.lastName)"
+        v-skeleton-loader(v-if="$apollo.queries.topicsByUser.loading" loading="loading" type="card-avatar" tile)
+        ForumTopicCard(v-else :topic="node.title" :slug="node.slug" :authorName="node.author.user.firstName.concat(\" \", node.author.user.lastName)"
           :authorInfo="node.author.prog.concat(\", \",node.author.branch,\", \",node.author.year)"
           :answerAuthorName="node.answerSet.edges[0].node.author.user.firstName.concat(\" \", node.author.user.lastName)"
           :answerTime="node.answersCount  ?timeSince(node.answerSet.edges[0].node.createdAt):null"

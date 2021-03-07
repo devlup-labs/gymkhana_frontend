@@ -53,6 +53,7 @@
       v-row.justify-center.align-center
         v-progress-circular(indeterminate color="primary")
         span.ml-5 Fetching Data... Please wait
+    v-skeleton-loader(v-else loading="loading" type="text,actions" tile)
 </template>
 
 <script>

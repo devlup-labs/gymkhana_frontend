@@ -11,7 +11,8 @@
     v-container.pa-4
       v-row(:style="{'margin-top': `-${ $vuetify.theme.options.parallaxHeight / 3.5 }px`}").justify-center
         v-col(sm="10" md="8")
-          v-card(
+          v-skeleton-loader(v-if="$apollo.queries._clubs.loading" loading="loading" type="card-avatar,actions" align="center" tile)
+          v-card(v-else 
             :style="{'border-top': `8px solid ${ $vuetify.theme.themes.light.primary }`}"
           ).pa-5.elevation-8
             v-card-title.display-1.font-weight-light About            
@@ -35,15 +36,16 @@
             v-card-text(v-else).text-center.subtitle-1.ml-2 There are currently no events.
         v-flex.md7.offset-md1.elevation-0(flat tile depressed).pl-md-5.xs12
           v-card-title.headline.justify-center()
-            v-icon(left large ) mdi-newspaper-plus
+          v-skeleton-loader(v-if="$apollo.queries._clubs.loading" loading="loading" type="list-item-avatar-three-line" tile)
+            v-icon(left large) mdi-newspaper-plus
             | Activities and News
-          v-tabs(fixed-tabs background-color='primary lighten-1' dark v-model="tab")
+          v-tabs(fixed-tabs background-color='primary lighten-1' dark v-model="tab" v-if="$apollo.queries._clubs.loading")
             v-tab
               | Activities
             v-tab
               v-icon(left) mdi-newspaper
               | news
-          v-tabs-items(v-model="tab" )
+          v-tabs-items(v-model="tab" v-if="$apollo.queries._clubs.loading")
             v-tab-item(v-if="club.activitySet.edges.length" )
               ActivityComponent(:activitiesList="club.activitySet.edges" )
             v-tab-item(v-else).pa-8.text-center.title.background-color There are no activities.
@@ -60,29 +62,27 @@
         v-row.justify-space-around
           v-flex(v-if="club.captain").md4.xs12
             CaptainComponent(:profile="club.captain" :designation="'Captain'")
-            v-skeleton-loader(v-if="$apollo.queries._clubs.loading" type="card-avatar")
           v-flex(v-if="club.viceCaptainOne").md4.xs12
             CaptainComponent(:profile="club.viceCaptainOne" :designation="'Vice Captain'")
-            v-skeleton-loader(v-if="$apollo.queries._clubs.loading" type="card-avatar")
           v-flex(v-if="club.viceCaptainTwo").md4.xs12
             CaptainComponent(:profile="club.viceCaptainTwo" :designation="'Vice Captain'")
-            v-skeleton-loader(v-if="$apollo.queries._clubs.loading" type="card-avatar")
           v-flex(v-if="club.viceCaptainThree").md4.xs12
-            CaptainComponent(:profile="club.viceCaptainThree" :designation="'Vice Captain'")
             v-skeleton-loader(v-if="$apollo.queries._clubs.loading" type="card-avatar")
+            CaptainComponent(:profile="club.viceCaptainThree" :designation="'Vice Captain'" v-else)
           v-flex(v-if="club.mentor").md4.xs12
-            CaptainComponent(:profile="club.mentor" :designation="'Mentor'")
             v-skeleton-loader(v-if="$apollo.queries._clubs.loading" type="card-avatar")
+            CaptainComponent(:profile="club.mentor" :designation="'Mentor'" v-else)
     v-container.pa-5(v-if="club.customHtml")
       span(v-html="club.customHtml")
     v-container.pa-8(v-if="club.coreMembers.edges.length" fluid)
       v-flex.md8.offset-md2
-        v-skeleton-loader(v-if="$apollo.queries._clubs.loading" type="card-avatar@2")
-        v-card(v-else class="accent white--text").elevation-10
+        v-card(class="accent white--text").elevation-10
           v-card-title.justify-center.display-1 Volunteers
       v-row.justify-space-around
         v-col(cols="12" md="6" lg="4" v-for="({ node }, j) in club.coreMembers.edges" :key="j")
-          CoreMemberComponent(:profile="node")
+          v-skeleton-loader(v-if="$apollo.queries._clubs.loading" type="card-avatar")
+          CoreMemberComponent(:profile="node" v-else)
+          
 </template>
 
 <script>

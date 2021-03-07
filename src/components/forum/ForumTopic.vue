@@ -1,6 +1,7 @@
 <template lang="pug">
 div
-  v-container(fluid v-if="!$apollo.queries._topic.loading").pt-0
+  v-skeleton-loader(v-if="$apollo.queries._topic.loading" loading="loading" type="heading" align="center" tile)
+  v-container(fluid v-else).pt-0
     v-row.text-capitalize.justify-center.align-center.fill-height(class="blue white--text").display-2.pa-8
       | {{topic.title}}
     v-container
@@ -27,7 +28,8 @@ div
             ) {{tag}}
       v-divider.mt-5
       v-timeline(align-top dense v-if="topic.answerSet.edges.length")
-        ForumAnswerComponent(v-for="({node},t) in topic.answerSet.edges" :key="t"
+        v-skeleton-loader(v-if="$apollo.queries._topic.loading" loading="loading" type="list-item-three-line" tile)
+        ForumAnswerComponent(v-else v-for="({node},t) in topic.answerSet.edges" :key="t"
           :authorAvatar="node.author.avatar.sizes.length?node.author.avatar.sizes.find(e=>e.name==='full_size').url:require('@/assets/avatar_default.png')"
           :authorName="node.author.user.firstName.concat(' ',node.author.user.lastName)"
           :answerTime="timeSince(node.createdAt)"
