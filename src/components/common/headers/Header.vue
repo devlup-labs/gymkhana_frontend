@@ -25,6 +25,11 @@
         v-icon(:left="$vuetify.breakpoint.mdAndUp") mdi-clipboard-account
         span(v-if="$vuetify.breakpoint.mdAndUp") People
     v-spacer
+    v-toolbar-items
+      v-btn
+        v-icon(:left="$vuetify.breakpoint.mdAndUp" v-if="$vuetify.theme.dark") mdi-moon-waxing-crescent
+        v-icon(:left="$vuetify.breakpoint.mdAndUp" v-else) mdi-brightness-7
+        v-switch(v-model="$vuetify.theme.dark" class="mt-5")
 </template>
 
 <script>
