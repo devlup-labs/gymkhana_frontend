@@ -8,6 +8,7 @@
       cycle
       hide-delimiter-background
       show-arrows-on-hover
+
     ).topbar-margin
       v-carousel-item(
         v-for="({node}, i) in homeCarousel.photos.edges"
@@ -22,21 +23,25 @@
             transition="fade-transition"
           ).white--text.text-center.font-weight-light.topbar-margin
             v-flex Students' Gymkhana
-            v-flex IIT Jodhpur
+            v-flex IIT Jodhpur 
     v-container.pa-10
       v-row
-        v-col
-          h1.mb-2.display-1.text-center About Students' Gymkhana
+        v-col()
+          v-skeleton-loader(v-if="$apollo.queries.societies.loading" loading="loading" type="heading" align="center" tile)
+          h1.mb-2.display-1.text-center(v-else) About Students' Gymkhana  
           v-row.justify-center
             v-col(sm="6" md="4")
-              v-img(src="../assets/workstation-336369.jpg" )
+              v-skeleton-loader(v-if="$apollo.queries.societies.loading" loading="loading" type="image" align="center" tile)
+              v-img(src="../assets/workstation-336369.jpg" v-else)
             v-col(md="6" align-self="center")
-              p.subtitle-1.text-center  Students' Gymkhana, IIT Jodhpur is the governing body that looks after all student activities.
+              v-skeleton-loader(v-if="$apollo.queries.societies.loading" loading="loading" type="text@3" align="center" tile)
+              p.subtitle-1.text-center(v-else)  Students' Gymkhana, IIT Jodhpur is the governing body that looks after all student activities.
+          
       v-row(v-if="!$apollo.queries.societies.loading").mt-4
         v-col
           v-row.justify-center
-            v-col(sm="6" md="6")
-              v-row.pa-2.justify-center.title.font-weight-regular
+            v-col(sm="6" md="6" v-if="!$apollo.queries.societies.loading")
+              v-row.pa-2.justify-center.title.font-weight-regular()
                 v-icon(left) mdi-newspaper
                 | News
               NewsTable( v-if="societies.edges.find(({node})=>node.pastNews.edges.length)"
@@ -44,7 +49,8 @@
               )
               v-col(v-else).text-center.title
                 | There is no News.
-            v-col(md="6" sm="6")
+            v-skeleton-loader(v-else loading="loading" type="list-item-avatar-three-line" align="center" tile)
+            v-col(md="6" sm="6" v-if="!$apollo.queries.societies.loading")
               v-row.pa-2.justify-center.title.font-weight-regular.text-center
                 v-icon(left) mdi-note-text
                 | Upcoming Events
@@ -54,6 +60,7 @@
               )
               v-col(v-else).text-center.title
                 | There are no Upcoming Events.
+            v-skeleton-loader(v-else loading="loading" type="list-item-avatar-three-line" align="center" tile)
     v-parallax(
       v-if="!$apollo.queries.festivals.loading"
       src="../assets/hero.jpeg"
@@ -61,16 +68,19 @@
     )
       v-content.align-center.mask
         v-container.container--fluid.mb-12
-          v-row.display-1.justify-center.mb-12 Festivals
+          v-skeleton-loader(v-if="$apollo.queries.societies.loading" loading="loading" type="heading" align="center" tile )
+          v-row.display-1.justify-center.mb-12(v-else) Festivals
           v-row
             FestivalCarousel(:festivalsList="festivals.edges")
-    v-container(v-if="!$apollo.queries.societies.loading")
+    v-container()
       v-col(cols="12")
-        p.display-1.text-center Societies
+        v-skeleton-loader(v-if="$apollo.queries.societies.loading" loading="loading" type="heading" align="center" tile)
+        p.display-1.text-center(v-else) Societies 
       v-col(cols="12" v-if="societies")
         v-row.justify-center
           v-col(cols="12" sm="6" v-for="({ node }, i) in societies.edges" :key="i")
-            StripedCard(:node="node")
+            StripedCard(:node="node" v-if="!$apollo.queries.societies.loading")
+            v-skeleton-loader(v-else loading="loading" type="card")
     v-img(src="../assets/other/background.svg" v-if="!$apollo.queries.homeGallery.loading && homeGallery" :min-height="carouselHeight")
       div.mask.fill-height
         v-container

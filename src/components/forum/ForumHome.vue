@@ -5,7 +5,8 @@
         v-col(cols="12" ).justify-center
           v-col(lg="8" ).offset-lg-2
             v-row.align-center
-              v-text-field(
+              v-skeleton-loader(v-if="this.$apollo.queries.loading" loading="loading" type="text,actions" tile)
+              v-text-field(v-else
                 v-model="searchTerm"
                 outline
                 prepend-inner-icon="mdi-magnify"
@@ -15,9 +16,10 @@
               v-btn(color="primary" ).mb-2
                 v-icon mdi-magnify
           v-divider.mb-5
-          v-row.justify-center(v-if="!this.$apollo.queries.loading")
+          v-row.justify-center()
             v-col(cols="12" md="10" xs="12" v-for="(node,x) in this.topics" :key="x")
-              ForumTopicCard(
+              v-skeleton-loader(v-if="this.$apollo.queries.loading" loading="loading" type="card-avatar, actions")
+              ForumTopicCard(v-else
                 :topic="node.title"
                 :slug="node.slug"
                 :authorName="authorName(node.author.user)"
