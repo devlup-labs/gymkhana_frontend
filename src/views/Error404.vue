@@ -15,6 +15,8 @@
     :style="{width:findDimension + 'px', height: findDimension + 'px'}"
   )
     .game-message
+      p
+      //- gameover messages are displayed in p tag
       .lower
         a.keep-playing-button(v-on:click="clearMessage") Keep going
         a.retry-button(v-on:click="init") Try again
@@ -41,33 +43,80 @@ export default {
     items: [4, 5, 6],
     tileNo: 4,
     map: {
-      38: 0, // Up
-      39: 1, // Right
-      40: 2, // Down
-      37: 3, // Left
-      75: 0, // Vim up
-      76: 1, // Vim right
-      74: 2, // Vim down
-      72: 3, // Vim left
-      87: 0, // W
-      68: 1, // D
-      83: 2, // S
-      65: 3 // A
-    }
+      ArrowUp: 0, // Up
+      ArrowRight: 1, // Right
+      ArrowDown: 2, // Down
+      ArrowLeft: 3, // Left
+      k: 0, // Vim up
+      l: 1, // Vim right
+      j: 2, // Vim down
+      h: 3, // Vim left
+      w: 0, // W
+      d: 1, // D
+      s: 2, // S
+      a: 3 // A
+    },
+    startX: 0,
+    startY: 0,
+    distX: 0,
+    distY: 0,
+    threshold: 150,
+    allowedTime: 500,
+    elapsedTime: 0,
+    startTime: 0
   }),
   created: function() {
     this.getWindowSize();
     window.addEventListener("keydown", event => {
       var modifiers =
         event.altKey || event.ctrlKey || event.metaKey || event.shiftKey;
-      var mapped = this.map[event.which];
+      var mapped = this.map[event.key];
 
       if (!modifiers) {
         if (mapped !== undefined) {
           event.preventDefault();
-          console.log(mapped);
           this.move(mapped);
         }
+      }
+      if (!modifiers && event.key === "r") {
+        this.init();
+      }
+    });
+    window.addEventListener("touchstart", event => {
+      var touchobj = event.changedTouches[0];
+      this.distX = 0;
+      this.startX = touchobj.pageX;
+      this.startY = touchobj.pageY;
+      this.startTime = new Date().getTime();
+      //event.preventDefault();
+    });
+    window.addEventListener("touchend", event => {
+      var touchobj = event.changedTouches[0];
+      this.distX = touchobj.pageX - this.startX;
+      this.distY = touchobj.pageY - this.startY;
+      this.elapsedTime = new Date().getTime() - this.startTime;
+      var swiperight =
+        this.elapsedTime <= this.allowedTime &&
+        this.distX >= this.threshold &&
+        Math.abs(this.distY) <= 100;
+      var swipeleft =
+        this.elapsedTime <= this.allowedTime &&
+        this.distX <= -1 * this.threshold &&
+        Math.abs(this.distY) <= 100;
+      var swipeup =
+        this.elapsedTime <= this.allowedTime &&
+        this.distY <= -1 * this.threshold &&
+        Math.abs(this.distX) <= 100;
+      var swipedown =
+        this.elapsedTime <= this.allowedTime &&
+        this.distY >= this.threshold &&
+        Math.abs(this.distX) <= 100;
+      this.handleswipe(swiperight, swipeleft, swipeup, swipedown);
+      //event.preventDefault();
+    });
+    window.addEventListener("resize", event => {
+      if (event) {
+        this.getWindowSize();
       }
     });
   },
@@ -322,6 +371,21 @@ export default {
       return true;
     },
 
+    handleswipe: function(swiperight, swipeleft, swipeup, swipedown) {
+      if (swiperight) {
+        this.move(1);
+        console.log("r");
+      } else if (swipeleft) {
+        this.move(3);
+        console.log("l");
+      } else if (swipeup) {
+        this.move(0);
+        console.log("u");
+      } else if (swipedown) {
+        this.move(2);
+        console.log("d");
+      }
+    },
     move: function(direction) {
       var vector = this.getVector(direction);
       var traversals = this.buildTraversals(vector);
@@ -509,11 +573,7 @@ export default {
         d = document,
         e = d.documentElement,
         g = d.getElementsByTagName("body")[0],
-        x = w.innerWidth || e.clientWidth || g.clientWidth,
-        y = w.innerHeight || e.clientHeight || g.clientHeight;
-
-      console.log(x);
-      console.log(y);
+        x = w.innerWidth || e.clientWidth || g.clientWidth;
 
       if (x <= 520) {
         this.tileDimension = 69.5;
@@ -525,44 +585,5 @@ export default {
     }
   }
 };
-// document.addEventListener("keydown", logKey);
-// //document.getElementById("mainVue").textContent += ` ${e.code}`;
-// var map = {
-//   38: 0, // Up
-//   39: 1, // Right
-//   40: 2, // Down
-//   37: 3, // Left
-//   75: 0, // Vim up
-//   76: 1, // Vim right
-//   74: 2, // Vim down
-//   72: 3, // Vim left
-//   87: 0, // W
-//   68: 1, // D
-//   83: 2, // S
-//   65: 3 // A
-// };
-// function logKey(event) {
-//   var modifiers =
-//     event.altKey || event.ctrlKey || event.metaKey || event.shiftKey;
-//   var mapped = map[event.which];
-
-//   if (!modifiers) {
-//     if (mapped !== undefined) {
-//       event.preventDefault();
-//       console.log(mapped);
-//       this.move(mapped);
-//     }
-//   }
-// }
 </script>
 <style scoped src="../plugins/style.css"></style>
-<!-- (function(win) {
-   new Vue({});
- var Keys = keys.KeyboardInputManager();
- Keys.on("move", function(direction) {
-    Game.move(direction);
-  });
-  win.onresize = function() {
-     Game.getWindowSize();
-   };
-})(window);-->
