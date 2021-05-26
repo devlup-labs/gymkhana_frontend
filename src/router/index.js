@@ -16,6 +16,7 @@ import Forum from "../views/Forum";
 import UserProfile from "../views/UserProfile";
 import QuestionsAnsweredByUser from "../components/forum/QuestionsAnsweredByUser";
 import Register from "@/views/Register";
+import Error404 from "../views/Error404.vue";
 
 Vue.use(VueRouter);
 
@@ -146,6 +147,11 @@ const routes = [
     name: "club",
     path: "/club/:slug",
     component: Club
+  },
+  {
+    path: "*",
+    name: "Error 404",
+    component: Error404
   }
 ];
 
