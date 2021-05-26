@@ -3,7 +3,8 @@
   .heading
     h1.title 2048
     .scores-container
-      .score-container {{conf.score}}
+      transition-group(name="fade")
+        .score-container(key="1") {{conf.score}}
       .best-container {{conf.bestScore}}
   .above-game
     p.game-intro Join the numbers and get the
@@ -24,6 +25,11 @@
       .grid-row(v-for="g in grid")
         .grid-cell(v-for="g in grid")
     tile(:tiles="tiles")
+  v-btn(@click="arr.push(45)") Toggle
+  v-btn(@click="arr.pop()") goggle
+  transition-group(name="fade")
+    div(key="1")
+    p(v-for="(i,key) in arr.length" :key="key") hello
 </template>
 <script>
 import { gameStorage } from "../plugins/store.js";
@@ -42,6 +48,8 @@ export default {
     conf: gameStorage.fetch("vue2048-config"),
     items: [4, 5, 6],
     tileNo: 4,
+    show: false,
+    arr: [1, 2, 3, 4],
     map: {
       ArrowUp: 0, // Up
       ArrowRight: 1, // Right
@@ -374,16 +382,12 @@ export default {
     handleswipe: function(swiperight, swipeleft, swipeup, swipedown) {
       if (swiperight) {
         this.move(1);
-        console.log("r");
       } else if (swipeleft) {
         this.move(3);
-        console.log("l");
       } else if (swipeup) {
         this.move(0);
-        console.log("u");
       } else if (swipedown) {
         this.move(2);
-        console.log("d");
       }
     },
     move: function(direction) {
@@ -541,8 +545,9 @@ export default {
 
       var addition = document.createElement("div");
       addition.classList.add("score-addition");
+      addition.setAttribute("key", "1");
       addition.textContent = "+" + score;
-      scoreContainer.appendChild(addition);
+      scoreContainer.insertAdjacentElement("afterend", addition);
     },
 
     message: function(won) {
