@@ -18,7 +18,7 @@
     "core-js": "^3.4.3",
     "graphql": "^15.0.0",
     "graphql-anywhere": "^4.2.7",
-    "qs": "^6.9.4",
+    "qs": "^6.9.7",
     "register-service-worker": "^1.6.2",
     "roboto-fontface": "*",
     "vue": "^2.6.10",
